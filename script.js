@@ -31,7 +31,7 @@
      */
     async function loadData() {
         try {
-            var response = await fetch('data.json');
+            var response = await fetch('data.json?v=' + Date.now());
             if (!response.ok) {
                 throw new Error('HTTP ' + response.status);
             }
