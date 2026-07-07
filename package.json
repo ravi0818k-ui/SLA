@@ -1,0 +1,15 @@
+{
+  "name": "sla-webinar-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Super Learner Academy - 2 Day Live Webinar Landing Page",
+  "scripts": {
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.3",
+    "fast-check": "^4.1.1",
+    "jsdom": "^26.1.0"
+  }
+}

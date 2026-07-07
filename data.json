@@ -1,0 +1,28 @@
+{
+    "countdown": {
+        "endDate": "2026-07-20T23:59:59",
+        "timezone": "Asia/Kolkata",
+        "expiredMessage": "Registration Closed!"
+    },
+    "registration": {
+        "price": "455",
+        "originalPrice": "4999",
+        "currency": "₹",
+        "link": "https://pages.razorpay.com/pl_XXXX/view",
+        "buttonText": "REGISTER NOW FOR ₹455/- ONLY"
+    },
+    "workshop": {
+        "name": "Super Learner Academy - 2 Day Live Webinar",
+        "coach": "Abhishek Ranjan",
+        "days": 2,
+        "startDate": "2026-07-21T19:00:00"
+    },
+    "whatsapp": {
+        "link": "https://chat.whatsapp.com/XXXX",
+        "buttonText": "Join WhatsApp Group"
+    },
+    "analytics": {
+        "gtmId": "",
+        "fbPixel": ""
+    }
+}

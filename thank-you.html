@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmed - Super Learner Academy</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Favicon SLA/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon SLA/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon SLA/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon SLA/apple-icon-180x180.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="thank-you-page" data-page="thank-you">
+
+    <!-- ========== CONFETTI CONTAINER ========== -->
+    <div id="confetti-container"></div>
+
+    <!-- ========== SUCCESS CONFIRMATION HERO ========== -->
+    <section class="thank-you-hero">
+        <div class="container">
+            <div class="success-icon">
+                <i class="fas fa-circle-check"></i>
+            </div>
+            <h1>Registration Confirmed! 🎉</h1>
+            <p class="workshop-name">
+                <span data-bind="workshop.name">Super Learner Academy - 2 Day Live Webinar</span>
+            </p>
+            <p class="workshop-datetime">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="workshop-date">Loading...</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== NEXT STEPS CARDS ========== -->
+    <section class="next-steps-section">
+        <div class="container">
+            <h2 class="section-title">What To Do Next</h2>
+            <div class="next-steps-grid">
+                <!-- Card 1: Save the Date -->
+                <div class="next-step-card">
+                    <div class="next-step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Save the Date</h3>
+                    <p>Mark the workshop date on your calendar so you don't miss the live sessions. Set a reminder 30 minutes before!</p>
+                </div>
+                <!-- Card 2: Join WhatsApp Group -->
+                <div class="next-step-card">
+                    <div class="next-step-icon whatsapp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>Join WhatsApp Group</h3>
+                    <p>Join our community group for updates, session links, and to connect with fellow learners before the workshop begins.</p>
+                </div>
+                <!-- Card 3: Share with Friends -->
+                <div class="next-step-card">
+                    <div class="next-step-icon share-icon">
+                        <i class="fas fa-share-nodes"></i>
+                    </div>
+                    <h3>Share with Friends</h3>
+                    <p>Know someone who struggles with studying or memory? Share this workshop with friends who could use these techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WORKSHOP DETAILS SUMMARY ========== -->
+    <section class="workshop-details-section">
+        <div class="container">
+            <h2 class="section-title">Workshop Details</h2>
+            <div class="workshop-details-card">
+                <div class="detail-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <div>
+                        <strong>Workshop</strong>
+                        <span data-bind="workshop.name">Super Learner Academy - 2 Day Live Webinar</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-calendar-days"></i>
+                    <div>
+                        <strong>Start Date & Time</strong>
+                        <span id="workshop-detail-date">Loading...</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Duration</strong>
+                        <span><span data-bind="workshop.days">2</span> Days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHATSAPP CTA ========== -->
+    <section class="whatsapp-cta-section">
+        <div class="container">
+            <h2 class="section-title">Join Our Community</h2>
+            <p class="whatsapp-description">Get session links, reminders, and connect with fellow super learners.</p>
+            <a href="#" class="cta-button whatsapp-cta" target="_blank" rel="noopener noreferrer" data-bind-href="whatsapp.link" id="whatsapp-btn" data-dynamic-only>
+                <i class="fab fa-whatsapp"></i> <span data-bind="whatsapp.buttonText">Join WhatsApp Group</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Super Learner Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>

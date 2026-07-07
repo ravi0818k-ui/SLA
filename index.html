@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Learner Academy - 2 Day Live Webinar</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Favicon SLA/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon SLA/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon SLA/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon SLA/apple-icon-180x180.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== TOP BAR (Urgency Banner) ========== -->
+    <div class="top-bar" aria-label="Urgency banner">
+        <p class="blink-text">🔥 Limited Seats! Register Before Time Runs Out!</p>
+    </div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Become a <span class="highlight">Super Learner</span> in Just 2 Days</h1>
+                <p class="sub-headline">Master proven memory techniques, boost your focus, and unlock your brain's true potential in our LIVE interactive webinar.</p>
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Register Now</span>
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="Images/host.png" alt="Abhishek Ranjan - Super Learner Academy Coach" class="coach-img hero-coach-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COUNTDOWN TIMER ========== -->
+    <section class="countdown-section" id="countdown">
+        <div class="container">
+            <h2 class="section-title light">Registration Closes In</h2>
+            <div class="countdown-timer" id="countdown-timer">
+                <div class="countdown-box">
+                    <span class="countdown-number" id="countdown-days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="countdown-hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="countdown-minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="countdown-seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+            <p class="countdown-expired" id="countdown-expired" style="display:none;"></p>
+        </div>
+    </section>
+
+    <!-- ========== CHALLENGES / PAIN POINTS ========== -->
+    <section class="challenges-section" id="challenges">
+        <div class="container">
+            <h2 class="section-title">Are You Struggling With These?</h2>
+            <div class="challenges-grid">
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Forgetting What You Read</h3>
+                    <p>You study for hours but can't recall key information when it matters most.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Wasting Time Studying</h3>
+                    <p>You put in long hours but feel like you're not making real progress.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-low-vision"></i></div>
+                    <h3>Losing Focus Quickly</h3>
+                    <p>Your attention drifts within minutes of sitting down to learn.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-battery-quarter"></i></div>
+                    <h3>Mental Fatigue</h3>
+                    <p>You feel mentally exhausted even after short study sessions.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>No Clear Learning Method</h3>
+                    <p>You don't know the right techniques for your learning style.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-heart-crack"></i></div>
+                    <h3>Low Confidence in Exams</h3>
+                    <p>You feel anxious because you can't trust your memory under pressure.</p>
+                </div>
+            </div>
+
+            <!-- CTA after Challenges -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Register Now</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHAT YOU'LL LEARN (2-Day Curriculum) ========== -->
+    <section class="curriculum-section" id="curriculum">
+        <div class="container">
+            <h2 class="section-title">What You'll Learn in 2 Days</h2>
+            <div class="curriculum-grid">
+                <!-- Day 1 Card -->
+                <div class="day-card scroll-reveal">
+                    <div class="day-card-header">
+                        <span class="day-badge">DAY 1</span>
+                        <h3>Memory & Learning Mastery</h3>
+                    </div>
+                    <ul class="day-checklist">
+                        <li><i class="fas fa-check"></i> Memory improvement techniques that actually work</li>
+                        <li><i class="fas fa-check"></i> Identify your unique learning style</li>
+                        <li><i class="fas fa-check"></i> Mental exercises to sharpen your brain</li>
+                    </ul>
+                </div>
+                <!-- Day 2 Card -->
+                <div class="day-card scroll-reveal">
+                    <div class="day-card-header day-2-header">
+                        <span class="day-badge">DAY 2</span>
+                        <h3>Focus & Performance</h3>
+                    </div>
+                    <ul class="day-checklist">
+                        <li><i class="fas fa-check"></i> Strategies to increase focus and concentration</li>
+                        <li><i class="fas fa-check"></i> Breathing exercises for mental clarity</li>
+                        <li><i class="fas fa-check"></i> Building a daily practice routine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MEET YOUR COACH ========== -->
+    <section class="coach-section" id="coach">
+        <div class="container">
+            <h2 class="section-title">Meet Your Coach</h2>
+            <div class="coach-content scroll-reveal">
+                <div class="coach-card">
+                    <div class="coach-card-image">
+                        <img src="Images/host.png" alt="Abhishek Ranjan - Super Learner Academy Coach" class="coach-img coach-profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
+                    </div>
+                    <div class="coach-card-overlay">
+                        <h4 class="coach-card-name">Abhishek Ranjan</h4>
+                        <p class="coach-card-role">Learning Science Coach</p>
+                    </div>
+                    <div class="coach-card-badge">
+                        <i class="fas fa-book"></i> Author: "Unleash the Power of Learning"
+                    </div>
+                </div>
+                <div class="coach-bio">
+                    <h3 class="coach-name">Abhishek Ranjan</h3>
+                    <p class="coach-role-subtitle">Learning Science Coach</p>
+                    <p class="coach-description">Abhishek is on a mission to help thousands of students enhance their cognitive abilities, accelerate their learning process, and achieve their full potential.</p>
+                    <ul class="coach-credentials">
+                        <li><i class="fas fa-check"></i> NIT Allahabad Passout & Software Engineer</li>
+                        <li><i class="fas fa-check"></i> Memory & Focus Techniques Expert</li>
+                        <li><i class="fas fa-check"></i> Trained hundreds of students & professionals</li>
+                        <li><i class="fas fa-check"></i> Creator of Super Learner Academy Program</li>
+                    </ul>
+                    <p class="coach-tagline">"Learn Smarter. Remember Better."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHAT'S INCLUDED ========== -->
+    <section class="included-section" id="included">
+        <div class="container">
+            <h2 class="section-title">What's Included</h2>
+            <div class="included-grid">
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-video"></i></div>
+                    <h3>2 Days Live Interactive Sessions</h3>
+                    <p>Real-time Q&A with your coach, not pre-recorded videos.</p>
+                </div>
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Exclusive Worksheets</h3>
+                    <p>Printable practice materials to reinforce what you learn.</p>
+                </div>
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-users"></i></div>
+                    <h3>Community Access</h3>
+                    <p>Join the WhatsApp community of fellow super learners.</p>
+                </div>
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Completion Certificate</h3>
+                    <p>Get a certificate to showcase your new learning skills.</p>
+                </div>
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Doubt Clearing Session</h3>
+                    <p>Dedicated time to get your personal questions answered.</p>
+                </div>
+                <div class="included-card scroll-reveal">
+                    <div class="included-icon"><i class="fas fa-infinity"></i></div>
+                    <h3>Lifetime Technique Access</h3>
+                    <p>Once learned, these techniques stay with you forever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Students Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I was struggling to remember anything I studied. After this webinar, I can recall entire chapters with ease. The memory techniques are game-changing!"</p>
+                    <div class="testimonial-author">
+                        <strong>Priya S.</strong>
+                        <span>Engineering Student</span>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"My focus has improved dramatically. I can study for 2 hours straight now without getting distracted. Totally worth the investment!"</p>
+                    <div class="testimonial-author">
+                        <strong>Rahul M.</strong>
+                        <span>UPSC Aspirant</span>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Abhishek sir explains everything so simply. The breathing exercises alone made a huge difference in my exam performance."</p>
+                    <div class="testimonial-author">
+                        <strong>Sneha K.</strong>
+                        <span>CA Student</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRICING / REGISTER ========== -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title light">Special Launch Offer</h2>
+            <div class="pricing-card scroll-reveal">
+                <div class="price-anchor">
+                    <span class="original-price">
+                        <span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span>
+                    </span>
+                    <span class="discount-badge">90% OFF</span>
+                </div>
+                <div class="current-price">
+                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">455</span><span class="price-suffix">/-only</span>
+                </div>
+                <p class="pricing-note">One-time payment. No hidden fees.</p>
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Register Now</span>
+                </a>
+                <p class="seats-left">⚡ Limited seats available for this batch</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ACCORDION ========== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>What is Super Learner Academy?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Super Learner Academy is an initiative by Abhishek Ranjan that teaches scientifically-backed learning techniques to help students study smarter, remember more, and perform better in exams and everyday life.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>Who is this webinar for?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This webinar is for anyone who wants to improve their memory, focus, and learning ability — students preparing for exams (board exams, competitive exams, university), working professionals looking to upskill, or lifelong learners who want to absorb information faster.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>What will I learn in 2 days?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Over 2 days, you'll learn powerful memory improvement techniques, how to identify your learning style, mental exercises to boost brain performance, strategies to increase focus, and breathing exercises for mental clarity. Everything is hands-on and practical.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>Is there a refund policy?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! If you attend the full webinar and feel it didn't add value, you can reach out to us within 24 hours after the session ends for a complete refund. We're confident you'll love the content.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>How do I attend the live session?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After registration, you'll receive a confirmation with all the details. The session is conducted live on Zoom. The joining link will be shared in our WhatsApp community group before the session begins.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 6 -->
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>Do I need any prior knowledge?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No prior knowledge is needed! The webinar is designed for beginners and advanced learners alike. We start from the basics and progress to powerful techniques that anyone can apply immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Super Learner Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========== STICKY CTA ========== -->
+    <div class="sticky-cta" aria-label="Registration call to action">
+        <a href="#" class="cta-button sticky-cta-button" data-bind-href="registration.link">
+            <span data-bind="registration.buttonText">Register Now</span>
+        </a>
+    </div>
+
+    <!-- ========== SCROLL TO TOP ========== -->
+    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
