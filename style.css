@@ -989,25 +989,41 @@ body {
 }
 
 /* ===========================
+   Thank-You Page Overrides
+   =========================== */
+.thank-you-page {
+    padding-top: 0;
+}
+
+/* ===========================
    Thank-You Hero Section
    =========================== */
 .thank-you-hero {
-    background: var(--deep-learning-blue);
+    background: linear-gradient(135deg, #0a1628, #0B2A5B);
     color: #ffffff;
-    padding: 80px 20px;
+    padding: 100px 20px 80px;
     text-align: center;
     min-height: 50vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.success-checkmark {
+.thank-you-hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-icon {
     font-size: 5rem;
     color: var(--growth-green);
-    margin-bottom: 2rem;
-    animation: checkmark-pop 0.5s ease-out;
+    margin-bottom: 1.5rem;
+    animation: checkmark-pop 0.6s ease-out;
+}
+
+.success-icon i {
+    filter: drop-shadow(0 4px 20px rgba(52, 168, 83, 0.4));
 }
 
 @keyframes checkmark-pop {
@@ -1025,14 +1041,25 @@ body {
 }
 
 .thank-you-hero h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     margin-bottom: 1rem;
+    color: #ffffff;
 }
 
-.workshop-info {
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
+.workshop-name {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.workshop-datetime {
+    font-size: 1.05rem;
+    color: var(--success-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 /* ===========================
@@ -1043,57 +1070,66 @@ body {
     background: #f8f9fa;
 }
 
+.next-steps-section .section-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #1a1a2e;
+}
+
 .next-steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
-.step-card {
+.next-step-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 32px;
+    padding: 36px 28px;
     text-align: center;
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.step-card:hover {
+.next-step-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--card-shadow-hover);
 }
 
-.step-card .step-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+.next-step-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: #1a1a2e;
 }
 
-.step-card .step-icon.save-date {
-    color: var(--memory-orange);
+.next-step-card p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.6;
 }
 
-.step-card .step-icon.whatsapp {
-    color: #25D366;
-}
-
-.step-card .step-icon.share {
-    color: var(--smart-blue);
-}
-
-.step-number {
-    background: var(--memory-orange);
-    color: #ffffff;
-    width: 30px;
-    height: 30px;
+.next-step-icon {
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
+    margin: 0 auto 1.2rem;
+    font-size: 1.6rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff8c00, #ff5e3a);
+}
+
+.next-step-icon.whatsapp-icon {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.next-step-icon.share-icon {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
 /* ===========================
@@ -1102,45 +1138,89 @@ body {
 .workshop-details-section {
     padding: var(--section-padding);
     text-align: center;
+    background: #ffffff;
 }
 
-.workshop-summary {
+.workshop-details-section .section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1a1a2e;
+}
+
+.workshop-details-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 32px;
+    padding: 36px 40px;
     box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     max-width: 600px;
     margin: 0 auto;
-}
-
-.workshop-summary h3 {
-    margin-bottom: 1.5rem;
 }
 
 .detail-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 1.05rem;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
 }
 
 .detail-item i {
     color: var(--smart-blue);
+    font-size: 1.3rem;
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.detail-item div {
+    text-align: left;
+}
+
+.detail-item strong {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.detail-item span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
 }
 
 /* ===========================
    WhatsApp CTA Section
    =========================== */
-.whatsapp-section {
-    padding: 40px 20px;
+.whatsapp-cta-section {
+    padding: var(--section-padding);
     text-align: center;
+    background: #f8f9fa;
+}
+
+.whatsapp-cta-section .section-title {
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: #1a1a2e;
+}
+
+.whatsapp-description {
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
 .whatsapp-cta {
     background: linear-gradient(135deg, #25D366, #128C7E);
     box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    animation: pulse-whatsapp 2s infinite;
 }
 
 .whatsapp-cta:hover {
@@ -1151,6 +1231,18 @@ body {
 .whatsapp-cta i {
     margin-right: 8px;
     font-size: 1.2rem;
+}
+
+@keyframes pulse-whatsapp {
+    0% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
+    }
+    100% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
 }
 
 /* ===========================
@@ -1210,7 +1302,8 @@ body {
     .grid-3,
     .challenges-grid,
     .included-grid,
-    .testimonials-grid {
+    .testimonials-grid,
+    .next-steps-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -1245,6 +1338,15 @@ body {
     /* Next-steps cards single column (Thank-You page) */
     .next-steps-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Workshop details card full width */
+    .workshop-details-card {
+        padding: 24px 20px;
+    }
+
+    .detail-item {
+        gap: 12px;
     }
 
     /* Minimum 44×44px touch targets for interactive elements */
@@ -1291,6 +1393,14 @@ body {
 
     .section-title {
         font-size: 1.5rem;
+    }
+
+    .thank-you-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .success-icon {
+        font-size: 3.5rem;
     }
 
     /* Full-width CTA buttons */
