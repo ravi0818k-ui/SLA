@@ -547,86 +547,46 @@
 
     /**
      * Initializes Thank-You page specific functionality:
-     * - Checks payment status from URL params or referrer
      * - Formats and injects workshop date
      * - Handles WhatsApp button visibility
      * - Starts auto-redirect progress bar
      * @param {Object} data - The parsed data.json object
      */
     function initThankYouPage(data) {
-        var isPaid = verifyPaymentStatus();
-
         var paidView = document.getElementById('thankyou-paid');
         var unpaidView = document.getElementById('thankyou-unpaid');
 
-        if (isPaid) {
-            // Show paid view
-            if (paidView) paidView.style.display = '';
-            if (unpaidView) unpaidView.style.display = 'none';
+        // Always show paid view (no gate)
+        if (paidView) paidView.style.display = '';
+        if (unpaidView) unpaidView.style.display = 'none';
 
-            // Format and inject workshop date
-            if (data.workshop && data.workshop.startDate) {
-                var formattedDate = formatWorkshopDate(data.workshop.startDate);
-                var dateEl = document.getElementById('workshop-date');
-                var detailDateEl = document.getElementById('workshop-detail-date');
+        // Format and inject workshop date
+        if (data.workshop && data.workshop.startDate) {
+            var formattedDate = formatWorkshopDate(data.workshop.startDate);
+            var dateEl = document.getElementById('workshop-date');
+            var detailDateEl = document.getElementById('workshop-detail-date');
 
-                if (dateEl) dateEl.textContent = formattedDate;
-                if (detailDateEl) detailDateEl.textContent = formattedDate;
-            }
-
-            // Handle WhatsApp button visibility and auto-redirect
-            var whatsappBtn = document.getElementById('whatsapp-btn');
-            var whatsappLink = data.whatsapp && data.whatsapp.link ? data.whatsapp.link : '';
-
-            if (whatsappBtn) {
-                if (!whatsappLink || whatsappLink.trim() === '') {
-                    whatsappBtn.style.display = 'none';
-                } else {
-                    whatsappBtn.style.display = '';
-                    whatsappBtn.href = whatsappLink;
-                }
-            }
-
-            // Start auto-redirect progress bar
-            if (whatsappLink && whatsappLink.trim() !== '') {
-                startRedirectProgress(whatsappLink);
-            }
-        } else {
-            // Show unpaid view
-            if (paidView) paidView.style.display = 'none';
-            if (unpaidView) unpaidView.style.display = '';
+            if (dateEl) dateEl.textContent = formattedDate;
+            if (detailDateEl) detailDateEl.textContent = formattedDate;
         }
-    }
 
-    /**
-     * Verifies if the user came from a valid payment.
-     * Checks multiple signals:
-     * 1. URL query params (status=success, paid=true, payment_status=paid)
-     * 2. Referrer from superprofile.bio
-     * 3. Any query params at all (SuperProfile redirects with params after payment)
-     * @returns {boolean} true if payment appears valid
-     */
-    function verifyPaymentStatus() {
-        var params = new URLSearchParams(window.location.search);
+        // Handle WhatsApp button visibility and auto-redirect
+        var whatsappBtn = document.getElementById('whatsapp-btn');
+        var whatsappLink = data.whatsapp && data.whatsapp.link ? data.whatsapp.link : '';
 
-        // Check common payment success params
-        if (params.get('status') === 'success') return true;
-        if (params.get('paid') === 'true') return true;
-        if (params.get('payment_status') === 'paid') return true;
-        if (params.get('payment_status') === 'success') return true;
+        if (whatsappBtn) {
+            if (!whatsappLink || whatsappLink.trim() === '') {
+                whatsappBtn.style.display = 'none';
+            } else {
+                whatsappBtn.style.display = '';
+                whatsappBtn.href = whatsappLink;
+            }
+        }
 
-        // SuperProfile may append order/transaction params
-        if (params.has('order_id') || params.has('transaction_id')) return true;
-        if (params.has('sp_order_id') || params.has('sp_status')) return true;
-
-        // Check if referrer is from superprofile.bio (payment gateway)
-        var referrer = document.referrer || '';
-        if (referrer.indexOf('superprofile.bio') !== -1) return true;
-
-        // If URL has ANY query params, likely came from payment redirect
-        if (window.location.search && window.location.search.length > 1) return true;
-
-        return false;
+        // Start auto-redirect progress bar
+        if (whatsappLink && whatsappLink.trim() !== '') {
+            startRedirectProgress(whatsappLink);
+        }
     }
 
     /**
