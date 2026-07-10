@@ -27,8 +27,8 @@
     <!-- ========== CONFETTI CONTAINER ========== -->
     <div id="confetti-container"></div>
 
-    <!-- ========== THANK YOU CARD ========== -->
-    <div class="thankyou-wrapper">
+    <!-- ========== THANK YOU CARD (shown after payment) ========== -->
+    <div class="thankyou-wrapper" id="thankyou-paid" style="display:none;">
         <div class="thankyou-card">
             <!-- Green Header -->
             <div class="thankyou-header">
@@ -60,6 +60,26 @@
 
                 <!-- Back to Homepage -->
                 <a href="index.html" class="back-home-link">← Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== UNPAID STATE (shown if no payment token) ========== -->
+    <div class="thankyou-wrapper" id="thankyou-unpaid" style="display:none;">
+        <div class="thankyou-card">
+            <div class="thankyou-header" style="background: linear-gradient(135deg, #c0392b, #922b21);">
+                <div class="thankyou-checkmark" style="background: #c0392b;">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <span class="thankyou-badge">PAYMENT NOT FOUND</span>
+                <h1>Registration Incomplete</h1>
+            </div>
+            <div class="thankyou-body">
+                <h2 class="thankyou-incomplete" style="color: #c0392b;">Please complete your payment first</h2>
+                <p class="thankyou-subtitle">You need to register and complete the payment to access the WhatsApp community group.</p>
+                <a href="index.html" class="whatsapp-join-btn" style="background: var(--memory-orange);">
+                    <i class="fas fa-arrow-left"></i> Go to Registration Page
+                </a>
             </div>
         </div>
     </div>
