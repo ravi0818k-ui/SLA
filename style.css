@@ -539,6 +539,14 @@ body {
     background: linear-gradient(135deg, #1E5EFF, #0B2A5B);
 }
 
+.day-card-header.day-3-header {
+    background: linear-gradient(135deg, #34A853, #1a6b3c);
+}
+
+.curriculum-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 .day-badge {
     background: rgba(255, 255, 255, 0.2);
     padding: 4px 12px;
@@ -1556,7 +1564,8 @@ body {
     }
 
     /* Day-cards stack vertically */
-    .curriculum-grid {
+    .curriculum-grid,
+    .curriculum-grid-3 {
         grid-template-columns: 1fr;
     }
 
