@@ -549,6 +549,7 @@
      * Initializes Thank-You page specific functionality:
      * - Formats and injects workshop date
      * - Handles WhatsApp button visibility
+     * - Starts auto-redirect progress bar
      * @param {Object} data - The parsed data.json object
      */
     function initThankYouPage(data) {
@@ -562,16 +563,56 @@
             if (detailDateEl) detailDateEl.textContent = formattedDate;
         }
 
-        // Handle WhatsApp button visibility
+        // Handle WhatsApp button visibility and auto-redirect
         var whatsappBtn = document.getElementById('whatsapp-btn');
+        var whatsappLink = data.whatsapp && data.whatsapp.link ? data.whatsapp.link : '';
+
         if (whatsappBtn) {
-            var whatsappLink = data.whatsapp && data.whatsapp.link ? data.whatsapp.link : '';
             if (!whatsappLink || whatsappLink.trim() === '') {
                 whatsappBtn.style.display = 'none';
             } else {
                 whatsappBtn.style.display = '';
+                whatsappBtn.href = whatsappLink;
             }
         }
+
+        // Start auto-redirect progress bar
+        if (whatsappLink && whatsappLink.trim() !== '') {
+            startRedirectProgress(whatsappLink);
+        }
+    }
+
+    /**
+     * Animates the progress bar and auto-redirects to WhatsApp after completion.
+     * Uses window.location.href (same tab) to avoid popup blockers on iOS/mobile.
+     * If redirect fails, highlights the manual button.
+     * @param {string} url - The WhatsApp group URL to redirect to
+     */
+    function startRedirectProgress(url) {
+        var progressFill = document.getElementById('progress-bar-fill');
+        var percentText = document.getElementById('redirect-percent');
+        if (!progressFill || !percentText) return;
+
+        var progress = 0;
+        var duration = 4000; // 4 seconds total
+        var interval = 50; // update every 50ms
+        var increment = 100 / (duration / interval);
+
+        var timer = setInterval(function () {
+            progress += increment;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(timer);
+
+                progressFill.style.width = '100%';
+                percentText.textContent = '100%';
+
+                // Use location.href for same-tab redirect (works on iOS/mobile without popup block)
+                window.location.href = url;
+            }
+            progressFill.style.width = Math.round(progress) + '%';
+            percentText.textContent = Math.round(progress) + '%';
+        }, interval);
     }
 
     function initCoachImageFallback() {
@@ -599,6 +640,66 @@
     }
 
     // ========================
+    // QUOTES SLIDER
+    // ========================
+
+    var quotesData = [];
+    var currentQuoteIndex = 0;
+    var quotesIntervalId = null;
+
+    /**
+     * Loads quotes.json and initializes the auto-sliding quotes.
+     */
+    async function initQuotesSlider() {
+        try {
+            var response = await fetch('quotes.json?v=' + Date.now());
+            if (!response.ok) return;
+            quotesData = await response.json();
+            if (quotesData.length === 0) return;
+
+            // Shuffle quotes for variety
+            quotesData = quotesData.sort(function () { return Math.random() - 0.5; });
+
+            // Show first quote immediately
+            showQuote(0);
+
+            // Auto-slide every 5 seconds
+            quotesIntervalId = setInterval(nextQuote, 5000);
+        } catch (e) {
+            // Silently fail — quotes are non-critical
+            console.warn('[SLA] Could not load quotes.json');
+        }
+    }
+
+    function showQuote(index) {
+        var quoteTextEl = document.getElementById('quote-text');
+        var quoteAuthorEl = document.getElementById('quote-author');
+        if (!quoteTextEl || !quoteAuthorEl || quotesData.length === 0) return;
+
+        var quote = quotesData[index];
+        quoteTextEl.textContent = '"' + quote.text + '"';
+        quoteAuthorEl.textContent = '— ' + quote.author;
+    }
+
+    function nextQuote() {
+        var quoteTextEl = document.getElementById('quote-text');
+        if (!quoteTextEl) return;
+
+        // Fade out
+        quoteTextEl.classList.add('fade-out');
+        quoteTextEl.classList.remove('fade-in');
+
+        setTimeout(function () {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotesData.length;
+            showQuote(currentQuoteIndex);
+
+            // Fade in
+            quoteTextEl.classList.remove('fade-out');
+            quoteTextEl.classList.add('fade-in');
+        }, 500);
+    }
+
+    // ========================
     // INITIALIZATION
     // ========================
 
@@ -618,6 +719,7 @@
                 initScrollAnimations();
                 initAnalytics(data);
                 initCoachImageFallback();
+                initQuotesSlider();
             }
         }
     });
