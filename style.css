@@ -574,6 +574,49 @@ body {
 }
 
 /* ===========================
+   Who This Event Is For Section
+   =========================== */
+.who-for-section {
+    padding: var(--section-padding);
+    background: #fff5f5;
+}
+
+.who-for-section .section-title {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.who-for-card {
+    max-width: 800px;
+}
+
+.who-for-list {
+    list-style: none;
+    padding: 0;
+}
+
+.who-for-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.who-check {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.who-check i {
+    color: var(--memory-orange);
+    font-size: 1.2rem;
+}
+
+/* ===========================
    Coach Section
    =========================== */
 .coach-section {
