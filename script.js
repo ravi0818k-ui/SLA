@@ -4,6 +4,72 @@
  * All dynamic content sourced from data.json.
  */
 
+// ========================
+// CONTENT PROTECTION
+// ========================
+
+// Disable right-click context menu
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    showProtectionAlert();
+});
+
+// Disable keyboard shortcuts for inspect/view-source
+document.addEventListener('keydown', function (e) {
+    // F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        showProtectionAlert();
+        return false;
+    }
+    // Ctrl+Shift+I (Inspect)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+        e.preventDefault();
+        showProtectionAlert();
+        return false;
+    }
+    // Ctrl+Shift+J (Console)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+        e.preventDefault();
+        showProtectionAlert();
+        return false;
+    }
+    // Ctrl+U (View Source)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+        e.preventDefault();
+        showProtectionAlert();
+        return false;
+    }
+    // Ctrl+S (Save page)
+    if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+        e.preventDefault();
+        return false;
+    }
+    // Ctrl+C (Copy) — optional, prevents text copying
+    if (e.ctrlKey && (e.key === 'C' || e.key === 'c')) {
+        e.preventDefault();
+        showProtectionAlert();
+        return false;
+    }
+});
+
+// Show protection popup
+function showProtectionAlert() {
+    // Remove existing popup if any
+    var existing = document.getElementById('protection-popup');
+    if (existing) existing.remove();
+
+    var popup = document.createElement('div');
+    popup.id = 'protection-popup';
+    popup.innerHTML = '<div class="protection-overlay"></div><div class="protection-modal"><div class="protection-icon"><i class="fas fa-shield-alt"></i></div><h3>Content Protected</h3><p>This content is protected. Copying or inspecting the source code is not permitted.</p><button onclick="this.parentElement.parentElement.remove()">OK, I Understand</button></div>';
+    document.body.appendChild(popup);
+
+    // Auto-dismiss after 4 seconds
+    setTimeout(function () {
+        if (popup.parentNode) popup.remove();
+    }, 4000);
+}
+
 (function () {
     'use strict';
 
