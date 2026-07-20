@@ -773,152 +773,58 @@ function showProtectionAlert() {
     }
 
     // ========================
-    // GOOGLE SHEETS INTEGRATION
+    // GOOGLE SHEETS INTEGRATION (DISABLED — causes slow page load)
+    // Uncomment loadGoogleSheetContent() call in DOMContentLoaded and the
+    // GOOGLE_SHEET_API_URL below when ready to use.
     // ========================
 
-    /**
-     * Google Sheets Web App URL.
-     * Replace this with your deployed Apps Script URL.
-     */
-    var GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxAqNv8lyeqji2f7kG8XNxAoUWg4zWVzfsN_go1KC8QwI0k20xAaGET2v9RpEjnXcu2Yw/exec'; // ← Paste your deployed Apps Script Web App URL here
+    /*
+    var GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxAqNv8lyeqji2f7kG8XNxAoUWg4zWVzfsN_go1KC8QwI0k20xAaGET2v9RpEjnXcu2Yw/exec';
 
-    /**
-     * Fetches content from the Google Sheets API and applies it to the page.
-     * Falls back gracefully if the API is unavailable or URL is not set.
-     * @param {Object} localData - The local data.json object (used as fallback)
-     */
     async function loadGoogleSheetContent(localData) {
         if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL.trim() === '') {
             console.info('[SLA] Google Sheet API URL not set. Using data.json only.');
             return;
         }
-
         try {
             var response = await fetch(GOOGLE_SHEET_API_URL);
-            if (!response.ok) {
-                throw new Error('HTTP ' + response.status);
-            }
+            if (!response.ok) throw new Error('HTTP ' + response.status);
             var result = await response.json();
-
-            if (result.status !== 'success' || !result.content) {
-                throw new Error('Invalid response from Google Sheet API');
-            }
-
+            if (result.status !== 'success' || !result.content) throw new Error('Invalid response from Google Sheet API');
             applySheetContent(result.content, localData);
         } catch (error) {
             console.warn('[SLA] Could not load Google Sheet content:', error.message);
-            console.info('[SLA] Falling back to data.json values.');
         }
     }
 
-    /**
-     * Applies content from Google Sheet to the DOM elements.
-     * Overrides data.json values where Sheet provides non-empty data.
-     * @param {Object} content - The content object from Google Sheet API
-     * @param {Object} localData - The local data.json object (mutated for countdown)
-     */
     function applySheetContent(content, localData) {
-        // --- Page Title (Hero H1) ---
-        if (content.pageTitle) {
-            var heroH1 = document.querySelector('.hero-text h1');
-            if (heroH1) {
-                heroH1.innerHTML = content.pageTitle;
-            }
-        }
-
-        // --- Registration / Pricing ---
+        if (content.pageTitle) { var heroH1 = document.querySelector('.hero-text h1'); if (heroH1) heroH1.innerHTML = content.pageTitle; }
         if (content.registration) {
             var reg = content.registration;
-
-            // Update countdown end date (override localData so countdown uses Sheet value)
-            if (reg.closeDate && localData && localData.countdown) {
-                localData.countdown.endDate = reg.closeDate;
-            }
-
-            // Button text
-            if (reg.buttonText) {
-                var btnElements = document.querySelectorAll('[data-bind="registration.buttonText"]');
-                btnElements.forEach(function (el) {
-                    el.textContent = reg.buttonText;
-                });
-            }
-
-            // Price
-            if (reg.price) {
-                var priceElements = document.querySelectorAll('[data-bind="registration.price"]');
-                priceElements.forEach(function (el) {
-                    el.textContent = reg.price;
-                });
-            }
-
-            // Original price
-            if (reg.originalPrice) {
-                var origPriceElements = document.querySelectorAll('[data-bind="registration.originalPrice"]');
-                origPriceElements.forEach(function (el) {
-                    el.textContent = reg.originalPrice;
-                });
-            }
-
-            // Currency
-            if (reg.currency) {
-                var currencyElements = document.querySelectorAll('[data-bind="registration.currency"]');
-                currencyElements.forEach(function (el) {
-                    el.textContent = reg.currency;
-                });
-            }
-
-            // Payment link
-            if (reg.paymentLink && reg.paymentLink !== '#') {
-                var linkElements = document.querySelectorAll('[data-bind-href="registration.link"]');
-                linkElements.forEach(function (el) {
-                    el.href = reg.paymentLink;
-                });
-            }
+            if (reg.closeDate && localData && localData.countdown) localData.countdown.endDate = reg.closeDate;
+            if (reg.buttonText) document.querySelectorAll('[data-bind="registration.buttonText"]').forEach(function (el) { el.textContent = reg.buttonText; });
+            if (reg.price) document.querySelectorAll('[data-bind="registration.price"]').forEach(function (el) { el.textContent = reg.price; });
+            if (reg.originalPrice) document.querySelectorAll('[data-bind="registration.originalPrice"]').forEach(function (el) { el.textContent = reg.originalPrice; });
+            if (reg.currency) document.querySelectorAll('[data-bind="registration.currency"]').forEach(function (el) { el.textContent = reg.currency; });
+            if (reg.paymentLink && reg.paymentLink !== '#') document.querySelectorAll('[data-bind-href="registration.link"]').forEach(function (el) { el.href = reg.paymentLink; });
         }
-
-        // --- Curriculum (3-Day Content) ---
         if (content.curriculum) {
             var dayCards = document.querySelectorAll('.day-card');
-
-            var days = ['day1', 'day2', 'day3'];
-            days.forEach(function (dayKey, index) {
+            ['day1', 'day2', 'day3'].forEach(function (dayKey, index) {
                 var dayData = content.curriculum[dayKey];
                 if (!dayData || !dayCards[index]) return;
-
                 var card = dayCards[index];
-
-                // Update day title
-                if (dayData.title) {
-                    var titleEl = card.querySelector('.day-card-header h3');
-                    if (titleEl) {
-                        titleEl.textContent = dayData.title;
-                    }
-                }
-
-                // Update day points
+                if (dayData.title) { var titleEl = card.querySelector('.day-card-header h3'); if (titleEl) titleEl.textContent = dayData.title; }
                 if (dayData.points && dayData.points.length > 0) {
                     var checklist = card.querySelector('.day-checklist');
-                    if (checklist) {
-                        checklist.innerHTML = '';
-                        dayData.points.forEach(function (point) {
-                            var li = document.createElement('li');
-                            li.innerHTML = '<i class="fas fa-check"></i> ' + escapeHTML(point);
-                            checklist.appendChild(li);
-                        });
-                    }
+                    if (checklist) { checklist.innerHTML = ''; dayData.points.forEach(function (point) { var li = document.createElement('li'); li.innerHTML = '<i class="fas fa-check"></i> ' + escapeHTML(point); checklist.appendChild(li); }); }
                 }
             });
         }
     }
 
-    /**
-     * Escapes HTML special characters to prevent XSS from Sheet content.
-     */
-    function escapeHTML(str) {
-        var div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
+    function escapeHTML(str) { var div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+    */
 
     // ========================
     // INITIALIZATION
@@ -934,8 +840,9 @@ function showProtectionAlert() {
                 initThankYouPage(data);
                 initAnalytics(data);
             } else {
-                // Load Google Sheet content first (overrides data.json where applicable)
-                await loadGoogleSheetContent(data);
+                // Google Sheet integration disabled for faster load.
+                // To re-enable: uncomment the block above and add:
+                // await loadGoogleSheetContent(data);
 
                 initCountdown(data);
                 initFAQ();
@@ -983,10 +890,7 @@ function showProtectionAlert() {
         getStaggerDelay: getStaggerDelay,
         playConfetti: playConfetti,
         formatWorkshopDate: formatWorkshopDate,
-        initThankYouPage: initThankYouPage,
-        loadGoogleSheetContent: loadGoogleSheetContent,
-        applySheetContent: applySheetContent,
-        escapeHTML: escapeHTML
+        initThankYouPage: initThankYouPage
     };
 
 })();

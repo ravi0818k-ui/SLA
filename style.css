@@ -342,7 +342,17 @@ h1, h2, h3, h4, h5, h6 {
     flex-shrink: 0;
 }
 
-.hero-coach-img,
+.hero-coach-img {
+    width: 420px;
+    height: auto;
+    max-height: 480px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
+}
+
 .coach-img {
     width: 280px;
     height: 280px;
@@ -727,7 +737,7 @@ body {
 
 .coach-card-image {
     width: 100%;
-    height: 240px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -792,6 +802,49 @@ body {
 }
 
 .coach-card-badge i {
+    color: var(--memory-orange);
+}
+
+.ebook-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--memory-orange);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.ebook-download-btn:hover {
+    background: #e65c00;
+    transform: translateY(-2px);
+}
+
+.ebook-download-btn i {
+    font-size: 1rem;
+}
+
+.coach-ebook {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.coach-ebook-label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.coach-ebook-label i {
     color: var(--memory-orange);
 }
 
