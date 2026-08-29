@@ -626,6 +626,8 @@ function showProtectionAlert() {
         if (paidView) paidView.style.display = '';
         if (unpaidView) unpaidView.style.display = 'none';
 
+        trackPurchaseConversion();
+
         // Format and inject workshop date
         if (data.workshop && data.workshop.startDate) {
             var formattedDate = formatWorkshopDate(data.workshop.startDate);
@@ -653,6 +655,35 @@ function showProtectionAlert() {
         if (whatsappLink && whatsappLink.trim() !== '') {
             startRedirectProgress(whatsappLink);
         }
+    }
+
+    /**
+     * Fires the Google Ads "Purchase" conversion event on the thank-you page.
+     * Registration goes through SuperProfile, not Razorpay, so there's no
+     * redirect query param or webhook to confirm payment or a transaction id —
+     * price is a static value matching data.json's registration.price.
+     * Guarded by sessionStorage so a refresh/reload of the thank-you page
+     * doesn't double-fire the same conversion.
+     */
+    function trackPurchaseConversion() {
+        if (typeof window.gtag !== 'function') return;
+
+        var alreadyFired = false;
+        try {
+            alreadyFired = sessionStorage.getItem('sla_conversion_fired') === 'true';
+        } catch (e) { /* private browsing / storage disabled — fall through and fire */ }
+        if (alreadyFired) return;
+
+        window.gtag('event', 'conversion', {
+            'send_to': 'AW-738572260/aFfQCPv8iOocEOTvluAC',
+            'value': 455,
+            'currency': 'INR',
+            'transaction_id': ''
+        });
+
+        try {
+            sessionStorage.setItem('sla_conversion_fired', 'true');
+        } catch (e) { /* private browsing / storage disabled — nothing to persist */ }
     }
 
     /**
@@ -890,7 +921,8 @@ function showProtectionAlert() {
         getStaggerDelay: getStaggerDelay,
         playConfetti: playConfetti,
         formatWorkshopDate: formatWorkshopDate,
-        initThankYouPage: initThankYouPage
+        initThankYouPage: initThankYouPage,
+        trackPurchaseConversion: trackPurchaseConversion
     };
 
 })();
