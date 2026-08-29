@@ -675,7 +675,7 @@ function showProtectionAlert() {
         if (alreadyFired) return;
 
         window.gtag('event', 'conversion', {
-            'send_to': 'AW-738572260/aFfQCPv8iOocEOTvluAC',
+            'send_to': 'AW-18417193820/GmoECPGNmOocENymgM5E',
             'value': 455,
             'currency': 'INR',
             'transaction_id': ''
