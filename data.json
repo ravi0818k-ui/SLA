@@ -1,6 +1,6 @@
 {
     "countdown": {
-        "endDate": "2026-07-20T23:59:59",
+        "endDate": "2026-09-05T23:59:59",
         "timezone": "Asia/Kolkata",
         "expiredMessage": "Registration Closed!"
     },
