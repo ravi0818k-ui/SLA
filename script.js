@@ -651,10 +651,15 @@ function showProtectionAlert() {
             }
         }
 
-        // Start auto-redirect progress bar
-        if (whatsappLink && whatsappLink.trim() !== '') {
-            startRedirectProgress(whatsappLink);
-        }
+        // TEMP: auto-redirect disabled for testing — user must click the WhatsApp
+        // button themselves. To revert, delete the block below and restore:
+        // if (whatsappLink && whatsappLink.trim() !== '') {
+        //     startRedirectProgress(whatsappLink);
+        // }
+        var progressBlock = document.querySelector('.redirect-progress');
+        var progressTrack = document.querySelector('.progress-bar-track');
+        if (progressBlock) progressBlock.style.display = 'none';
+        if (progressTrack) progressTrack.style.display = 'none';
     }
 
     /**
