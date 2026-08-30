@@ -665,8 +665,10 @@ function showProtectionAlert() {
     /**
      * Fires the Google Ads "Purchase" conversion event on the thank-you page.
      * Registration goes through SuperProfile, not Razorpay, so there's no
-     * redirect query param or webhook to confirm payment or a transaction id —
-     * price is a static value matching data.json's registration.price.
+     * redirect query param or webhook to confirm payment — price is a static
+     * value matching data.json's registration.price, and transaction_id is
+     * the current timestamp (not a real payment reference) so each fire is
+     * still distinguishable in Google Ads.
      * Guarded by sessionStorage so a refresh/reload of the thank-you page
      * doesn't double-fire the same conversion.
      */
@@ -683,7 +685,7 @@ function showProtectionAlert() {
             'send_to': 'AW-18417193820/GmoECPGNmOocENymgM5E',
             'value': 455,
             'currency': 'INR',
-            'transaction_id': ''
+            'transaction_id': String(Date.now())
         });
 
         try {
