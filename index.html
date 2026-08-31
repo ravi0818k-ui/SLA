@@ -38,8 +38,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome 6.5 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome 6.5 (loaded non-blocking - no icons appear above the fold) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css?v=1.0.3">
@@ -56,14 +57,20 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>Become a <span class="highlight">Super Learner</span> in Just 3 Days</h1>
-                <p class="sub-headline">Master proven memory techniques, boost your focus, and unlock your brain's true potential in our LIVE interactive webinar.</p>
+                <p class="sub-headline">A practical live workshop to help you remember better, read faster, and discover how you learn best.</p>
+                <ul class="hero-features">
+                    <li><span class="hero-feature-icon" aria-hidden="true">🧠</span> Memory Techniques</li>
+                    <li><span class="hero-feature-icon" aria-hidden="true">⚡</span> Speed Reading</li>
+                    <li><span class="hero-feature-icon" aria-hidden="true">🎯</span> Discover Your Learning Style</li>
+                </ul>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
                     <span data-bind="registration.buttonText">Register Now</span>
                 </a>
+                <p class="trust-note hero-text-trust">Live sessions • Practical techniques • Certificate included</p>
                 <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
             </div>
             <div class="hero-image">
-                <img src="Images/Your host.png" alt="Abhishek Ranjan - Super Learner Academy Coach" class="hero-coach-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="Images/Your host.webp" alt="Abhishek Ranjan - Super Learner Academy Coach" class="hero-coach-img" width="840" height="840" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
             </div>
         </div>
@@ -137,6 +144,7 @@
                 <a href="#" class="cta-button" data-bind-href="registration.link">
                     <span data-bind="registration.buttonText">Register Now</span>
                 </a>
+                <p class="trust-note">Secure your seat for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
                 <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
             </div>
         </div>
@@ -221,7 +229,7 @@
             <div class="coach-content scroll-reveal">
                 <div class="coach-card">
                     <div class="coach-card-image">
-                        <img src="Images/book reading image.png" alt="Abhishek Ranjan - Reading" class="coach-img coach-profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="Images/book reading image.webp" alt="Abhishek Ranjan - Reading" class="coach-img coach-profile-img" width="760" height="760" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
                     </div>
                     <div class="coach-card-overlay">
