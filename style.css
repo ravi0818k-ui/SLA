@@ -447,7 +447,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 0;
     pointer-events: none;
     opacity: 0.9;
-    animation: mandala-spin 90s linear infinite;
+    animation: mandala-spin 24s linear infinite;
 }
 
 @keyframes mandala-spin {
@@ -487,13 +487,23 @@ h1, h2, h3, h4, h5, h6 {
  * cutout background is transparent, so a badge shows through wherever the
  * photo is transparent and disappears behind the person's silhouette
  * instead of drawing text over the face/book.
+ *
+ * transform-origin MUST match .hero-mandala's center (46% 24%). The four
+ * anchors below were placed to form a circle around that point, not around
+ * .hero-orbit's own box center (the 50% 50% default) - without this, each
+ * anchor sits a different distance from the actual rotation pivot, so
+ * rotating swings some of them (orbit-n worst, ~72% vs the intended ~46%
+ * radius) way outside the container - e.g. left: 122% at a 90deg rotation -
+ * which is what was blowing out the width and forcing a horizontal
+ * scrollbar on mobile.
  */
 .hero-orbit {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    animation: orbit-spin 90s linear infinite;
+    transform-origin: 46% 24%;
+    animation: orbit-spin 24s linear infinite;
 }
 
 .orbit-anchor {
@@ -511,14 +521,36 @@ h1, h2, h3, h4, h5, h6 {
     left: 92%;
 }
 
+/*
+ * Not actually "south" - straight down from the pivot (46%,24%) runs
+ * through the host photo's body/book, which is opaque from ~46 deg to
+ * ~126 deg all the way out past radius 75% (checked against the actual
+ * alpha channel), so a badge parked there is hidden behind the photo for
+ * a big chunk of every rotation, including at rest on page load. Moved
+ * to 138deg (down-left) at the same ~46% radius, which the alpha channel
+ * confirms is fully transparent with several % of margin on every side.
+ */
 .orbit-s {
-    top: 70%;
-    left: 46%;
+    top: 55%;
+    left: 12%;
 }
 
 .orbit-w {
     top: 24%;
     left: 0%;
+}
+
+/* Both placed the same way as .orbit-s above: picked from an alpha-channel
+   scan of the host photo so they land in the transparent gaps either side
+   of the body/book, not on top of it. */
+.orbit-meditation {
+    top: 46%;
+    left: 87%;
+}
+
+.orbit-concentration {
+    top: -9%;
+    left: 14%;
 }
 
 .hero-badge {
@@ -534,7 +566,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     font-size: 0.78rem;
     white-space: nowrap;
-    animation: counter-mandala-spin 90s linear infinite;
+    animation: counter-mandala-spin 24s linear infinite;
 }
 
 .hero-badge-icon {
@@ -571,6 +603,16 @@ h1, h2, h3, h4, h5, h6 {
     animation-delay: 1.8s;
 }
 
+.badge-meditation .hero-badge-icon {
+    background: var(--deep-learning-blue);
+    animation-delay: 2.4s;
+}
+
+.badge-concentration .hero-badge-icon {
+    background: var(--red-orange);
+    animation-delay: 3s;
+}
+
 @keyframes pulse-glow {
     0%, 100% {
         opacity: 0.7;
@@ -601,6 +643,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 576px) {
+    /* .hero-orbit's own box spans the full .hero-visual size (inset: 0), and
+       CSS transform overflow is computed from that whole box, not just the
+       visible badges inside it - rotating it around the off-center pivot
+       (transform-origin: 46% 24%) sweeps the box's far corner through an arc
+       much wider than .hero-visual itself, which was still forcing a
+       horizontal scrollbar on mobile even after the anchor radius above was
+       tuned to keep the *badges* on-screen. overflow-x here clips that
+       rotation-only bleed at .hero-visual's edge without touching overflow-y,
+       so badges can still bleed above/below (.orbit-n's negative top) as
+       designed - only measured/confirmed via a headless-browser scrollWidth
+       check across a full animation cycle, not by inspection alone.
+       Desktop is left alone so .hero-visual::before's glow keeps its bleed. */
+    .hero-visual {
+        overflow: hidden; /* fallback for iOS Safari <16, no overflow-x:clip support */
+        overflow-x: clip;
+        overflow-y: visible;
+    }
+
     /* Shrink in place (no transform: scale) - scaling the whole absolutely
        positioned group toward its center pulls the edge-anchored badges
        inward onto the photo instead of just making them smaller. */
@@ -629,11 +689,22 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .orbit-s {
-        top: 62%;
+        top: 49%;
+        left: 18%;
     }
 
     .orbit-w {
         left: 10%;
+    }
+
+    .orbit-meditation {
+        top: 41%;
+        left: 79%;
+    }
+
+    .orbit-concentration {
+        top: -2%;
+        left: 20%;
     }
 
     .hero-mandala {
