@@ -401,6 +401,246 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* ===========================
+   Hero Decorative Graphics
+   (mandala halo + orbiting badges)
+   =========================== */
+.hero-visual {
+    position: relative;
+    width: 420px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 125%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle at 34% 38%, rgba(30, 94, 255, 0.38), transparent 55%),
+        radial-gradient(circle at 66% 58%, rgba(255, 107, 0, 0.35), transparent 55%);
+    filter: blur(8px);
+    z-index: 0;
+    pointer-events: none;
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/*
+ * Ornamental halo behind the head/shoulders. Positioned/sized from the
+ * cutout photo's actual alpha-channel silhouette (scripts/generate_mandala.py
+ * + a per-row transparency scan of Images/Your host.webp): the head+shoulders
+ * only occupy ~13%-53% width up to ~40% height, so a ring centered near the
+ * top stays mostly visible around the head instead of being hidden by the body.
+ */
+.hero-mandala {
+    position: absolute;
+    top: 24%;
+    left: 46%;
+    width: 82%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    background: url("Images/mandala.svg") center / contain no-repeat;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+    animation: mandala-spin 90s linear infinite;
+}
+
+@keyframes mandala-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Same duration/timing as mandala-spin (kept separate since .hero-orbit
+   has no centering translate to preserve) so the orbit stays phase-locked
+   with the mandala's own rotation. */
+@keyframes orbit-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes counter-mandala-spin {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.hero-coach-img {
+    position: relative;
+    z-index: 1;
+}
+
+/*
+ * Badges orbit on a wider ring outside the mandala (see .hero-mandala)
+ * so their path stays clear of the body as much as possible. .hero-orbit
+ * shares the mandala's exact animation (name + duration) to stay perfectly
+ * in sync; each .hero-badge runs the mirror-image rotation so the pill
+ * itself stays upright while its anchor point is carried around the circle.
+ *
+ * z-index is BELOW .hero-coach-img (z-index: 1) on purpose: the photo's
+ * cutout background is transparent, so a badge shows through wherever the
+ * photo is transparent and disappears behind the person's silhouette
+ * instead of drawing text over the face/book.
+ */
+.hero-orbit {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    animation: orbit-spin 90s linear infinite;
+}
+
+.orbit-anchor {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-n {
+    top: -22%;
+    left: 46%;
+}
+
+.orbit-e {
+    top: 24%;
+    left: 92%;
+}
+
+.orbit-s {
+    top: 70%;
+    left: 46%;
+}
+
+.orbit-w {
+    top: 24%;
+    left: 0%;
+}
+
+.hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ffffff;
+    color: var(--deep-learning-blue);
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    animation: counter-mandala-spin 90s linear infinite;
+}
+
+.hero-badge-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    color: #ffffff;
+    flex-shrink: 0;
+    animation: icon-shake 3.4s ease-in-out infinite;
+}
+
+.badge-read .hero-badge-icon {
+    background: var(--smart-blue);
+    animation-delay: 0s;
+}
+
+.badge-remember .hero-badge-icon {
+    background: var(--memory-orange);
+    animation-delay: 0.6s;
+}
+
+.badge-focus .hero-badge-icon {
+    background: var(--success-gold);
+    color: var(--deep-learning-blue);
+    animation-delay: 1.2s;
+}
+
+.badge-photo .hero-badge-icon {
+    background: var(--growth-green);
+    animation-delay: 1.8s;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.06);
+    }
+}
+
+@keyframes icon-shake {
+    0%, 85%, 100% {
+        transform: rotate(0deg);
+    }
+    88% {
+        transform: rotate(-14deg);
+    }
+    91% {
+        transform: rotate(11deg);
+    }
+    94% {
+        transform: rotate(-7deg);
+    }
+    97% {
+        transform: rotate(4deg);
+    }
+}
+
+@media (max-width: 576px) {
+    /* Shrink in place (no transform: scale) - scaling the whole absolutely
+       positioned group toward its center pulls the edge-anchored badges
+       inward onto the photo instead of just making them smaller. */
+    .hero-badge {
+        gap: 0.3rem;
+        padding: 0.3rem 0.55rem;
+        font-size: 0.62rem;
+    }
+
+    .hero-badge-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 0.65rem;
+    }
+
+    /* Pull the orbit radius back in on narrow screens - the wider desktop
+       orbit puts badge centers at the container's edge, and the pill's own
+       width then runs past the viewport since .hero-visual is nearly full
+       viewport width here. */
+    .orbit-n {
+        top: -14%;
+    }
+
+    .orbit-e {
+        left: 82%;
+    }
+
+    .orbit-s {
+        top: 62%;
+    }
+
+    .orbit-w {
+        left: 10%;
+    }
+
+    .hero-mandala {
+        width: 90%;
+    }
+}
+
 .coach-fallback {
     width: 280px;
     height: 280px;
