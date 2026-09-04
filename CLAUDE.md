@@ -10,7 +10,7 @@ Registration currently goes through **SuperProfile** (`data.json`'s `registratio
 
 ## Positioning & content niche
 
-All copy on this site is written to one niche — **helping students get better grades by teaching practical, science-informed strategies for memory, focus, study skills, and growth mindset.** When editing headlines, section copy, FAQ answers, testimonials, or `data.json` text, keep it inside this frame:
+All copy on this site is written to one niche — **helping students get better grades by teaching practical, science-informed strategies for memory, focus, study skills, and growth mindset.** `niche.md` is the full reference (audience profile, pain vocabulary, pillar topic banks, message hierarchy, off-niche list); the working rules are below. When editing headlines, section copy, FAQ answers, testimonials, or `data.json` text, keep it inside this frame:
 
 - **Target reader** is a *student* (teens through graduation; board/JEE/NEET/UPSC/CA aspirants), secondarily their parents. Working professionals and lifelong learners are a footnote, not the lead — the "Who This Event Is For" list is deliberately ordered students-first.
 - **The pain** is *studying hard but marks not moving*: forgetting by exam day, long hours with average results, focus breaking in minutes, re-reading/highlighting as the only method, no revision system, and the self-image of being "just an average student." The `#challenges` section is written against exactly these six.

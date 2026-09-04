@@ -1154,8 +1154,21 @@ body {
 .day-checklist li {
     padding: 10px 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
+    line-height: 1.5;
+}
+
+/* Align the check icon with the first line of wrapped text */
+.day-checklist li > i.fa-check {
+    flex-shrink: 0;
+    margin-top: 0.32em;
+}
+
+.day-checklist li > span,
+.who-for-list li > span,
+.coach-credentials li > span {
+    flex: 1;
 }
 
 .day-checklist i.fa-check {

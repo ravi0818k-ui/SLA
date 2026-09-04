@@ -1,6 +1,6 @@
 {
     "countdown": {
-        "endDate": "2026-09-05T23:59:59",
+        "endDate": "2026-09-12T12:00:00",
         "timezone": "Asia/Kolkata",
         "expiredMessage": "Registration Closed!"
     },
@@ -15,7 +15,8 @@
         "name": "Super Learner Academy - 3 Day Live Webinar",
         "coach": "Abhishek Ranjan",
         "days": 3,
-        "startDate": "2026-07-21T19:00:00"
+        "startDate": "2026-09-12T16:00:00",
+        "sessionTime": "4:00 PM – 6:30 PM IST"
     },
     "whatsapp": {
         "link": "https://chat.whatsapp.com/JBS46Qt3Qs34Gc35YyxPX2",
