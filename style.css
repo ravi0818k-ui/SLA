@@ -1166,7 +1166,7 @@ body {
 }
 
 .day-checklist li > span,
-.who-for-list li > span,
+.who-for-list li > span:not(.who-check),
 .coach-credentials li > span {
     flex: 1;
 }
@@ -1243,9 +1243,26 @@ body {
     width: 260px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 34px rgba(11, 42, 91, 0.28);
     position: relative;
-    background: linear-gradient(180deg, #1a3a6b 0%, #0B2A5B 100%);
+    /* The coach photo is a transparent cutout, so this background shows through
+       around the subject. Echoes .hero-visual::before's blue+orange glow so the
+       two cutout photos on the page get the same lighting treatment. */
+    background:
+        radial-gradient(circle at 34% 30%, rgba(30, 94, 255, 0.38), transparent 58%),
+        radial-gradient(circle at 70% 62%, rgba(255, 107, 0, 0.30), transparent 58%),
+        linear-gradient(165deg, #1d4079 0%, #0B2A5B 55%, #071e3f 100%);
+}
+
+/* Soft inner rim so the card edge reads against the white section */
+.coach-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+    z-index: 2;
 }
 
 .coach-card-image {
@@ -1258,7 +1275,9 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    /* Subject's alpha bbox is x0-682 of 760 (transparent strip on the right),
+       so `center` leaves it ~15px left of centre. 12% re-centres the person. */
+    object-position: 12% top;
     border-radius: 0;
     border: none;
     box-shadow: none;
