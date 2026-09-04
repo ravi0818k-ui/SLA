@@ -8,6 +8,23 @@ A static (no build step) webinar registration landing page for Super Learner Aca
 
 Registration currently goes through **SuperProfile** (`data.json`'s `registration.link`), which redirects straight to `thank-you.html` with no query param, webhook, or transaction id to confirm payment — `initThankYouPage` in `script.js` always shows the "paid" view (no gate). `razorpay.md` documents a **future** migration plan to Razorpay (payment verification, webhook-to-Google-Sheets); none of that is live yet, so don't assume Razorpay params/verification exist.
 
+## Positioning & content niche
+
+All copy on this site is written to one niche — **helping students get better grades by teaching practical, science-informed strategies for memory, focus, study skills, and growth mindset.** When editing headlines, section copy, FAQ answers, testimonials, or `data.json` text, keep it inside this frame:
+
+- **Target reader** is a *student* (teens through graduation; board/JEE/NEET/UPSC/CA aspirants), secondarily their parents. Working professionals and lifelong learners are a footnote, not the lead — the "Who This Event Is For" list is deliberately ordered students-first.
+- **The pain** is *studying hard but marks not moving*: forgetting by exam day, long hours with average results, focus breaking in minutes, re-reading/highlighting as the only method, no revision system, and the self-image of being "just an average student." The `#challenges` section is written against exactly these six.
+- **The promised outcome** is *better grades through smarter method, not more hours*. Lead with the grade/score result; skills (recall, focus, calm) are the mechanism, not the headline.
+- **Three content pillars** structure the whole page, and each maps to one workshop day. Keep this mapping consistent everywhere it appears (`#pillars` cards, the three `.day-card`s in `#curriculum`, the hero's `.hero-features`, the hero orbit badges, and the "What will I learn in 3 days" FAQ answer) — changing one means changing all of them:
+  1. **Memory & Brain** (Day 1) — Hook System, observation training, neurobics, how the brain learns
+  2. **Study & Focus** (Day 2) — active recall, spaced practice, revision scheduling, concentration
+  3. **Mindset & Learning** (Day 3) — growth mindset, self-talk, meditation, learner identity/exam confidence
+
+**Two content rules that are easy to violate:**
+
+- **No pseudo-scientific claims.** "Photographic memory" was deliberately removed from the hero orbit badges (replaced with "Growth Mindset") because it undercuts the science-informed positioning. Don't reintroduce it or similar — memory palaces, mnemonics, spaced repetition, neuroplasticity are defensible; eidetic memory, "10% of your brain", learning-style-as-fixed-neurology are not. Name real techniques, and explain the *mechanism* — that's what the `#science` ("Why These Techniques Work") section exists for.
+- **No invented outcome numbers.** The `.testimonial-result` badges in `#testimonials` summarise what each quote already claims — they must never carry a fabricated score ("+23%", "went from 60% to 85%"). There's an HTML comment above that grid saying testimonials must be replaced with real verified results before paid traffic; honour it. The "Will this actually improve my grades?" FAQ answer intentionally refuses to promise a number — don't "improve" it by adding one.
+
 ## Commands
 
 ```bash
@@ -48,6 +65,7 @@ A disabled Google Sheets override path (`applySheetContent`, currently commented
 - `tests/properties/*.property.test.js` — [fast-check](https://github.com/dubzzz/fast-check) property tests (≥100 iterations) for pure logic functions, each tagged with a `Property N` comment matching the numbered properties in `.kiro/specs/sla-webinar-landing-page/design.md` (e.g. Property 1: sticky CTA visibility = `scrollY > 700`; Property 2: countdown component sum; Property 4: discount % = `Math.round((1 - current/original) * 100)`; Property 6: FAQ single-open invariant).
 - `tests/setup.js` provides `loadHTML`, `setupDOM`, `loadScript`, `createMockData` helpers and resets `document.documentElement.innerHTML` + `localStorage` before each test.
 - When changing a property's underlying formula in `script.js`, check whether the corresponding property text in `design.md` and the property test's generator/assertion need updating too.
+- **`tests/unit/structure.test.js` has 3 known-stale failures** (pre-existing, unrelated to any current work): it asserts exactly 2 `.day-card`s when the curriculum has 3, expects every `img.coach-img` to carry the hero's alt text when the coach-section image has its own, and looks for `.next-step-card` on `thank-you.html` where no such class exists. `npm test` is therefore expected to report `3 failed | 61 passed` on a clean tree — treat that as the baseline, and don't assume your change caused it.
 
 ### Analytics: two separate systems, don't conflate them
 

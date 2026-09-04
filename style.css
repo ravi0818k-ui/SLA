@@ -937,6 +937,166 @@ body {
 }
 
 /* ===========================
+   Pillars Section (3 Content Pillars)
+   =========================== */
+.pillars-section {
+    padding: var(--section-padding);
+    background: #ffffff;
+    text-align: center;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 2.5rem;
+}
+
+.pillar-card {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #eef1f6;
+    border-radius: var(--radius-card);
+    padding: 36px 28px 28px;
+    text-align: left;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--memory-orange);
+}
+
+.pillar-number {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: #eef1f6;
+}
+
+.pillar-icon {
+    font-size: 2.2rem;
+    color: var(--memory-orange);
+    margin-bottom: 1rem;
+}
+
+.pillar-card:nth-child(2) .pillar-icon { color: var(--smart-blue); }
+.pillar-card:nth-child(3) .pillar-icon { color: var(--growth-green); }
+
+.pillar-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--deep-learning-blue);
+    margin-bottom: 0.6rem;
+}
+
+.pillar-card > p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+
+.pillar-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pillar-tags li {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: #f4f6fa;
+    color: var(--deep-learning-blue);
+}
+
+/* Day-card pillar tag (curriculum) */
+.day-pillar-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+/* ===========================
+   Science Section (Why It Works)
+   =========================== */
+.science-section {
+    padding: var(--section-padding);
+    background: #f4f7fc;
+    text-align: center;
+}
+
+.science-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 2.5rem;
+}
+
+.science-card {
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    padding: 32px 26px;
+    text-align: left;
+    box-shadow: var(--card-shadow);
+    border-top: 4px solid var(--smart-blue);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.science-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.science-icon {
+    font-size: 1.8rem;
+    color: var(--smart-blue);
+    margin-bottom: 0.8rem;
+}
+
+.science-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--deep-learning-blue);
+    margin-bottom: 0.6rem;
+}
+
+.science-card p {
+    font-size: 0.93rem;
+    color: #555;
+}
+
+/* Testimonial result badge */
+.testimonial-result {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    margin-bottom: 0.9rem;
+    border-radius: var(--radius-pill);
+    background: rgba(52, 168, 83, 0.15);
+    color: #7ee2a8;
+}
+
+/* ===========================
    Curriculum Section
    =========================== */
 .curriculum-section {
@@ -2071,6 +2231,8 @@ body {
     .challenges-grid,
     .included-grid,
     .testimonials-grid,
+    .pillars-grid,
+    .science-grid,
     .next-steps-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2094,7 +2256,9 @@ body {
     .grid-3,
     .challenges-grid,
     .included-grid,
-    .testimonials-grid {
+    .testimonials-grid,
+    .pillars-grid,
+    .science-grid {
         grid-template-columns: 1fr;
     }
 
