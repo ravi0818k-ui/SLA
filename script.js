@@ -683,7 +683,7 @@ function showProtectionAlert() {
 
         window.gtag('event', 'conversion', {
             'send_to': 'AW-18417193820/GmoECPGNmOocENymgM5E',
-            'value': 99,
+            'value': 21,
             'currency': 'INR',
             'transaction_id': String(Date.now())
         });

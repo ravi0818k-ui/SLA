@@ -5,12 +5,12 @@
         "expiredMessage": "Registration Closed!"
     },
     "registration": {
-        "price": "99",
+        "price": "21",
         "originalPrice": "4999",
         "currency": "₹",
-        "link": "https://superprofile.bio/e/xjhIxvaR",
-        "buttonText": "Reserve My Seat for ₹99",
-        "priceHeadline": "Join for just ₹99",
+        "link": "https://superprofile.bio/e/FBHwDADv",
+        "buttonText": "Reserve My Seat for ₹21",
+        "priceHeadline": "Join for just ₹21",
         "priceNote": "One-time payment • No hidden fees • Certificate included",
         "refundNote": "Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below."
     },
