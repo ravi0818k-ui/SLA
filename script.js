@@ -811,6 +811,81 @@ function showProtectionAlert() {
     }
 
     // ========================
+    // HERO QUOTE ROTATOR
+    // ========================
+
+    /*
+     * Rotates the Ramanujan quote under the hero photo. Separate from
+     * initQuotesSlider (which drives #quotes-slider off quotes.json) on
+     * purpose: this list is hero-specific, hardcoded so it costs no extra
+     * request above the fold, and the first entry is already in the HTML so
+     * the block renders identically with JS off.
+     *
+     * Every quote here is attributable to Ramanujan himself - the first from
+     * his 1913 letter to G. H. Hardy, the third from Hardy's own account of
+     * the 1729 taxicab exchange. Don't add unsourced "inspirational" lines.
+     */
+    var HERO_QUOTES = [
+        {
+            text: 'I have not trodden through a conventional university course, but I am striking out a new path for myself.',
+            author: 'Srinivasa Ramanujan, letter to G. H. Hardy, 1913'
+        },
+        {
+            text: 'An equation means nothing to me unless it expresses a thought of God.',
+            author: 'Srinivasa Ramanujan'
+        },
+        {
+            text: 'It is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.',
+            author: 'Srinivasa Ramanujan, on 1729'
+        }
+    ];
+
+    var heroQuoteIndex = 0;
+    var heroQuoteIntervalId = null;
+
+    /**
+     * Returns the index that follows `index` in a list of `length` items,
+     * wrapping back to 0 at the end.
+     * @param {number} index - Current 0-based index
+     * @param {number} length - Number of items in the list
+     * @returns {number} The next index, or 0 if the list is empty
+     */
+    function getNextQuoteIndex(index, length) {
+        if (!length || length <= 0) return 0;
+        return (index + 1) % length;
+    }
+
+    function showHeroQuote(index) {
+        var textEl = document.getElementById('hero-quote-text');
+        var authorEl = document.getElementById('hero-quote-author');
+        if (!textEl || !authorEl) return;
+
+        var quote = HERO_QUOTES[index];
+        if (!quote) return;
+
+        textEl.textContent = '“' + quote.text + '”';
+        authorEl.textContent = '— ' + quote.author;
+    }
+
+    function initHeroQuotes() {
+        var wrapper = document.querySelector('.hero-quote');
+        if (!wrapper || HERO_QUOTES.length < 2) return;
+
+        // Respect the OS "reduce motion" setting: leave the static first
+        // quote in place rather than cross-fading text above the fold.
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        heroQuoteIntervalId = setInterval(function () {
+            wrapper.classList.add('is-fading');
+            setTimeout(function () {
+                heroQuoteIndex = getNextQuoteIndex(heroQuoteIndex, HERO_QUOTES.length);
+                showHeroQuote(heroQuoteIndex);
+                wrapper.classList.remove('is-fading');
+            }, 500);
+        }, 8000);
+    }
+
+    // ========================
     // GOOGLE SHEETS INTEGRATION (DISABLED — causes slow page load)
     // Uncomment loadGoogleSheetContent() call in DOMContentLoaded and the
     // GOOGLE_SHEET_API_URL below when ready to use.
@@ -889,6 +964,7 @@ function showProtectionAlert() {
                 initAnalytics(data);
                 initCoachImageFallback();
                 initQuotesSlider();
+                initHeroQuotes();
             }
         }
     });
@@ -925,6 +1001,9 @@ function showProtectionAlert() {
         injectGTM: injectGTM,
         injectFBPixel: injectFBPixel,
         initCoachImageFallback: initCoachImageFallback,
+        initHeroQuotes: initHeroQuotes,
+        showHeroQuote: showHeroQuote,
+        getNextQuoteIndex: getNextQuoteIndex,
         getStaggerDelay: getStaggerDelay,
         playConfetti: playConfetti,
         formatWorkshopDate: formatWorkshopDate,

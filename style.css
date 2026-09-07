@@ -412,6 +412,22 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
+/*
+ * .hero-orbit rotates a box the full size of .hero-visual around an off-center
+ * pivot, and CSS computes transform overflow from that whole box - not from the
+ * badges inside it - so its far corner sweeps ~200px past .hero-visual's right
+ * edge and forced a horizontal scrollbar at 1440px and 768px (measured, not
+ * guessed: scrollWidth 1515 vs 1440). Clipping x on the *section* kills that
+ * page-level scroll while still letting the badges and .hero-visual::before's
+ * glow bleed outside .hero-visual itself, which the design depends on.
+ * `clip` (not `hidden`) on purpose: it doesn't create a scroll container, so
+ * nothing here can become independently scrollable.
+ */
+.hero {
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
 .hero-visual::before {
     content: "";
     position: absolute;
@@ -432,14 +448,18 @@ h1, h2, h3, h4, h5, h6 {
 /*
  * Ornamental halo behind the head/shoulders. Positioned/sized from the
  * cutout photo's actual alpha-channel silhouette (scripts/generate_mandala.py
- * + a per-row transparency scan of Images/Your host.webp): the head+shoulders
- * only occupy ~13%-53% width up to ~40% height, so a ring centered near the
- * top stays mostly visible around the head instead of being hidden by the body.
+ * + a per-row transparency scan of Images/Ramanujan.webp): head+shoulders
+ * occupy ~40%-77% width down to ~38% height, then the torso/arms flare out to
+ * the full canvas width by ~70% height. So the ring is centered on the head
+ * (55%, 22%) - it stays visible around the head and upper background instead
+ * of being swallowed by the body. (The previous host photo's silhouette sat
+ * further left, hence the older 46%/24% center - recalculate the same way if
+ * the photo is ever replaced again.)
  */
 .hero-mandala {
     position: absolute;
-    top: 24%;
-    left: 46%;
+    top: 22%;
+    left: 55%;
     width: 82%;
     aspect-ratio: 1 / 1;
     transform: translate(-50%, -50%);
@@ -488,7 +508,7 @@ h1, h2, h3, h4, h5, h6 {
  * photo is transparent and disappears behind the person's silhouette
  * instead of drawing text over the face/book.
  *
- * transform-origin MUST match .hero-mandala's center (46% 24%). The four
+ * transform-origin MUST match .hero-mandala's center (55% 22%). The six
  * anchors below were placed to form a circle around that point, not around
  * .hero-orbit's own box center (the 50% 50% default) - without this, each
  * anchor sits a different distance from the actual rotation pivot, so
@@ -502,7 +522,7 @@ h1, h2, h3, h4, h5, h6 {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    transform-origin: 46% 24%;
+    transform-origin: 55% 22%;
     animation: orbit-spin 32s linear infinite;
 }
 
@@ -511,46 +531,49 @@ h1, h2, h3, h4, h5, h6 {
     transform: translate(-50%, -50%);
 }
 
+/*
+ * All six anchors sit on one ~44%-radius circle around the pivot (55%, 22%),
+ * at angles chosen by sampling Ramanujan.webp's alpha channel in a badge-sized
+ * box at each candidate point (0deg = right, counter-clockwise):
+ *
+ *   335deg .orbit-e            20deg .orbit-meditation     65deg .orbit-n
+ *   110deg .orbit-concentration  155deg .orbit-w           193deg .orbit-s
+ *
+ * The whole lower arc (~200deg-320deg) is opaque photo - this subject's torso
+ * and arms reach the full canvas width by ~70% height - so no badge *rests*
+ * there; each one still passes behind the body mid-rotation, which is the
+ * intended layering (see the z-index note above). Max horizontal excursion at
+ * any rotation is 55% + 44% = 99% of .hero-visual, keeping the ring inside its
+ * box on desktop. Names are historical, not compass directions.
+ */
 .orbit-n {
-    top: -22%;
-    left: 46%;
+    top: -18%;
+    left: 74%;
 }
 
 .orbit-e {
-    top: 24%;
-    left: 92%;
+    top: 41%;
+    left: 95%;
 }
 
-/*
- * Not actually "south" - straight down from the pivot (46%,24%) runs
- * through the host photo's body/book, which is opaque from ~46 deg to
- * ~126 deg all the way out past radius 75% (checked against the actual
- * alpha channel), so a badge parked there is hidden behind the photo for
- * a big chunk of every rotation, including at rest on page load. Moved
- * to 138deg (down-left) at the same ~46% radius, which the alpha channel
- * confirms is fully transparent with several % of margin on every side.
- */
 .orbit-s {
-    top: 55%;
+    top: 32%;
     left: 12%;
 }
 
 .orbit-w {
-    top: 24%;
-    left: 0%;
+    top: 3%;
+    left: 15%;
 }
 
-/* Both placed the same way as .orbit-s above: picked from an alpha-channel
-   scan of the host photo so they land in the transparent gaps either side
-   of the body/book, not on top of it. */
 .orbit-meditation {
-    top: 46%;
-    left: 87%;
+    top: 7%;
+    left: 96%;
 }
 
 .orbit-concentration {
-    top: -9%;
-    left: 14%;
+    top: -19%;
+    left: 40%;
 }
 
 .hero-badge {
@@ -679,36 +702,104 @@ h1, h2, h3, h4, h5, h6 {
     /* Pull the orbit radius back in on narrow screens - the wider desktop
        orbit puts badge centers at the container's edge, and the pill's own
        width then runs past the viewport since .hero-visual is nearly full
-       viewport width here. */
+       viewport width here. Same six angles as the desktop ring, just recomputed
+       at radius 30% instead of 44% around the same (55%, 22%) pivot. (36% was
+       tried first and left the right-hand pills clipped 1-3px by
+       .hero-visual's overflow-x at 360-390px.) */
     .orbit-n {
-        top: -14%;
+        top: -5%;
+        left: 68%;
     }
 
     .orbit-e {
+        top: 35%;
         left: 82%;
     }
 
     .orbit-s {
-        top: 49%;
-        left: 18%;
+        top: 29%;
+        left: 26%;
     }
 
     .orbit-w {
-        left: 10%;
+        top: 9%;
+        left: 28%;
     }
 
     .orbit-meditation {
-        top: 41%;
-        left: 79%;
+        top: 12%;
+        left: 83%;
     }
 
     .orbit-concentration {
-        top: -2%;
-        left: 20%;
+        top: -6%;
+        left: 45%;
     }
 
     .hero-mandala {
         width: 90%;
+    }
+}
+
+/* ===========================
+   Hero quote (under the photo)
+   =========================== */
+/*
+ * min-height reserves the tallest of the three rotated quotes at each
+ * breakpoint, so swapping text can't shift the hero (this sits above the fold
+ * on desktop). Sized from a headless measurement of the longest string, not
+ * eyeballed - recheck it if the quote list changes.
+ */
+.hero-quote {
+    margin: 1.5rem auto 0;
+    max-width: 400px;
+    padding: 0 8px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    padding-top: 1.15rem;
+}
+
+.hero-quote-text {
+    margin: 0;
+    min-height: 5.2em;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    transition: opacity 0.5s ease;
+}
+
+.hero-quote-author {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: var(--success-gold);
+    transition: opacity 0.5s ease;
+}
+
+.hero-quote.is-fading .hero-quote-text,
+.hero-quote.is-fading .hero-quote-author {
+    opacity: 0;
+}
+
+@media (max-width: 992px) {
+    .hero-quote {
+        max-width: 460px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-quote {
+        margin-top: 1.15rem;
+        padding-top: 1rem;
+    }
+
+    .hero-quote-text {
+        font-size: 0.85rem;
+        min-height: 6.8em;
     }
 }
 
@@ -1275,9 +1366,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Subject's alpha bbox is x0-682 of 760 (transparent strip on the right),
-       so `center` leaves it ~15px left of centre. 12% re-centres the person. */
-    object-position: 12% top;
+    /* Images/host.webp: the subject's alpha bbox spans only 12.7%-82.1% of the
+       square canvas, so cover-cropping it into the 260x300 card (which trims
+       ~13% of the width) still fits the whole person inside the frame with
+       `center` - no nudge needed, and the head lands at ~53% of the card.
+       Re-scan the alpha channel the same way if this photo is replaced. */
+    object-position: center top;
     border-radius: 0;
     border: none;
     box-shadow: none;
@@ -2233,6 +2327,230 @@ body {
 }
 
 /* ===========================
+   Conversion Blocks (hero offer strip, audience qualifier, outcomes)
+   Added for Google Ads cold traffic — reuses existing tokens only.
+   =========================== */
+
+/* --- Top bar --- */
+.top-bar-text {
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+/* --- Hero: format line ("3-Day LIVE Interactive Workshop for Students") --- */
+.hero-format {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--success-gold);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.85rem;
+}
+
+/* --- Hero: when / how long / where --- */
+.hero-meta {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.hero-meta li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+}
+
+.hero-meta-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* --- Hero: price --- */
+.hero-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+}
+
+.hero-price-strike {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.hero-price-main {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.9rem;
+    color: var(--success-gold);
+    line-height: 1.2;
+}
+
+/* --- Hero: trust strip below the CTA --- */
+.trust-strip {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin-top: 1rem;
+}
+
+.trust-strip li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.trust-check {
+    color: var(--growth-green);
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* --- Audience qualifier section (directly after hero) --- */
+.for-whom-section {
+    padding: 56px 20px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.for-whom-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.for-whom-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    color: #333;
+    background: #ffffff;
+    border: 1px solid #eef1f6;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.for-whom-check {
+    color: var(--growth-green);
+    font-weight: 700;
+    line-height: 1.5;
+    flex-shrink: 0;
+}
+
+/* --- Outcomes section ("What You'll Be Able to Do") --- */
+.outcomes-section {
+    padding: var(--section-padding);
+    background: #ffffff;
+    text-align: center;
+}
+
+.outcomes-list {
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+    max-width: 640px;
+}
+
+.outcomes-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: #333;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef1f6;
+}
+
+.outcomes-list li:last-child {
+    border-bottom: none;
+}
+
+.outcome-check {
+    color: var(--growth-green);
+    font-weight: 700;
+    line-height: 1.6;
+    flex-shrink: 0;
+}
+
+.outcomes-note {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #777;
+    max-width: 640px;
+    margin: 1.25rem auto 0;
+}
+
+/* --- Pricing section additions --- */
+.section-subtitle.light {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.price-anchor-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    margin-right: 8px;
+}
+
+.price-launch-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--growth-green);
+    background: rgba(52, 168, 83, 0.15);
+    border: 1px solid rgba(52, 168, 83, 0.4);
+    border-radius: var(--radius-pill);
+    display: inline-block;
+    padding: 4px 16px;
+    margin-bottom: 0.5rem;
+}
+
+.refund-note {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 420px;
+    margin: 1.25rem auto 0;
+}
+
+.refund-icon {
+    line-height: 1;
+}
+
+/* Trust note on dark backgrounds (e.g. the CTA under testimonials) */
+.trust-note-light {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===========================
    Responsive Breakpoints
    =========================== */
 
@@ -2245,17 +2563,29 @@ body {
         text-align: center;
     }
 
+    /* Ad traffic lands here: the offer + CTA must be readable without
+       scrolling past the (decorative) coach photo, so the text comes first
+       and the photo follows it once the hero stacks. */
     .hero-text {
-        order: 2;
+        order: 1;
     }
 
-    .hero-features {
+    .hero-features,
+    .hero-meta,
+    .hero-price,
+    .trust-strip {
         justify-content: center;
     }
 
     .hero-image {
-        order: 1;
-        margin-bottom: 2rem;
+        order: 2;
+        margin-top: 2rem;
+        margin-bottom: 0;
+    }
+
+    /* Audience qualifier: 2 columns */
+    .for-whom-list {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* Limit grids to max 2 columns */
@@ -2302,6 +2632,11 @@ body {
 
     /* Next-steps cards single column (Thank-You page) */
     .next-steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Audience qualifier: single column */
+    .for-whom-list {
         grid-template-columns: 1fr;
     }
 
@@ -2376,6 +2711,104 @@ body {
         text-align: center;
     }
 
+    /* Top bar: keep to one line so the fixed-bar body offset stays correct */
+    .top-bar {
+        padding: 8px 12px;
+    }
+
+    .top-bar-text {
+        font-size: 0.72rem;
+    }
+
+    .top-bar-extra {
+        display: none;
+    }
+
+    /* Tighter hero so the whole offer fits one phone screen
+       (body already carries a 50px offset for the fixed top bar) */
+    .hero {
+        padding: 32px 16px 48px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.85rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-text .sub-headline {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-features {
+        gap: 0.5rem 1rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .hero-features li {
+        font-size: 0.9rem;
+    }
+
+    /* Hero offer block: keep the price and CTA unmissable, never overflowing */
+    .hero-format {
+        font-size: 1rem;
+    }
+
+    .hero-meta {
+        gap: 0.4rem;
+    }
+
+    .hero-meta li {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    .hero-price {
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .hero-price-main {
+        font-size: 1.6rem;
+    }
+
+    .hero-price-strike {
+        font-size: 1rem;
+    }
+
+    .trust-strip {
+        gap: 0.35rem 0.85rem;
+    }
+
+    .trust-strip li {
+        font-size: 0.78rem;
+    }
+
+    /* New sections keep their own headings readable under the global 1.5rem cap */
+    .outcomes-list li {
+        font-size: 0.95rem;
+    }
+
+    .for-whom-list li {
+        font-size: 0.95rem;
+        padding: 10px 14px;
+    }
+
+    /* Sticky CTA must not eat the viewport on small phones */
+    .sticky-cta {
+        padding: 10px 12px;
+    }
+
+    .sticky-cta .cta-button {
+        font-size: 0.95rem;
+        padding: 14px 16px;
+    }
+
+    /* Pricing card breathing room */
+    .pricing-card {
+        padding: 32px 20px;
+    }
+
     /* Countdown boxes tighter */
     .countdown-box {
         padding: 12px 8px;
@@ -2388,6 +2821,179 @@ body {
     /* Container reduced padding */
     .container {
         padding: 0 12px;
+    }
+
+    /* ===========================================================
+       Mobile density pass
+       -----------------------------------------------------------
+       The page is 15 sections of stacked single-column cards on a
+       phone, and at desktop spacing that measured 19,933px tall at
+       390x844 - about 24 screens for someone who just clicked an ad.
+       Every rule below only trims whitespace (section padding, grid
+       gaps, card padding, heading rhythm); no card, copy, image or
+       font-size for body text is removed or shrunk below 0.85rem.
+       Re-measure with a headless full-page height check after
+       touching these - the point is scroll depth, not tidiness.
+       =========================================================== */
+
+    /* Sections: 40px -> 32px. .for-whom-section and .outcomes-section
+       are listed explicitly because their own class rules (56px) outrank
+       the bare `section` selector in the block above. */
+    section,
+    .section,
+    .for-whom-section,
+    .outcomes-section {
+        padding: 32px 16px;
+    }
+
+    :root {
+        --section-padding: 32px 16px;
+    }
+
+    .quotes-section {
+        padding: 28px 16px;
+    }
+
+    /* Heading rhythm: 16px/32px of trailing space per section is a lot
+       when there are 15 of them. */
+    .section-title {
+        margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+        margin-bottom: 20px;
+        font-size: 0.92rem;
+    }
+
+    /* Card grids: single column already, so the 24px gap is pure
+       vertical scroll. */
+    .challenges-grid,
+    .included-grid,
+    .science-grid,
+    .pillars-grid,
+    .testimonials-grid,
+    .grid-2,
+    .grid-3 {
+        gap: 14px;
+    }
+
+    .curriculum-grid,
+    .curriculum-grid-3 {
+        gap: 18px;
+    }
+
+    /* Card padding: 32px all round is desktop-hover spacing; 20px keeps
+       the same look at a third of the cost across ~24 cards. */
+    .challenge-card,
+    .included-card,
+    .science-card,
+    .testimonial-card {
+        padding: 20px;
+    }
+
+    .pillar-card {
+        padding: 24px 20px 20px;
+    }
+
+    .for-whom-list,
+    .outcomes-list {
+        gap: 10px;
+    }
+
+    /* The blanket `h1, h2, h3 { font-size: 1.5rem }` cap above was written for
+       section headings, but it also catches card titles that have no rule of
+       their own - so .challenge-card/.included-card h3 rendered at 24px on a
+       phone, *larger* than on desktop, wrapping to two lines in every one of
+       the 12 cards. Pin them back to a card-appropriate size. (.science-card
+       and .pillar-card h3 already carry their own font-size, hence not here.) */
+    .challenge-card h3,
+    .included-card h3 {
+        font-size: 1.05rem;
+        line-height: 1.3;
+    }
+
+    /* Decorative glyphs, not content: 64px of icon + 16px margin per card
+       across 12 cards was ~960px of the scroll on its own. */
+    .challenge-icon,
+    .included-icon {
+        font-size: 1.9rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    .science-icon {
+        font-size: 1.6rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+
+    .pillar-icon {
+        font-size: 1.9rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    /* --- Keep the offer chain above a 700px-tall fold ---------------------
+       Measured at 320-390px x 700 (a very common real mobile viewport once
+       browser chrome is subtracted): the sub-headline, the three date/time/
+       platform pills and the three pillar labels were each wrapping to 3
+       lines, which pushed .cta-button to y=764 at 320px - below the fold, the
+       one thing item 11 of the brief says must never happen. These trims pull
+       the whole chain (H1 -> format -> meta -> pillars -> price -> CTA) back
+       above it without shrinking any body copy below 0.85rem. */
+    .hero-format {
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-text .sub-headline {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0.85rem;
+    }
+
+    .hero-meta {
+        gap: 0.35rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .hero-meta li {
+        font-size: 0.75rem;
+        padding: 4px 9px;
+    }
+
+    .hero-features {
+        gap: 0.4rem 0.85rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .hero-features li {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- Very small phones (<=360px) ---
+   Only the hero offer chain is tuned here; everything else inherits the
+   <=480px rules above. Placed after that block so these win where both apply. */
+@media (max-width: 360px) {
+    .hero-text h1 {
+        font-size: 1.7rem;
+    }
+
+    .hero-meta li {
+        font-size: 0.72rem;
+        padding: 4px 8px;
+    }
+
+    .hero-features li {
+        font-size: 0.82rem;
+    }
+
+    .hero-price-main {
+        font-size: 1.45rem;
+    }
+
+    .hero-price-strike {
+        font-size: 0.92rem;
     }
 }
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Learner Academy - Study Smarter, Score Higher | 3 Day Live Workshop</title>
-    <meta name="description" content="A 3-day live workshop for students. Learn science-backed memory techniques, focus strategies, and growth mindset habits that turn study hours into better grades.">
+    <title>3-Day LIVE Workshop for Students — Study Smarter, Score Higher | ₹99</title>
+    <meta name="description" content="3-Day LIVE Interactive Workshop for students — 18–20 September, 4:00–6:30 PM IST on Zoom. Science-backed memory, focus and revision techniques. Join for just ₹99. Certificate included.">
     <meta name="keywords" content="memory techniques for students, how to study smarter, improve focus, better grades, growth mindset, learning techniques, neurobics, spaced repetition">
     <link rel="canonical" href="https://www.superlearneracademy.in/">
 
@@ -53,13 +53,13 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=1.0.5">
+    <link rel="stylesheet" href="style.css?v=1.1.3">
 </head>
 <body>
 
     <!-- ========== TOP BAR (Urgency Banner) ========== -->
     <div class="top-bar" aria-label="Urgency banner">
-        <p class="blink-text">🔥 Limited Seats! Register Before Time Runs Out!</p>
+<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">18–20 September</span> &bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
     </div>
 
     <!-- ========== HERO SECTION ========== -->
@@ -67,22 +67,39 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>Study Smarter. <span class="highlight">Score Higher.</span> In Just 3 Days.</h1>
-                <p class="sub-headline">A live workshop for students — science-backed memory, focus, and mindset strategies that turn your study hours into better grades. Not harder work. Smarter learning.</p>
+                <p class="hero-format" data-bind="workshop.format">3-Day LIVE Interactive Workshop for Students</p>
+                <p class="sub-headline">Science-backed memory, focus, and mindset strategies that turn your study hours into better grades. Not harder work. Smarter learning.</p>
+                <ul class="hero-meta">
+                    <li><span class="hero-meta-icon" aria-hidden="true">📅</span><span data-bind="workshop.dateRange">18–20 September</span></li>
+                    <li><span class="hero-meta-icon" aria-hidden="true">🕓</span><span data-bind="workshop.sessionTime">4:00 PM – 6:30 PM IST</span></li>
+                    <li><span class="hero-meta-icon" aria-hidden="true">🎥</span><span data-bind="workshop.platform">Live on Zoom</span></li>
+                </ul>
                 <ul class="hero-features">
                     <li><span class="hero-feature-icon" aria-hidden="true">🧠</span> Memory &amp; Brain</li>
                     <li><span class="hero-feature-icon" aria-hidden="true">🎯</span> Study &amp; Focus</li>
                     <li><span class="hero-feature-icon" aria-hidden="true">🌱</span> Mindset &amp; Growth</li>
                 </ul>
+                <div class="hero-price">
+                    <span class="hero-price-strike"><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></span>
+                    <span class="hero-price-main">Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span>
+                </div>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Register Now</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
-                <p class="trust-note hero-text-trust">Live sessions • Backed by learning science • Certificate included</p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
+                <p class="trust-note hero-text-trust" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
+                <ul class="trust-strip">
+                    <li><span class="trust-check" aria-hidden="true">✓</span> LIVE on Zoom</li>
+                    <li><span class="trust-check" aria-hidden="true">✓</span> Hinglish</li>
+                    <li><span class="trust-check" aria-hidden="true">✓</span> Certificate Included</li>
+                    <li><span class="trust-check" aria-hidden="true">✓</span> UPI / Cards</li>
+                    <li><span class="trust-check" aria-hidden="true">✓</span> 24-Hour Refund Policy</li>
+                </ul>
+                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
             </div>
             <div class="hero-image">
                 <div class="hero-visual">
                     <div class="hero-mandala" aria-hidden="true"></div>
-                    <img src="Images/Your host.webp" alt="Abhishek Ranjan - Super Learner Academy Coach" class="hero-coach-img" width="840" height="840" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="Images/Ramanujan.webp" alt="Illustration of Srinivasa Ramanujan working in his notebook" class="hero-coach-img" width="840" height="840" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
                     <div class="hero-orbit" aria-hidden="true">
                         <div class="orbit-anchor orbit-n">
@@ -123,6 +140,80 @@
                         </div>
                     </div>
                 </div>
+                <!-- Fills the dead space under the hero photo (most visible on
+                     mobile, where the photo is the last thing before the next
+                     section). Static markup is the first quote so it renders
+                     with the hero even if script.js never runs; initHeroQuotes
+                     then rotates through the rest. -->
+                <figure class="hero-quote">
+                    <blockquote class="hero-quote-text" id="hero-quote-text">&ldquo;I have not trodden through a conventional university course, but I am striking out a new path for myself.&rdquo;</blockquote>
+                    <figcaption class="hero-quote-author" id="hero-quote-author">&mdash; Srinivasa Ramanujan, letter to G. H. Hardy, 1913</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHO IS THIS FOR (Audience Qualifier - Ads traffic) ========== -->
+    <section class="for-whom-section" id="for-whom">
+        <div class="container">
+            <h2 class="section-title">Who Is This Workshop For?</h2>
+            <p class="section-subtitle">Built for students. Perfect for you if you're one of these:</p>
+            <ul class="for-whom-list">
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> Class 6&ndash;12 students</li>
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> College students</li>
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> Competitive exam aspirants</li>
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who forget what they study</li>
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who struggle to concentrate</li>
+                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who want a better revision system</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== CHALLENGES / PAIN POINTS ========== -->
+    <section class="challenges-section" id="challenges">
+        <div class="container">
+            <h2 class="section-title">Studying Hard but Marks Not Moving?</h2>
+            <p class="section-subtitle">If any of these sound like you, the problem isn't effort — it's method.</p>
+            <div class="challenges-grid">
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-brain"></i></div>
+                    <h3>You Forget It by Exam Day</h3>
+                    <p>You revised the chapter twice, but in the exam hall the answer just won't come back.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Long Hours, Average Marks</h3>
+                    <p>You study more than your friends who score higher — and can't work out what they're doing differently.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-mobile-screen"></i></div>
+                    <h3>Focus Breaks in 10 Minutes</h3>
+                    <p>You sit down to study and your attention is gone before the first page is finished.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-highlighter"></i></div>
+                    <h3>Re-Reading &amp; Highlighting</h3>
+                    <p>Your main study method is the one research ranks lowest for actually retaining information.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-calendar-xmark"></i></div>
+                    <h3>No Revision System</h3>
+                    <p>Everything gets crammed the night before, then disappears from memory a week later.</p>
+                </div>
+                <div class="challenge-card scroll-reveal">
+                    <div class="challenge-icon"><i class="fas fa-heart-crack"></i></div>
+                    <h3>"I'm Just an Average Student"</h3>
+                    <p>You've quietly accepted a ceiling on your marks — when it's your method, not your ability, holding you there.</p>
+                </div>
+            </div>
+
+            <!-- CTA after Challenges -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
+                </a>
+                <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">18–20 September • 4:00 PM–6:30 PM IST • Live on Zoom</span></p>
+                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
             </div>
         </div>
     </section>
@@ -176,8 +267,8 @@
     <!-- ========== WHAT YOU'LL LEARN (3-Day Curriculum) ========== -->
     <section class="curriculum-section" id="curriculum">
         <div class="container">
-            <h2 class="section-title">What You'll Learn in 3 Days</h2>
-            <p class="section-subtitle">One pillar per day — each with techniques you can use on tonight's homework.</p>
+            <h2 class="section-title">What You'll Learn in 3 LIVE Days</h2>
+            <p class="section-subtitle">One pillar per day, taught LIVE by Coach Abhishek Ranjan &mdash; each with techniques you can use on tonight's homework.</p>
             <div class="curriculum-grid curriculum-grid-3">
                 <!-- Day 1 Card -->
                 <div class="day-card scroll-reveal">
@@ -225,6 +316,30 @@
         </div>
     </section>
 
+    <!-- ========== OUTCOMES (What you'll be able to do) + CTA after curriculum ========== -->
+    <section class="outcomes-section" id="outcomes">
+        <div class="container">
+            <h2 class="section-title">What You'll Be Able to Do</h2>
+            <p class="section-subtitle">After 3 days, you'll have practical techniques to:</p>
+            <ul class="outcomes-list">
+                <li><span class="outcome-check" aria-hidden="true">✓</span> Remember what you study more effectively</li>
+                <li><span class="outcome-check" aria-hidden="true">✓</span> Improve concentration while studying</li>
+                <li><span class="outcome-check" aria-hidden="true">✓</span> Use active recall and spaced revision</li>
+                <li><span class="outcome-check" aria-hidden="true">✓</span> Build a practical revision routine</li>
+                <li><span class="outcome-check" aria-hidden="true">✓</span> Study with less passive rereading</li>
+            </ul>
+            <p class="outcomes-note">You'll learn the method. Your marks follow from applying it consistently &mdash; we don't promise a number.</p>
+
+            <!-- CTA after 3-day curriculum -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
+                </a>
+                <p class="trust-note" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== COUNTDOWN TIMER ========== -->
     <section class="countdown-section" id="countdown">
         <div class="container">
@@ -248,55 +363,6 @@
                 </div>
             </div>
             <p class="countdown-expired" id="countdown-expired" style="display:none;"></p>
-        </div>
-    </section>
-
-    <!-- ========== CHALLENGES / PAIN POINTS ========== -->
-    <section class="challenges-section" id="challenges">
-        <div class="container">
-            <h2 class="section-title">Studying Hard but Marks Not Moving?</h2>
-            <p class="section-subtitle">If any of these sound like you, the problem isn't effort — it's method.</p>
-            <div class="challenges-grid">
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-brain"></i></div>
-                    <h3>You Forget It by Exam Day</h3>
-                    <p>You revised the chapter twice, but in the exam hall the answer just won't come back.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Long Hours, Average Marks</h3>
-                    <p>You study more than your friends who score higher — and can't work out what they're doing differently.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-mobile-screen"></i></div>
-                    <h3>Focus Breaks in 10 Minutes</h3>
-                    <p>You sit down to study and your attention is gone before the first page is finished.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-highlighter"></i></div>
-                    <h3>Re-Reading &amp; Highlighting</h3>
-                    <p>Your main study method is the one research ranks lowest for actually retaining information.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-calendar-xmark"></i></div>
-                    <h3>No Revision System</h3>
-                    <p>Everything gets crammed the night before, then disappears from memory a week later.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-heart-crack"></i></div>
-                    <h3>"I'm Just an Average Student"</h3>
-                    <p>You've quietly accepted a ceiling on your marks — when it's your method, not your ability, holding you there.</p>
-                </div>
-            </div>
-
-            <!-- CTA after Challenges -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Register Now</span>
-                </a>
-                <p class="trust-note">Secure your seat for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
-            </div>
         </div>
     </section>
 
@@ -372,10 +438,11 @@
     <section class="coach-section" id="coach">
         <div class="container">
             <h2 class="section-title">Meet Your Coach</h2>
+            <p class="section-subtitle">Who's actually teaching this &mdash; and why he built it.</p>
             <div class="coach-content scroll-reveal">
                 <div class="coach-card">
                     <div class="coach-card-image">
-                        <img src="Images/book reading image.webp" alt="Abhishek Ranjan - Reading" class="coach-img coach-profile-img" width="760" height="760" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="Images/host.webp" alt="Abhishek Ranjan - Super Learner Academy Coach" class="coach-img coach-profile-img" width="640" height="640" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
                     </div>
                     <div class="coach-card-overlay">
@@ -385,8 +452,9 @@
                 </div>
                 <div class="coach-bio">
                     <h3 class="coach-name">Abhishek Ranjan</h3>
-                    <p class="coach-role-subtitle">Learning Science Coach</p>
+                    <p class="coach-role-subtitle">Learning Science Coach &bull; NIT Allahabad Graduate &bull; Software Engineer</p>
                     <p class="coach-description">Abhishek is on a mission to help thousands of students enhance their cognitive abilities, accelerate their learning process, and achieve their full potential.</p>
+                    <p class="coach-description">He built Super Learner Academy after seeing the same pattern again and again: students putting in long hours with re-reading and highlighting, then losing it all by exam day &mdash; not because they lacked ability, but because nobody had ever taught them <em>how</em> to learn. So he teaches the method itself: memory techniques like the Hook System, active recall and spaced revision, concentration training, and the growth mindset that keeps students using them. He teaches all 3 days LIVE himself, and answers questions in the doubt-clearing sessions.</p>
                     <ul class="coach-credentials">
                         <li><i class="fas fa-check"></i><span>NIT Allahabad Passout & Software Engineer</span></li>
                         <li><i class="fas fa-check"></i><span>Memory & Focus Techniques Expert</span></li>
@@ -402,6 +470,17 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CTA after the coach/trust block. On a phone the run from the
+                 outcomes CTA to the pricing CTA was ~7,700px (about 9 screens)
+                 with only the sticky bar to convert on; this breaks it up at
+                 the point where a cold visitor has just seen who's teaching. -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
+                </a>
+                <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">18–20 September • 4:00 PM–6:30 PM IST • Live on Zoom</span></p>
+            </div>
         </div>
     </section>
 
@@ -409,11 +488,12 @@
     <section class="included-section" id="included">
         <div class="container">
             <h2 class="section-title">What's Included</h2>
+            <p class="section-subtitle">Live on Zoom &bull; Ask questions &bull; Doubt clearing &bull; Worksheets &bull; WhatsApp community</p>
             <div class="included-grid">
                 <div class="included-card scroll-reveal">
                     <div class="included-icon"><i class="fas fa-video"></i></div>
-                    <h3>3 Days Live Interactive Sessions</h3>
-                    <p>Real-time Q&A with your coach, not pre-recorded videos.</p>
+                    <h3>3 Days LIVE Interactive Sessions</h3>
+                    <p>Real-time Q&amp;A with Coach Abhishek Ranjan on Zoom — not pre-recorded videos.</p>
                 </div>
                 <div class="included-card scroll-reveal">
                     <div class="included-icon"><i class="fas fa-file-alt"></i></div>
@@ -449,9 +529,14 @@
         <div class="container">
             <h2 class="section-title">What Our Students Say</h2>
             <!--
-              NOTE: Replace the quotes, names and .testimonial-result badges below with REAL,
-              verified student results before running paid traffic. The result badge should
-              summarise what that student actually reported — do not invent score numbers.
+              BLOCKING BEFORE PAID TRAFFIC: the three testimonials below are placeholders.
+              Either (a) replace each quote, name and .testimonial-result badge with a REAL
+              student result you can verify and have written permission to publish, or
+              (b) delete this whole <section id="testimonials"> — the CTA block at the end of
+              it can move up into #included. Do NOT ship unverifiable social proof: it reads
+              as fake to cold ad traffic and costs more conversions than it wins.
+              The result badge must only summarise what that student actually reported —
+              never invent a score number.
             -->
             <div class="testimonials-grid">
                 <div class="testimonial-card scroll-reveal">
@@ -488,29 +573,40 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CTA after testimonials / trust section -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
+                </a>
+                <p class="trust-note trust-note-light" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
+            </div>
         </div>
     </section>
 
     <!-- ========== PRICING / REGISTER ========== -->
     <section class="pricing-section" id="pricing">
         <div class="container">
-            <h2 class="section-title light">Special Launch Offer</h2>
+            <h2 class="section-title light">Join the 3-Day LIVE Workshop</h2>
+            <p class="section-subtitle light" data-bind="workshop.schedule">18–20 September • 4:00 PM–6:30 PM IST • Live on Zoom</p>
             <div class="pricing-card scroll-reveal">
                 <div class="price-anchor">
+                    <span class="price-anchor-label">Regular Price</span>
                     <span class="original-price">
                         <span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span>
                     </span>
-                    <span class="discount-badge">90% OFF</span>
                 </div>
+                <p class="price-launch-label">Launch Price</p>
                 <div class="current-price">
-                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">99</span><span class="price-suffix">/-only</span>
+                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">99</span>
                 </div>
-                <p class="pricing-note">One-time payment. No hidden fees.</p>
+                <p class="pricing-note">One-time payment &bull; No hidden fees</p>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Register Now</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
+                <p class="refund-note"><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
                 <p class="seats-left">⚡ Limited seats available for this batch</p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
+                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -533,11 +629,11 @@
                 <!-- FAQ Item 2 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Who is this webinar for?</span>
+                        <span>Who is this LIVE workshop for?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>This webinar is for anyone who wants to improve their memory, focus, and learning ability — students preparing for exams (board exams, competitive exams, university), working professionals looking to upskill, or lifelong learners who want to absorb information faster.</p>
+                        <p>It's built for <strong>students</strong> first — Class 6 to graduation, and board or competitive exam aspirants (JEE, NEET, UPSC, CA) — who forget what they study, lose focus quickly, or want a real revision system. Parents attend alongside their child, and working professionals or lifelong learners who need to absorb new material fast are welcome too.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 3 -->
@@ -577,17 +673,17 @@
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes! If you attend the full webinar and feel it didn't add value, you can reach out to us within 24 hours after the session ends for a complete refund. We're confident you'll love the content.</p>
+                        <p>Yes! If you attend the full workshop and feel it didn't add value, you can reach out to us within 24 hours after the session ends for a complete refund. We're confident you'll love the content.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 5 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>How do I attend the live session?</span>
+                        <span>How do I attend the LIVE session?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>The workshop runs for 3 days starting <strong>Saturday, 12th September</strong>, from <strong>4:00 PM to 6:30 PM IST</strong> each day. After registration, you'll receive a confirmation with all the details. The session is conducted live on Zoom, and the joining link will be shared in our WhatsApp community group before the session begins.</p>
+                        <p>The workshop runs for 3 days &mdash; <strong>Friday 18th to Sunday 20th September</strong>, from <strong>4:00 PM to 6:30 PM IST</strong> each day. Every session is <strong>LIVE on Zoom</strong> with Coach Abhishek Ranjan &mdash; not pre-recorded. After registration you'll receive a confirmation with all the details, and the joining link is shared in our WhatsApp community group before the first session begins.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 6 -->
@@ -597,17 +693,17 @@
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>No prior knowledge is needed! The webinar is designed for beginners and advanced learners alike. We start from the basics and progress to powerful techniques that anyone can apply immediately.</p>
+                        <p>No prior knowledge is needed! The workshop is designed for beginners and advanced learners alike. We start from the basics and progress to powerful techniques that anyone can apply immediately.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 7 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What will be the language of the webinar?</span>
+                        <span>What will be the language of the workshop?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>The webinar will be conducted in Hinglish (a mix of Hindi and English) so that everyone can understand easily and follow along comfortably.</p>
+                        <p>The workshop is conducted in Hinglish (a mix of Hindi and English) so that everyone can understand easily and follow along comfortably.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 8 -->
@@ -617,7 +713,7 @@
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Registration closes on <strong>12th September at 12:00 PM</strong> — a few hours before the first session begins. Seats at this price are limited, so we recommend registering early to avoid missing out.</p>
+                        <p>Registration closes on <strong>18th September at 12:00 PM</strong> — a few hours before the first session begins. Seats at this price are limited, so we recommend registering early to avoid missing out.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 9 -->
@@ -627,13 +723,13 @@
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>₹99 is a limited-time launch price to make this accessible to as many students and professionals as possible. There are no hidden fees — this one-time payment covers all 3 days, worksheets, and your completion certificate.</p>
+                        <p>₹99 is a limited-time launch price to make this accessible to as many students as possible. There are no hidden fees — this one-time payment covers all 3 LIVE days, the editable worksheets, WhatsApp community access, and your completion certificate.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 10 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What do I need to join the webinar?</span>
+                        <span>What do I need to join the LIVE workshop?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
@@ -657,17 +753,17 @@
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes! Every participant who completes the 3-day webinar receives a Certificate of Completion from Super Learner Academy.</p>
+                        <p>Yes! Every participant who completes the 3-day LIVE workshop receives a Certificate of Completion from Super Learner Academy.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 13 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Can I ask questions during the webinar?</span>
+                        <span>Can I ask questions during the workshop?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolutely. Each day includes a dedicated doubt-clearing session, and you can also post questions anytime in the WhatsApp community group.</p>
+                        <p>Absolutely — that's the point of it being LIVE and interactive. You can ask Coach Abhishek questions in real time, each day includes a dedicated doubt-clearing session, and you can post questions anytime in the WhatsApp community group.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 14 -->
@@ -680,6 +776,15 @@
                         <p>You can reach us at superlearneracademy@gmail.com or call/WhatsApp 9151726759, and we'll be happy to help.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- CTA after FAQ -->
+            <div class="section-cta">
+                <a href="#" class="cta-button" data-bind-href="registration.link">
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
+                </a>
+                <p class="trust-note"><span data-bind="workshop.schedule">18–20 September • 4:00 PM–6:30 PM IST • Live on Zoom</span></p>
+                <p class="trust-note">Attend the full workshop and you're covered by our 24-hour refund policy &mdash; see the refund question above.</p>
             </div>
         </div>
     </section>
@@ -694,7 +799,7 @@
     <!-- ========== STICKY CTA ========== -->
     <div class="sticky-cta" aria-label="Registration call to action">
         <a href="#" class="cta-button sticky-cta-button" data-bind-href="registration.link">
-            <span data-bind="registration.buttonText">Register Now</span>
+            <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
         </a>
     </div>
 
@@ -704,6 +809,6 @@
     </button>
 
     <!-- Script -->
-    <script src="script.js?v=1.0.3"></script>
+    <script src="script.js?v=1.0.4"></script>
 </body>
 </html>

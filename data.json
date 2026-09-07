@@ -1,6 +1,6 @@
 {
     "countdown": {
-        "endDate": "2026-09-12T12:00:00",
+        "endDate": "2026-09-18T12:00:00",
         "timezone": "Asia/Kolkata",
         "expiredMessage": "Registration Closed!"
     },
@@ -9,14 +9,21 @@
         "originalPrice": "4999",
         "currency": "₹",
         "link": "https://superprofile.bio/e/xjhIxvaR",
-        "buttonText": "START SCORING HIGHER — JOIN FOR ₹99"
+        "buttonText": "Reserve My Seat for ₹99",
+        "priceHeadline": "Join for just ₹99",
+        "priceNote": "One-time payment • No hidden fees • Certificate included",
+        "refundNote": "Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below."
     },
     "workshop": {
-        "name": "Super Learner Academy - 3 Day Live Webinar",
+        "name": "Super Learner Academy - 3 Day Live Workshop",
+        "format": "3-Day LIVE Interactive Workshop for Students",
         "coach": "Abhishek Ranjan",
         "days": 3,
         "startDate": "2026-09-18T16:00:00",
-        "sessionTime": "4:00 PM – 6:30 PM IST"
+        "dateRange": "18–20 September",
+        "sessionTime": "4:00 PM – 6:30 PM IST",
+        "platform": "Live on Zoom",
+        "schedule": "18–20 September • 4:00 PM–6:30 PM IST • Live on Zoom"
     },
     "whatsapp": {
         "link": "https://chat.whatsapp.com/JBS46Qt3Qs34Gc35YyxPX2",
