@@ -357,6 +357,58 @@ function reset() {
   show('idle');
 }
 
+/* ---------------------------------------------------------- copy prompt */
+
+function legacyCopy(text) {
+  // navigator.clipboard needs a secure context; this covers the rest.
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+
+  let ok = false;
+  try {
+    ok = document.execCommand('copy');
+  } catch (err) {
+    ok = false;
+  }
+  document.body.removeChild(area);
+  return ok;
+}
+
+async function copyPrompt() {
+  const btn = $('btn-copy-prompt');
+  const text = $('prompt-text').textContent;
+
+  let ok = false;
+  try {
+    await navigator.clipboard.writeText(text);
+    ok = true;
+  } catch (err) {
+    ok = legacyCopy(text);
+  }
+
+  if (!ok) {
+    // Nothing worked — select it so the user can copy by hand.
+    const range = document.createRange();
+    range.selectNodeContents($('prompt-text'));
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+
+  btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+  btn.classList.toggle('is-done', ok);
+
+  setTimeout(() => {
+    btn.textContent = 'Copy';
+    btn.classList.remove('is-done');
+  }, 2000);
+}
+
 /* ------------------------------------------------------------------ wire */
 
 function wire() {
@@ -400,6 +452,7 @@ function wire() {
   window.addEventListener('drop', (e) => e.preventDefault());
 
   $('btn-example').addEventListener('click', loadExample);
+  $('btn-copy-prompt').addEventListener('click', copyPrompt);
   $('btn-reset').addEventListener('click', reset);
   $('btn-error-reset').addEventListener('click', reset);
 

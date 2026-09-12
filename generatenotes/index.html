@@ -335,6 +335,121 @@ pre.log-body {
   font-size: .85rem;
 }
 
+/* ---------- how to use ---------- */
+.howto { margin-top: 28px; }
+
+.howto h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--deep-learning-blue);
+  margin: 0 0 6px;
+}
+
+.howto > .card > p.note { margin-bottom: 20px; }
+
+.step {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+
+.step:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+.step-n {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--cta-gradient);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+}
+
+.step h3 {
+  font-family: var(--font-heading);
+  font-size: .98rem;
+  margin: 4px 0 6px;
+  color: var(--deep-learning-blue);
+}
+
+.step p { margin: 0 0 10px; font-size: .9rem; color: var(--muted); }
+.step p:last-child { margin-bottom: 0; }
+.step ul { margin: 0 0 10px; padding-left: 18px; font-size: .9rem; color: var(--muted); }
+.step li { margin-bottom: 4px; }
+
+.btn-sm {
+  font-size: .85rem;
+  padding: 9px 18px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+.dl-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.prompt-wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0f1b30;
+  overflow: hidden;
+}
+
+.prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, .06);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.prompt-label {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #8fa6c8;
+}
+
+.btn-copy {
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .08);
+  color: #e6edf8;
+  border-radius: 50px;
+  padding: 6px 15px;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+  flex: 0 0 auto;
+}
+
+.btn-copy:hover { background: rgba(255, 255, 255, .16); }
+.btn-copy.is-done { background: var(--growth-green); border-color: var(--growth-green); color: #fff; }
+
+pre.prompt-body {
+  margin: 0;
+  padding: 16px;
+  max-height: 300px;
+  overflow: auto;
+  color: #cbd8ea;
+  font-size: .8rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.spaced { margin-top: 14px; }
+.spaced-sm { margin-top: 10px; }
+
 footer.page-foot {
   margin-top: 34px;
   text-align: center;
@@ -433,7 +548,7 @@ footer.page-foot a:hover { text-decoration: underline; }
         <div class="render-meta"><span id="render-file"></span> · <span id="render-timer">0s</span> elapsed</div>
       </div>
     </div>
-    <p class="note" style="margin-top:14px;">Rendering in the browser is a few times slower than on a desktop. A full chapter can take tens of seconds.</p>
+    <p class="note spaced">Rendering in the browser is a few times slower than on a desktop. A full chapter can take tens of seconds.</p>
     <details class="log">
       <summary>Show log</summary>
       <pre class="log-body" id="log-body"></pre>
@@ -474,9 +589,91 @@ footer.page-foot a:hover { text-decoration: underline; }
     </div>
   </section>
 
+  <!-- HOW TO USE (always visible) -->
+  <section class="howto">
+    <div class="card">
+      <h2>Don't have a notes file yet?</h2>
+      <p class="note">
+        This page turns a <strong>notes markdown file</strong> into a PDF — it doesn't read
+        chapter PDFs directly. To make that notes file, hand your chapter to any AI tool
+        (ChatGPT, Claude, Gemini, Copilot…) along with the template below. Three steps, once per chapter.
+      </p>
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <h3>Download the template</h3>
+          <p>
+            <code>template.md</code> is the format specification — it tells the AI exactly how to
+            structure the notes. The worked example is optional but gives the AI a finished file to copy the style from.
+          </p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="template.md" download="template.md">Download template.md</a>
+            <a class="btn btn-ghost btn-sm" href="examples/Ch3_Atmosphere_Summary.md" download="Ch3_Atmosphere_Summary.md">Download example notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <h3>Give your chapter and the template to an AI</h3>
+          <p>Open any AI chat tool and attach:</p>
+          <ul>
+            <li><code>template.md</code> (from step 1)</li>
+            <li>your chapter — a PDF, photos of the pages, or pasted text</li>
+            <li><em>optional:</em> <code>Ch3_Atmosphere_Summary.md</code> as a worked example</li>
+          </ul>
+          <p>Then paste this prompt:</p>
+
+          <div class="prompt-wrap">
+            <div class="prompt-head">
+              <span class="prompt-label">Prompt — copy and paste</span>
+              <button type="button" id="btn-copy-prompt" class="btn-copy">Copy</button>
+            </div>
+            <pre class="prompt-body" id="prompt-text">Turn the attached chapter into a notes file for a PDF generator.
+
+Attached:
+1. template.md — the specification for the notes format.
+2. My chapter (PDF, images or text).
+3. Optional: Ch3_Atmosphere_Summary.md — a worked example of a finished notes file.
+
+Instructions:
+- Read template.md first and follow its grammar, block order and per-block limits exactly.
+- Use Recipe A (chapter summary notes) unless I tell you otherwise.
+- Take every fact from my chapter only. Do not add outside information, invent
+  figures or dates, or pad with generic filler. If my chapter does not cover what
+  a block asks for, leave that block out rather than making something up.
+- In the ## SETTINGS block, set output: to &lt;ChapterName&gt;_Summary.pdf
+- Use the highlight markup (**bold**, ==yellow==, ++green++, !!pink!!) only on the
+  key terms and definitions a student must recall — never on whole paragraphs.
+- Write in plain text. No HTML and no code fences inside the notes themselves.
+- Keep the language simple and direct, suitable for a school student revising.
+
+Return the finished notes as one single .md file I can download, and nothing
+else — no explanation before or after it.</pre>
+          </div>
+          <p class="spaced-sm">Scroll inside the box to read it all — <strong>Copy</strong> takes the whole prompt.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <h3>Save the reply as <code>.md</code> and drop it above</h3>
+          <p>
+            Save what the AI gives you as a file ending in <code>.md</code> (for example
+            <code>Ch4_MyChapter_Summary.md</code>), then drop it into the box at the top of
+            this page. Your PDF renders here in your browser, and the file never leaves your device.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="page-foot">
     <p>
-      New to this? The notes file format is documented in
+      The notes file format is documented in
       <a href="template.md">template.md</a>.
     </p>
     <p>

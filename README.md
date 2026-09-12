@@ -22,6 +22,22 @@ Options mirror the CLI flags: font style (handwriting / print), page size
 (A4 / Letter), ruled lines, cover page and contents page. The chosen values
 persist in `localStorage`.
 
+### Making a notes file from a chapter
+
+The page renders a notes `.md` — it does not read chapter PDFs. A
+**"Don't have a notes file yet?"** section on the page walks through the
+three-step pipeline that `template.md` describes:
+
+1. Download `template.md` (and optionally the worked example) from the page.
+2. Give both, plus the chapter PDF, to any AI tool along with the copy-ready
+   prompt on the page.
+3. Save the reply as a `.md` and drop it into the page.
+
+The prompt lives in the `#prompt-text` block in `generatenotes/index.html`; the
+Copy button reads its `textContent`, so edit it there rather than duplicating it
+elsewhere. Keep it consistent with `template.md` — it tells the AI to follow that
+spec, to use only facts from the user's own chapter, and not to invent figures.
+
 ### What lives where
 
 ```
