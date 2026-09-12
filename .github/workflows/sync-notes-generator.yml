@@ -1,0 +1,61 @@
+name: Notes generator copy in sync
+
+# generatenotes/generate_notes_pdf.py must be a byte-identical copy of the root
+# file. The root file is the single source of truth for both the CLI and the
+# web app, and the web app is forbidden from editing it.
+
+on:
+  push:
+    paths:
+      - 'generate_notes_pdf.py'
+      - 'template.md'
+      - 'Ch3_Atmosphere_Summary.md'
+      - 'generatenotes/**'
+  pull_request:
+    paths:
+      - 'generate_notes_pdf.py'
+      - 'template.md'
+      - 'Ch3_Atmosphere_Summary.md'
+      - 'generatenotes/**'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare root files against their web copies
+        run: |
+          status=0
+
+          check() {
+            root="$1"
+            copy="$2"
+
+            if [ ! -f "$root" ]; then
+              echo "note: $root is not in the repo - skipping."
+              return
+            fi
+
+            if [ ! -f "$copy" ]; then
+              echo "::error file=$copy::$copy is missing. Run: cp $root $copy"
+              status=1
+              return
+            fi
+
+            if ! cmp -s "$root" "$copy"; then
+              echo "::error file=$copy::$copy has diverged from $root. Run: cp $root $copy"
+              diff -u "$root" "$copy" || true
+              status=1
+              return
+            fi
+
+            echo "ok: $copy matches $root"
+          }
+
+          check generate_notes_pdf.py      generatenotes/generate_notes_pdf.py
+          check template.md                generatenotes/template.md
+          check Ch3_Atmosphere_Summary.md  generatenotes/examples/Ch3_Atmosphere_Summary.md
+
+          exit $status

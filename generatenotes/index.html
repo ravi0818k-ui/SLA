@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes PDF Generator — Super Learner Academy</title>
+<meta name="description" content="Turn a notes markdown file into a printable, handwritten-style PDF. Runs entirely in your browser — your file is never uploaded.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+<link rel="icon" href="../Favicon SLA/favicon.ico">
+
+<style>
+:root {
+  --deep-learning-blue: #0B2A5B;
+  --memory-orange: #FF6B00;
+  --red-orange: #ff5e3a;
+  --growth-green: #34A853;
+  --smart-blue: #1E5EFF;
+  --cta-gradient: linear-gradient(135deg, #FF6B00, #ff5e3a);
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --ink: #16243d;
+  --muted: #5b6b85;
+  --line: #e3e8f0;
+  --surface: #ffffff;
+  --ground: #f6f8fc;
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(11, 42, 91, .07);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--ground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+header.page-head { text-align: center; margin-bottom: 32px; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--memory-orange);
+  background: rgba(255, 107, 0, .1);
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: var(--deep-learning-blue);
+}
+
+.lede { color: var(--muted); margin: 0 auto; max-width: 52ch; }
+
+.privacy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--growth-green);
+  background: rgba(52, 168, 83, .09);
+  border: 1px solid rgba(52, 168, 83, .2);
+  padding: 8px 16px;
+  border-radius: 50px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- booting ---------- */
+.stage-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+  color: var(--deep-learning-blue);
+}
+
+.bar {
+  height: 8px;
+  background: #e9eef6;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 14px 0 10px;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--cta-gradient);
+  border-radius: 50px;
+  transition: width .4s ease;
+}
+
+.note { font-size: .85rem; color: var(--muted); margin: 0; }
+
+/* ---------- drop zone ---------- */
+.drop {
+  border: 2px dashed #c8d4e6;
+  border-radius: var(--radius);
+  background: #fbfcfe;
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.drop:hover, .drop:focus-visible { border-color: var(--memory-orange); background: #fff8f3; outline: none; }
+.drop.is-over { border-color: var(--memory-orange); background: #fff3ea; transform: scale(1.01); }
+.drop.is-disabled { opacity: .5; pointer-events: none; }
+
+.drop-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 10px; }
+.drop-title { font-family: var(--font-heading); font-weight: 700; color: var(--deep-learning-blue); margin-bottom: 4px; }
+.drop-sub { font-size: .88rem; color: var(--muted); }
+
+.inline-error {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fdecec;
+  border: 1px solid #f5c2c2;
+  color: #a12727;
+  font-size: .88rem;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: .95rem;
+  border: none;
+  border-radius: 50px;
+  padding: 13px 28px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+.btn-primary { background: var(--cta-gradient); color: #fff; box-shadow: 0 8px 25px rgba(255, 94, 58, .35); }
+.btn-lg { font-size: 1.05rem; padding: 16px 40px; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--deep-learning-blue);
+  border: 1.5px solid var(--line);
+}
+
+.btn-ghost:hover:not(:disabled) { border-color: var(--memory-orange); color: var(--memory-orange); }
+
+.row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+
+/* ---------- options ---------- */
+details.options { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+
+details.options > summary {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--deep-learning-blue);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details.options > summary::-webkit-details-marker { display: none; }
+details.options > summary::before { content: '▸'; transition: transform .2s ease; display: inline-block; }
+details.options[open] > summary::before { transform: rotate(90deg); }
+
+.opt-grid { display: grid; gap: 14px; margin-top: 16px; }
+
+.opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: .9rem;
+}
+
+.opt > label { font-weight: 500; }
+
+.opt select {
+  font-family: var(--font-body);
+  font-size: .9rem;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  min-width: 150px;
+}
+
+.opt input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--memory-orange); cursor: pointer; }
+
+/* ---------- rendering ---------- */
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #e9eef6;
+  border-top-color: var(--memory-orange);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.render-head { display: flex; align-items: center; gap: 16px; }
+.render-meta { font-size: .88rem; color: var(--muted); }
+.counter { font-family: var(--font-heading); font-weight: 700; color: var(--deep-learning-blue); font-size: 1.05rem; }
+
+details.log { margin-top: 18px; }
+details.log > summary { cursor: pointer; font-size: .85rem; color: var(--muted); font-weight: 500; }
+
+pre.log-body {
+  margin: 10px 0 0;
+  max-height: 220px;
+  overflow: auto;
+  background: #0f1b30;
+  color: #cbd8ea;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: .78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---------- done ---------- */
+.done-head { text-align: center; }
+
+.done-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(52, 168, 83, .12);
+  color: var(--growth-green);
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  margin: 0 auto 12px;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0 4px;
+}
+
+.chip {
+  font-size: .8rem;
+  background: #f1f5fb;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 6px 13px;
+  border-radius: 50px;
+}
+
+.chip strong { color: var(--deep-learning-blue); font-weight: 600; }
+
+.preview-frame {
+  width: 100%;
+  height: 70vh;
+  min-height: 380px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-top: 22px;
+  background: #fff;
+}
+
+.preview-fallback {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f1f5fb;
+  border: 1px solid var(--line);
+  font-size: .88rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- error ---------- */
+.error-card { border-color: #f5c2c2; background: #fffafa; }
+.error-title { font-family: var(--font-heading); color: #a12727; margin: 0 0 8px; font-size: 1.05rem; }
+.error-msg { margin: 0; color: #6d3030; font-size: .92rem; }
+
+.warn {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fff7e6;
+  border: 1px solid #ffd88a;
+  color: #8a5a00;
+  font-size: .85rem;
+}
+
+footer.page-foot {
+  margin-top: 34px;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+footer.page-foot a { color: var(--smart-blue); text-decoration: none; }
+footer.page-foot a:hover { text-decoration: underline; }
+
+@media (max-width: 576px) {
+  .wrap { padding: 28px 16px 48px; }
+  .card { padding: 20px; }
+  .drop { padding: 30px 16px; }
+  .opt { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .opt select { width: 100%; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <span class="eyebrow">Super Learner Academy</span>
+    <h1>Notes PDF Generator</h1>
+    <p class="lede">Drop in a notes markdown file and get back a printable, handwritten-style PDF — cover page, contents and ruled pages included.</p>
+    <div class="privacy">
+      <span aria-hidden="true">&#128274;</span>
+      <span>Your file never leaves this device. Everything runs in your browser.</span>
+    </div>
+  </header>
+
+  <!-- STATE 1: booting -->
+  <section id="state-boot" class="card">
+    <h2 class="stage-title" id="boot-stage">Starting up…</h2>
+    <div class="bar"><span id="boot-bar"></span></div>
+    <p class="note">Loading the Python engine (about 10 MB, one time — it's cached afterwards).</p>
+  </section>
+
+  <!-- STATE 2: idle -->
+  <section id="state-idle" class="card" hidden>
+    <div id="drop" class="drop" tabindex="0" role="button" aria-label="Choose or drop a markdown file">
+      <div class="drop-icon" aria-hidden="true">&#128196;</div>
+      <div class="drop-title">Drop your <code>.md</code> file here</div>
+      <div class="drop-sub">or click to browse</div>
+    </div>
+    <input type="file" id="file-input" accept=".md,text/markdown" hidden>
+
+    <div id="idle-error" class="inline-error" hidden></div>
+    <div id="font-warning" class="warn" hidden></div>
+
+    <div class="row">
+      <button type="button" id="btn-example" class="btn btn-ghost">Try an example</button>
+    </div>
+
+    <details class="options" id="options">
+      <summary>Options</summary>
+      <div class="opt-grid">
+        <div class="opt">
+          <label for="opt-font">Font style</label>
+          <select id="opt-font">
+            <option value="handwriting">Handwriting</option>
+            <option value="print">Print</option>
+          </select>
+        </div>
+        <div class="opt">
+          <label for="opt-size">Page size</label>
+          <select id="opt-size">
+            <option value="A4">A4</option>
+            <option value="LETTER">Letter</option>
+          </select>
+        </div>
+        <div class="opt">
+          <label for="opt-ruled">Ruled lines</label>
+          <input type="checkbox" id="opt-ruled" checked>
+        </div>
+        <div class="opt">
+          <label for="opt-cover">Cover page</label>
+          <input type="checkbox" id="opt-cover" checked>
+        </div>
+        <div class="opt">
+          <label for="opt-contents">Contents page</label>
+          <input type="checkbox" id="opt-contents" checked>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- STATE 3: rendering -->
+  <section id="state-render" class="card" hidden>
+    <div class="render-head">
+      <div class="spinner" aria-hidden="true"></div>
+      <div>
+        <div class="counter" id="render-counter">Starting the renderer…</div>
+        <div class="render-meta"><span id="render-file"></span> · <span id="render-timer">0s</span> elapsed</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px;">Rendering in the browser is a few times slower than on a desktop. A full chapter can take tens of seconds.</p>
+    <details class="log">
+      <summary>Show log</summary>
+      <pre class="log-body" id="log-body"></pre>
+    </details>
+  </section>
+
+  <!-- STATE 4: done -->
+  <section id="state-done" class="card" hidden>
+    <div class="done-head">
+      <div class="done-icon" aria-hidden="true">&#10003;</div>
+      <h2 class="stage-title">Your PDF is ready</h2>
+      <div class="summary" id="done-summary"></div>
+      <div class="row">
+        <a id="download-link" class="btn btn-primary btn-lg" download>Download PDF</a>
+        <button type="button" id="btn-reset" class="btn btn-ghost">Render another</button>
+      </div>
+    </div>
+    <iframe id="preview" class="preview-frame" title="PDF preview"></iframe>
+    <div id="preview-fallback" class="preview-fallback" hidden>
+      Your browser can't preview PDFs inline — use the Download button above to open it.
+    </div>
+    <details class="log">
+      <summary>Show log</summary>
+      <pre class="log-body" id="log-body-done"></pre>
+    </details>
+  </section>
+
+  <!-- STATE 5: error -->
+  <section id="state-error" class="card error-card" hidden>
+    <h2 class="error-title">That didn't work</h2>
+    <p class="error-msg" id="error-msg"></p>
+    <details class="log" id="error-details" hidden>
+      <summary>Show details</summary>
+      <pre class="log-body" id="error-detail"></pre>
+    </details>
+    <div class="row">
+      <button type="button" id="btn-error-reset" class="btn btn-ghost">Start over</button>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <p>
+      New to this? The notes file format is documented in
+      <a href="template.md">template.md</a>.
+    </p>
+    <p>
+      Rendered with Pyodide (CPython + Pillow in WebAssembly). Set in
+      <a href="fonts/LICENSES.md">Kalam and Lato</a>, used under the SIL Open Font License.
+    </p>
+    <p><a href="../index.html">&larr; Back to Super Learner Academy</a></p>
+  </footer>
+
+</div>
+
+<script src="app.js" type="module"></script>
+</body>
+</html>
