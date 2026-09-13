@@ -1,0 +1,428 @@
+{
+  "id": "social-type",
+  "title": "Social Type Quiz",
+  "resultsTitle": "Congratulations",
+  "optionType": "per-question-text",
+  "scorer": "tally-word-list",
+  "widget": "pie",
+  "questions": [
+    {
+      "text": "1/20",
+      "options": [
+        {
+          "text": "Persuasive"
+        },
+        {
+          "text": "Fearful"
+        },
+        {
+          "text": "Open-minded"
+        },
+        {
+          "text": "Original"
+        }
+      ]
+    },
+    {
+      "text": "2/20",
+      "options": [
+        {
+          "text": "Cautious"
+        },
+        {
+          "text": "Convincing"
+        },
+        {
+          "text": "Aggressive"
+        },
+        {
+          "text": "Good-natured"
+        }
+      ]
+    },
+    {
+      "text": "3/20",
+      "options": [
+        {
+          "text": "Docile"
+        },
+        {
+          "text": "Dogged"
+        },
+        {
+          "text": "Open-minded"
+        },
+        {
+          "text": "Bold"
+        }
+      ]
+    },
+    {
+      "text": "4/20",
+      "options": [
+        {
+          "text": "Charming"
+        },
+        {
+          "text": "Loyal"
+        },
+        {
+          "text": "Determined"
+        },
+        {
+          "text": "Even-tempered"
+        }
+      ]
+    },
+    {
+      "text": "5/20",
+      "options": [
+        {
+          "text": "Willing"
+        },
+        {
+          "text": "Eager"
+        },
+        {
+          "text": "Nervy"
+        },
+        {
+          "text": "Strong-willed"
+        }
+      ]
+    },
+    {
+      "text": "6/20",
+      "options": [
+        {
+          "text": "Agreeable"
+        },
+        {
+          "text": "High-spirited"
+        },
+        {
+          "text": "Confident"
+        },
+        {
+          "text": "Even-tempered"
+        }
+      ]
+    },
+    {
+      "text": "7/20",
+      "options": [
+        {
+          "text": "Obliging"
+        },
+        {
+          "text": "Assertive"
+        },
+        {
+          "text": "Precise"
+        },
+        {
+          "text": "Animated"
+        }
+      ]
+    },
+    {
+      "text": "8/20",
+      "options": [
+        {
+          "text": "Disciplined"
+        },
+        {
+          "text": "Cheerful"
+        },
+        {
+          "text": "Restless"
+        },
+        {
+          "text": "Resigned"
+        }
+      ]
+    },
+    {
+      "text": "9/20",
+      "options": [
+        {
+          "text": "Sympathetic"
+        },
+        {
+          "text": "Persistent"
+        },
+        {
+          "text": "Obedient"
+        },
+        {
+          "text": "Spontaneous"
+        }
+      ]
+    },
+    {
+      "text": "10/20",
+      "options": [
+        {
+          "text": "Competitive"
+        },
+        {
+          "text": "Tolerant"
+        },
+        {
+          "text": "Fussy"
+        },
+        {
+          "text": "Pioneering"
+        }
+      ]
+    },
+    {
+      "text": "11/20",
+      "options": [
+        {
+          "text": "Respectful"
+        },
+        {
+          "text": "Jovial"
+        },
+        {
+          "text": "Influential"
+        },
+        {
+          "text": "Optimistic"
+        }
+      ]
+    },
+    {
+      "text": "12/20",
+      "options": [
+        {
+          "text": "Generous"
+        },
+        {
+          "text": "Unconquerable"
+        },
+        {
+          "text": "Inspiring"
+        },
+        {
+          "text": "Submissive"
+        }
+      ]
+    },
+    {
+      "text": "13/20",
+      "options": [
+        {
+          "text": "Considerate"
+        },
+        {
+          "text": "Brave"
+        },
+        {
+          "text": "Timid"
+        },
+        {
+          "text": "Adaptable"
+        }
+      ]
+    },
+    {
+      "text": "14/20",
+      "options": [
+        {
+          "text": "Argumentative"
+        },
+        {
+          "text": "Kind"
+        },
+        {
+          "text": "Nonchalant"
+        },
+        {
+          "text": "Patient"
+        }
+      ]
+    },
+    {
+      "text": "15/20",
+      "options": [
+        {
+          "text": "Self-reliant"
+        },
+        {
+          "text": "Lighthearted"
+        },
+        {
+          "text": "Soft spoken"
+        },
+        {
+          "text": "Trusting"
+        }
+      ]
+    },
+    {
+      "text": "16/20",
+      "options": [
+        {
+          "text": "Adventurous"
+        },
+        {
+          "text": "Peaceful"
+        },
+        {
+          "text": "Positive"
+        },
+        {
+          "text": "Moderate"
+        }
+      ]
+    },
+    {
+      "text": "17/20",
+      "options": [
+        {
+          "text": "Cordial"
+        },
+        {
+          "text": "Vigorous"
+        },
+        {
+          "text": "Receptive"
+        },
+        {
+          "text": "Controlled"
+        }
+      ]
+    },
+    {
+      "text": "18/20",
+      "options": [
+        {
+          "text": "Accurate"
+        },
+        {
+          "text": "Good mixer"
+        },
+        {
+          "text": "Decisive"
+        },
+        {
+          "text": "Lenient"
+        }
+      ]
+    },
+    {
+      "text": "19/20",
+      "options": [
+        {
+          "text": "Talkative"
+        },
+        {
+          "text": "Conventional"
+        },
+        {
+          "text": "Outspoken"
+        },
+        {
+          "text": "Satisfied"
+        }
+      ]
+    },
+    {
+      "text": "20/20",
+      "options": [
+        {
+          "text": "Audacious"
+        },
+        {
+          "text": "Popular"
+        },
+        {
+          "text": "Companionable"
+        },
+        {
+          "text": "Polished"
+        }
+      ]
+    }
+  ],
+  "wordLists": {
+    "Amiable": [
+      "Good-natured",
+      "Docile",
+      "Loyal",
+      "Even-tempered",
+      "Willing",
+      "Agreeable",
+      "Obliging",
+      "Sympathetic",
+      "Tolerant",
+      "Respectful",
+      "Generous",
+      "Considerate",
+      "Kind",
+      "Patient",
+      "Trusting",
+      "Peaceful",
+      "Cordial",
+      "Lenient",
+      "Satisfied",
+      "Companionable"
+    ],
+    "Driver": [
+      "Aggressive",
+      "Dogged",
+      "Determined",
+      "Strong-willed",
+      "Confident",
+      "Assertive",
+      "Restless",
+      "Persistent",
+      "Competitive",
+      "Unconquerable",
+      "Brave",
+      "Argumentative",
+      "Self-reliant",
+      "Adventurous",
+      "Vigorous",
+      "Decisive",
+      "Outspoken",
+      "Audacious"
+    ],
+    "Analytical": [
+      "Cautious",
+      "Precise",
+      "Disciplined",
+      "Accurate",
+      "Fussy",
+      "Timid",
+      "Nonchalant",
+      "Moderate",
+      "Controlled",
+      "Conventional"
+    ],
+    "Expressive": [
+      "Persuasive",
+      "Open-minded",
+      "Charming",
+      "High-spirited",
+      "Animated",
+      "Cheerful",
+      "Spontaneous",
+      "Pioneering",
+      "Jovial",
+      "Influential",
+      "Optimistic",
+      "Inspiring",
+      "Adaptable",
+      "Lighthearted",
+      "Positive",
+      "Receptive",
+      "Good mixer",
+      "Talkative",
+      "Popular",
+      "Polished"
+    ]
+  }
+}

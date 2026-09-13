@@ -1,0 +1,200 @@
+{
+  "id": "limiting-beliefs",
+  "title": "Self-Limiting Beliefs Assessment",
+  "resultsTitle": "Your Limiting Beliefs",
+  "optionType": "shared-likert",
+  "scorer": "likert-domains",
+  "widget": "ring-domains",
+  "questions": [
+    {
+      "text": "I'm just not smart enough to succeed at difficult things",
+      "domain": "Ability"
+    },
+    {
+      "text": "Some people are naturally talented — I'm not one of them",
+      "domain": "Ability"
+    },
+    {
+      "text": "I can't learn new skills easily; my brain doesn't work that way",
+      "domain": "Ability"
+    },
+    {
+      "text": "If I haven't figured something out quickly, I probably never will",
+      "domain": "Ability"
+    },
+    {
+      "text": "I'm not creative — I can't think of original ideas",
+      "domain": "Ability"
+    },
+    {
+      "text": "I don't deserve success because I haven't worked hard enough",
+      "domain": "Worthiness"
+    },
+    {
+      "text": "Good things happen to other people, not to me",
+      "domain": "Worthiness"
+    },
+    {
+      "text": "If people really knew me, they wouldn't respect me",
+      "domain": "Worthiness"
+    },
+    {
+      "text": "I'm not the kind of person who achieves big things",
+      "domain": "Worthiness"
+    },
+    {
+      "text": "I feel guilty when something good happens to me",
+      "domain": "Worthiness"
+    },
+    {
+      "text": "If I try and fail, people will think less of me",
+      "domain": "Fear of Failure"
+    },
+    {
+      "text": "It's better not to try than to try and fail publicly",
+      "domain": "Fear of Failure"
+    },
+    {
+      "text": "Failure means I'm a failure as a person",
+      "domain": "Fear of Failure"
+    },
+    {
+      "text": "I avoid challenges because I might not be good enough",
+      "domain": "Fear of Failure"
+    },
+    {
+      "text": "Making mistakes proves that I'm not capable",
+      "domain": "Fear of Failure"
+    },
+    {
+      "text": "People don't really change — you either have it or you don't",
+      "domain": "Fixed Mindset"
+    },
+    {
+      "text": "My past defines my future — I can't break free from it",
+      "domain": "Fixed Mindset"
+    },
+    {
+      "text": "Hard work won't help if you don't have natural ability",
+      "domain": "Fixed Mindset"
+    },
+    {
+      "text": "I've always been this way and I always will be",
+      "domain": "Fixed Mindset"
+    },
+    {
+      "text": "Successful people were born lucky — effort alone won't get me there",
+      "domain": "Fixed Mindset"
+    },
+    {
+      "text": "I often tell myself 'I can't do this' before even trying",
+      "domain": "Negative Self-Talk"
+    },
+    {
+      "text": "When something goes wrong, my first thought is 'I knew it — I always mess up'",
+      "domain": "Negative Self-Talk"
+    },
+    {
+      "text": "I replay my mistakes in my head over and over",
+      "domain": "Negative Self-Talk"
+    },
+    {
+      "text": "I focus more on what went wrong than what went right",
+      "domain": "Negative Self-Talk"
+    },
+    {
+      "text": "My inner voice is more critical than encouraging",
+      "domain": "Negative Self-Talk"
+    }
+  ],
+  "sharedOptions": [
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"
+  ],
+  "bands": [
+    {
+      "max": 30,
+      "label": "Free Thinker — Few Limiting Beliefs",
+      "color": "#34A853"
+    },
+    {
+      "max": 50,
+      "label": "Moderate — Some Beliefs Holding You Back",
+      "color": "#1E5EFF"
+    },
+    {
+      "max": 70,
+      "label": "Significant — Many Self-Limiting Patterns",
+      "color": "#FF6B00"
+    },
+    {
+      "max": 100,
+      "label": "Critical — Deeply Rooted Limiting Beliefs",
+      "color": "#E53935"
+    }
+  ],
+  "domainBands": [
+    {
+      "max": 35,
+      "key": "low"
+    },
+    {
+      "max": 65,
+      "key": "moderate"
+    },
+    {
+      "max": 100,
+      "key": "high"
+    }
+  ],
+  "domains": {
+    "Ability": {
+      "emoji": "🧠",
+      "color": "#1E5EFF",
+      "label": "Beliefs About Ability",
+      "low": "You believe in your capacity to learn and grow. You see ability as something that develops with effort.",
+      "moderate": "You sometimes doubt your abilities. Remember: intelligence is not fixed — every expert was once a beginner.",
+      "high": "You strongly believe your abilities are limited. This belief itself is the biggest barrier. Research proves that brains grow with practice — you CAN learn anything with effort and time.",
+      "reframe": "Instead of 'I'm not smart enough', try 'I haven't learned this YET'."
+    },
+    "Worthiness": {
+      "emoji": "💎",
+      "color": "#6A3DE8",
+      "label": "Beliefs About Worthiness",
+      "low": "You feel deserving of success and good things. You know your worth.",
+      "moderate": "You sometimes question whether you deserve good outcomes. You are worthy simply because you exist — success is not reserved for 'special' people.",
+      "high": "You carry a deep belief that you're not worthy of success. This is a learned belief, not a fact. You deserve every good thing that comes your way.",
+      "reframe": "Instead of 'I don't deserve this', try 'I am worthy of good things because of who I am, not just what I do'."
+    },
+    "Fear of Failure": {
+      "emoji": "😨",
+      "color": "#E53935",
+      "label": "Fear of Failure",
+      "low": "You see failure as a learning opportunity, not a judgment of your worth. This is a powerful mindset.",
+      "moderate": "Failure feels uncomfortable for you. That's normal — but remember, every successful person failed many times before succeeding.",
+      "high": "Fear of failure is strongly holding you back. You avoid risks to protect yourself. But avoidance guarantees one thing: you'll never know what you're capable of.",
+      "reframe": "Instead of 'What if I fail?', try 'What if I learn something valuable?'."
+    },
+    "Fixed Mindset": {
+      "emoji": "🔒",
+      "color": "#FF6B00",
+      "label": "Fixed Mindset Beliefs",
+      "low": "You have a growth mindset — you believe people can change and improve. This is scientifically accurate.",
+      "moderate": "You partially believe things are fixed. In reality, neuroscience proves your brain creates new connections every time you practice something.",
+      "high": "You strongly believe people can't change. This is the most limiting belief of all — because if you believe you can't grow, you won't try. But science says otherwise: neuroplasticity is real.",
+      "reframe": "Instead of 'I've always been this way', try 'I'm choosing to grow in a new direction'."
+    },
+    "Negative Self-Talk": {
+      "emoji": "🗣️",
+      "color": "#0B2A5B",
+      "label": "Negative Self-Talk",
+      "low": "Your inner voice is mostly encouraging and balanced. You're kind to yourself.",
+      "moderate": "Your inner critic is active. Start noticing when it speaks — awareness is the first step to changing the conversation.",
+      "high": "Your inner voice is harshly critical. You speak to yourself in ways you'd never speak to a friend. This constant negativity drains your energy and confidence. Practice replacing one negative thought per day with a neutral or kind one.",
+      "reframe": "Instead of 'I always mess up', try 'I'm learning and that's okay'."
+    }
+  }
+}

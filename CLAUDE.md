@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-A static (no build step) webinar registration landing page for Super Learner Academy — pure HTML/CSS/vanilla JS, deployed via GitHub Pages behind the custom domain in `CNAME` (`www.superlearneracademy.in`). Two pages: `index.html` (landing page) and `thank-you.html` (post-payment page). All copy, prices, dates, and links are non-technical and driven from `data.json` so the page can be updated without editing HTML. See `theme.md` for the color/typography/spacing design system (source of truth is `style.css`'s `:root` tokens — `design-reference.md` describes an earlier/different project variant and should not be used for this site's actual styling).
+A static (no build step) webinar registration landing page for Super Learner Academy — pure HTML/CSS/vanilla JS, deployed via GitHub Pages behind the custom domain in `CNAME` (`www.superlearneracademy.in`). Three pages: `index.html` (landing page), `thank-you.html` (post-payment page) and `quiz.html` (the free "Know Yourself Better" assessment app - see its own section below). All copy, prices, dates, and links are non-technical and driven from `data.json` so the page can be updated without editing HTML. See `theme.md` for the color/typography/spacing design system (source of truth is `style.css`'s `:root` tokens — `design-reference.md` describes an earlier/different project variant and should not be used for this site's actual styling).
 
 Registration currently goes through **SuperProfile** (`data.json`'s `registration.link`), which redirects straight to `thank-you.html` with no query param, webhook, or transaction id to confirm payment — `initThankYouPage` in `script.js` always shows the "paid" view (no gate). `razorpay.md` documents a **future** migration plan to Razorpay (payment verification, webhook-to-Google-Sheets); none of that is live yet, so don't assume Razorpay params/verification exist.
 
@@ -65,7 +65,7 @@ A disabled Google Sheets override path (`applySheetContent`, currently commented
 - `tests/properties/*.property.test.js` — [fast-check](https://github.com/dubzzz/fast-check) property tests (≥100 iterations) for pure logic functions, each tagged with a `Property N` comment matching the numbered properties in `.kiro/specs/sla-webinar-landing-page/design.md` (e.g. Property 1: sticky CTA visibility = `scrollY > 700`; Property 2: countdown component sum; Property 4: discount % = `Math.round((1 - current/original) * 100)`; Property 6: FAQ single-open invariant).
 - `tests/setup.js` provides `loadHTML`, `setupDOM`, `loadScript`, `createMockData` helpers and resets `document.documentElement.innerHTML` + `localStorage` before each test.
 - When changing a property's underlying formula in `script.js`, check whether the corresponding property text in `design.md` and the property test's generator/assertion need updating too.
-- **`tests/unit/structure.test.js` has 3 known-stale failures** (pre-existing, unrelated to any current work): it asserts exactly 2 `.day-card`s when the curriculum has 3, expects every `img.coach-img` to carry the hero's alt text when the coach-section image has its own, and looks for `.next-step-card` on `thank-you.html` where no such class exists. `npm test` is therefore expected to report `3 failed | 61 passed` on a clean tree — treat that as the baseline, and don't assume your change caused it.
+- **`tests/unit/structure.test.js` has 3 known-stale failures** (pre-existing, unrelated to any current work): it asserts exactly 2 `.day-card`s when the curriculum has 3, expects every `img.coach-img` to carry the hero's alt text when the coach-section image has its own, and looks for `.next-step-card` on `thank-you.html` where no such class exists. `npm test` is therefore expected to report 2–3 failures on a clean tree (a fast-check date-formatting property test in `tests/properties/formatting.property.test.js` is also intermittently flaky) against ~143 passing — treat that as the baseline, and don't assume your change caused it.
 
 ### Analytics: two separate systems, don't conflate them
 
@@ -93,6 +93,109 @@ Ad traffic lands on `index.html` and needs to render fast, but there's no build-
 Font Awesome's stylesheet (cdnjs `all.min.css`) is loaded in `index.html`'s `<head>` via `rel="preload"` + an `onload` swap (with a `<noscript>` fallback), not a normal blocking `<link rel="stylesheet">` — this lets the hero paint without waiting on the CDN request. The hero's orbiting badges (see above) do use FA icons above the fold now, but the deferred load still works fine for them in practice (icons pop in a beat after paint, screenshot-verified) — don't "fix" this into a blocking `<link>` on that assumption alone. `thank-you.html` intentionally keeps Font Awesome render-blocking because its success checkmark (`fas fa-check`) is the first thing visible there; don't "fix" that inconsistency without checking whether the icon in question is above the fold on that page.
 
 The Google Fonts `<link>` in `<head>` is the only loader for Montserrat/Inter — don't reintroduce a second `@import url(...)` for the same fonts inside `style.css` (one existed and was removed as a redundant render-blocking request).
+
+## Quiz app (`quiz.html`)
+
+A second, self-contained app in the same repo: 18 free self-assessments and 11 brain-training
+tools, aimed at the same student audience as the landing page and used as a free lead magnet.
+It was ported from a separate React/Vite project (`quiz-assessment-app`, since removed) into the
+same no-build, vanilla-JS shape as the rest of the site. **There is no React, no bundler and no
+npm dependency in it** - recharts, MUI, canvas-confetti, html-to-image, jspdf, pdfjs and epubjs
+were all either hand-rolled or moved to on-demand CDN loads.
+
+### Files
+
+- `quiz.html` - the single shell page (`data-page="quiz"`). Like `index.html`, the static markup
+  inside it is the real no-JS fallback, not a placeholder.
+- `quiz.js` - hash router, quiz engine, scorers, result widgets, `window.SLAQuiz` test surface.
+- `quiz-tools.js` - the 11 interactive tools. Loaded lazily, only on the first `#/tools/<id>` route.
+- `quiz.css` - the ported `App.css` plus a block of additions for the components that replaced a
+  React dependency. It re-declares the same `:root` tokens as `style.css`; keep the two in sync.
+- `QuizQuestions/` - `index.json` (home-page catalogue) plus one file per quiz, and
+  `reading-texts.json` for the Speed Reading practice passages.
+- `media/` - `audio/` (6 MP3s) and `peg-system/` (30 WebP peg images).
+
+### Routing and state
+
+Hash router: `#/`, `#/username/<id>`, `#/quiz/<id>`, `#/results/<id>`, `#/tools/<id>`, `#/about`.
+Hash-based deliberately - it needs no GitHub Pages 404 redirect hack and no server rewrite.
+React Router's `location.state` became `sessionStorage` under the key `sla_quiz_state`
+(`{ userName, quizId, answers }`), so a mid-quiz refresh resumes at the first unanswered question.
+
+`route()` returns a promise that resolves once the view is rendered, and `SLAQuiz.navigate(hash)`
+wraps it - that is what the render tests await instead of guessing at timers.
+
+### The quiz engine is data-driven - don't add per-quiz code
+
+The 18 quizzes are **not** 18 code paths. Each `QuizQuestions/<id>.json` declares a `scorer` and a
+`widget`, and `quiz.js` dispatches on those. To add or change a quiz, edit its JSON; only add code
+if a genuinely new scoring shape is needed.
+
+- **Scorers**: `likert-total`, `likert-domains`, `score-domains`, `scores-array-domains`,
+  `answer-key-categories`, `tally-option`, `tally-word-list`, `tally-vark`, `binary-index`,
+  `study-plan`.
+- **Widgets**: `ring`, `ring-domains`, `pie`, `pie-band`, `score-domains`, `profile`, `plan`.
+- **Answers are always stored as the selected option's INDEX.** Every scorer works from
+  `(question, index)`. The React version stored option *text* and matched it back to a label later;
+  don't reintroduce that.
+- `bands` are evaluated top-down, first match wins: `min` (pct >= min), `max` (pct <= max), `iqMin`
+  (matched against the estimated IQ, not the percentage), or a bare band as a catch-all.
+- Shared-Likert quizzes score `index + 1`, flipped to `(scale + 1) - score` when the question has
+  `reverse: true`. Option-scored quizzes carry their own `score` per option.
+- Spirit Animal and Mood Check options carry a **`key`** (`"Bear"`, `"Calm"`) separately from their
+  display text; that key is what indexes the quiz's `profiles` table. Tallying the visible text
+  instead silently produces no profile.
+
+### Deliberate choices worth not "fixing"
+
+- **EQ and IQ show domain bars, not a pie.** Their per-area scores are independent percentages, so
+  a pie's slices summed to ~270%. The React version really did feed these to a pie chart; that was
+  a bug, and the bars are the fix. Don't convert them back.
+- **Spirit Animal renders an emoji on a brand gradient, not a photo.** The React profiles hotlinked
+  six Unsplash URLs, two of which (Eagle, Wolf) were already dead 404s masked by an `onError`
+  handler. The `image` field is stripped from the generated JSON. If real photos are ever wanted,
+  add all six to `media/` - don't reintroduce hotlinks.
+- **The content-protection layer exempts text fields.** `quiz.js` installs the same
+  right-click/F12/Ctrl-U/Ctrl-C blocking as `script.js`, but `isTextField()` lets `<input>`,
+  `<textarea>` and contenteditable through - this app has name inputs and a journaling tool, and
+  blocking copy/paste there breaks real typing.
+- **`appEl()` / `dialogEl()` resolve the shell elements at use time** rather than caching them, so
+  the module never holds a reference to a detached node.
+- **Charts are hand-rolled SVG.** The donut is built from `stroke-dasharray` arcs on concentric
+  circles, which has no path-arc edge cases at 0% or 100%.
+- **"Download as Image" is SVG `foreignObject` -> canvas -> PNG** (`downloadResultCard`). This is
+  the same technique `html-to-image` used, with styles inlined because the rasterised SVG cannot
+  reach `quiz.css`. It is browser-sensitive; verify in a real browser after touching it.
+
+### Tools (`quiz-tools.js`)
+
+`window.SLATools.mount(id, host, ctx)` renders one tool and **returns a cleanup function**. The
+router calls that cleanup on every navigation, so a tool that starts a `requestAnimationFrame`
+loop, `setInterval` or audio playback **must** stop it there - `tests/unit/quiz-tools.test.js`
+asserts exactly that, including `vi.getTimerCount() === 0` after teardown.
+
+Three libraries have no native equivalent and are loaded from cdnjs **on demand, inside the one
+tool that needs them**: pdf.js and epub.js (Speed Reading file upload) and jsPDF (the three
+Reflects worksheets). Nothing else on the page pays for them.
+
+The canvas tools (Ball Focus, Eye Exercise) guard `getContext('2d')` and degrade to a message if
+it returns null.
+
+### Media
+
+`media/audio/` was re-encoded with ffmpeg from the React project's originals: 82 MB -> 30 MB.
+Speech tracks are 64 kbps mono; the two music/tone tracks (`mandala-inspiration`,
+`852hz-reset-the-mind`) are 96 kbps stereo, because mono at 64k audibly hurt them.
+`media/peg-system/` is 30 WebP files converted from 500x500 PNGs with Pillow at quality 82:
+9.0 MB -> 0.9 MB. If these assets are ever replaced, re-apply the same treatment - there is no
+build step to do it for you.
+
+### Generated JSON
+
+`QuizQuestions/*.json` was generated once from the React project's `src/data/questions.js` plus the
+scoring rules that were embedded in each `*Results.jsx`. That generator depended on the React
+source and is **not** reproducible now that `quiz-assessment-app` is gone - the JSON files are the
+source of truth from here on. Edit them directly.
 
 ## Content notes
 

@@ -1,0 +1,498 @@
+{
+  "id": "iq",
+  "title": "IQ Assessment",
+  "resultsTitle": "IQ Results",
+  "optionType": "per-question-correct",
+  "scorer": "answer-key-categories",
+  "widget": "score-domains",
+  "questions": [
+    {
+      "text": "What comes next in the sequence: 2, 6, 12, 20, 30, ?",
+      "category": "numerical",
+      "options": [
+        {
+          "text": "40",
+          "correct": false
+        },
+        {
+          "text": "42",
+          "correct": true
+        },
+        {
+          "text": "38",
+          "correct": false
+        },
+        {
+          "text": "44",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "If 3 × 4 = 21, 5 × 6 = 55, then 7 × 8 = ?",
+      "category": "numerical",
+      "options": [
+        {
+          "text": "91",
+          "correct": true
+        },
+        {
+          "text": "72",
+          "correct": false
+        },
+        {
+          "text": "85",
+          "correct": false
+        },
+        {
+          "text": "96",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "What is the next number: 1, 1, 2, 3, 5, 8, 13, ?",
+      "category": "numerical",
+      "options": [
+        {
+          "text": "18",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "21",
+          "correct": true
+        },
+        {
+          "text": "26",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Complete the series: 3, 9, 27, 81, ?",
+      "category": "numerical",
+      "options": [
+        {
+          "text": "162",
+          "correct": false
+        },
+        {
+          "text": "243",
+          "correct": true
+        },
+        {
+          "text": "189",
+          "correct": false
+        },
+        {
+          "text": "216",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+      "category": "numerical",
+      "options": [
+        {
+          "text": "100 minutes",
+          "correct": false
+        },
+        {
+          "text": "5 minutes",
+          "correct": true
+        },
+        {
+          "text": "20 minutes",
+          "correct": false
+        },
+        {
+          "text": "50 minutes",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "All roses are flowers. Some flowers fade quickly. Which conclusion is valid?",
+      "category": "logical",
+      "options": [
+        {
+          "text": "All roses fade quickly",
+          "correct": false
+        },
+        {
+          "text": "Some roses may fade quickly",
+          "correct": true
+        },
+        {
+          "text": "No roses fade quickly",
+          "correct": false
+        },
+        {
+          "text": "All flowers are roses",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "If A > B, B > C, and C > D, which statement must be true?",
+      "category": "logical",
+      "options": [
+        {
+          "text": "D > A",
+          "correct": false
+        },
+        {
+          "text": "A > D",
+          "correct": true
+        },
+        {
+          "text": "B > D only sometimes",
+          "correct": false
+        },
+        {
+          "text": "A = D",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Tom is taller than Jim. Jim is taller than Sam. Sam is taller than Bob. Who is the shortest?",
+      "category": "logical",
+      "options": [
+        {
+          "text": "Tom",
+          "correct": false
+        },
+        {
+          "text": "Jim",
+          "correct": false
+        },
+        {
+          "text": "Sam",
+          "correct": false
+        },
+        {
+          "text": "Bob",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "text": "If all Zips are Zaps, and all Zaps are Zops, then:",
+      "category": "logical",
+      "options": [
+        {
+          "text": "All Zops are Zips",
+          "correct": false
+        },
+        {
+          "text": "All Zips are Zops",
+          "correct": true
+        },
+        {
+          "text": "Some Zops are not Zaps",
+          "correct": false
+        },
+        {
+          "text": "No Zips are Zops",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "A clock shows 3:15. What is the angle between the hour and minute hands?",
+      "category": "logical",
+      "options": [
+        {
+          "text": "0°",
+          "correct": false
+        },
+        {
+          "text": "7.5°",
+          "correct": true
+        },
+        {
+          "text": "15°",
+          "correct": false
+        },
+        {
+          "text": "22.5°",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Which number doesn't belong: 2, 3, 5, 7, 11, 14, 17?",
+      "category": "pattern",
+      "options": [
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        },
+        {
+          "text": "14",
+          "correct": true
+        },
+        {
+          "text": "17",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Complete the pattern: AZ, BY, CX, DW, ?",
+      "category": "pattern",
+      "options": [
+        {
+          "text": "EV",
+          "correct": true
+        },
+        {
+          "text": "EU",
+          "correct": false
+        },
+        {
+          "text": "FV",
+          "correct": false
+        },
+        {
+          "text": "EX",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Which doesn't belong: Triangle, Square, Pentagon, Circle, Hexagon?",
+      "category": "pattern",
+      "options": [
+        {
+          "text": "Triangle",
+          "correct": false
+        },
+        {
+          "text": "Square",
+          "correct": false
+        },
+        {
+          "text": "Circle",
+          "correct": true
+        },
+        {
+          "text": "Hexagon",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "If APPLE = 50, BANANA = 42, then CHERRY = ?",
+      "category": "pattern",
+      "options": [
+        {
+          "text": "64",
+          "correct": false
+        },
+        {
+          "text": "72",
+          "correct": false
+        },
+        {
+          "text": "63",
+          "correct": true
+        },
+        {
+          "text": "54",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "What comes next: J, F, M, A, M, J, J, ?",
+      "category": "pattern",
+      "options": [
+        {
+          "text": "A",
+          "correct": true
+        },
+        {
+          "text": "S",
+          "correct": false
+        },
+        {
+          "text": "O",
+          "correct": false
+        },
+        {
+          "text": "K",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Which word is the odd one out: Apple, Banana, Carrot, Mango, Grape?",
+      "category": "verbal",
+      "options": [
+        {
+          "text": "Apple",
+          "correct": false
+        },
+        {
+          "text": "Banana",
+          "correct": false
+        },
+        {
+          "text": "Carrot",
+          "correct": true
+        },
+        {
+          "text": "Grape",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "BOOK is to READING as FORK is to:",
+      "category": "verbal",
+      "options": [
+        {
+          "text": "Drawing",
+          "correct": false
+        },
+        {
+          "text": "Eating",
+          "correct": true
+        },
+        {
+          "text": "Writing",
+          "correct": false
+        },
+        {
+          "text": "Cooking",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "What is the opposite of 'EPHEMERAL'?",
+      "category": "verbal",
+      "options": [
+        {
+          "text": "Temporary",
+          "correct": false
+        },
+        {
+          "text": "Permanent",
+          "correct": true
+        },
+        {
+          "text": "Beautiful",
+          "correct": false
+        },
+        {
+          "text": "Ancient",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Find the analogy: Doctor : Patient :: Teacher : ?",
+      "category": "verbal",
+      "options": [
+        {
+          "text": "School",
+          "correct": false
+        },
+        {
+          "text": "Book",
+          "correct": false
+        },
+        {
+          "text": "Student",
+          "correct": true
+        },
+        {
+          "text": "Class",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Which word means the same as 'UBIQUITOUS'?",
+      "category": "verbal",
+      "options": [
+        {
+          "text": "Rare",
+          "correct": false
+        },
+        {
+          "text": "Everywhere",
+          "correct": true
+        },
+        {
+          "text": "Unique",
+          "correct": false
+        },
+        {
+          "text": "Dangerous",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "iqMin": 130,
+      "label": "Superior",
+      "color": "#34A853",
+      "text": "Excellent! You demonstrated superior cognitive abilities across logical reasoning, pattern recognition, and problem-solving. You think quickly and accurately."
+    },
+    {
+      "iqMin": 120,
+      "label": "Above Average",
+      "color": "#34A853",
+      "text": "Very good! You show above-average cognitive abilities. Your logical thinking and problem-solving skills are well-developed."
+    },
+    {
+      "iqMin": 110,
+      "label": "High Average",
+      "color": "#1E5EFF",
+      "text": "Good job! You have high-average cognitive abilities. You handle logical challenges and patterns well."
+    },
+    {
+      "iqMin": 90,
+      "label": "Average",
+      "color": "#1E5EFF",
+      "text": "You show average cognitive abilities. With practice, you can strengthen specific areas like pattern recognition or numerical reasoning."
+    },
+    {
+      "iqMin": 80,
+      "label": "Below Average",
+      "color": "#FF6B00",
+      "text": "This score suggests room for growth. Regular practice with puzzles, reading, and logical exercises can significantly improve cognitive performance."
+    },
+    {
+      "iqMin": 0,
+      "label": "Needs Development",
+      "color": "#E53935",
+      "text": "This score suggests room for growth. Regular practice with puzzles, reading, and logical exercises can significantly improve cognitive performance."
+    }
+  ],
+  "categoryLabels": {
+    "numerical": "Numerical",
+    "logical": "Logical",
+    "pattern": "Pattern",
+    "verbal": "Verbal"
+  },
+  "iqScale": {
+    "base": 70,
+    "range": 70
+  }
+}

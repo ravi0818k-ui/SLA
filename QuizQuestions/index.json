@@ -1,0 +1,168 @@
+{
+  "sections": [
+    {
+      "title": "Start Here",
+      "quizzes": [
+        {
+          "id": "mood-check",
+          "emoji": "🎭",
+          "label": "Mood Check",
+          "subtitle": "How ready are you?",
+          "title": "Mood Check",
+          "questions": 10
+        },
+        {
+          "id": "focus",
+          "emoji": "🎯",
+          "label": "Focus Check",
+          "subtitle": "How present is your mind?",
+          "title": "Focus & Present Moment Check",
+          "questions": 15
+        },
+        {
+          "id": "inner-world",
+          "emoji": "🌊",
+          "label": "Inner World",
+          "subtitle": "What's on your mind?",
+          "title": "Inner World Assessment",
+          "questions": 20
+        },
+        {
+          "id": "limiting-beliefs",
+          "emoji": "🔓",
+          "label": "Self-Limiting Beliefs",
+          "subtitle": "What holds you back?",
+          "title": "Self-Limiting Beliefs Assessment",
+          "questions": 25
+        },
+        {
+          "id": "fomo",
+          "emoji": "📱",
+          "label": "FOMO Check",
+          "subtitle": "Fear of missing out level",
+          "title": "FOMO (Fear of Missing Out) Assessment",
+          "questions": 20
+        },
+        {
+          "id": "self-image",
+          "emoji": "🪞",
+          "label": "Self-Image",
+          "subtitle": "How you see yourself",
+          "title": "Self-Image Assessment",
+          "questions": 20
+        }
+      ]
+    },
+    {
+      "title": "Know Your Personality",
+      "quizzes": [
+        {
+          "id": "spirit-animal",
+          "emoji": "🐾",
+          "label": "Spirit Animal",
+          "subtitle": "Your personality archetype",
+          "title": "Spirit Animal Personality Quiz",
+          "questions": 12
+        },
+        {
+          "id": "social-type",
+          "emoji": "👥",
+          "label": "Social Type",
+          "subtitle": "How you interact with others",
+          "title": "Social Type Quiz",
+          "questions": 20
+        },
+        {
+          "id": "brain-dominance",
+          "emoji": "🧠",
+          "label": "Brain Dominance",
+          "subtitle": "Left or right brain?",
+          "title": "Brain Dominance Quiz",
+          "questions": 20
+        }
+      ]
+    },
+    {
+      "title": "Learning & Growth",
+      "quizzes": [
+        {
+          "id": "study-strategy",
+          "emoji": "🗺️",
+          "label": "Study Strategy",
+          "subtitle": "Personalized study plan for your subject",
+          "title": "Personalized Study Strategy",
+          "questions": 10
+        },
+        {
+          "id": "topper-mindset",
+          "emoji": "🏆",
+          "label": "Topper Mindset",
+          "subtitle": "Do you think like a topper?",
+          "title": "Topper Mindset Assessment",
+          "questions": 20
+        },
+        {
+          "id": "study-effort",
+          "emoji": "📊",
+          "label": "Study Effort & Habits",
+          "subtitle": "Your current effort level",
+          "title": "Study Effort & Habits Assessment",
+          "questions": 20
+        },
+        {
+          "id": "vark",
+          "emoji": "📚",
+          "label": "VARK Learning Style",
+          "subtitle": "How you learn best",
+          "title": "VARK Learning Style Quiz",
+          "questions": 15
+        },
+        {
+          "id": "motivation",
+          "emoji": "🎯",
+          "label": "Motivation Type",
+          "subtitle": "Intrinsic vs extrinsic",
+          "title": "Motivation Type Quiz",
+          "questions": 15
+        },
+        {
+          "id": "learning-agility",
+          "emoji": "📈",
+          "label": "Learning Agility",
+          "subtitle": "Your adaptability",
+          "title": "Learning Agility Quiz",
+          "questions": 27
+        }
+      ]
+    },
+    {
+      "title": "Intelligence & Well-being",
+      "quizzes": [
+        {
+          "id": "eq",
+          "emoji": "💡",
+          "label": "EQ Assessment",
+          "subtitle": "Emotional intelligence",
+          "title": "EQ (Emotional Intelligence) Assessment",
+          "questions": 20
+        },
+        {
+          "id": "iq",
+          "emoji": "🧩",
+          "label": "IQ Assessment",
+          "subtitle": "Cognitive ability",
+          "title": "IQ Assessment",
+          "questions": 20
+        },
+        {
+          "id": "happiness",
+          "emoji": "😊",
+          "label": "Happiness Check",
+          "subtitle": "Your well-being score",
+          "title": "Happiness & Well-being Quiz",
+          "questions": 20
+        }
+      ]
+    }
+  ]
+}

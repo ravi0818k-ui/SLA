@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Yourself Better — Free Student Assessments | Super Learner Academy</title>
+    <meta name="description" content="18 free self-assessments and 11 brain-training tools for students — learning style, focus, study habits, memory and mindset. Know how you learn, then study smarter.">
+    <meta name="keywords" content="learning style quiz, VARK test, study habits assessment, focus test for students, brain dominance quiz, memory training, growth mindset">
+    <link rel="canonical" href="https://www.superlearneracademy.in/quiz.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Know Yourself Better — Free Student Assessments">
+    <meta property="og:description" content="Find out how you learn, where your focus breaks, and what's holding your grades back — 18 free assessments built for students.">
+    <meta property="og:url" content="https://www.superlearneracademy.in/quiz.html">
+    <meta property="og:image" content="https://www.superlearneracademy.in/Images/Logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417193820"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18417193820');
+    </script>
+
+    <!-- Google Analytics 4 - Super Learner Academy WEBSITE -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM45CDB7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YM45CDB7GK');
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Favicon SLA/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon SLA/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon SLA/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon SLA/apple-icon-180x180.png">
+    <meta name="theme-color" content="#0B2A5B">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6.5 (non-blocking - the only above-the-fold icons are the
+         social links in the sidebar, which are fine to pop in a beat later) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="quiz.css?v=1.0.0">
+</head>
+<body data-page="quiz">
+
+    <!-- Confetti overlay, filled by playConfetti() on results pages -->
+    <div id="confetti-container" aria-hidden="true"></div>
+
+    <!--
+      Single-page shell. quiz.js owns a hash router and renders one view into
+      #app: #/ (home), #/username/<id>, #/quiz/<id>, #/results/<id>,
+      #/tools/<id>, #/about. The static markup below is the no-JS fallback,
+      matching how index.html keeps real copy rather than placeholders.
+    -->
+    <main id="app" class="app-container">
+        <div class="quiz-boot">
+            <img src="Images/Logo.png" alt="Super Learner Academy" width="220" height="220" class="quiz-boot-logo">
+            <h1>Know Yourself Better</h1>
+            <p>Free self-assessments and brain-training tools for students — find out how you learn, where your focus breaks, and what's holding your grades back.</p>
+            <noscript>
+                <p class="quiz-boot-note">These assessments need JavaScript enabled. Please turn it on and reload the page.</p>
+            </noscript>
+        </div>
+    </main>
+
+    <!-- Confirmation dialog, reused by every results view -->
+    <div id="quiz-dialog" class="quiz-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="quiz-dialog-title">
+        <div class="quiz-dialog-backdrop" data-dialog-cancel></div>
+        <div class="quiz-dialog-panel">
+            <h2 class="quiz-dialog-title" id="quiz-dialog-title">Return to Home Page?</h2>
+            <div class="quiz-dialog-body">
+                <p>Are you sure you want to go to the main page?</p>
+                <p><strong>Warning:</strong> If you leave this page, you will not be able to re-download your results. Please make sure you have downloaded your results before leaving.</p>
+            </div>
+            <div class="quiz-dialog-actions">
+                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-outline" data-dialog-cancel>Cancel</button>
+                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-filled" data-dialog-confirm>Yes, Return Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz.js?v=1.0.0"></script>
+</body>
+</html>

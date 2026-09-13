@@ -1,0 +1,106 @@
+{
+  "id": "focus",
+  "title": "Focus & Present Moment Check",
+  "resultsTitle": "Your Focus Level",
+  "optionType": "shared-likert",
+  "scorer": "likert-total",
+  "widget": "ring",
+  "questions": [
+    {
+      "text": "Right now, how present do you feel in this moment?"
+    },
+    {
+      "text": "Right now, my mind keeps drifting to other thoughts unrelated to what I'm doing",
+      "reverse": true
+    },
+    {
+      "text": "I am aware of what's happening around me right now"
+    },
+    {
+      "text": "I am thinking about things I need to do later or things that happened earlier",
+      "reverse": true
+    },
+    {
+      "text": "Right now, I feel mentally clear and sharp"
+    },
+    {
+      "text": "My thoughts are scattered and jumping between different things",
+      "reverse": true
+    },
+    {
+      "text": "I feel fully engaged with this task and nothing else is pulling my attention"
+    },
+    {
+      "text": "I find myself worrying or planning instead of being here",
+      "reverse": true
+    },
+    {
+      "text": "I can give my full attention to what's in front of me right now"
+    },
+    {
+      "text": "I feel mentally restless — like my mind wants to be somewhere else",
+      "reverse": true
+    },
+    {
+      "text": "I notice small details around me (sounds, sensations, visual details)"
+    },
+    {
+      "text": "I am operating on 'autopilot' without really paying attention",
+      "reverse": true
+    },
+    {
+      "text": "If someone spoke to me right now, I would hear every word clearly"
+    },
+    {
+      "text": "Unfinished tasks or personal problems are occupying my mental space",
+      "reverse": true
+    },
+    {
+      "text": "I feel calm and settled — not rushing or anxious about anything"
+    }
+  ],
+  "sharedOptions": [
+    "Not at all",
+    "A little",
+    "Moderately",
+    "Quite a bit",
+    "Completely"
+  ],
+  "bands": [
+    {
+      "min": 70,
+      "key": "high"
+    },
+    {
+      "min": 45,
+      "key": "moderate"
+    },
+    {
+      "min": 0,
+      "key": "low"
+    }
+  ],
+  "levels": {
+    "high": {
+      "label": "Fully Focused & Present",
+      "emoji": "🎯",
+      "color": "#34A853",
+      "description": "Your mind is clear, present, and fully available for learning. You're in an ideal state to absorb information, solve problems, and engage deeply. Make the most of this focus!",
+      "tip": "You're in the zone. Dive into the hardest material now — your brain is ready for it."
+    },
+    "moderate": {
+      "label": "Partially Focused",
+      "emoji": "😐",
+      "color": "#FF6B00",
+      "description": "Your attention is somewhat divided. Part of your mind is here, but part is occupied with other thoughts — perhaps worries, plans, or distractions. You can still learn, but you might need to actively redirect your focus.",
+      "tip": "Try this: Take 3 deep breaths, set ONE clear intention for the next 30 minutes, and remove your phone from sight."
+    },
+    "low": {
+      "label": "Mind Wandering — Unfocused",
+      "emoji": "🌊",
+      "color": "#E53935",
+      "description": "Your mind is heavily occupied with other thoughts right now. Worries, plans, memories, or distractions are taking up most of your mental bandwidth. Learning in this state is very difficult because your brain can't properly encode new information while processing background thoughts.",
+      "tip": "Before studying: Do a 'brain dump' — write everything on your mind on paper for 2 minutes. This externalizes the thoughts so your mind can let go. Then take 5 slow breaths and set a tiny goal."
+    }
+  }
+}

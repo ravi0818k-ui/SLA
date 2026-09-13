@@ -1,0 +1,483 @@
+{
+  "id": "eq",
+  "title": "EQ (Emotional Intelligence) Assessment",
+  "resultsTitle": "EQ Results",
+  "optionType": "per-question-scores-array",
+  "scorer": "scores-array-domains",
+  "widget": "score-domains",
+  "questions": [
+    {
+      "text": "You receive critical feedback on a project you worked hard on. Your first reaction is:",
+      "domain": "Self-Awareness",
+      "options": [
+        {
+          "text": "Feel hurt and dismiss the feedback as unfair",
+          "score": 2
+        },
+        {
+          "text": "Get angry at the person giving feedback",
+          "score": 1
+        },
+        {
+          "text": "Take a moment to process, then objectively evaluate the feedback",
+          "score": 4
+        },
+        {
+          "text": "Immediately agree with everything to avoid conflict",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "During a stressful exam week, you notice you're snapping at friends. You:",
+      "domain": "Self-Awareness",
+      "options": [
+        {
+          "text": "Continue as usual — exams are stressful for everyone",
+          "score": 1
+        },
+        {
+          "text": "Recognize your stress is affecting others and apologize",
+          "score": 4
+        },
+        {
+          "text": "Blame your friends for being too sensitive",
+          "score": 1
+        },
+        {
+          "text": "Isolate yourself completely until exams are over",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "When you feel anxious before a presentation, you:",
+      "domain": "Self-Awareness",
+      "options": [
+        {
+          "text": "Pretend you're not nervous and push through",
+          "score": 2
+        },
+        {
+          "text": "Acknowledge the anxiety and use breathing techniques to manage it",
+          "score": 4
+        },
+        {
+          "text": "Avoid the presentation entirely",
+          "score": 1
+        },
+        {
+          "text": "Tell everyone how nervous you are repeatedly",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "You made a mistake at work/school that no one noticed. You:",
+      "domain": "Self-Awareness",
+      "options": [
+        {
+          "text": "Keep quiet and hope no one finds out",
+          "score": 2
+        },
+        {
+          "text": "Blame it on someone else if it's ever discovered",
+          "score": 1
+        },
+        {
+          "text": "Acknowledge the error, correct it, and learn from it",
+          "score": 4
+        },
+        {
+          "text": "Obsess over it for days feeling guilty",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "How well can you identify what specific emotion you're feeling at any given moment?",
+      "domain": "Self-Awareness",
+      "options": [
+        {
+          "text": "I rarely think about my emotions",
+          "score": 1
+        },
+        {
+          "text": "I can usually tell if I'm happy or sad, but not much more",
+          "score": 2
+        },
+        {
+          "text": "I can identify specific emotions and understand what triggered them",
+          "score": 4
+        },
+        {
+          "text": "I'm overwhelmed by emotions and can't pinpoint them",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "Someone cuts in front of you in a long queue. You:",
+      "domain": "Self-Regulation",
+      "options": [
+        {
+          "text": "Yell at them immediately",
+          "score": 1
+        },
+        {
+          "text": "Feel frustrated but calmly point out the queue",
+          "score": 4
+        },
+        {
+          "text": "Say nothing but feel angry for hours",
+          "score": 2
+        },
+        {
+          "text": "Physically push them back",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "You're in a heated argument and you realize you might be wrong. You:",
+      "domain": "Self-Regulation",
+      "options": [
+        {
+          "text": "Keep arguing to win the point anyway",
+          "score": 1
+        },
+        {
+          "text": "Change the subject to avoid admitting it",
+          "score": 2
+        },
+        {
+          "text": "Pause, acknowledge the valid points, and adjust your position",
+          "score": 4
+        },
+        {
+          "text": "Storm off without resolving anything",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "When faced with an unexpected change in plans, you typically:",
+      "domain": "Self-Regulation",
+      "options": [
+        {
+          "text": "Get extremely frustrated and resist the change",
+          "score": 1
+        },
+        {
+          "text": "Feel initially upset but adapt within a reasonable time",
+          "score": 4
+        },
+        {
+          "text": "Don't care at all about any changes",
+          "score": 2
+        },
+        {
+          "text": "Panic and become unable to function",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "You have an important deadline tomorrow but friends invite you to a party tonight. You:",
+      "domain": "Self-Regulation",
+      "options": [
+        {
+          "text": "Go to the party and pull an all-nighter later",
+          "score": 2
+        },
+        {
+          "text": "Decline, finish your work, then reward yourself afterwards",
+          "score": 4
+        },
+        {
+          "text": "Go to the party and skip the deadline",
+          "score": 1
+        },
+        {
+          "text": "Get angry at your friends for tempting you",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "When you feel overwhelmed by negative emotions, you:",
+      "domain": "Self-Regulation",
+      "options": [
+        {
+          "text": "Use unhealthy coping mechanisms (overeating, excessive screen time)",
+          "score": 1
+        },
+        {
+          "text": "Suppress the emotions entirely and pretend they don't exist",
+          "score": 2
+        },
+        {
+          "text": "Use healthy strategies like exercise, journaling, or talking to someone",
+          "score": 4
+        },
+        {
+          "text": "Take out frustrations on others around you",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "Your friend seems quieter than usual but says 'I'm fine.' You:",
+      "domain": "Empathy",
+      "options": [
+        {
+          "text": "Accept it and move on — they said they're fine",
+          "score": 2
+        },
+        {
+          "text": "Push them aggressively to tell you what's wrong",
+          "score": 1
+        },
+        {
+          "text": "Gently let them know you're there if they want to talk, without pressure",
+          "score": 4
+        },
+        {
+          "text": "Talk about your own problems to relate",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "A classmate/colleague is struggling with a task you find easy. You:",
+      "domain": "Empathy",
+      "options": [
+        {
+          "text": "Think they should just try harder",
+          "score": 1
+        },
+        {
+          "text": "Offer patient help without making them feel inferior",
+          "score": 4
+        },
+        {
+          "text": "Do it for them to save time",
+          "score": 2
+        },
+        {
+          "text": "Point out how easy it is for you",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "You see someone being treated unfairly in a group setting. You:",
+      "domain": "Empathy",
+      "options": [
+        {
+          "text": "Stay quiet — it's not your business",
+          "score": 2
+        },
+        {
+          "text": "Join in with the group to fit in",
+          "score": 1
+        },
+        {
+          "text": "Speak up respectfully or support the person privately",
+          "score": 4
+        },
+        {
+          "text": "Make a scene and publicly shame the group",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "A team member shares an idea you think is weak. You:",
+      "domain": "Empathy",
+      "options": [
+        {
+          "text": "Immediately say it won't work",
+          "score": 1
+        },
+        {
+          "text": "Acknowledge the effort, ask questions to understand their thinking, then share concerns constructively",
+          "score": 4
+        },
+        {
+          "text": "Ignore it and propose your own idea",
+          "score": 2
+        },
+        {
+          "text": "Laugh at the suggestion",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "When someone from a different background shares their experience, you:",
+      "domain": "Empathy",
+      "options": [
+        {
+          "text": "Compare it to your own experience and explain why yours was harder",
+          "score": 1
+        },
+        {
+          "text": "Listen actively and try to understand their perspective without judgment",
+          "score": 4
+        },
+        {
+          "text": "Dismiss it as irrelevant to you",
+          "score": 1
+        },
+        {
+          "text": "Pretend to listen while thinking about something else",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "In a group project, two members have conflicting ideas. You:",
+      "domain": "Social Skills",
+      "options": [
+        {
+          "text": "Pick a side and support them",
+          "score": 2
+        },
+        {
+          "text": "Ignore the conflict and hope it resolves itself",
+          "score": 1
+        },
+        {
+          "text": "Facilitate a discussion to find common ground or a compromise",
+          "score": 4
+        },
+        {
+          "text": "Take over the project yourself to avoid conflict",
+          "score": 2
+        }
+      ]
+    },
+    {
+      "text": "You need to deliver bad news to someone. You:",
+      "domain": "Social Skills",
+      "options": [
+        {
+          "text": "Send a text message to avoid the conversation",
+          "score": 1
+        },
+        {
+          "text": "Be direct but compassionate, choosing an appropriate time and place",
+          "score": 4
+        },
+        {
+          "text": "Sugarcoat it so much that the message gets lost",
+          "score": 2
+        },
+        {
+          "text": "Blurt it out without considering their feelings",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "At a networking event or social gathering with strangers, you:",
+      "domain": "Social Skills",
+      "options": [
+        {
+          "text": "Stand in the corner checking your phone",
+          "score": 1
+        },
+        {
+          "text": "Only talk to people you already know",
+          "score": 2
+        },
+        {
+          "text": "Approach new people with genuine curiosity and ask thoughtful questions",
+          "score": 4
+        },
+        {
+          "text": "Talk only about yourself to impress others",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "A friend achieves something you were also competing for. You:",
+      "domain": "Social Skills",
+      "options": [
+        {
+          "text": "Feel bitter and avoid them",
+          "score": 1
+        },
+        {
+          "text": "Congratulate them genuinely while managing your own disappointment privately",
+          "score": 4
+        },
+        {
+          "text": "Downplay their achievement",
+          "score": 1
+        },
+        {
+          "text": "Pretend to be happy but gossip about them later",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "When giving feedback to someone, you:",
+      "domain": "Social Skills",
+      "options": [
+        {
+          "text": "Only point out what's wrong to help them improve",
+          "score": 2
+        },
+        {
+          "text": "Avoid giving feedback entirely to keep the peace",
+          "score": 1
+        },
+        {
+          "text": "Balance specific positives with constructive suggestions, being respectful of their effort",
+          "score": 4
+        },
+        {
+          "text": "Only give positive feedback regardless of quality",
+          "score": 2
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "min": 85,
+      "label": "Exceptional EQ",
+      "color": "#34A853",
+      "text": "Outstanding! You demonstrate exceptional emotional intelligence. You're highly self-aware, regulate your emotions effectively, show deep empathy, and navigate social situations with skill. These abilities make you an excellent communicator, leader, and collaborator."
+    },
+    {
+      "min": 70,
+      "label": "High EQ",
+      "color": "#34A853",
+      "text": "Very good! You have high emotional intelligence. You understand your emotions well, manage them effectively most of the time, and show genuine empathy towards others. Continue developing these strengths."
+    },
+    {
+      "min": 55,
+      "label": "Moderate EQ",
+      "color": "#1E5EFF",
+      "text": "You have moderate emotional intelligence with clear strengths in some areas. Look at your domain breakdown below to identify areas for growth. Practicing mindfulness, active listening, and self-reflection can help strengthen weaker areas."
+    },
+    {
+      "min": 40,
+      "label": "Developing EQ",
+      "color": "#FF6B00",
+      "text": "Your emotional intelligence is still developing. Focus on building self-awareness first — start noticing your emotions without judging them. Then work on understanding others' perspectives. These skills can be significantly improved with practice."
+    },
+    {
+      "min": 0,
+      "label": "Low EQ",
+      "color": "#E53935",
+      "text": "Your results suggest significant room for growth in emotional intelligence. Consider starting with self-awareness exercises, journaling about your emotions, and practicing active listening. EQ is a skill that can be developed at any age."
+    }
+  ],
+  "perQuestionMax": 4
+}

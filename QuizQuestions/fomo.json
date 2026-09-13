@@ -1,0 +1,139 @@
+{
+  "id": "fomo",
+  "title": "FOMO (Fear of Missing Out) Assessment",
+  "resultsTitle": "FOMO Results",
+  "optionType": "shared-likert",
+  "scorer": "likert-total",
+  "widget": "ring",
+  "questions": [
+    {
+      "text": "I fear others have more rewarding experiences than me"
+    },
+    {
+      "text": "I fear my friends have more rewarding experiences than me"
+    },
+    {
+      "text": "I get worried when I find out my friends are having fun without me"
+    },
+    {
+      "text": "I get anxious when I don't know what my friends are up to"
+    },
+    {
+      "text": "It is important that I understand my friends' inside jokes"
+    },
+    {
+      "text": "Sometimes I wonder if I spend too much time keeping up with what's going on"
+    },
+    {
+      "text": "It bothers me when I miss an opportunity to meet up with friends"
+    },
+    {
+      "text": "When I have a good time, it's important for me to share the details online"
+    },
+    {
+      "text": "When I miss out on a planned get-together, it bothers me"
+    },
+    {
+      "text": "When I go on vacation, I keep track of what my friends are doing"
+    },
+    {
+      "text": "I feel uneasy if I haven't checked social media in a while"
+    },
+    {
+      "text": "I often compare my life to what I see on social media"
+    },
+    {
+      "text": "I feel left out when I see others posting about events I wasn't invited to"
+    },
+    {
+      "text": "I say yes to things I don't really want to do, just so I don't miss out"
+    },
+    {
+      "text": "I check my phone first thing in the morning to see what I missed"
+    },
+    {
+      "text": "I feel like others are living a more exciting life than me"
+    },
+    {
+      "text": "I struggle to enjoy the present because I'm thinking about what else I could be doing"
+    },
+    {
+      "text": "I feel pressure to attend every social event or opportunity"
+    },
+    {
+      "text": "I often feel like I'm not doing enough compared to my peers"
+    },
+    {
+      "text": "I feel anxious when I see classmates studying something I haven't started yet"
+    }
+  ],
+  "sharedOptions": [
+    "Not at all true of me",
+    "Slightly true",
+    "Moderately true",
+    "Very true",
+    "Extremely true of me"
+  ],
+  "bands": [
+    {
+      "max": 40,
+      "key": "low"
+    },
+    {
+      "max": 65,
+      "key": "moderate"
+    },
+    {
+      "max": 100,
+      "key": "high"
+    }
+  ],
+  "levels": {
+    "low": {
+      "label": "Low FOMO",
+      "emoji": "😌",
+      "color": "#34A853",
+      "range": "20-40%",
+      "description": "You have a healthy relationship with social connection and missing out. You're comfortable with your own choices and don't feel excessively anxious about what others are doing. You can enjoy your own path without constant comparison.",
+      "steps": [
+        "Keep doing what you're doing — your relationship with social media and social life is balanced",
+        "Continue practicing intentional presence in your daily activities",
+        "Maintain your healthy boundaries around phone usage and social commitments"
+      ]
+    },
+    "moderate": {
+      "label": "Moderate FOMO",
+      "emoji": "😟",
+      "color": "#FF6B00",
+      "range": "41-65%",
+      "description": "You experience FOMO at a noticeable level. Social media and peer comparisons occasionally make you feel like you're falling behind or missing important experiences. This level can start affecting your focus, self-esteem, and study habits if not addressed.",
+      "steps": [
+        "Set specific social media time limits (try 30 min/day max) and stick to them",
+        "Practice the 'JOMO' (Joy of Missing Out) — intentionally skip one event per week and enjoy the downtime",
+        "Before checking your phone, ask: 'What am I avoiding right now?' — awareness breaks the habit",
+        "Unfollow or mute accounts that consistently trigger comparison",
+        "Keep a gratitude journal — write 3 things you're grateful for each evening",
+        "Remind yourself: social media shows highlights, not reality. You're comparing your behind-the-scenes to their showreel"
+      ]
+    },
+    "high": {
+      "label": "High FOMO",
+      "emoji": "😰",
+      "color": "#E53935",
+      "range": "66-100%",
+      "description": "You experience significant FOMO that is likely affecting your mental health, focus, and ability to study effectively. The constant worry about what others are doing steals your attention from the present moment and your own growth. This is very common in today's hyper-connected world — but it can be changed.",
+      "steps": [
+        "Digital detox: Try one full day per week with no social media (start with 4 hours if a full day feels impossible)",
+        "Turn OFF all non-essential notifications. Your phone is controlling your attention — take it back",
+        "Practice 'delayed checking' — when you feel the urge to check your phone, wait 10 minutes. The urge will pass",
+        "Replace scrolling time with ONE meaningful activity (reading, walking, creating, exercising)",
+        "Have honest conversations with close friends about how social media makes you feel",
+        "Write down your own goals and values. When you're clear on YOUR path, others' paths matter less",
+        "Remember: every minute spent worrying about others' lives is a minute stolen from building your own",
+        "Consider speaking to a counselor — FOMO at high levels can be connected to anxiety that benefits from professional support",
+        "Practice mindfulness: spend 5 minutes daily just noticing your breath. This trains your brain to be present",
+        "Set 'phone-free zones': bedroom, study desk, and meal times. Protect these spaces"
+      ]
+    }
+  }
+}

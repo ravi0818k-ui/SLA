@@ -1,0 +1,115 @@
+{
+  "id": "learning-agility",
+  "title": "Learning Agility Quiz",
+  "resultsTitle": "Your Learning Agility",
+  "optionType": "shared-likert",
+  "scorer": "likert-total",
+  "widget": "pie-band",
+  "questions": [
+    {
+      "text": "How often do you take the initiative to implement new ideas or solutions without being prompted?"
+    },
+    {
+      "text": "How often do you actively seek out opportunities to learn from people outside your immediate team or department?"
+    },
+    {
+      "text": "How often do you step out of your comfort zone to try something new at work?"
+    },
+    {
+      "text": "How frequently do you volunteer for challenging projects or tasks that stretch your abilities?"
+    },
+    {
+      "text": "How often do you proactively address conflicts or issues with colleagues or team members?"
+    },
+    {
+      "text": "How frequently do you actively seek opportunities to collaborate with colleagues from diverse backgrounds, departments or teams?"
+    },
+    {
+      "text": "How often do you seek feedback and insights from different stakeholders before making important decisions?"
+    },
+    {
+      "text": "How frequently do you actively seek feedback from peers, seniors, managers, or mentors?"
+    },
+    {
+      "text": "How often do you make time for self-reflection to assess your progress towards personal and professional goals?"
+    },
+    {
+      "text": "How often do you take initiative to implement a new idea without waiting for explicit instructions?"
+    },
+    {
+      "text": "How receptive are you to feedback and suggestions from others on improving your work?"
+    },
+    {
+      "text": "How often are you comfortable with trying unconventional approaches to solve problems?"
+    },
+    {
+      "text": "How often do you handle failure or setbacks effectively in your professional endeavors?"
+    },
+    {
+      "text": "How often do you seek opportunities to work with people who have different perspectives and backgrounds?"
+    },
+    {
+      "text": "How often do you actively seek out opportunities to participate in cross-functional projects or teams?"
+    },
+    {
+      "text": "How often do you review and analyze information from different sources to make informed decisions?"
+    },
+    {
+      "text": "How frequently do you utilize feedback received from others efficiently to improve your skills and performance?"
+    },
+    {
+      "text": "How well do you identify patterns or areas for improvement through self-reflection?"
+    },
+    {
+      "text": "How often are you comfortable with making decisions quickly, even if they might not be perfect?"
+    },
+    {
+      "text": "How frequently are you willing to consider alternative approaches and solutions to a problem?"
+    },
+    {
+      "text": "How often are you comfortable with taking calculated risks in your work or projects?"
+    },
+    {
+      "text": "How often do you handle situations where the outcome is uncertain, and there's a possibility of failure effectively and positively?"
+    },
+    {
+      "text": "How often are you comfortable in providing constructive feedback to colleagues or team members?"
+    },
+    {
+      "text": "How often do you adapt your communication and work style effectively to align with others during collaborative efforts?"
+    },
+    {
+      "text": "How often do you stay informed about industry trends and developments?"
+    },
+    {
+      "text": "How often do you react to constructive feedback about your performance?"
+    },
+    {
+      "text": "How often do you use insights gained from self-reflection to make positive changes?"
+    }
+  ],
+  "sharedOptions": [
+    "Rarely or never",
+    "Occasionally",
+    "Sometimes",
+    "Often",
+    "Always"
+  ],
+  "bands": [
+    {
+      "min": 80,
+      "label": "High Learning Agility",
+      "color": "#34A853"
+    },
+    {
+      "min": 60,
+      "label": "Moderate Learning Agility",
+      "color": "#FF6B00"
+    },
+    {
+      "min": 0,
+      "label": "Low Learning Agility",
+      "color": "#E53935"
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "id": "brain-dominance",
+  "title": "Brain Dominance Quiz",
+  "resultsTitle": "Your Brain Dominance",
+  "optionType": "per-question-text",
+  "scorer": "binary-index",
+  "widget": "pie",
+  "questions": [
+    {
+      "text": "When solving a problem, you prefer to:",
+      "options": [
+        {
+          "text": "Break it into smaller logical steps"
+        },
+        {
+          "text": "Look at the big picture and use intuition"
+        }
+      ]
+    },
+    {
+      "text": "When studying or working, you prefer:",
+      "options": [
+        {
+          "text": "A quiet, organized environment"
+        },
+        {
+          "text": "Background music or some level of activity around you"
+        }
+      ]
+    },
+    {
+      "text": "You are better at remembering:",
+      "options": [
+        {
+          "text": "Names and dates"
+        },
+        {
+          "text": "Faces and places"
+        }
+      ]
+    },
+    {
+      "text": "When reading, you prefer:",
+      "options": [
+        {
+          "text": "Non-fiction, factual content"
+        },
+        {
+          "text": "Fiction, stories with vivid imagery"
+        }
+      ]
+    },
+    {
+      "text": "When given directions, you prefer:",
+      "options": [
+        {
+          "text": "Written step-by-step instructions"
+        },
+        {
+          "text": "A visual map or diagram"
+        }
+      ]
+    },
+    {
+      "text": "When making decisions, you tend to:",
+      "options": [
+        {
+          "text": "Use logic and analysis"
+        },
+        {
+          "text": "Trust your gut feeling"
+        }
+      ]
+    },
+    {
+      "text": "In a group project, you usually:",
+      "options": [
+        {
+          "text": "Plan the timeline and assign tasks"
+        },
+        {
+          "text": "Come up with creative ideas and brainstorm"
+        }
+      ]
+    },
+    {
+      "text": "You find it easier to:",
+      "options": [
+        {
+          "text": "Work with numbers and data"
+        },
+        {
+          "text": "Work with colors and design"
+        }
+      ]
+    },
+    {
+      "text": "Your desk or workspace is usually:",
+      "options": [
+        {
+          "text": "Neat and organized"
+        },
+        {
+          "text": "Creative and a bit messy"
+        }
+      ]
+    },
+    {
+      "text": "When explaining something to someone, you prefer to:",
+      "options": [
+        {
+          "text": "Use words and detailed explanations"
+        },
+        {
+          "text": "Draw diagrams or use gestures"
+        }
+      ]
+    },
+    {
+      "text": "When you have free time, you are more likely to:",
+      "options": [
+        {
+          "text": "Read a book or solve puzzles"
+        },
+        {
+          "text": "Draw, paint, or listen to music"
+        }
+      ]
+    },
+    {
+      "text": "You prefer activities that involve:",
+      "options": [
+        {
+          "text": "Rules, structure, and clear guidelines"
+        },
+        {
+          "text": "Freedom, creativity, and self-expression"
+        }
+      ]
+    },
+    {
+      "text": "When learning something new, you prefer:",
+      "options": [
+        {
+          "text": "Detailed written instructions or lectures"
+        },
+        {
+          "text": "Hands-on demonstrations or visual examples"
+        }
+      ]
+    },
+    {
+      "text": "You tend to think in:",
+      "options": [
+        {
+          "text": "Words and sequences"
+        },
+        {
+          "text": "Images and patterns"
+        }
+      ]
+    },
+    {
+      "text": "In conversations, you focus more on:",
+      "options": [
+        {
+          "text": "The specific words and facts being shared"
+        },
+        {
+          "text": "The tone, emotion, and body language"
+        }
+      ]
+    },
+    {
+      "text": "When planning a trip, you prefer to:",
+      "options": [
+        {
+          "text": "Create a detailed itinerary with schedules"
+        },
+        {
+          "text": "Be spontaneous and explore as you go"
+        }
+      ]
+    },
+    {
+      "text": "Your strongest skill area is:",
+      "options": [
+        {
+          "text": "Mathematics, science, or language"
+        },
+        {
+          "text": "Art, music, or creative writing"
+        }
+      ]
+    },
+    {
+      "text": "You express yourself better through:",
+      "options": [
+        {
+          "text": "Speaking or writing clearly"
+        },
+        {
+          "text": "Art, music, or physical movement"
+        }
+      ]
+    },
+    {
+      "text": "When you are stressed, you usually:",
+      "options": [
+        {
+          "text": "Make a to-do list and prioritize tasks"
+        },
+        {
+          "text": "Go for a walk, listen to music, or do something creative"
+        }
+      ]
+    },
+    {
+      "text": "Your approach to time is:",
+      "options": [
+        {
+          "text": "Punctual and schedule-driven"
+        },
+        {
+          "text": "Flexible and go-with-the-flow"
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "poleAbove": 0,
+      "threshold": 60,
+      "label": "Left Brain Dominant",
+      "text": "You are Left Brain Dominant! You tend to be logical, analytical, and detail-oriented. You excel at tasks involving language, mathematics, and sequential thinking. You prefer structure, planning, and working with facts and data."
+    },
+    {
+      "poleAbove": 1,
+      "threshold": 60,
+      "label": "Right Brain Dominant",
+      "text": "You are Right Brain Dominant! You tend to be creative, intuitive, and big-picture oriented. You excel at tasks involving art, music, spatial awareness, and imagination. You prefer flexibility, spontaneity, and visual or hands-on learning."
+    },
+    {
+      "label": "Balanced Brain",
+      "text": "You have a Balanced Brain! You use both hemispheres fairly equally, giving you a blend of analytical and creative abilities. You can adapt your thinking style to different situations, combining logic with intuition effectively."
+    }
+  ],
+  "poles": [
+    "Left Brain",
+    "Right Brain"
+  ]
+}

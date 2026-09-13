@@ -1,0 +1,197 @@
+{
+  "id": "motivation",
+  "title": "Motivation Type Quiz",
+  "resultsTitle": "Your Motivation Type",
+  "optionType": "per-question-text",
+  "scorer": "binary-index",
+  "widget": "pie",
+  "questions": [
+    {
+      "text": "Why do you study or learn new things?",
+      "options": [
+        {
+          "text": "Because I genuinely enjoy gaining knowledge and understanding"
+        },
+        {
+          "text": "Because it helps me get good grades or a better job"
+        }
+      ]
+    },
+    {
+      "text": "When you complete a challenging task, what feels most rewarding?",
+      "options": [
+        {
+          "text": "The personal satisfaction of overcoming the challenge"
+        },
+        {
+          "text": "The praise or recognition I receive from others"
+        }
+      ]
+    },
+    {
+      "text": "What motivates you to work hard on a project?",
+      "options": [
+        {
+          "text": "My curiosity and interest in the topic"
+        },
+        {
+          "text": "The reward or outcome I'll get at the end"
+        }
+      ]
+    },
+    {
+      "text": "When choosing a course or subject, you prefer:",
+      "options": [
+        {
+          "text": "Something that fascinates me, even if it's difficult"
+        },
+        {
+          "text": "Something that will look good on my resume"
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about homework or assignments?",
+      "options": [
+        {
+          "text": "I enjoy them when they help me explore ideas deeper"
+        },
+        {
+          "text": "I do them mainly because they count towards my grade"
+        }
+      ]
+    },
+    {
+      "text": "When you read a book, it's usually because:",
+      "options": [
+        {
+          "text": "I'm genuinely curious about the subject or story"
+        },
+        {
+          "text": "It was recommended or required for a purpose"
+        }
+      ]
+    },
+    {
+      "text": "What keeps you going when a task gets difficult?",
+      "options": [
+        {
+          "text": "The desire to master the skill and grow personally"
+        },
+        {
+          "text": "The thought of the reward or avoiding negative consequences"
+        }
+      ]
+    },
+    {
+      "text": "When you achieve something, what matters most to you?",
+      "options": [
+        {
+          "text": "Knowing that I've improved and grown as a person"
+        },
+        {
+          "text": "Getting a certificate, trophy, or public acknowledgment"
+        }
+      ]
+    },
+    {
+      "text": "You volunteer or participate in extra activities because:",
+      "options": [
+        {
+          "text": "It brings me joy and fulfillment"
+        },
+        {
+          "text": "It enhances my profile and gives me an advantage"
+        }
+      ]
+    },
+    {
+      "text": "What type of feedback motivates you most?",
+      "options": [
+        {
+          "text": "Understanding where I can improve and how to grow"
+        },
+        {
+          "text": "Being told I'm the best or ranked highly"
+        }
+      ]
+    },
+    {
+      "text": "When you set goals for yourself, they are usually about:",
+      "options": [
+        {
+          "text": "Personal growth, skills, or becoming better at something"
+        },
+        {
+          "text": "Earning rewards, promotions, or external achievements"
+        }
+      ]
+    },
+    {
+      "text": "If no one would ever know about your accomplishments, would you still pursue them?",
+      "options": [
+        {
+          "text": "Yes, because the journey and growth matter to me"
+        },
+        {
+          "text": "Probably not as much — recognition motivates me"
+        }
+      ]
+    },
+    {
+      "text": "When working in a team, you feel most motivated when:",
+      "options": [
+        {
+          "text": "I can contribute meaningfully and learn from others"
+        },
+        {
+          "text": "My contribution is noticed and appreciated publicly"
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about competitions?",
+      "options": [
+        {
+          "text": "I enjoy them for the challenge, regardless of winning"
+        },
+        {
+          "text": "I enjoy them mainly when I have a chance to win"
+        }
+      ]
+    },
+    {
+      "text": "Your ideal job would be one that:",
+      "options": [
+        {
+          "text": "Aligns with my passion, even if the pay is average"
+        },
+        {
+          "text": "Pays well and has great perks, even if it's not my passion"
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "poleAbove": 0,
+      "threshold": 65,
+      "label": "Primarily Intrinsically Motivated",
+      "text": "You are primarily Intrinsically Motivated! You are driven by internal satisfaction, curiosity, and the joy of learning itself. You find fulfillment in personal growth, mastery, and doing things because they genuinely interest you. This is a powerful trait — intrinsic motivation leads to deeper learning, greater creativity, and long-term persistence."
+    },
+    {
+      "poleAbove": 1,
+      "threshold": 65,
+      "label": "Primarily Extrinsically Motivated",
+      "text": "You are primarily Extrinsically Motivated! You are driven by external rewards such as grades, recognition, career advancement, and social approval. While this can be very effective for achieving tangible goals, consider nurturing your inner curiosity as well. Finding personal meaning in what you do can make the journey more enjoyable and sustainable."
+    },
+    {
+      "label": "Balanced Motivation",
+      "text": "You have a Balanced Motivation style! You are driven by both internal satisfaction and external rewards. This balance means you can enjoy the process of learning while also being motivated by tangible outcomes. This adaptability serves you well in different situations."
+    }
+  ],
+  "poles": [
+    "Intrinsic Motivation",
+    "Extrinsic Motivation"
+  ]
+}

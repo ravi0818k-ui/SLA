@@ -1,0 +1,628 @@
+{
+  "id": "topper-mindset",
+  "title": "Topper Mindset Assessment",
+  "resultsTitle": "Your Mindset Profile",
+  "optionType": "per-question-scored",
+  "scorer": "score-domains",
+  "widget": "ring-domains",
+  "questions": [
+    {
+      "text": "Do you believe intelligence is something you're born with or something you can develop?",
+      "domain": "Beliefs About Ability",
+      "options": [
+        {
+          "text": "You're either smart or you're not — can't really change it",
+          "score": 1
+        },
+        {
+          "text": "Some people are naturally smarter, but you can improve a little",
+          "score": 2
+        },
+        {
+          "text": "Intelligence can grow with effort, but there are limits",
+          "score": 3
+        },
+        {
+          "text": "Anyone can become significantly smarter with the right methods",
+          "score": 4
+        },
+        {
+          "text": "Intelligence is 100% buildable — your brain literally grows with practice",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When you see a topper, what's your first thought?",
+      "domain": "Beliefs About Ability",
+      "options": [
+        {
+          "text": "They're just naturally gifted — I could never be like them",
+          "score": 1
+        },
+        {
+          "text": "They probably have better resources or tuition than me",
+          "score": 2
+        },
+        {
+          "text": "They work hard, but they also have some natural advantage",
+          "score": 3
+        },
+        {
+          "text": "They've figured out better strategies — I can learn those too",
+          "score": 4
+        },
+        {
+          "text": "They simply put in more deliberate effort — I can do the same if I commit",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you feel when a subject is very difficult for you?",
+      "domain": "Beliefs About Ability",
+      "options": [
+        {
+          "text": "This subject isn't for me — I'm just not built for it",
+          "score": 1
+        },
+        {
+          "text": "I'll try, but I don't expect to do well",
+          "score": 2
+        },
+        {
+          "text": "It's hard but I'll manage somehow",
+          "score": 3
+        },
+        {
+          "text": "Difficulty means I need to change my approach, not give up",
+          "score": 4
+        },
+        {
+          "text": "The harder it is, the more my brain is growing — I welcome the struggle",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When you score poorly on a test, you think:",
+      "domain": "Response to Failure",
+      "options": [
+        {
+          "text": "I'm stupid — this proves I'm not good enough",
+          "score": 1
+        },
+        {
+          "text": "Bad luck — the paper was too hard this time",
+          "score": 2
+        },
+        {
+          "text": "I'll try to do better next time",
+          "score": 3
+        },
+        {
+          "text": "Let me analyze exactly which concepts I got wrong and fix them",
+          "score": 4
+        },
+        {
+          "text": "This is valuable data — now I know my weak spots and can target them precisely",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "After failing at something, how long does it take you to try again?",
+      "domain": "Response to Failure",
+      "options": [
+        {
+          "text": "I usually give up and avoid that thing",
+          "score": 1
+        },
+        {
+          "text": "Weeks or months — I need time to recover emotionally",
+          "score": 2
+        },
+        {
+          "text": "A few days — once I stop feeling bad about it",
+          "score": 3
+        },
+        {
+          "text": "Within a day — I adjust my approach and try differently",
+          "score": 4
+        },
+        {
+          "text": "Immediately — failure is just feedback, I iterate right away",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you believe luck plays a big role in academic success?",
+      "domain": "Response to Failure",
+      "options": [
+        {
+          "text": "Yes — lucky people get easy papers, good teachers, and opportunities",
+          "score": 1
+        },
+        {
+          "text": "Luck matters a lot but effort matters too",
+          "score": 2
+        },
+        {
+          "text": "It's roughly 50-50 luck and effort",
+          "score": 3
+        },
+        {
+          "text": "Effort matters much more — you create your own luck through preparation",
+          "score": 4
+        },
+        {
+          "text": "Luck is what happens when preparation meets opportunity — I focus only on preparation",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about putting in effort when results aren't immediate?",
+      "domain": "Effort & Discipline",
+      "options": [
+        {
+          "text": "If I don't see results quickly, I lose motivation and stop",
+          "score": 1
+        },
+        {
+          "text": "I get frustrated and start questioning if it's worth it",
+          "score": 2
+        },
+        {
+          "text": "I can keep going for a while but eventually lose steam",
+          "score": 3
+        },
+        {
+          "text": "I trust the process — results are delayed but certain if I persist",
+          "score": 4
+        },
+        {
+          "text": "I focus on daily systems, not outcomes — the score takes care of itself",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "On a day when you feel zero motivation, you:",
+      "domain": "Effort & Discipline",
+      "options": [
+        {
+          "text": "Skip studying — you can't study without motivation",
+          "score": 1
+        },
+        {
+          "text": "Scroll your phone and promise to start tomorrow",
+          "score": 2
+        },
+        {
+          "text": "Try but usually give up after 10-15 minutes",
+          "score": 3
+        },
+        {
+          "text": "Use discipline — motivation is unreliable, habits are not",
+          "score": 4
+        },
+        {
+          "text": "Show up anyway and do even a reduced session — consistency beats intensity",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "What does 'hard work' mean to you?",
+      "domain": "Effort & Discipline",
+      "options": [
+        {
+          "text": "Sitting with books for long hours (even if distracted)",
+          "score": 1
+        },
+        {
+          "text": "Reading everything multiple times",
+          "score": 2
+        },
+        {
+          "text": "Spending more time on subjects I find difficult",
+          "score": 3
+        },
+        {
+          "text": "Working with focus, using proven strategies, and measuring progress",
+          "score": 4
+        },
+        {
+          "text": "Deliberate practice on weaknesses + smart strategy + consistent daily execution",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "What's your goal when you study?",
+      "domain": "Goals & Standards",
+      "options": [
+        {
+          "text": "Just pass the exam somehow",
+          "score": 1
+        },
+        {
+          "text": "Get decent marks — not fail, not top",
+          "score": 2
+        },
+        {
+          "text": "Score above average",
+          "score": 3
+        },
+        {
+          "text": "Score in the top 10% — I set high standards for myself",
+          "score": 4
+        },
+        {
+          "text": "Master the subject deeply — marks are a byproduct of real understanding",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When you achieve a goal, you:",
+      "domain": "Goals & Standards",
+      "options": [
+        {
+          "text": "Relax and take it easy for a long time",
+          "score": 1
+        },
+        {
+          "text": "Feel satisfied and coast for a while",
+          "score": 2
+        },
+        {
+          "text": "Celebrate briefly then continue as normal",
+          "score": 3
+        },
+        {
+          "text": "Celebrate, then immediately set a higher goal",
+          "score": 4
+        },
+        {
+          "text": "Appreciate the win but know there's always the next level — I never fully 'arrive'",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you compare yourself to others?",
+      "domain": "Goals & Standards",
+      "options": [
+        {
+          "text": "I compare and feel bad — others are always better",
+          "score": 1
+        },
+        {
+          "text": "I try not to compare but end up doing it negatively",
+          "score": 2
+        },
+        {
+          "text": "I compare sometimes but it doesn't affect me much",
+          "score": 3
+        },
+        {
+          "text": "I compare only to learn — what are they doing differently that I can adopt?",
+          "score": 4
+        },
+        {
+          "text": "My only competition is yesterday's version of myself",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When studying a topic, how deep do you go?",
+      "domain": "Learning Approach",
+      "options": [
+        {
+          "text": "Just enough to recognize the answer in MCQs",
+          "score": 1
+        },
+        {
+          "text": "I memorize the key points and definitions",
+          "score": 2
+        },
+        {
+          "text": "I understand the concept reasonably well",
+          "score": 3
+        },
+        {
+          "text": "I understand it deeply enough to explain it to someone else",
+          "score": 4
+        },
+        {
+          "text": "I understand it so well I could apply it to problems I've never seen before",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you seek feedback on your work?",
+      "domain": "Learning Approach",
+      "options": [
+        {
+          "text": "No — I avoid feedback because it feels like criticism",
+          "score": 1
+        },
+        {
+          "text": "Only when it's required (teacher corrections)",
+          "score": 2
+        },
+        {
+          "text": "Sometimes — from friends or when I'm unsure",
+          "score": 3
+        },
+        {
+          "text": "Regularly — I actively ask teachers and peers to point out my mistakes",
+          "score": 4
+        },
+        {
+          "text": "I chase feedback aggressively — every mistake found is a gift that prevents future failure",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about asking for help?",
+      "domain": "Learning Approach",
+      "options": [
+        {
+          "text": "It's embarrassing — it means I'm dumb",
+          "score": 1
+        },
+        {
+          "text": "I avoid it unless absolutely necessary",
+          "score": 2
+        },
+        {
+          "text": "I ask sometimes but feel uncomfortable",
+          "score": 3
+        },
+        {
+          "text": "I ask freely — getting help is smart, not weak",
+          "score": 4
+        },
+        {
+          "text": "I proactively seek mentors, peer groups, and resources — leverage is intelligence",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When your results are poor, who is responsible?",
+      "domain": "Ownership & Responsibility",
+      "options": [
+        {
+          "text": "The teacher — they didn't teach well",
+          "score": 1
+        },
+        {
+          "text": "The system — the exam was unfair",
+          "score": 2
+        },
+        {
+          "text": "Partly me, partly circumstances",
+          "score": 3
+        },
+        {
+          "text": "Mostly me — I could have prepared better regardless of circumstances",
+          "score": 4
+        },
+        {
+          "text": "100% me — I own my results completely. External factors exist but I choose my response",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you believe you control your academic destiny?",
+      "domain": "Ownership & Responsibility",
+      "options": [
+        {
+          "text": "No — too many things are out of my control",
+          "score": 1
+        },
+        {
+          "text": "Partially — but the system is stacked against people like me",
+          "score": 2
+        },
+        {
+          "text": "Somewhat — I can influence it but not fully control it",
+          "score": 3
+        },
+        {
+          "text": "Mostly yes — my daily choices determine my outcomes",
+          "score": 4
+        },
+        {
+          "text": "Absolutely — I am the architect of my results. Period.",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "When things go wrong (bad health, family issues, distractions), you:",
+      "domain": "Ownership & Responsibility",
+      "options": [
+        {
+          "text": "Use it as a reason to give up or lower expectations",
+          "score": 1
+        },
+        {
+          "text": "Feel helpless and wait for things to get better",
+          "score": 2
+        },
+        {
+          "text": "Adjust my expectations and do what I can",
+          "score": 3
+        },
+        {
+          "text": "Acknowledge the challenge but find a way to keep moving forward",
+          "score": 4
+        },
+        {
+          "text": "Adapt immediately — obstacles are part of the game, not exceptions to it",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How far ahead do you plan your academic journey?",
+      "domain": "Long-term Vision",
+      "options": [
+        {
+          "text": "I don't plan — I deal with whatever comes",
+          "score": 1
+        },
+        {
+          "text": "A few days or weeks before exams",
+          "score": 2
+        },
+        {
+          "text": "One semester at a time",
+          "score": 3
+        },
+        {
+          "text": "1-2 years ahead with clear milestones",
+          "score": 4
+        },
+        {
+          "text": "I have a 5+ year vision and reverse-engineer my daily actions from it",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "What drives you to study?",
+      "domain": "Long-term Vision",
+      "options": [
+        {
+          "text": "Parental pressure or fear of punishment",
+          "score": 1
+        },
+        {
+          "text": "Not wanting to fail or be embarrassed",
+          "score": 2
+        },
+        {
+          "text": "Getting a decent job and stable life",
+          "score": 3
+        },
+        {
+          "text": "Achieving something meaningful and proving what I'm capable of",
+          "score": 4
+        },
+        {
+          "text": "A deep personal mission — I want to master my field and make an impact",
+          "score": 5
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "min": 80,
+      "label": "🏆 Topper Mindset",
+      "color": "#34A853",
+      "text": "You think like a topper. You believe in growth, own your results, embrace failure as feedback, and set audacious standards. Keep this mindset and combine it with smart strategy — results will follow inevitably."
+    },
+    {
+      "min": 60,
+      "label": "📈 Growth Mindset (Almost There)",
+      "color": "#1E5EFF",
+      "text": "You're close to a topper mindset but some limiting beliefs are still holding you back. Look at the domains marked orange/red below — fixing even ONE of those areas could dramatically shift your trajectory."
+    },
+    {
+      "min": 40,
+      "label": "😐 Average/Comfort Zone Mindset",
+      "color": "#FF6B00",
+      "text": "You're stuck in an average comfort zone. Not because you lack ability, but because your beliefs, standards, and responses keep you playing safe. The difference between you and a topper isn't talent — it's these exact mindset patterns. The good news: they're all changeable."
+    },
+    {
+      "min": 0,
+      "label": "⚠️ Fixed/Mediocre Mindset",
+      "color": "#E53935",
+      "text": "Your current mindset is keeping you trapped in mediocrity. You believe ability is fixed, avoid failure, rely on motivation, and blame circumstances. None of these are character flaws — they're LEARNED patterns that can be UNLEARNED. Start with one domain below and commit to changing it for 30 days."
+    }
+  ],
+  "domainBands": [
+    {
+      "min": 75,
+      "key": "topper"
+    },
+    {
+      "min": 50,
+      "key": "average"
+    },
+    {
+      "min": 0,
+      "key": "mediocre"
+    }
+  ],
+  "domains": {
+    "Beliefs About Ability": {
+      "emoji": "🧠",
+      "color": "#6A3DE8",
+      "mediocre": "You believe talent is fixed. This single belief limits everything else — if you think you can't grow, you won't try hard enough. The truth: your brain physically changes with practice.",
+      "average": "You partially believe in growth but still doubt your potential. Start tracking your progress weekly to build evidence that YOU can improve.",
+      "topper": "You fully embrace the growth mindset. You know ability is built, not born. This belief alone gives you an unfair advantage.",
+      "fix": "Read about neuroplasticity. Your brain literally grows new connections every time you practice. Intelligence is a muscle, not a gift."
+    },
+    "Response to Failure": {
+      "emoji": "💥",
+      "color": "#E53935",
+      "mediocre": "You see failure as proof you're not good enough. This makes you avoid challenges and give up early. Toppers see failure as data — nothing more.",
+      "average": "You recover from failure but slowly. Shortening your recovery time from days to hours is what separates good from great.",
+      "topper": "You treat failure as fuel. Every setback gives you precise information about what to fix. You iterate rapidly.",
+      "fix": "After every setback, write: 'What specifically went wrong? What will I do differently?' Then act within 24 hours."
+    },
+    "Effort & Discipline": {
+      "emoji": "⚡",
+      "color": "#FF6B00",
+      "mediocre": "You rely on motivation and do long unfocused hours. Toppers rely on systems and do short, intense, deliberate sessions every single day.",
+      "average": "You put in effort but inconsistently. The gap between you and a topper isn't talent — it's showing up on the days you don't feel like it.",
+      "topper": "You've built discipline as a habit. You don't wait to 'feel like it' — you execute regardless. This is your superpower.",
+      "fix": "Build a non-negotiable daily minimum (even 45 min). Track your streak. Never break the chain — consistency compounds."
+    },
+    "Goals & Standards": {
+      "emoji": "🎯",
+      "color": "#1E5EFF",
+      "mediocre": "Your standards are low — 'just pass' or 'above average'. You'll always perform to the level of your expectations. Raise the bar.",
+      "average": "You aim reasonably high but don't push beyond comfort. Toppers set standards that make them uncomfortable — that's where growth lives.",
+      "topper": "You set audacious goals and hold yourself to high standards. You compete with your potential, not your peers.",
+      "fix": "Write your goal as: 'Top 5% in [subject]'. Then ask: What would someone at that level do daily? Do that."
+    },
+    "Learning Approach": {
+      "emoji": "📖",
+      "color": "#34A853",
+      "mediocre": "You study to recognize answers, not to understand deeply. This creates fragile knowledge that collapses under exam pressure.",
+      "average": "You understand concepts but don't push to mastery. Toppers study until they can teach it, apply it to unseen problems, and explain WHY it works.",
+      "topper": "You pursue deep understanding and actively seek feedback. Your learning is active, strategic, and efficient.",
+      "fix": "For every topic, pass the 'teach test': Can you explain it simply to a 10-year-old? If not, you don't truly understand it yet."
+    },
+    "Ownership & Responsibility": {
+      "emoji": "👑",
+      "color": "#0B2A5B",
+      "mediocre": "You blame external factors for poor results. As long as you do this, you give away your power to change. Take it back.",
+      "average": "You take partial responsibility but still make excuses sometimes. Full ownership is the bridge between average and excellent.",
+      "topper": "You own your results completely. You don't waste energy on blame — you invest it in solutions. This is true maturity.",
+      "fix": "Repeat: 'I am 100% responsible for my results. Circumstances explain, they never excuse.' Act from this belief daily."
+    },
+    "Long-term Vision": {
+      "emoji": "🔭",
+      "color": "#34A853",
+      "mediocre": "You have no clear direction — just reacting to deadlines and pressure. Without a vision, every day feels pointless. Create one.",
+      "average": "You have some goals but they're vague or short-term. A clear long-term vision turns daily tasks from chores into stepping stones.",
+      "topper": "You have a compelling long-term vision and reverse-engineer your daily actions from it. Every hour of study connects to a larger purpose.",
+      "fix": "Write: 'In 5 years, I want to ___.' Then: 'In 1 year, I need to ___.' Then: 'This month, I must ___.' Then: 'Today, I will ___.'"
+    }
+  }
+}

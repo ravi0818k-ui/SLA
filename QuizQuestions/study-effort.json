@@ -1,0 +1,607 @@
+{
+  "id": "study-effort",
+  "title": "Study Effort & Habits Assessment",
+  "resultsTitle": "Your Study Effort",
+  "optionType": "per-question-scored",
+  "scorer": "score-domains",
+  "widget": "ring-domains",
+  "questions": [
+    {
+      "text": "How many hours do you study on a typical day (outside of class)?",
+      "domain": "Time & Consistency",
+      "options": [
+        {
+          "text": "Less than 30 minutes",
+          "score": 1
+        },
+        {
+          "text": "30 minutes to 1 hour",
+          "score": 2
+        },
+        {
+          "text": "1 to 2 hours",
+          "score": 3
+        },
+        {
+          "text": "2 to 4 hours",
+          "score": 4
+        },
+        {
+          "text": "More than 4 hours (focused)",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you follow a fixed study schedule or timetable?",
+      "domain": "Time & Consistency",
+      "options": [
+        {
+          "text": "No, I study randomly whenever I feel like it",
+          "score": 1
+        },
+        {
+          "text": "I try but rarely follow it",
+          "score": 2
+        },
+        {
+          "text": "I follow it sometimes",
+          "score": 3
+        },
+        {
+          "text": "I mostly stick to my schedule",
+          "score": 4
+        },
+        {
+          "text": "Yes, I follow a consistent routine daily",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How often do you study without getting distracted by your phone or social media?",
+      "domain": "Time & Consistency",
+      "options": [
+        {
+          "text": "I can't study without checking my phone every few minutes",
+          "score": 1
+        },
+        {
+          "text": "I get distracted often (every 10-15 min)",
+          "score": 2
+        },
+        {
+          "text": "I manage to focus for about 30 minutes at a stretch",
+          "score": 3
+        },
+        {
+          "text": "I can focus for 45-60 minutes before taking a break",
+          "score": 4
+        },
+        {
+          "text": "I keep my phone away and study with full focus",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you study consistently throughout the semester or only before exams?",
+      "domain": "Time & Consistency",
+      "options": [
+        {
+          "text": "Only 1-2 days before the exam",
+          "score": 1
+        },
+        {
+          "text": "Only in the last week before exams",
+          "score": 2
+        },
+        {
+          "text": "I study more near exams but do some regular work",
+          "score": 3
+        },
+        {
+          "text": "I study regularly and increase before exams",
+          "score": 4
+        },
+        {
+          "text": "I study consistently every day regardless of exams",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you make notes while studying?",
+      "domain": "Techniques & Methods",
+      "options": [
+        {
+          "text": "Never — I just read the textbook or slides",
+          "score": 1
+        },
+        {
+          "text": "Rarely — only for very important topics",
+          "score": 2
+        },
+        {
+          "text": "Sometimes — for subjects I find difficult",
+          "score": 3
+        },
+        {
+          "text": "Often — for most subjects",
+          "score": 4
+        },
+        {
+          "text": "Always — I make detailed notes for everything",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "To remember a concept, what do you typically do?",
+      "domain": "Techniques & Methods",
+      "options": [
+        {
+          "text": "Just read it once and hope I remember",
+          "score": 1
+        },
+        {
+          "text": "Repeat/re-read it multiple times",
+          "score": 2
+        },
+        {
+          "text": "Highlight or underline key points",
+          "score": 3
+        },
+        {
+          "text": "Create mind maps, stories, or visual associations",
+          "score": 4
+        },
+        {
+          "text": "Teach it to someone else or use active recall techniques",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you use any specific memory techniques (mnemonics, memory palace, chunking)?",
+      "domain": "Techniques & Methods",
+      "options": [
+        {
+          "text": "I don't know any memory techniques",
+          "score": 1
+        },
+        {
+          "text": "I've heard of them but don't use them",
+          "score": 2
+        },
+        {
+          "text": "I use them occasionally",
+          "score": 3
+        },
+        {
+          "text": "I use them regularly for difficult topics",
+          "score": 4
+        },
+        {
+          "text": "I actively use multiple techniques and they work well for me",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you approach a difficult topic that you don't understand?",
+      "domain": "Techniques & Methods",
+      "options": [
+        {
+          "text": "I skip it and hope it won't come in the exam",
+          "score": 1
+        },
+        {
+          "text": "I read it again the same way hoping it clicks",
+          "score": 2
+        },
+        {
+          "text": "I search YouTube or Google for explanations",
+          "score": 3
+        },
+        {
+          "text": "I try multiple sources and ask classmates or teachers",
+          "score": 4
+        },
+        {
+          "text": "I break it down, seek help, and don't move on until I understand",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How often do you revise what you've already studied?",
+      "domain": "Revision & Retention",
+      "options": [
+        {
+          "text": "Never — once I finish a topic, I move on",
+          "score": 1
+        },
+        {
+          "text": "Only before exams",
+          "score": 2
+        },
+        {
+          "text": "Once a week for important topics",
+          "score": 3
+        },
+        {
+          "text": "Every few days using spaced repetition",
+          "score": 4
+        },
+        {
+          "text": "I have a systematic revision schedule (daily/weekly review)",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Before an exam, how many times do you revise the full syllabus?",
+      "domain": "Revision & Retention",
+      "options": [
+        {
+          "text": "I don't finish even one full revision",
+          "score": 1
+        },
+        {
+          "text": "One time, barely",
+          "score": 2
+        },
+        {
+          "text": "2 times",
+          "score": 3
+        },
+        {
+          "text": "3 times",
+          "score": 4
+        },
+        {
+          "text": "4 or more complete revisions",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How often do you review your notes after making them?",
+      "domain": "Revision & Retention",
+      "options": [
+        {
+          "text": "Never — I make them and forget about them",
+          "score": 1
+        },
+        {
+          "text": "Only when exams approach",
+          "score": 2
+        },
+        {
+          "text": "Once every few weeks",
+          "score": 3
+        },
+        {
+          "text": "Weekly",
+          "score": 4
+        },
+        {
+          "text": "Within 24 hours and then at regular intervals",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you test yourself (self-quiz) on what you've studied?",
+      "domain": "Revision & Retention",
+      "options": [
+        {
+          "text": "Never",
+          "score": 1
+        },
+        {
+          "text": "Rarely — only with sample papers before exams",
+          "score": 2
+        },
+        {
+          "text": "Sometimes — I try to recall key points",
+          "score": 3
+        },
+        {
+          "text": "Often — I use flashcards or practice questions",
+          "score": 4
+        },
+        {
+          "text": "Regularly — active recall is my primary study method",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "During exams, do you blank out or forget things you studied?",
+      "domain": "Exam Performance",
+      "options": [
+        {
+          "text": "Very often — I freeze and forget almost everything",
+          "score": 1
+        },
+        {
+          "text": "Often — I remember only bits and pieces",
+          "score": 2
+        },
+        {
+          "text": "Sometimes — especially for topics I crammed",
+          "score": 3
+        },
+        {
+          "text": "Rarely — I usually recall most of what I studied",
+          "score": 4
+        },
+        {
+          "text": "Almost never — I feel confident and remember well",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about time management during exams?",
+      "domain": "Exam Performance",
+      "options": [
+        {
+          "text": "I always run out of time and leave questions incomplete",
+          "score": 1
+        },
+        {
+          "text": "I often rush through the last few questions",
+          "score": 2
+        },
+        {
+          "text": "I manage time okay but feel pressured",
+          "score": 3
+        },
+        {
+          "text": "I manage time well with some buffer at the end",
+          "score": 4
+        },
+        {
+          "text": "I have a clear strategy and finish with time to review",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you practice previous year papers or mock tests?",
+      "domain": "Exam Performance",
+      "options": [
+        {
+          "text": "Never",
+          "score": 1
+        },
+        {
+          "text": "Only 1-2 days before the exam",
+          "score": 2
+        },
+        {
+          "text": "A few papers before each exam",
+          "score": 3
+        },
+        {
+          "text": "Regularly throughout my preparation",
+          "score": 4
+        },
+        {
+          "text": "Yes, timed practice is a core part of my study plan",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "After an exam, do you analyze your mistakes?",
+      "domain": "Exam Performance",
+      "options": [
+        {
+          "text": "No, I just check if I passed and move on",
+          "score": 1
+        },
+        {
+          "text": "I glance at wrong answers but don't study them",
+          "score": 2
+        },
+        {
+          "text": "I check mistakes for major topics",
+          "score": 3
+        },
+        {
+          "text": "I review all mistakes and understand why I got them wrong",
+          "score": 4
+        },
+        {
+          "text": "I maintain an error log and ensure I never repeat the same mistakes",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you set clear study goals before each session?",
+      "domain": "Planning & Mindset",
+      "options": [
+        {
+          "text": "No, I just open the book and see what happens",
+          "score": 1
+        },
+        {
+          "text": "I have a vague idea of what to cover",
+          "score": 2
+        },
+        {
+          "text": "I usually decide topics but not specific targets",
+          "score": 3
+        },
+        {
+          "text": "I set clear goals like 'finish chapter 5 and solve 10 problems'",
+          "score": 4
+        },
+        {
+          "text": "I plan specific goals, track progress, and adjust daily",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you handle procrastination?",
+      "domain": "Planning & Mindset",
+      "options": [
+        {
+          "text": "I procrastinate almost every day and feel stuck",
+          "score": 1
+        },
+        {
+          "text": "I delay often and feel guilty about it",
+          "score": 2
+        },
+        {
+          "text": "I procrastinate sometimes but manage to catch up",
+          "score": 3
+        },
+        {
+          "text": "I use techniques (timers, small tasks) to beat it most days",
+          "score": 4
+        },
+        {
+          "text": "I rarely procrastinate — I've built discipline as a habit",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "Do you believe your study effort is truly your best?",
+      "domain": "Planning & Mindset",
+      "options": [
+        {
+          "text": "No — I know I'm giving barely 20% of what I could",
+          "score": 1
+        },
+        {
+          "text": "Maybe 40% — I could do much more",
+          "score": 2
+        },
+        {
+          "text": "About 60% — decent but not my best",
+          "score": 3
+        },
+        {
+          "text": "Around 80% — I'm working hard with some room to grow",
+          "score": 4
+        },
+        {
+          "text": "Yes — I'm giving 90-100% of my honest best effort",
+          "score": 5
+        }
+      ]
+    },
+    {
+      "text": "How do you feel about your overall study approach?",
+      "domain": "Planning & Mindset",
+      "options": [
+        {
+          "text": "Lost — I don't know how to study effectively",
+          "score": 1
+        },
+        {
+          "text": "Confused — I try things but nothing seems to work",
+          "score": 2
+        },
+        {
+          "text": "Okay — I have basic methods that partially work",
+          "score": 3
+        },
+        {
+          "text": "Good — I have a solid system that works for most subjects",
+          "score": 4
+        },
+        {
+          "text": "Excellent — I have a proven system and keep optimizing it",
+          "score": 5
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "min": 80,
+      "label": "Excellent — High Effort Student",
+      "color": "#34A853",
+      "text": "You're putting in serious effort with smart strategies. Your consistency, active techniques, and exam preparation are at a high level. Keep optimizing — you're on the path to mastery."
+    },
+    {
+      "min": 60,
+      "label": "Good — Solid Effort with Room to Grow",
+      "color": "#1E5EFF",
+      "text": "You have good habits forming but there are clear gaps. Look at your weakest domain below — even small improvements there will significantly boost your results. You're closer to excellence than you think."
+    },
+    {
+      "min": 40,
+      "label": "Average — Needs Improvement",
+      "color": "#FF6B00",
+      "text": "Your effort level is average. You likely know you could do better. The gap between where you are and where you want to be is closable — but it requires changing specific habits, not just 'trying harder'. Focus on the domains marked red/orange below."
+    },
+    {
+      "min": 0,
+      "label": "Low — Significant Change Needed",
+      "color": "#E53935",
+      "text": "Your current study effort is significantly below what's needed for strong results. This isn't about intelligence — it's about habits and systems. Start with ONE change: set a specific 1-hour study block at the same time every day. Build from there."
+    }
+  ],
+  "domainBands": [
+    {
+      "min": 70,
+      "key": "high"
+    },
+    {
+      "min": 45,
+      "key": "moderate"
+    },
+    {
+      "min": 0,
+      "key": "low"
+    }
+  ],
+  "domains": {
+    "Time & Consistency": {
+      "emoji": "⏰",
+      "color": "#1E5EFF",
+      "low": "You're spending very little focused time on studies. Consistency is the foundation — even 1 focused hour daily is better than 5 scattered hours before exams.",
+      "moderate": "You're putting in some effort but it's inconsistent. Try building a small daily habit first (even 45 min focused) and grow from there.",
+      "high": "You're investing consistent time and showing discipline. You've built a solid routine — keep refining it."
+    },
+    "Techniques & Methods": {
+      "emoji": "🛠️",
+      "color": "#6A3DE8",
+      "low": "You're relying on passive methods (just reading). Active techniques like self-testing, mind maps, and teaching others are 3-5x more effective.",
+      "moderate": "You use some good techniques but haven't fully committed to active learning. Try replacing re-reading with recall practice for one week and notice the difference.",
+      "high": "You're using evidence-based study methods. Active recall, spaced repetition, and varied techniques give you a strong learning advantage."
+    },
+    "Revision & Retention": {
+      "emoji": "🔄",
+      "color": "#34A853",
+      "low": "Without revision, you forget 80% within a week. The forgetting curve is real. Even 10 minutes of daily review can transform your retention.",
+      "moderate": "You revise but not systematically. Try the 1-3-7-21 rule: revise after 1 day, 3 days, 7 days, and 21 days for permanent memory.",
+      "high": "Your revision system is strong. Regular review and spaced repetition mean you're actually retaining what you learn long-term."
+    },
+    "Exam Performance": {
+      "emoji": "📝",
+      "color": "#FF6B00",
+      "low": "Exam anxiety and blanking out usually means the material wasn't deeply encoded. More practice tests under timed conditions will build exam confidence.",
+      "moderate": "You perform okay but feel the pressure. Simulating exam conditions during study (timed, closed book) trains your brain for the real thing.",
+      "high": "You perform well under exam pressure. Your preparation strategies — practice papers, time management, and error analysis — are paying off."
+    },
+    "Planning & Mindset": {
+      "emoji": "🎯",
+      "color": "#0B2A5B",
+      "low": "Without clear goals and self-belief, effort feels directionless. Start by asking 'What exactly will I accomplish in the next hour?' before every session.",
+      "moderate": "You have some structure but procrastination and self-doubt still hold you back. Small wins build momentum — celebrate tiny progress daily.",
+      "high": "You have strong planning skills and self-awareness. You know your effort level and continuously work to improve. This mindset is your biggest asset."
+    }
+  }
+}

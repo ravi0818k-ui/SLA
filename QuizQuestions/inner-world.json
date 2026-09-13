@@ -1,0 +1,166 @@
+{
+  "id": "inner-world",
+  "title": "Inner World Assessment",
+  "resultsTitle": "Your Inner World",
+  "optionType": "shared-likert",
+  "scorer": "likert-domains",
+  "widget": "ring-domains",
+  "questions": [
+    {
+      "text": "I feel tension or conflict at home that stays on my mind even when I'm studying",
+      "domain": "Family & Home"
+    },
+    {
+      "text": "I feel pressure from my family to perform or meet expectations I struggle with",
+      "domain": "Family & Home"
+    },
+    {
+      "text": "Problems at home make it hard for me to concentrate on anything else",
+      "domain": "Family & Home"
+    },
+    {
+      "text": "I worry about my family's financial situation or well-being",
+      "domain": "Family & Home"
+    },
+    {
+      "text": "I feel hurt, confused, or distracted because of a personal relationship",
+      "domain": "Relationships"
+    },
+    {
+      "text": "I feel lonely or disconnected from the people around me",
+      "domain": "Relationships"
+    },
+    {
+      "text": "I spend a lot of mental energy thinking about relationship problems",
+      "domain": "Relationships"
+    },
+    {
+      "text": "I feel like I can't talk to anyone about what's really bothering me",
+      "domain": "Relationships"
+    },
+    {
+      "text": "I compare myself to others and feel like I'm not good enough",
+      "domain": "Self-Worth"
+    },
+    {
+      "text": "I feel like I'm pretending to be okay when I'm actually struggling inside",
+      "domain": "Self-Worth"
+    },
+    {
+      "text": "I doubt my abilities and feel like I don't deserve success",
+      "domain": "Self-Worth"
+    },
+    {
+      "text": "I feel stuck — like I don't know who I am or what I really want",
+      "domain": "Self-Worth"
+    },
+    {
+      "text": "I feel overwhelmed by the amount of work or expectations placed on me",
+      "domain": "Academic Pressure"
+    },
+    {
+      "text": "I fear failure so much that it stops me from trying new things",
+      "domain": "Academic Pressure"
+    },
+    {
+      "text": "I feel like I'm falling behind and can't catch up no matter what I do",
+      "domain": "Academic Pressure"
+    },
+    {
+      "text": "I feel anxious about exams, deadlines, or my future career",
+      "domain": "Academic Pressure"
+    },
+    {
+      "text": "I carry thoughts that keep me awake at night or distract me during the day",
+      "domain": "Emotional Load"
+    },
+    {
+      "text": "I feel emotionally drained even without doing much physical work",
+      "domain": "Emotional Load"
+    },
+    {
+      "text": "I sometimes feel like crying or breaking down without a clear reason",
+      "domain": "Emotional Load"
+    },
+    {
+      "text": "I feel like my mind is always 'full' — there's no space for anything new",
+      "domain": "Emotional Load"
+    }
+  ],
+  "sharedOptions": [
+    "Not at all",
+    "Rarely",
+    "Sometimes",
+    "Often",
+    "Almost Always"
+  ],
+  "bands": [
+    {
+      "max": 30,
+      "label": "Light — Your Mind is Clear",
+      "color": "#34A853",
+      "text": "Your inner world feels relatively light right now. You have mental space available for learning, growth, and new experiences. Keep nurturing the habits that keep you balanced."
+    },
+    {
+      "max": 55,
+      "label": "Moderate — Some Weight on Your Mind",
+      "color": "#FF6B00"
+    },
+    {
+      "max": 100,
+      "label": "Heavy — You're Carrying a Lot",
+      "color": "#E53935"
+    }
+  ],
+  "domainBands": [
+    {
+      "max": 30,
+      "key": "low"
+    },
+    {
+      "max": 60,
+      "key": "moderate"
+    },
+    {
+      "max": 100,
+      "key": "high"
+    }
+  ],
+  "domains": {
+    "Family & Home": {
+      "emoji": "🏠",
+      "color": "#6A3DE8",
+      "low": "Your home environment feels stable and supportive. It's not weighing on your mind significantly.",
+      "moderate": "There are some tensions at home that occasionally distract you. It may help to talk to someone you trust.",
+      "high": "Family issues are heavily impacting your mental space. Consider seeking support from a counselor or mentor."
+    },
+    "Relationships": {
+      "emoji": "💔",
+      "color": "#E53935",
+      "low": "Your relationships feel healthy and are not causing you significant stress right now.",
+      "moderate": "Some relationship challenges are on your mind. Journaling or talking to a friend might help process these feelings.",
+      "high": "Relationship issues are consuming a lot of your mental energy. Reaching out to a trusted person or counselor can help."
+    },
+    "Self-Worth": {
+      "emoji": "🪞",
+      "color": "#FF6B00",
+      "low": "You have a generally positive sense of self. You feel confident in who you are.",
+      "moderate": "You sometimes struggle with self-doubt. Remember — growth is a process, not a destination.",
+      "high": "You're carrying a heavy burden of self-doubt. Please know that your worth is not defined by grades or others' opinions."
+    },
+    "Academic Pressure": {
+      "emoji": "📚",
+      "color": "#1E5EFF",
+      "low": "Academic demands feel manageable. You're in a good place to learn effectively.",
+      "moderate": "You feel some academic pressure building up. Breaking tasks into smaller steps can help reduce overwhelm.",
+      "high": "Academic stress is significantly impacting you. Consider talking to your teacher about workload, and prioritize self-care."
+    },
+    "Emotional Load": {
+      "emoji": "🧠",
+      "color": "#0B2A5B",
+      "low": "Your emotional state is light and manageable. You have mental space available for learning.",
+      "moderate": "You're carrying some emotional weight. Mindfulness, breaks, and creative expression can help lighten the load.",
+      "high": "Your emotional burden is heavy. This is not weakness — it's a signal to seek support. Talk to someone you trust."
+    }
+  }
+}

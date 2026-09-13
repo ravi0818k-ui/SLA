@@ -1,0 +1,271 @@
+{
+  "id": "vark",
+  "title": "VARK Learning Style Quiz",
+  "resultsTitle": "Congratulations",
+  "optionType": "per-question-text",
+  "scorer": "tally-vark",
+  "widget": "pie",
+  "questions": [
+    {
+      "text": "I lean towards ___ for getting the latest news/information",
+      "options": [
+        {
+          "text": "Youtube / Ted Talks"
+        },
+        {
+          "text": "Podcasts / Audiobooks"
+        },
+        {
+          "text": "Books / eBooks / Newspapers"
+        },
+        {
+          "text": "Social Gatherings"
+        }
+      ]
+    },
+    {
+      "text": "When I was studying, I remember things better when",
+      "options": [
+        {
+          "text": "Watching illustrations / illustrative videos that explain the concept"
+        },
+        {
+          "text": "Drew a mindmap to find the links between the concepts"
+        },
+        {
+          "text": "Reading / Writing / Highlighting the important point"
+        },
+        {
+          "text": "My friend explains the concepts to me"
+        }
+      ]
+    },
+    {
+      "text": "On social media, I prefer",
+      "options": [
+        {
+          "text": "Videos with story voice overs"
+        },
+        {
+          "text": "Posts"
+        },
+        {
+          "text": "Reels"
+        },
+        {
+          "text": "Puzzles / Challenges"
+        }
+      ]
+    },
+    {
+      "text": "At a book store, what kind of book would you reach for?",
+      "options": [
+        {
+          "text": "A book with lots of pictures"
+        },
+        {
+          "text": "A novel / work related book"
+        },
+        {
+          "text": "A book with word searches or crossword puzzles"
+        },
+        {
+          "text": "An audiobook"
+        }
+      ]
+    },
+    {
+      "text": "When you are not sure how to spell a word, what are you most likely to do?",
+      "options": [
+        {
+          "text": "Read what I have written to see if it looks right"
+        },
+        {
+          "text": "Write it down in my mind to see if it looks right"
+        },
+        {
+          "text": "Spell it out loud to see if it sounds right"
+        },
+        {
+          "text": "Trace the letters in the air (finger spelling)"
+        }
+      ]
+    },
+    {
+      "text": "When you see the word 'cat,' what do you do first?",
+      "options": [
+        {
+          "text": "Picture a cat in your mind"
+        },
+        {
+          "text": "Think about being with a cat (petting it or hearing it purr)"
+        },
+        {
+          "text": "Say the word 'cat' to yourself"
+        },
+        {
+          "text": "Just see the word as it is"
+        }
+      ]
+    },
+    {
+      "text": "If you were buying a new car, you would:",
+      "options": [
+        {
+          "text": "Discuss with your friends what kind of car you should get"
+        },
+        {
+          "text": "Read reviews about the car online or in magazines"
+        },
+        {
+          "text": "Look at the model / build of the car and get the one that looks the best"
+        },
+        {
+          "text": "Test-drive lots of different types of cars before you buy"
+        }
+      ]
+    },
+    {
+      "text": "What do you find most distracting when you are trying to study?",
+      "options": [
+        {
+          "text": "People walking past you"
+        },
+        {
+          "text": "A novel / storybook"
+        },
+        {
+          "text": "An uncomfortable chair"
+        },
+        {
+          "text": "Loud noises"
+        }
+      ]
+    },
+    {
+      "text": "What do you like to do to relax?",
+      "options": [
+        {
+          "text": "Watch a movie / a TV show"
+        },
+        {
+          "text": "Exercise (walk, run, play sports, etc.)"
+        },
+        {
+          "text": "Listen to music"
+        },
+        {
+          "text": "Read"
+        }
+      ]
+    },
+    {
+      "text": "What is the best way for you to remember something (e.g., a phone number)?",
+      "options": [
+        {
+          "text": "Write it down or store it in your phone"
+        },
+        {
+          "text": "Say it out loud over and over"
+        },
+        {
+          "text": "Picture the numbers on the phone as you would dial them"
+        },
+        {
+          "text": "Practice dialing it"
+        }
+      ]
+    },
+    {
+      "text": "When you need directions for travelling, you prefer to:",
+      "options": [
+        {
+          "text": "Ask for spoken directions"
+        },
+        {
+          "text": "Read a map and follow it"
+        },
+        {
+          "text": "Trust your instincts and follow your nose"
+        },
+        {
+          "text": "Follow the sign boards"
+        }
+      ]
+    },
+    {
+      "text": "If you were learning how to use a new piece of technology, you would:",
+      "options": [
+        {
+          "text": "Watch a video about it"
+        },
+        {
+          "text": "Have a go and try to figure it out for yourself"
+        },
+        {
+          "text": "Listen to someone explain how to use it"
+        },
+        {
+          "text": "Read the instructions"
+        }
+      ]
+    },
+    {
+      "text": "When I want to learn about a new project, I would ask for:",
+      "options": [
+        {
+          "text": "Examples where the project has been used successfully"
+        },
+        {
+          "text": "Diagrams to show the project stages with charts, benefits, and costs"
+        },
+        {
+          "text": "A written report describing the main features of the project"
+        },
+        {
+          "text": "An opportunity to discuss the project"
+        }
+      ]
+    },
+    {
+      "text": "I prefer a presenter or a teacher who uses:",
+      "options": [
+        {
+          "text": "Handouts, books, or readings"
+        },
+        {
+          "text": "Question and answer, talk, group discussion, or guest speakers"
+        },
+        {
+          "text": "Demonstrations, models or practical sessions"
+        },
+        {
+          "text": "Diagrams, charts, maps or graphs"
+        }
+      ]
+    },
+    {
+      "text": "When learning from the internet, I like:",
+      "options": [
+        {
+          "text": "Audio channels where I can listen to podcasts or interviews"
+        },
+        {
+          "text": "Interesting written descriptions, lists, and explanations"
+        },
+        {
+          "text": "Videos showing how to do or make things"
+        },
+        {
+          "text": "Interesting design and visual features"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "Visual",
+    "Auditory",
+    "Reading/Writing",
+    "Kinesthetic"
+  ]
+}

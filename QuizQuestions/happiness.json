@@ -1,0 +1,97 @@
+{
+  "id": "happiness",
+  "title": "Happiness & Well-being Quiz",
+  "resultsTitle": "Your Results",
+  "optionType": "shared-likert",
+  "scorer": "likert-total",
+  "widget": "ring",
+  "questions": [
+    {
+      "text": "I feel that life is very rewarding"
+    },
+    {
+      "text": "I feel energetic and enthusiastic most of the time"
+    },
+    {
+      "text": "I am satisfied with the way my life is going"
+    },
+    {
+      "text": "I feel I have a great deal of energy"
+    },
+    {
+      "text": "I find it easy to make decisions"
+    },
+    {
+      "text": "I feel fully mentally alert"
+    },
+    {
+      "text": "I often experience joy and happiness"
+    },
+    {
+      "text": "I feel I am in control of my life"
+    },
+    {
+      "text": "I feel optimistic about the future"
+    },
+    {
+      "text": "I find beauty in many things around me"
+    },
+    {
+      "text": "I have a sense of purpose and meaning in my life"
+    },
+    {
+      "text": "I am able to handle stress effectively"
+    },
+    {
+      "text": "I feel connected to the people around me"
+    },
+    {
+      "text": "I laugh and smile often"
+    },
+    {
+      "text": "I wake up feeling refreshed and ready for the day"
+    },
+    {
+      "text": "I feel confident about my abilities"
+    },
+    {
+      "text": "I enjoy my daily activities"
+    },
+    {
+      "text": "I feel grateful for what I have in life"
+    },
+    {
+      "text": "I feel calm and peaceful most of the time"
+    },
+    {
+      "text": "I believe I can achieve my goals"
+    }
+  ],
+  "sharedOptions": [
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"
+  ],
+  "bands": [
+    {
+      "min": 75,
+      "label": "High Well-being",
+      "color": "#34A853",
+      "text": "Great news! You have a high level of happiness and well-being. You feel energetic, optimistic, and in control of your life. This positive mental state is excellent for learning — you're in a great position to absorb new knowledge and take on challenges. Keep doing what makes you feel good!"
+    },
+    {
+      "min": 50,
+      "label": "Moderate Well-being",
+      "color": "#FF6B00",
+      "text": "You have a moderate level of happiness and well-being. While you're doing reasonably well overall, there may be areas where stress or dissatisfaction is creeping in. Consider incorporating more activities that bring you joy, practicing mindfulness, or connecting with friends. A balanced emotional state supports better learning outcomes."
+    },
+    {
+      "min": 0,
+      "label": "Needs Attention",
+      "color": "#E53935",
+      "text": "Your results suggest you may be experiencing stress or low well-being. This is important to address because stress significantly impacts your ability to learn, concentrate, and retain information. Consider talking to someone you trust, practicing self-care, getting regular exercise, and ensuring adequate sleep. Remember: taking care of your mental health is not a luxury — it's essential for effective learning."
+    }
+  ]
+}
