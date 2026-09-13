@@ -29,6 +29,12 @@
         "link": "https://chat.whatsapp.com/JBS46Qt3Qs34Gc35YyxPX2",
         "buttonText": "Join WhatsApp Group"
     },
+    "contact": {
+        "email": "support@superlearneracademy.in",
+        "emailHref": "mailto:support@superlearneracademy.in",
+        "instagram": "https://www.instagram.com/superlearneracademy",
+        "instagramHandle": "@superlearneracademy"
+    },
     "analytics": {
         "gtmId": "",
         "fbPixel": ""

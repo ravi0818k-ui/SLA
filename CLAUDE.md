@@ -197,6 +197,34 @@ scoring rules that were embedded in each `*Results.jsx`. That generator depended
 source and is **not** reproducible now that `quiz-assessment-app` is gone - the JSON files are the
 source of truth from here on. Edit them directly.
 
+## Shared site chrome (`site-nav.css` / `site-nav.js`) and `about.html`
+
+Added for Google's Search Quality Rater / E-E-A-T signals: a reader (or a human rater)
+must be able to tell who runs the site and how to contact them from any page.
+
+- **`site-nav.css` + `site-nav.js`** are deliberately standalone — they must not depend on
+  `style.css` or `quiz.css`, because those two never load on the same page. `site-nav.js` only
+  wires up open/close (plus Escape, backdrop click and a tab loop); the panel markup is **static
+  HTML duplicated in each page**, so the About/Contact/Tools links exist with JS disabled.
+- Present on `index.html`, `about.html`, `quiz.html`, `thank-you.html` and
+  `generatenotes/index.html`. The copy in `generatenotes/` uses `../` hrefs — if you edit the nav
+  or footer, edit **all five**.
+- Nav z-indexes are 9993–9995 on purpose: **below** `index.html`'s `.top-bar` (9999), the quiz's
+  `.quiz-dialog` (9999) and `#protection-popup`, and **above** the landing page's `.sticky-cta`
+  (9990). `.top-bar ~ .site-nav .site-nav-toggle` drops the button to `top: 58px` on pages that
+  have the urgency banner, so don't move the nav out of its sibling position after `.top-bar`.
+- **`about.html`** is the E-E-A-T page: who runs the site, the founder's background, an explicit
+  "what we will not claim" list (it restates the no-pseudo-science / no-invented-numbers rules
+  above), what the free tools do with your data, refund terms, and contact. It carries an
+  `AboutPage` + `Organization` JSON-LD block; `index.html` carries a matching `Organization` one.
+  **If the prose and the JSON-LD ever disagree, that's the bug** — keep them in sync.
+- Contact details live in `data.json` under `contact` (`email`, `emailHref`, `instagram`,
+  `instagramHandle`) and are bound into the footer on the two pages that load `script.js`. The
+  static text in the HTML is the real fallback everywhere else, so it must stay correct.
+- The notes generator (`generatenotes/index.html`) still carries `<meta name="robots" content="noindex">`
+  from before it was linked in the nav. Deliberately left alone — flip it only if you actually want
+  that tool indexed.
+
 ## Content notes
 
 - `quotes.json` feeds a rotating quote slider (`showQuote`/`nextQuote` in `script.js`); it's independent of `data.json`.
