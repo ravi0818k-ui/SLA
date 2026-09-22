@@ -64,6 +64,16 @@
             if (e.key === 'Escape' && isOpen()) close(true);
         });
 
+        // Some pages hide the whole menu below a breakpoint (see site-nav.css).
+        // If the viewport crosses that breakpoint while the panel is open —
+        // rotating a tablet to portrait, for instance — the panel vanishes but
+        // open() has already locked body scroll, which would trap the reader on
+        // an unscrollable page. offsetParent is null once a CSS ancestor is
+        // display:none, so use that to detect it and close properly.
+        window.addEventListener('resize', function () {
+            if (isOpen() && toggle.offsetParent === null) close(false);
+        });
+
         // Keep tabbing inside the panel while it is open.
         panel.addEventListener('keydown', function (e) {
             if (e.key !== 'Tab') return;

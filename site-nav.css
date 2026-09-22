@@ -308,6 +308,20 @@
     padding-bottom: 96px;
 }
 
+/* --- Landing page: no hamburger on mobile ------------------------- */
+/* On phones the toggle lands right on top of the hero offer block and gives
+   the reader an exit route out of the funnel. The landing page is the only
+   page with the urgency .top-bar, so this selector scopes the hide to it —
+   about / quiz / resources / thank-you / generatenotes keep their menu,
+   because there it is the only navigation they have. Everything in the
+   panel (Home, About, FAQ, Coach, the free tools, contact) is also in the
+   site footer, so nothing becomes unreachable. */
+@media (max-width: 768px) {
+    .top-bar ~ .site-nav {
+        display: none;
+    }
+}
+
 @media (max-width: 576px) {
     .site-footer-inner {
         gap: 22px;
