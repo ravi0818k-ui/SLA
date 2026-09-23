@@ -1282,6 +1282,69 @@ input, textarea, [contenteditable="true"] {
 .domain-note { font-size: 13px; color: #555; line-height: 1.7; margin: 8px 0 0; }
 .domain-reframe { font-size: 13px; color: #333; line-height: 1.7; margin: 6px 0 0; background: #f6f8fc; padding: 10px 12px; border-radius: 8px; }
 
+/* ---------- Exhaustion check: dominant-pattern action plan ----------
+   Used only by the `dominant-domain` widget. The plan is the answer on that
+   card, so it gets a tinted panel keyed to the domain's own colour
+   (--plan-color, set inline per block) while the four domain bars below stay
+   in the standard .domain-* styling. */
+
+.plan-block {
+  text-align: left;
+  background: #f8fafd;
+  border: 1px solid #e6ebf4;
+  border-left: 4px solid var(--plan-color, #1E5EFF);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 14px 0 0;
+}
+
+.plan-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.plan-emoji { font-size: 18px; }
+.plan-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--plan-color, var(--deep-learning-blue));
+  flex: 1;
+}
+.plan-score { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: #777; white-space: nowrap; }
+
+.plan-lead { font-size: 14px; line-height: 1.7; color: #333; margin: 0; }
+
+.plan-sequence {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--plan-color, var(--deep-learning-blue));
+  background: #fff;
+  border: 1px dashed #d8e0ee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0 0;
+}
+
+.plan-do { margin: 12px 0 0 18px; color: #444; font-size: 14px; line-height: 1.8; }
+.plan-avoid { font-size: 13px; line-height: 1.7; color: #555; margin: 12px 0 0; }
+.plan-rule {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--deep-learning-blue);
+  margin: 12px 0 0;
+}
+
+.result-disclaimer {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #8a8a8a;
+  text-align: left;
+  margin: 22px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #eef1f6;
+}
+
 /* ---------- About ---------- */
 
 .about-group { text-align: left; margin-top: 28px; }

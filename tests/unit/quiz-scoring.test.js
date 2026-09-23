@@ -56,8 +56,8 @@ describe('quiz catalogue', () => {
         expect(allIds.slice().sort()).toEqual(files.slice().sort());
     });
 
-    it('declares 18 quizzes', () => {
-        expect(allIds).toHaveLength(18);
+    it('declares 19 quizzes', () => {
+        expect(allIds).toHaveLength(19);
     });
 
     it('every quiz file has questions, a scorer and a widget', () => {
@@ -92,7 +92,7 @@ describe('quiz catalogue', () => {
 describe('scoreQuiz - every quiz scores without throwing', () => {
     // Index 0 is the "lowest" answer, 4 the highest, so these bracket the range.
     for (const index of [0, 2, 4]) {
-        it(`handles an all-option-${index} run for all 18 quizzes`, () => {
+        it(`handles an all-option-${index} run for all 19 quizzes`, () => {
             for (const id of allIds) {
                 const quiz = loadQuizJSON(id);
                 const result = window.SLAQuiz.scoreQuiz(quiz, answerAll(quiz, index));
@@ -360,6 +360,166 @@ describe('generateStudyPlan', () => {
         );
         const relaxed = quiz.questions.map((q, i) => (i === 6 ? farIndex : 0));
         expect(window.SLAQuiz.generateStudyPlan(quiz, relaxed).urgency).toBeNull();
+    });
+});
+
+describe('dominantDomains (exhaustion check)', () => {
+    const d = (name, percentage) => ({ name, percentage, score: 0, max: 12 });
+
+    it('returns the single highest domain', () => {
+        const top = window.SLAQuiz.dominantDomains(
+            [d('Mental', 80), d('Physical', 20), d('Emotional', 30), d('Stress', 40)],
+            { within: 10, floor: 15, limit: 2 }
+        );
+        expect(top.map((x) => x.name)).toEqual(['Mental']);
+    });
+
+    it('treats a domain within the tolerance as co-dominant', () => {
+        const top = window.SLAQuiz.dominantDomains(
+            [d('Mental', 83), d('Physical', 25), d('Emotional', 33), d('Stress', 78)],
+            { within: 10, floor: 15, limit: 2 }
+        );
+        expect(top.map((x) => x.name)).toEqual(['Mental', 'Stress']);
+    });
+
+    it('honours the limit when more domains tie', () => {
+        const top = window.SLAQuiz.dominantDomains(
+            [d('Mental', 50), d('Physical', 50), d('Emotional', 50), d('Stress', 50)],
+            { within: 10, floor: 15, limit: 2 }
+        );
+        expect(top).toHaveLength(2);
+    });
+
+    it('returns nothing when the top score is below the floor', () => {
+        const top = window.SLAQuiz.dominantDomains(
+            [d('Mental', 10), d('Physical', 8), d('Emotional', 0), d('Stress', 5)],
+            { within: 10, floor: 15, limit: 2 }
+        );
+        expect(top).toEqual([]);
+    });
+
+    it('returns nothing for an all-zero run rather than every domain', () => {
+        const top = window.SLAQuiz.dominantDomains(
+            [d('Mental', 0), d('Physical', 0), d('Emotional', 0), d('Stress', 0)],
+            { within: 10, floor: 15, limit: 2 }
+        );
+        expect(top).toEqual([]);
+    });
+
+    it('is safe on an empty domain list', () => {
+        expect(window.SLAQuiz.dominantDomains([], {})).toEqual([]);
+    });
+});
+
+describe('tiredness quiz', () => {
+    const quiz = loadQuizJSON('tiredness');
+
+    // "Not at all" must be worth 0, not 1 - a student who reports no
+    // exhaustion at all has to land on 0%, or the whole tool reads as
+    // "everyone is at least a bit exhausted".
+    it('scores an all-"Not at all" run as 0%', () => {
+        const r = window.SLAQuiz.scoreQuiz(quiz, answerAll(quiz, 0));
+        expect(r.percentage).toBe(0);
+        expect(r.totalScore).toBe(0);
+    });
+
+    it('scores an all-"Very much" run as 100%', () => {
+        const r = window.SLAQuiz.scoreQuiz(quiz, answerAll(quiz, 3));
+        expect(r.percentage).toBe(100);
+        expect(r.maxScore).toBe(45);
+    });
+
+    it('splits into the four documented domains with 12/12/12/9 maxima', () => {
+        const r = window.SLAQuiz.scoreQuiz(quiz, answerAll(quiz, 3));
+        expect(r.domains.map((x) => x.name)).toEqual(['Mental', 'Physical', 'Emotional', 'Stress']);
+        expect(r.domains.map((x) => x.max)).toEqual([12, 12, 12, 9]);
+    });
+
+    it('normalises domains of different length, so Stress can still win', () => {
+        // Stress = 3 questions at "Very much" (9/9), everything else at 0.
+        const answers = quiz.questions.map((q) => (q.domain === 'Stress' ? 3 : 0));
+        const r = window.SLAQuiz.scoreQuiz(quiz, answers);
+        const top = window.SLAQuiz.dominantDomains(r.domains, {
+            within: quiz.coDominantWithin, floor: quiz.dominantFloor, limit: quiz.maxDominant
+        });
+        expect(top.map((x) => x.name)).toEqual(['Stress']);
+        expect(top[0].percentage).toBe(100);
+    });
+
+    it('has an action plan for every domain it can report', () => {
+        Object.keys(quiz.domains).forEach((name) => {
+            expect(quiz.plans[name], `${name} plan`).toBeTruthy();
+            expect(quiz.plans[name].lead.length, `${name} lead`).toBeGreaterThan(10);
+        });
+    });
+});
+
+// The "Download as Image" path rasterises the card through an SVG
+// <foreignObject>. jsdom can't rasterise, so these cover the two places that
+// silently produced a blank-white PNG instead of the card.
+describe('downloadResultCard image building', () => {
+    function offScreenHolder(innerHTML) {
+        const holder = document.createElement('div');
+        // exactly how downloadResultCard parks the card to measure it
+        holder.setAttribute('style', 'position:fixed;left:-10000px;top:0;width:900px;background:#ffffff;padding:24px;');
+        holder.innerHTML = innerHTML;
+        document.body.appendChild(holder);
+        return holder;
+    }
+
+    it('does not carry the off-screen positioning into the foreignObject', () => {
+        const holder = offScreenHolder('<p>Your result</p>');
+        const svg = window.SLAQuiz.buildForeignObject(holder, 900, 400);
+        const embedded = svg.querySelector('foreignObject > div > div');
+
+        expect(embedded, 'embedded copy').toBeTruthy();
+        // A fixed box at left:-10000px inside the SVG is laid out 10,000px to
+        // the left of the viewport, so every pixel rasterises as blank white.
+        expect(embedded.style.position).toBe('static');
+        expect(embedded.style.left).toBe('auto');
+        expect(embedded.style.top).toBe('auto');
+
+        const serialized = new XMLSerializer().serializeToString(svg);
+        expect(serialized).not.toContain('-10000px');
+        expect(serialized).toContain('position: static');
+    });
+
+    it('keeps the live card untouched while exporting', () => {
+        const holder = offScreenHolder('<p>Your result</p>');
+        window.SLAQuiz.buildForeignObject(holder, 900, 400);
+        // the measuring holder itself stays parked off-screen; only the
+        // embedded copy is re-positioned
+        expect(holder.style.position).toBe('fixed');
+    });
+
+    it('pins an exact size on text-free boxes and a minimum on text boxes', () => {
+        const holder = offScreenHolder(
+            '<div id="track" style="height:10px;width:200px"></div>' +
+            '<div id="label" style="height:20px;width:200px">Mental Exhaustion</div>'
+        );
+        window.SLAQuiz.inlineStyles(holder);
+
+        // The bar track has no text and must hold its 10px, or the coloured
+        // fill inside it collapses to nothing.
+        expect(holder.querySelector('#track').style.height).toBe('10px');
+        // The label may re-wrap in the rasteriser's fallback font, so it gets
+        // room to grow instead of being drawn through by the bar below it.
+        expect(holder.querySelector('#label').style.minHeight).toBe('20px');
+        expect(holder.querySelector('#label').style.height).toBe('');
+    });
+
+    it('inlines the offsets an absolutely positioned child needs', () => {
+        // .score-ring-label is centred with top/left 50% + translate(-50%,-50%);
+        // without these the ring's percentage lands outside the ring.
+        const holder = offScreenHolder(
+            '<div id="pct" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">64%</div>'
+        );
+        window.SLAQuiz.inlineStyles(holder);
+        const pct = holder.querySelector('#pct');
+        expect(pct.style.position).toBe('absolute');
+        expect(pct.style.top).toBe('50%');
+        expect(pct.style.left).toBe('50%');
+        expect(pct.style.transform).toContain('translate');
     });
 });
 

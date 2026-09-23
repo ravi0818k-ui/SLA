@@ -96,7 +96,7 @@ The Google Fonts `<link>` in `<head>` is the only loader for Montserrat/Inter �
 
 ## Quiz app (`quiz.html`)
 
-A second, self-contained app in the same repo: 18 free self-assessments and 11 brain-training
+A second, self-contained app in the same repo: 19 free self-assessments and 11 brain-training
 tools, aimed at the same student audience as the landing page and used as a free lead magnet.
 It was ported from a separate React/Vite project (`quiz-assessment-app`, since removed) into the
 same no-build, vanilla-JS shape as the rest of the site. **There is no React, no bundler and no
@@ -127,14 +127,27 @@ wraps it - that is what the render tests await instead of guessing at timers.
 
 ### The quiz engine is data-driven - don't add per-quiz code
 
-The 18 quizzes are **not** 18 code paths. Each `QuizQuestions/<id>.json` declares a `scorer` and a
+The 19 quizzes are **not** 19 code paths. Each `QuizQuestions/<id>.json` declares a `scorer` and a
 `widget`, and `quiz.js` dispatches on those. To add or change a quiz, edit its JSON; only add code
 if a genuinely new scoring shape is needed.
 
 - **Scorers**: `likert-total`, `likert-domains`, `score-domains`, `scores-array-domains`,
   `answer-key-categories`, `tally-option`, `tally-word-list`, `tally-vark`, `binary-index`,
   `study-plan`.
-- **Widgets**: `ring`, `ring-domains`, `pie`, `pie-band`, `score-domains`, `profile`, `plan`.
+- **Widgets**: `ring`, `ring-domains`, `pie`, `pie-band`, `score-domains`, `dominant-domain`,
+  `profile`, `plan`.
+- **`dominant-domain` reads a domain result the other way round.** `ring-domains`/`score-domains`
+  lead with the *overall* band and show the domains as supporting bars; `dominant-domain`
+  (the `tiredness` exhaustion check) leads with the **highest** domain, because that is what
+  selects the action plan the student reads. The pick is `dominantDomains()` — a pure function
+  tuned per quiz by `coDominantWithin` (points within the top score that still count as
+  co-dominant — "you can have more than one type at once"), `dominantFloor` (below this nothing
+  is worth acting on, so no plan is shown) and `maxDominant` (cap on plans surfaced). The plan
+  copy lives in the JSON's `plans` map, keyed by domain name.
+- **A 0-based Likert has to be option-scored, not `sharedOptions`.** `sharedOptions` hardcodes
+  `index + 1`, so its lowest answer is worth 1 — on a "0 = not at all" instrument that puts an
+  untroubled student at 25% instead of 0%. `tiredness` therefore repeats its four scored options
+  per question; don't "tidy" it into `sharedOptions`.
 - **Answers are always stored as the selected option's INDEX.** Every scorer works from
   `(question, index)`. The React version stored option *text* and matched it back to a label later;
   don't reintroduce that.

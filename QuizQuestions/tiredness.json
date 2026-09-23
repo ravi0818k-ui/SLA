@@ -1,0 +1,296 @@
+{
+  "id": "tiredness",
+  "title": "Before You Study: What Kind of Exhaustion Are You Feeling?",
+  "resultsTitle": "Your Exhaustion Check",
+  "scorer": "likert-domains",
+  "widget": "dominant-domain",
+  "coDominantWithin": 10,
+  "dominantFloor": 15,
+  "maxDominant": 2,
+  "domains": {
+    "Mental": {
+      "label": "Mental Exhaustion",
+      "emoji": "🧠",
+      "color": "#1E5EFF",
+      "high": "Your thinking system is the tired part right now — concentration, comprehension and problem-solving are all costing more effort than usual.",
+      "moderate": "Some mental fatigue is showing. You can still study, but new and difficult material will feel heavier than it should.",
+      "low": "Your thinking feels clear enough to take on new material."
+    },
+    "Physical": {
+      "label": "Physical Exhaustion",
+      "emoji": "🏃",
+      "color": "#34A853",
+      "high": "Your body is asking for something — sleep, food, water, movement or rest. No study technique substitutes for that.",
+      "moderate": "Your body is a little heavy. A short reset (water, a walk, a stretch) will probably buy you a usable study block.",
+      "low": "Your body is not what's getting in the way right now."
+    },
+    "Emotional": {
+      "label": "Emotional Exhaustion",
+      "emoji": "❤️",
+      "color": "#FF6B00",
+      "high": "Something is draining your emotional energy. This is not laziness, and treating it as laziness will make the next hour worse, not better.",
+      "moderate": "There's some emotional drag. A very small, familiar task will start much more easily than a big one.",
+      "low": "Emotionally you have room to work."
+    },
+    "Stress": {
+      "label": "Stress / Overload",
+      "emoji": "⚠️",
+      "color": "#6A3DE8",
+      "high": "Too much is being held in your head at once. The load itself — not the subject — is what's blocking you from starting.",
+      "moderate": "Part of your attention is booked by things other than this study session.",
+      "low": "Your head is reasonably clear of competing demands."
+    }
+  },
+  "domainBands": [
+    { "min": 65, "key": "high" },
+    { "min": 30, "key": "moderate" },
+    { "min": 0, "key": "low" }
+  ],
+  "bands": [
+    {
+      "min": 70,
+      "label": "Running On Empty",
+      "color": "#E53935",
+      "text": "Most of your systems are reporting tired at once. Forcing a long session now usually produces re-reading rather than learning.",
+      "smallest": "Recovery may genuinely be the more useful choice right now. If you must do something: 10 minutes of revising material you already know — nothing new."
+    },
+    {
+      "min": 45,
+      "label": "Noticeably Drained",
+      "color": "#FF6B00",
+      "text": "You have some capacity left, but not enough for your hardest chapter. Match the task to the tank.",
+      "smallest": "10–15 minutes of revision or flashcards on something familiar. Stop when the timer stops — that counts as a finished session."
+    },
+    {
+      "min": 22,
+      "label": "Some Drag",
+      "color": "#FFC107",
+      "text": "You're mostly functional with one or two things pulling at you. Clear those first and you'll get a good block out of today.",
+      "smallest": "A 25-minute active recall block — close the book and write down what you remember, then check."
+    },
+    {
+      "min": 0,
+      "label": "Good To Go",
+      "color": "#34A853",
+      "text": "Nothing is flagging strongly right now. This is the state to spend on your hardest material, not your easiest.",
+      "smallest": "Take on the difficult chapter or the problem set you've been avoiding. This is the energy you should be spending on it."
+    }
+  ],
+  "plans": {
+    "Mental": {
+      "lead": "Don't open the hardest new chapter first. Your thinking system needs to be warmed up, not thrown into deep water.",
+      "sequence": "10–15 minute reset → light recall → easy task → difficult task",
+      "do": [
+        "Review material you have already learned",
+        "Flashcards or a quick self-quiz",
+        "Draw a mind map of a topic you know",
+        "Explain something you already understand, out loud",
+        "Organise or tidy your notes",
+        "A short retrieval-practice round"
+      ],
+      "avoid": "\"Let me learn this completely new and difficult chapter right now.\"",
+      "rule": "Reduce the cognitive load before you increase the difficulty."
+    },
+    "Physical": {
+      "lead": "The useful question isn't \"how do I force myself to study?\" — it's \"what does my body actually need?\"",
+      "sequence": "Meet the physical need → then re-check your energy → then choose the task",
+      "do": [
+        "Check the obvious four: sleep, food, water, movement",
+        "Get out of the chair for five minutes",
+        "Fix the environment — light, air, a less collapsed posture",
+        "Take a genuine short rest instead of a scrolling break"
+      ],
+      "avoid": "Pushing through another hour while actually sleepy — the hour costs you the time and gives back almost no retention.",
+      "rule": "If you are genuinely sleepy, sleep is the higher-value study decision."
+    },
+    "Emotional": {
+      "lead": "Don't open with \"I'm lazy.\" The accurate sentence is \"something is draining my emotional energy\" — and that's a solvable problem.",
+      "sequence": "Step away → name it → write it down → one small familiar task",
+      "do": [
+        "Step away for a few minutes, properly",
+        "Identify what is actually bothering you",
+        "Write it down — out of your head, onto paper",
+        "Pick a very small study target",
+        "Start with something familiar, not something new",
+        "Give yourself permission to stop once that small target is done"
+      ],
+      "avoid": "\"I have to study chemistry for three hours.\" That target is what's keeping you from starting at all.",
+      "rule": "Swap the three-hour target for \"I'll revise one concept for 15 minutes.\""
+    },
+    "Stress": {
+      "lead": "Stress gets much harder to manage while everything is being held in your head at the same time. Get it out first.",
+      "sequence": "Brain dump → sort → pick ONE task",
+      "do": [
+        "Take a sheet of paper and write down everything that's worrying you",
+        "Sort each item: 🔴 must do today, 🟡 can do tomorrow, 🟢 can wait",
+        "Choose ONE thing from the red list",
+        "Start on that one thing only — the rest is now on paper, not in your head"
+      ],
+      "avoid": "Trying to study while mentally re-checking every deadline at once.",
+      "rule": "Whatever is written down no longer needs to be remembered."
+    }
+  },
+  "reflection": "What is the smallest useful thing I can do right now?",
+  "closing": {
+    "steps": [
+      "STOP — don't force yourself straight into it.",
+      "CHECK — which kind of exhaustion is this?",
+      "CHOOSE — what does my current state let me do well?",
+      "STUDY — pick the activity that fits."
+    ],
+    "line": "Don't always fight exhaustion. First understand it."
+  },
+  "disclaimer": "This is a self-reflection tool, not a medical or psychological diagnostic test. Persistent or severe fatigue, sleep problems, low mood, or difficulty functioning day to day should be discussed with a doctor or another appropriate healthcare professional.",
+  "questions": [
+    {
+      "text": "Am I finding it difficult to concentrate on one thing?",
+      "domain": "Mental",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Am I reading the same sentence over and over without taking it in?",
+      "domain": "Mental",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Is solving a simple problem taking much more effort than usual?",
+      "domain": "Mental",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Does my mind feel overloaded with too many thoughts or too much information?",
+      "domain": "Mental",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Does my body feel unusually tired or heavy?",
+      "domain": "Physical",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Am I feeling sleepy, or struggling to keep my eyes open?",
+      "domain": "Physical",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Do I feel I need food, water, movement or physical rest before I can study?",
+      "domain": "Physical",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Does even sitting up and holding my posture feel tiring?",
+      "domain": "Physical",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Do I feel emotionally drained even though my body isn't especially tired?",
+      "domain": "Emotional",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Am I unusually irritated, frustrated or easily upset?",
+      "domain": "Emotional",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Do I feel \"I don't want to do anything\" even when I have the energy to do it?",
+      "domain": "Emotional",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Does the idea of studying feel emotionally overwhelming right now?",
+      "domain": "Emotional",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Is my mind circling back to exams, deadlines, unfinished work or future problems?",
+      "domain": "Stress",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Am I trying to study while worrying about several other things at the same time?",
+      "domain": "Stress",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    },
+    {
+      "text": "Do I feel heavy pressure that I \"must study\" without knowing where to start?",
+      "domain": "Stress",
+      "options": [
+        { "text": "Not at all", "score": 0 },
+        { "text": "A little", "score": 1 },
+        { "text": "Quite a lot", "score": 2 },
+        { "text": "Very much", "score": 3 }
+      ]
+    }
+  ]
+}

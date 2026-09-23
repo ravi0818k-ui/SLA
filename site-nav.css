@@ -198,10 +198,18 @@
 }
 
 .site-nav-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     color: var(--sn-blue);
     font-weight: 600;
     text-decoration: none;
     word-break: break-word;
+}
+
+.site-nav-contact-icon {
+    flex: 0 0 auto;
+    opacity: 0.85;
 }
 
 .site-nav-contact a:hover {
@@ -273,6 +281,17 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     color: #ffffff;
+}
+
+.site-footer-contact-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-footer-contact-icon {
+    flex: 0 0 auto;
+    opacity: 0.8;
 }
 
 .site-footer-social {

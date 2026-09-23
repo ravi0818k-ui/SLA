@@ -279,6 +279,34 @@
         };
     }
 
+    // --- dominant domain: which pattern(s) is this person actually in? -----
+    //     Used by the `dominant-domain` widget. Kept pure and separate from
+    //     the scorer because the arithmetic is still plain scoreDomains() -
+    //     only the *reading* of the result is new: the highest domain picks
+    //     which action plan to show.
+    //
+    //     opts.within  - a domain within this many percentage points of the
+    //                    top one counts as co-dominant ("you can have more
+    //                    than one type at the same time").
+    //     opts.floor   - below this percentage nothing is dominant enough to
+    //                    act on, so no plan is shown at all.
+    //     opts.limit   - cap on how many plans to surface.
+    function dominantDomains(domains, opts) {
+        var o = opts || {};
+        var within = typeof o.within === 'number' ? o.within : 0;
+        var floor = typeof o.floor === 'number' ? o.floor : 0;
+        var limit = typeof o.limit === 'number' ? o.limit : Infinity;
+        if (!domains || !domains.length) return [];
+
+        var sorted = domains.slice().sort(function (a, b) { return b.percentage - a.percentage; });
+        var top = sorted[0].percentage;
+        if (top <= floor) return [];
+
+        return sorted.filter(function (d) {
+            return d.percentage >= top - within && d.percentage > floor;
+        }).slice(0, limit);
+    }
+
     // --- tally-option: count how often each option's profile KEY was chosen.
     //     Spirit Animal / Mood Check options carry the key ('Bear', 'Calm')
     //     separately from their display text; that key indexes quiz.profiles.
@@ -719,6 +747,7 @@
     // that cannot reach quiz.css.
     function buildForeignObject(node, width, height) {
         inlineStyles(node);
+
         var wrapper = svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: width, height: height, viewBox: '0 0 ' + width + ' ' + height
@@ -726,7 +755,24 @@
         var fo = svg('foreignObject', { x: 0, y: 0, width: width, height: height });
         var div = document.createElement('div');
         div.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
-        div.appendChild(node.cloneNode(true));
+
+        // `node` is the measuring holder, parked off-screen with
+        // `position:fixed; left:-10000px` so it can be laid out without being
+        // seen - and inlineStyles() has just baked that into its style
+        // attribute. Inside a foreignObject there is no page to be off-screen
+        // *from*: the fixed box is simply laid out 10,000px to the left of the
+        // SVG viewport, so every pixel of the rasterised PNG is the blank
+        // white fill and nothing else. Pin the embedded copy back to the
+        // origin. (Symptom when this regresses: the download works, the file
+        // is the right size, and the image is entirely white.)
+        var copy = node.cloneNode(true);
+        copy.style.position = 'static';
+        copy.style.left = 'auto';
+        copy.style.top = 'auto';
+        copy.style.right = 'auto';
+        copy.style.bottom = 'auto';
+
+        div.appendChild(copy);
         fo.appendChild(div);
         wrapper.appendChild(fo);
         return wrapper;
@@ -735,20 +781,49 @@
     var INLINE_PROPS = ['color', 'background-color', 'background', 'font-family', 'font-size',
         'font-weight', 'line-height', 'text-align', 'padding', 'margin', 'border', 'border-radius',
         'display', 'width', 'height', 'box-sizing', 'flex-direction', 'align-items',
-        'justify-content', 'gap', 'overflow', 'position', 'stroke', 'fill', 'stroke-width'];
+        'justify-content', 'gap', 'overflow', 'position', 'stroke', 'fill', 'stroke-width',
+        // Offsets and transform travel with `position` or absolutely positioned
+        // children land at their static position instead - .score-ring-label is
+        // centred inside the ring with top/left 50% + a translate(-50%, -50%).
+        'top', 'left', 'right', 'bottom', 'transform', 'transform-origin',
+        'letter-spacing', 'white-space', 'flex-wrap', 'font-style'];
 
     function inlineStyles(root) {
         var all = [root].concat(Array.prototype.slice.call(root.querySelectorAll('*')));
         all.forEach(function (el) {
             var cs = window.getComputedStyle(el);
+            // The rasteriser loads the SVG in an isolated context that has no
+            // access to the page's webfonts, so text re-wraps at different
+            // widths than it did on screen. Freezing a text box at the exact
+            // width/height it happened to have then makes the extra line
+            // overflow its own box - which is how the domain bars ended up
+            // drawn through their own labels. So: boxes that carry text get
+            // that measurement as a *minimum* and are allowed to grow, while
+            // boxes with no text of their own (the ring, the bar track and
+            // its fill) keep the exact size the design depends on.
+            var pins = /\S/.test(el.textContent || '') ? SOFT_SIZE : HARD_SIZE;
             var out = [];
             INLINE_PROPS.forEach(function (p) {
                 var v = cs.getPropertyValue(p);
-                if (v) out.push(p + ':' + v);
+                if (!v) return;
+                out.push((pins[p] || p) + ':' + v);
             });
             el.setAttribute('style', out.join(';') + ';' + (el.getAttribute('style') || ''));
+
+            // The element's own inline style is appended last, so an inline
+            // width/height set by a widget (or by downloadResultCard sizing
+            // the clone) would win over the min-* above and re-pin the box.
+            // Drop it on text boxes only; text-free boxes keep theirs, which
+            // is how .domain-fill carries its `width: <pct>%`.
+            if (pins === SOFT_SIZE) {
+                el.style.width = '';
+                el.style.height = '';
+            }
         });
     }
+
+    var HARD_SIZE = {};
+    var SOFT_SIZE = { width: 'min-width', height: 'min-height' };
 
     // =====================================================================
     // 9. SHARED DIALOG
@@ -1074,6 +1149,7 @@
             case 'pie': renderPie(card, quiz, result, userName); break;
             case 'pie-band': renderPieBand(card, quiz, result, userName); break;
             case 'score-domains': renderScoreDomains(card, quiz, result, userName); break;
+            case 'dominant-domain': renderDominantDomain(card, quiz, result, userName); break;
             case 'profile': renderProfile(card, quiz, result, userName); break;
             case 'plan': renderPlan(card, quiz, result, userName); break;
             default: card.appendChild(h('p', { text: 'Unsupported result type.' }));
@@ -1187,6 +1263,80 @@
         if (band.text) card.appendChild(h('p', { class: 'result-text', text: band.text }));
         card.appendChild(h('h3', { class: 'result-subhead', text: 'Breakdown by Area' }));
         card.appendChild(domainBars(r.domains, quiz.domains, quiz.domainBands));
+    }
+
+    // Exhaustion check. Unlike the other domain widgets, the *highest* domain
+    // is the answer here - it selects which action plan the student reads -
+    // so the plan comes first and the four bars are the supporting detail.
+    // Deliberately framed as a self-check, never a diagnosis: quiz.disclaimer
+    // is rendered on the card itself, not just on the start screen.
+    function renderDominantDomain(card, quiz, r, userName) {
+        var band = r.band;
+        var color = band.color || '#1E5EFF';
+        var tops = dominantDomains(r.domains, {
+            within: quiz.coDominantWithin,
+            floor: quiz.dominantFloor,
+            limit: quiz.maxDominant
+        });
+
+        card.appendChild(scoreRing(r.percentage, color, 'Overall load'));
+        card.appendChild(h('h2', { class: 'result-label', style: 'color:' + color, text: band.label }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is what your answers point to right now.') }));
+        if (band.text) card.appendChild(h('p', { class: 'result-text', text: band.text }));
+
+        if (tops.length) {
+            card.appendChild(h('h3', {
+                class: 'result-subhead',
+                text: tops.length > 1 ? 'Your dominant patterns' : 'Your dominant pattern'
+            }));
+            tops.forEach(function (d) {
+                var meta = (quiz.domains || {})[d.name] || {};
+                var plan = (quiz.plans || {})[d.name];
+                if (!plan) return;
+                var pc = meta.color || color;
+
+                card.appendChild(h('div', { class: 'plan-block', style: '--plan-color:' + pc }, [
+                    h('div', { class: 'plan-head' }, [
+                        meta.emoji ? h('span', { class: 'plan-emoji', text: meta.emoji }) : null,
+                        h('span', { class: 'plan-title', text: meta.label || d.name }),
+                        h('span', { class: 'plan-score', text: d.score + ' / ' + d.max })
+                    ]),
+                    h('p', { class: 'plan-lead', text: plan.lead }),
+                    plan.sequence ? h('p', { class: 'plan-sequence', text: plan.sequence }) : null,
+                    plan.do && plan.do.length ? h('ul', { class: 'plan-do' }, plan.do.map(function (t) {
+                        return h('li', { text: t });
+                    })) : null,
+                    plan.avoid ? h('p', { class: 'plan-avoid' }, [
+                        h('strong', { text: 'Don’t start with: ' }), document.createTextNode(plan.avoid)
+                    ]) : null,
+                    plan.rule ? h('p', { class: 'plan-rule', text: plan.rule }) : null
+                ]));
+            });
+        } else {
+            card.appendChild(h('p', { class: 'result-text', text: 'No single pattern is standing out, and nothing is scoring high enough to need managing first. Go straight to the work.' }));
+        }
+
+        if (band.smallest) {
+            card.appendChild(h('div', { class: 'result-tip' }, [
+                h('h4', { text: '⭐ ' + (quiz.reflection || 'The smallest useful thing right now') }),
+                h('p', { text: band.smallest })
+            ]));
+        }
+
+        card.appendChild(h('h3', { class: 'result-subhead', text: 'All four scores' }));
+        card.appendChild(domainBars(r.domains, quiz.domains, quiz.domainBands));
+
+        if (quiz.closing) {
+            card.appendChild(h('div', { class: 'result-tip' }, [
+                h('h4', { text: 'STOP → CHECK → CHOOSE → STUDY' }),
+                h('ul', {}, (quiz.closing.steps || []).map(function (t) { return h('li', { text: t }); })),
+                quiz.closing.line ? h('p', { class: 'plan-rule', text: quiz.closing.line }) : null
+            ]));
+        }
+
+        if (quiz.disclaimer) {
+            card.appendChild(h('p', { class: 'result-disclaimer', text: quiz.disclaimer }));
+        }
     }
 
     function renderProfile(card, quiz, r, userName) {
@@ -1430,6 +1580,7 @@
         maxPointsFor: maxPointsFor,
         scoreTotal: scoreTotal,
         scoreDomains: scoreDomains,
+        dominantDomains: dominantDomains,
         scoreAnswerKey: scoreAnswerKey,
         tallyOptions: tallyOptions,
         tallyWordLists: tallyWordLists,
@@ -1444,6 +1595,11 @@
         writeState: writeState,
         clearAnswers: clearAnswers,
         playConfetti: playConfetti,
+        // Exported for the download-image regression tests: the rasterised
+        // PNG itself can't be checked under jsdom, but these two are where it
+        // has gone wrong before.
+        buildForeignObject: buildForeignObject,
+        inlineStyles: inlineStyles,
         TOOLS: TOOLS,
         // DOM helpers - quiz-tools.js is handed these at mount time, so tests
         // that mount a tool directly need them too.

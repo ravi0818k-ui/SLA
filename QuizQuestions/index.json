@@ -12,6 +12,14 @@
           "questions": 10
         },
         {
+          "id": "tiredness",
+          "emoji": "🔋",
+          "label": "Exhaustion Check",
+          "subtitle": "What kind of tired are you?",
+          "title": "Before You Study: What Kind of Exhaustion Are You Feeling?",
+          "questions": 15
+        },
+        {
           "id": "focus",
           "emoji": "🎯",
           "label": "Focus Check",

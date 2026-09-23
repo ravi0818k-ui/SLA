@@ -159,7 +159,7 @@ describe('quiz runner', () => {
         expect(buttons[0].disabled).toBe(true);
     });
 
-    it('renders a first question for all 18 quizzes', async () => {
+    it('renders a first question for all 19 quizzes', async () => {
         for (const id of allIds) {
             await boot(`#/quiz/${id}`);
             const app = document.getElementById('app');
@@ -181,7 +181,7 @@ describe('results view', () => {
         return document.getElementById('app');
     }
 
-    it('renders a result card with actions for all 18 quizzes', async () => {
+    it('renders a result card with actions for all 19 quizzes', async () => {
         for (const id of allIds) {
             const app = await showResults(id);
             expect(app.querySelector('.quiz-error'), `${id} errored`).toBeNull();
@@ -208,6 +208,25 @@ describe('results view', () => {
         const app = await showResults('self-image');
         const quiz = loadQuizJSON('self-image');
         expect(app.querySelectorAll('.domain-row').length).toBe(Object.keys(quiz.domains).length);
+    });
+
+    it('shows the dominant plan, all four bars and the disclaimer for the exhaustion check', async () => {
+        // optionIndex 3 = "Very much" on every item, so every domain maxes out
+        // and co-dominance is capped by maxDominant.
+        const app = await showResults('tiredness', 3);
+        const quiz = loadQuizJSON('tiredness');
+
+        const plans = app.querySelectorAll('.plan-block');
+        expect(plans.length).toBeGreaterThan(0);
+        expect(plans.length).toBeLessThanOrEqual(quiz.maxDominant);
+        expect(app.querySelectorAll('.domain-row').length).toBe(Object.keys(quiz.domains).length);
+        expect(app.querySelector('.result-disclaimer').textContent).toContain('not a medical');
+    });
+
+    it('shows no action plan when nothing is exhausted', async () => {
+        const app = await showResults('tiredness', 0);
+        expect(app.querySelectorAll('.plan-block').length).toBe(0);
+        expect(app.querySelector('.score-ring-pct').textContent).toBe('0%');
     });
 
     it('shows the profile hero and the chosen animal for Spirit Animal', async () => {
