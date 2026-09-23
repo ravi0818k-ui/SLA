@@ -162,32 +162,338 @@
     }
 
     // =====================================================================
+    // 3b. LANGUAGE (English + Hindi)
+    //
+    // English stays the single source of truth for SCORING. Three scorers
+    // match on option TEXT (VARK keywords, Social Type word lists, and the
+    // tally-option fallback key), so mergeTranslation() keeps the original
+    // English string as `textEn` and those scorers read that, never the
+    // translated `text`. Hindi only ever replaces what is displayed.
+    //
+    // Translations live in sidecar files (QuizQuestions/hi/<id>.json) that
+    // mirror the English file's shape and carry display strings only. A
+    // missing or broken sidecar silently falls back to English.
+    // =====================================================================
+
+    var LANGS = ['en', 'hi'];
+    var LANG_KEY = 'sla_quiz_lang';
+    var currentLang = 'en';
+
+    var LANG_OPTIONS = [
+        { code: 'en', label: 'English', note: 'English' },
+        { code: 'hi', label: 'हिन्दी', note: 'Hindi' }
+    ];
+
+    function readLang() {
+        var s = readState();
+        if (s.lang && LANGS.indexOf(s.lang) !== -1) return s.lang;
+        try {
+            var stored = localStorage.getItem(LANG_KEY);
+            if (stored && LANGS.indexOf(stored) !== -1) return stored;
+        } catch (err) { /* private mode - just use English */ }
+        return 'en';
+    }
+
+    function setLang(lang) {
+        currentLang = LANGS.indexOf(lang) !== -1 ? lang : 'en';
+        writeState({ lang: currentLang });
+        try { localStorage.setItem(LANG_KEY, currentLang); } catch (err) { /* ignore */ }
+        applyLangToDocument(currentLang);
+        return currentLang;
+    }
+
+    // Montserrat/Inter carry no Devanagari, so the browser would fall back to
+    // whatever the OS ships. The webfont is fetched only once Hindi is picked,
+    // so English visitors never pay for the extra request.
+    var hindiFontLoaded = false;
+
+    function ensureHindiFont() {
+        if (hindiFontLoaded || typeof document === 'undefined' || !document.head) return;
+        hindiFontLoaded = true;
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap';
+        document.head.appendChild(link);
+    }
+
+    function applyLangToDocument(lang) {
+        if (typeof document === 'undefined' || !document.documentElement) return;
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        if (lang === 'hi') ensureHindiFont();
+        applyDialogLanguage();
+    }
+
+    // --- UI chrome strings (everything not sourced from a quiz JSON) -------
+    var STRINGS = {
+        en: {
+            errTitle: 'Something went wrong',
+            backHome: 'Back to Home',
+            loading: 'Loading…',
+            homeTitle: 'Know Yourself Better',
+            aboutBtn: 'ℹ️ About These Quizzes',
+            aboutBtnSub: 'Learn more about each assessment',
+            workshop: '🎓 Join the 3-Day Live Workshop',
+            workshopSub: 'Study smarter, score higher',
+            langLabel: 'Choose your language',
+            langHint: 'Questions and your result will be shown in this language.',
+            namePrompt: "What's your name?",
+            namePlaceholder: 'Enter your name',
+            startQuiz: 'Start Quiz',
+            backAll: '← Back to all assessments',
+            meta: '{q} questions · about {m} min',
+            questionOf: 'Question {n} of {t}',
+            back: 'Back',
+            next: 'Next',
+            submit: 'Submit',
+            noAnswers: 'No answers found for this assessment. Please take it again.',
+            download: 'Download as Image',
+            returnHome: 'Return to Home',
+            unsupported: 'Unsupported result type.',
+            gStand: 'here is where you stand right now.',
+            gBreakdown: 'here is your breakdown.',
+            gAnswers: 'here is what your answers show.',
+            gProfile: 'here is your profile.',
+            gAgility: 'here is your agility level.',
+            gDid: 'here is how you did.',
+            gPoint: 'here is what your answers point to right now.',
+            tryThis: '💡 Try this',
+            nextSteps: '✅ Your next steps',
+            overall: 'Overall',
+            domainBreakdown: 'Domain Breakdown',
+            breakdownArea: 'Breakdown by Area',
+            reframe: 'Reframe: ',
+            fix: 'Fix: ',
+            estimated: 'estimated score · {c} of {m} correct',
+            overallLoad: 'Overall load',
+            domPattern: 'Your dominant pattern',
+            domPatterns: 'Your dominant patterns',
+            noDominant: 'No single pattern is standing out, and nothing is scoring high enough to need managing first. Go straight to the work.',
+            dontStart: 'Don’t start with: ',
+            smallest: 'The smallest useful thing right now',
+            allFour: 'All four scores',
+            stopCheck: 'STOP → CHECK → CHOOSE → STUDY',
+            strengths: '💪 Your strengths',
+            growth: '🌱 Your growth area',
+            meansLearning: '🎯 What this means for your learning',
+            secondary: 'Your secondary type',
+            yourBreakdown: 'Your Breakdown',
+            youAreNamed: '{name}, you are {profile}',
+            youAre: 'You are {profile}',
+            planTitleNamed: "{name}'s Personalized Strategy for {subject}",
+            planTitle: 'Your Personalized Strategy for {subject}',
+            planSubject: 'Your Subject',
+            planLead: "Based on your answers, here's exactly how you should study.",
+            stepMethod: 'Your Step-by-Step Method',
+            rowRevision: '🔁 Revision Schedule',
+            rowEncode: '✍️ How to Encode It',
+            rowPractice: '🎯 Practice Plan',
+            rowTime: '⏱️ Daily Time Split',
+            rowVis: '🧠 Visualization',
+            rowPStyle: '📝 Practice Style',
+            rowRApproach: '📅 Revision Approach',
+            aboutTitle: 'About These Assessments',
+            aboutP1: 'These are self-reflection tools, not diagnostic tests. They are designed to show you how you currently study, focus, and think about yourself — so you know which habits to change first. No score here is a verdict on your ability.',
+            aboutP2: 'Nothing you enter is uploaded or stored on a server. Your name and answers stay in your own browser for the length of the session and are cleared when you return home.',
+            aboutItem: ' — {sub} ({n} questions)',
+            noQuiz: 'That assessment does not exist.',
+            noTool: 'That tool does not exist.',
+            loadFail: 'Could not load the assessments ({m}). Check your connection and reload the page.',
+            titleHome: 'Know Yourself Better — Free Student Assessments | Super Learner Academy',
+            titleAbout: 'About These Assessments | Super Learner Academy',
+            dlgTitle: 'Return to Home Page?',
+            dlgBody1: 'Are you sure you want to go to the main page?',
+            dlgWarn: 'Warning:',
+            dlgBody2: ' If you leave this page, you will not be able to re-download your results. Please make sure you have downloaded your results before leaving.',
+            dlgCancel: 'Cancel',
+            dlgConfirm: 'Yes, Return Home'
+        },
+        hi: {
+            errTitle: 'कुछ गड़बड़ हो गई',
+            backHome: 'होम पर वापस जाएँ',
+            loading: 'लोड हो रहा है…',
+            homeTitle: 'खुद को बेहतर जानें',
+            aboutBtn: 'ℹ️ इन क्विज़ के बारे में',
+            aboutBtnSub: 'हर असेसमेंट के बारे में और जानें',
+            workshop: '🎓 3-दिन की लाइव वर्कशॉप जॉइन करें',
+            workshopSub: 'स्मार्ट पढ़ें, ज़्यादा नंबर लाएँ',
+            langLabel: 'अपनी भाषा चुनें',
+            langHint: 'प्रश्न और आपका रिज़ल्ट इसी भाषा में दिखाए जाएंगे।',
+            namePrompt: 'आपका नाम क्या है?',
+            namePlaceholder: 'अपना नाम लिखें',
+            startQuiz: 'क्विज़ शुरू करें',
+            backAll: '← सभी असेसमेंट पर वापस',
+            meta: '{q} प्रश्न · लगभग {m} मिनट',
+            questionOf: 'प्रश्न {n} / {t}',
+            back: 'पीछे',
+            next: 'आगे',
+            submit: 'जमा करें',
+            noAnswers: 'इस असेसमेंट के जवाब नहीं मिले। कृपया इसे फिर से लें।',
+            download: 'इमेज के रूप में डाउनलोड करें',
+            returnHome: 'होम पर लौटें',
+            unsupported: 'यह रिज़ल्ट प्रकार समर्थित नहीं है।',
+            gStand: 'अभी आप यहाँ खड़े हैं।',
+            gBreakdown: 'यह रहा आपका विश्लेषण।',
+            gAnswers: 'आपके जवाब यह बताते हैं।',
+            gProfile: 'यह रही आपकी प्रोफ़ाइल।',
+            gAgility: 'यह रहा आपके सीखने की फुर्ती का स्तर।',
+            gDid: 'आपका प्रदर्शन इस प्रकार रहा।',
+            gPoint: 'आपके जवाब अभी इस ओर इशारा करते हैं।',
+            tryThis: '💡 यह करके देखें',
+            nextSteps: '✅ आपके अगले कदम',
+            overall: 'कुल',
+            domainBreakdown: 'क्षेत्रवार विश्लेषण',
+            breakdownArea: 'क्षेत्र के अनुसार विश्लेषण',
+            reframe: 'नया नज़रिया: ',
+            fix: 'सुधार: ',
+            estimated: 'अनुमानित स्कोर · {m} में से {c} सही',
+            overallLoad: 'कुल भार',
+            domPattern: 'आपका प्रमुख पैटर्न',
+            domPatterns: 'आपके प्रमुख पैटर्न',
+            noDominant: 'कोई एक पैटर्न ख़ास उभरकर नहीं आ रहा, और कोई भी स्कोर इतना ऊँचा नहीं कि पहले उसे संभालना पड़े। सीधे पढ़ाई शुरू करें।',
+            dontStart: 'इससे शुरू न करें: ',
+            smallest: 'अभी का सबसे छोटा उपयोगी कदम',
+            allFour: 'चारों स्कोर',
+            stopCheck: 'रुकें → जाँचें → चुनें → पढ़ें',
+            strengths: '💪 आपकी ताकतें',
+            growth: '🌱 आपका विकास क्षेत्र',
+            meansLearning: '🎯 आपकी पढ़ाई के लिए इसका मतलब',
+            secondary: 'आपका दूसरा प्रकार',
+            yourBreakdown: 'आपका विश्लेषण',
+            youAreNamed: '{name}, आप हैं {profile}',
+            youAre: 'आप हैं {profile}',
+            planTitleNamed: '{subject} के लिए {name} की ख़ास रणनीति',
+            planTitle: '{subject} के लिए आपकी ख़ास रणनीति',
+            planSubject: 'आपका विषय',
+            planLead: 'आपके जवाबों के आधार पर, आपको ठीक इस तरह पढ़ना चाहिए।',
+            stepMethod: 'आपका स्टेप-बाय-स्टेप तरीका',
+            rowRevision: '🔁 रिवीज़न शेड्यूल',
+            rowEncode: '✍️ इसे दिमाग़ में कैसे बिठाएँ',
+            rowPractice: '🎯 प्रैक्टिस प्लान',
+            rowTime: '⏱️ रोज़ का समय-विभाजन',
+            rowVis: '🧠 विज़ुअलाइज़ेशन',
+            rowPStyle: '📝 प्रैक्टिस का तरीका',
+            rowRApproach: '📅 रिवीज़न का तरीका',
+            aboutTitle: 'इन असेसमेंट के बारे में',
+            aboutP1: 'ये आत्म-चिंतन के तरीके हैं, कोई निदानात्मक जाँच नहीं। इनका काम यह दिखाना है कि आप अभी कैसे पढ़ते, ध्यान लगाते और खुद को देखते हैं — ताकि आप जान सकें कि कौन सी आदत पहले बदलनी है। यहाँ का कोई भी स्कोर आपकी काबिलियत पर फैसला नहीं है।',
+            aboutP2: 'आप जो भी लिखते हैं वह किसी सर्वर पर नहीं जाता। आपका नाम और जवाब सिर्फ़ आपके अपने ब्राउज़र में सेशन तक रहते हैं और होम पर लौटते ही मिट जाते हैं।',
+            aboutItem: ' — {sub} ({n} प्रश्न)',
+            noQuiz: 'यह असेसमेंट मौजूद नहीं है।',
+            noTool: 'यह टूल मौजूद नहीं है।',
+            loadFail: 'असेसमेंट लोड नहीं हो सके ({m})। अपना इंटरनेट जाँचकर पेज रीलोड करें।',
+            titleHome: 'खुद को बेहतर जानें — छात्रों के लिए मुफ़्त असेसमेंट | Super Learner Academy',
+            titleAbout: 'इन असेसमेंट के बारे में | Super Learner Academy',
+            dlgTitle: 'होम पेज पर लौटें?',
+            dlgBody1: 'क्या आप वाकई मुख्य पेज पर जाना चाहते हैं?',
+            dlgWarn: 'ध्यान दें:',
+            dlgBody2: ' इस पेज से जाने पर आप अपना रिज़ल्ट दोबारा डाउनलोड नहीं कर पाएंगे। जाने से पहले रिज़ल्ट डाउनलोड कर लें।',
+            dlgCancel: 'रद्द करें',
+            dlgConfirm: 'हाँ, होम पर लौटें'
+        }
+    };
+
+    // tr('meta', { q: 15, m: 4 }) - '{x}' placeholders, English as fallback.
+    function tr(key, vars) {
+        var table = STRINGS[currentLang] || STRINGS.en;
+        var s = table[key];
+        if (s === undefined) s = STRINGS.en[key];
+        if (s === undefined) return '';
+        if (!vars) return s;
+        return s.replace(/\{(\w+)\}/g, function (m, name) {
+            return vars[name] !== undefined ? vars[name] : m;
+        });
+    }
+
+    // --- Translation merge ------------------------------------------------
+    // Structural overlay: the sidecar mirrors the English file's shape and
+    // supplies display strings only. Arrays merge by index, objects by key,
+    // and anything the sidecar omits stays English. Map KEYS (domain names,
+    // profile keys, strategy tags, wordLists categories) are never translated
+    // - they are the scorers' identifiers - so a sidecar reuses the English
+    // keys and supplies display names through `categoryLabels` / `label`.
+    function mergeTranslation(base, patch) {
+        if (patch === undefined || patch === null) return base;
+
+        if (Array.isArray(base)) {
+            if (!Array.isArray(patch)) return base;
+            return base.map(function (item, i) { return mergeTranslation(item, patch[i]); });
+        }
+
+        if (base && typeof base === 'object') {
+            if (typeof patch !== 'object' || Array.isArray(patch)) return base;
+            var out = {};
+            Object.keys(base).forEach(function (k) { out[k] = base[k]; });
+            Object.keys(patch).forEach(function (k) {
+                out[k] = (k in base) ? mergeTranslation(base[k], patch[k]) : patch[k];
+            });
+            // The English option text is what VARK / Social Type / tally-option
+            // match on. Keep it reachable after a translation replaces `text`.
+            if (typeof base.text === 'string' && out.text !== base.text) out.textEn = base.text;
+            return out;
+        }
+
+        return patch;
+    }
+
+    // What the text-matching scorers read - never the displayed (possibly
+    // translated) string.
+    function scoreText(opt) {
+        if (!opt) return undefined;
+        return opt.textEn !== undefined ? opt.textEn : opt.text;
+    }
+
+    // The confirmation dialog's markup is static in quiz.html, so it is
+    // translated in place rather than re-rendered.
+    function applyDialogLanguage() {
+        var el = dialogEl();
+        if (!el) return;
+        var nodes = el.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].textContent = tr(nodes[i].getAttribute('data-i18n'));
+        }
+    }
+
+    // =====================================================================
     // 4. DATA LOADING
     // index.json holds the home-page catalogue; each quiz's questions and
     // interpretation copy live in its own file, fetched only when started.
     // =====================================================================
 
-    var catalogue = null;
+    var catalogueCache = {};
     var quizCache = {};
 
-    function loadCatalogue() {
-        if (catalogue) return Promise.resolve(catalogue);
-        return fetch('QuizQuestions/index.json')
-            .then(function (r) {
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json();
-            })
-            .then(function (data) { catalogue = data; return data; });
+    function fetchJSON(url) {
+        return fetch(url).then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        });
     }
 
-    function loadQuiz(id) {
-        if (quizCache[id]) return Promise.resolve(quizCache[id]);
-        return fetch('QuizQuestions/' + id + '.json')
-            .then(function (r) {
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json();
-            })
-            .then(function (data) { quizCache[id] = data; return data; });
+    // Both loaders take the display language. For 'hi' the English file is
+    // still fetched first and stays the scoring source; the sidecar is layered
+    // over it, and a missing sidecar just leaves the English through.
+    function withTranslation(enUrl, hiUrl, lang) {
+        return fetchJSON(enUrl).then(function (data) {
+            if (lang !== 'hi') return data;
+            return fetchJSON(hiUrl)
+                .then(function (patch) { return mergeTranslation(data, patch); })
+                .catch(function () { return data; });
+        });
+    }
+
+    function loadCatalogue(lang) {
+        lang = lang || 'en';
+        if (catalogueCache[lang]) return Promise.resolve(catalogueCache[lang]);
+        return withTranslation('QuizQuestions/index.json', 'QuizQuestions/' + lang + '/index.json', lang)
+            .then(function (data) { catalogueCache[lang] = data; return data; });
+    }
+
+    function loadQuiz(id, lang) {
+        lang = lang || 'en';
+        var key = id + '|' + lang;
+        if (quizCache[key]) return Promise.resolve(quizCache[key]);
+        return withTranslation('QuizQuestions/' + id + '.json', 'QuizQuestions/' + lang + '/' + id + '.json', lang)
+            .then(function (data) { quizCache[key] = data; return data; });
     }
 
     // Resolve a question's option list: either the quiz-wide shared Likert
@@ -315,7 +621,7 @@
         quiz.questions.forEach(function (q, i) {
             var opt = (q.options || [])[answers[i]];
             if (!opt) return;
-            var key = opt.key || opt.text;
+            var key = opt.key || scoreText(opt);
             counts[key] = (counts[key] || 0) + 1;
         });
         var sorted = Object.keys(counts)
@@ -337,7 +643,7 @@
             var opt = (q.options || [])[answers[i]];
             if (!opt) return;
             for (var c = 0; c < cats.length; c++) {
-                if (quiz.wordLists[cats[c]].indexOf(opt.text) !== -1) {
+                if (quiz.wordLists[cats[c]].indexOf(scoreText(opt)) !== -1) {
                     counts[cats[c]]++;
                     return;
                 }
@@ -345,8 +651,14 @@
         });
 
         var total = quiz.questions.length;
+        // The category KEY stays English (it is the wordLists lookup); only
+        // the displayed name comes from the optional categoryLabels map.
+        var labels = quiz.categoryLabels || {};
         return cats.map(function (c) {
-            return { name: c, value: counts[c], percentage: total ? (counts[c] / total) * 100 : 0 };
+            return {
+                name: labels[c] || c, key: c, value: counts[c],
+                percentage: total ? (counts[c] / total) * 100 : 0
+            };
         });
     }
 
@@ -381,12 +693,18 @@
         quiz.questions.forEach(function (q, i) {
             var opt = (q.options || [])[answers[i]];
             if (!opt) return;
-            var cat = categorizeVARK(opt.text);
+            var cat = categorizeVARK(scoreText(opt));
             if (cat) counts[cat]++;
         });
         var total = quiz.questions.length;
+        // As above: `categories` are the keyword-matcher's own labels, so a
+        // translation renames them through categoryLabels, never in place.
+        var labels = quiz.categoryLabels || {};
         return quiz.categories.map(function (c) {
-            return { name: c, value: counts[c], percentage: total ? (counts[c] / total) * 100 : 0 };
+            return {
+                name: labels[c] || c, key: c, value: counts[c],
+                percentage: total ? (counts[c] / total) * 100 : 0
+            };
         });
     }
 
@@ -398,6 +716,8 @@
             else if (answers[i] === 1) counts[1]++;
         });
         var total = quiz.questions.length;
+        // `poles` is display-only here - poleBand() matches on the INDEX
+        // (band.poleAbove), so a translated poles array is safe.
         return quiz.poles.map(function (name, i) {
             return { name: name, value: counts[i], percentage: total ? (counts[i] / total) * 100 : 0 };
         });
@@ -455,50 +775,66 @@
         });
     }
 
+    // The tag -> advice copy. It lives here (not in study-strategy.json) so the
+    // English behaviour is unchanged, but a translation sidecar can override
+    // the whole table through the quiz's own `advice` key.
+    var PLAN_ADVICE = {
+        revision: {
+            fast_forget: 'You forget quickly — revise within the SAME DAY (evening review of morning study). Then again after 1 day, 3 days, 7 days, and 21 days.',
+            medium_forget: 'Revise after 1 day, then after 3 days, then weekly. The 1-3-7-21 spacing works well for your forgetting rate.',
+            slow_forget: 'You retain reasonably well. Revise after 3 days, then weekly, then monthly. Focus revision time on practice rather than re-reading.',
+            exam_forget: "You're losing knowledge over time because of insufficient long-term revision. Add a 15-min weekly review of ALL past topics, not just recent ones.",
+            'default': 'Your retention is strong. Maintain it with monthly quick reviews and focus your energy on deeper application and harder problems.'
+        },
+        practice: {
+            no_practice: 'Critical gap: You MUST add active practice. Knowledge without application is like learning swimming from a book. Start with 20 min of practice daily.',
+            give_up: 'When stuck, spend 5 more minutes trying before checking the answer. Then study the solution, close it, and redo it. Struggle is where learning happens.',
+            partial_practice: 'Good foundation! Now push into harder problems. Spend 60% time on medium difficulty, 30% on hard, 10% on easy (for confidence).',
+            careless: 'Your knowledge is there but execution needs refinement. Slow down, write neatly, double-check key steps. Keep an error log of careless mistakes.',
+            'default': 'Excellent practice habits! Challenge yourself with competition-level or cross-topic problems to reach mastery.'
+        },
+        encoding: {
+            visual: 'Use diagrams, color-coding, mind maps, and videos heavily. Draw concepts from memory. Convert text into visual formats.',
+            auditory: 'Record yourself explaining concepts and listen back. Discuss with study partners. Use podcasts and verbal self-quizzing.',
+            writing: 'Write detailed notes in your own words. Summarize chapters into 1-page sheets. Rewrite key points from memory.',
+            kinesthetic: 'Practice physically: type code, solve on paper, do experiments, walk while revising. Your body needs to be involved.',
+            'default': 'Create stories, analogies, and wild associations. Link new concepts to things you already know through creative connections.'
+        },
+        time: {
+            time_low: 'With limited time, use ONLY active recall and practice. Skip re-reading entirely. 25 min focused practice > 2 hours of passive reading.',
+            time_medium: 'Split: 20 min learning new material + 20 min practice + 10 min revision of older topics. Every single day.',
+            time_good: 'Split: 40 min new material + 40 min active practice + 20 min spaced revision. Include 5-min breaks every 25 min.',
+            'default': 'You have good time. Use Pomodoro (25 min work + 5 min break). Alternate: concept study → practice → revision → concept study.'
+        },
+        // No `default` here on purpose: a far-off exam gets no urgency note.
+        urgency: {
+            exam_urgent: '⚡ Your exam is very close! Focus on high-yield topics, practice past papers, and revise your strongest material first.',
+            exam_soon: '⏰ Exam approaching! Prioritize active practice and revision over learning new topics.'
+        }
+    };
+
+    function adviceFor(quiz, group, tag) {
+        var custom = (quiz.advice && quiz.advice[group]) || {};
+        var base = PLAN_ADVICE[group] || {};
+        if (tag && custom[tag] !== undefined) return custom[tag];
+        if (tag && base[tag] !== undefined) return base[tag];
+        if (custom['default'] !== undefined) return custom['default'];
+        return base['default'] !== undefined ? base['default'] : null;
+    }
+
     function generateStudyPlan(quiz, answers) {
-        var t = tagsFor(quiz, answers);
-        var subject = t[0], learningStyle = t[4], dailyTime = t[5],
-            examDistance = t[6], forgetSpeed = t[3], practiceLevel = t[8];
-
-        var revisionFrequency;
-        if (forgetSpeed === 'fast_forget') revisionFrequency = 'You forget quickly — revise within the SAME DAY (evening review of morning study). Then again after 1 day, 3 days, 7 days, and 21 days.';
-        else if (forgetSpeed === 'medium_forget') revisionFrequency = 'Revise after 1 day, then after 3 days, then weekly. The 1-3-7-21 spacing works well for your forgetting rate.';
-        else if (forgetSpeed === 'slow_forget') revisionFrequency = 'You retain reasonably well. Revise after 3 days, then weekly, then monthly. Focus revision time on practice rather than re-reading.';
-        else if (forgetSpeed === 'exam_forget') revisionFrequency = "You're losing knowledge over time because of insufficient long-term revision. Add a 15-min weekly review of ALL past topics, not just recent ones.";
-        else revisionFrequency = 'Your retention is strong. Maintain it with monthly quick reviews and focus your energy on deeper application and harder problems.';
-
-        var practiceAdvice;
-        if (practiceLevel === 'no_practice') practiceAdvice = 'Critical gap: You MUST add active practice. Knowledge without application is like learning swimming from a book. Start with 20 min of practice daily.';
-        else if (practiceLevel === 'give_up') practiceAdvice = 'When stuck, spend 5 more minutes trying before checking the answer. Then study the solution, close it, and redo it. Struggle is where learning happens.';
-        else if (practiceLevel === 'partial_practice') practiceAdvice = 'Good foundation! Now push into harder problems. Spend 60% time on medium difficulty, 30% on hard, 10% on easy (for confidence).';
-        else if (practiceLevel === 'careless') practiceAdvice = 'Your knowledge is there but execution needs refinement. Slow down, write neatly, double-check key steps. Keep an error log of careless mistakes.';
-        else practiceAdvice = 'Excellent practice habits! Challenge yourself with competition-level or cross-topic problems to reach mastery.';
-
-        var encodingAdvice;
-        if (learningStyle === 'visual') encodingAdvice = 'Use diagrams, color-coding, mind maps, and videos heavily. Draw concepts from memory. Convert text into visual formats.';
-        else if (learningStyle === 'auditory') encodingAdvice = 'Record yourself explaining concepts and listen back. Discuss with study partners. Use podcasts and verbal self-quizzing.';
-        else if (learningStyle === 'writing') encodingAdvice = 'Write detailed notes in your own words. Summarize chapters into 1-page sheets. Rewrite key points from memory.';
-        else if (learningStyle === 'kinesthetic') encodingAdvice = 'Practice physically: type code, solve on paper, do experiments, walk while revising. Your body needs to be involved.';
-        else encodingAdvice = 'Create stories, analogies, and wild associations. Link new concepts to things you already know through creative connections.';
-
-        var timeAdvice;
-        if (dailyTime === 'time_low') timeAdvice = 'With limited time, use ONLY active recall and practice. Skip re-reading entirely. 25 min focused practice > 2 hours of passive reading.';
-        else if (dailyTime === 'time_medium') timeAdvice = 'Split: 20 min learning new material + 20 min practice + 10 min revision of older topics. Every single day.';
-        else if (dailyTime === 'time_good') timeAdvice = 'Split: 40 min new material + 40 min active practice + 20 min spaced revision. Include 5-min breaks every 25 min.';
-        else timeAdvice = 'You have good time. Use Pomodoro (25 min work + 5 min break). Alternate: concept study → practice → revision → concept study.';
-
-        var urgency = null;
-        if (examDistance === 'exam_urgent') urgency = '⚡ Your exam is very close! Focus on high-yield topics, practice past papers, and revise your strongest material first.';
-        else if (examDistance === 'exam_soon') urgency = '⏰ Exam approaching! Prioritize active practice and revision over learning new topics.';
+        var tags = tagsFor(quiz, answers);
+        var subject = tags[0], learningStyle = tags[4], dailyTime = tags[5],
+            examDistance = tags[6], forgetSpeed = tags[3], practiceLevel = tags[8];
 
         return {
             strategy: quiz.strategies[subject],
-            revisionFrequency: revisionFrequency,
-            practiceAdvice: practiceAdvice,
-            encodingAdvice: encodingAdvice,
-            timeAdvice: timeAdvice,
-            urgency: urgency,
-            struggle: t[1],
+            revisionFrequency: adviceFor(quiz, 'revision', forgetSpeed),
+            practiceAdvice: adviceFor(quiz, 'practice', practiceLevel),
+            encodingAdvice: adviceFor(quiz, 'encoding', learningStyle),
+            timeAdvice: adviceFor(quiz, 'time', dailyTime),
+            urgency: adviceFor(quiz, 'urgency', examDistance),
+            struggle: tags[1],
             examDistance: examDistance
         };
     }
@@ -647,10 +983,10 @@
                 ]),
                 note ? h('p', { class: 'domain-note', text: note }) : null,
                 meta.reframe ? h('p', { class: 'domain-reframe' }, [
-                    h('strong', { text: 'Reframe: ' }), document.createTextNode(meta.reframe)
+                    h('strong', { text: tr('reframe') }), document.createTextNode(meta.reframe)
                 ]) : null,
                 meta.fix ? h('p', { class: 'domain-reframe' }, [
-                    h('strong', { text: 'Fix: ' }), document.createTextNode(meta.fix)
+                    h('strong', { text: tr('fix') }), document.createTextNode(meta.fix)
                 ]) : null
             ]);
         }));
@@ -870,10 +1206,36 @@
 
     function errorView(message) {
         return h('div', { class: 'quiz-error' }, [
-            h('h2', { text: 'Something went wrong' }),
+            h('h2', { text: tr('errTitle') }),
             h('p', { text: message }),
-            h('button', { class: 'nav-button', onclick: function () { go('#/'); } }, ['Back to Home'])
+            h('button', { class: 'nav-button', onclick: function () { go('#/'); } }, [tr('backHome')])
         ]);
+    }
+
+    // --- Language switch, shared by the home page and the name gate -------
+    // Switching re-runs the router, so every view re-renders in the new
+    // language rather than half of it going stale.
+    function languageSwitch(onChange) {
+        var wrap = h('div', { class: 'lang-switch', role: 'radiogroup', 'aria-label': tr('langLabel') });
+        LANG_OPTIONS.forEach(function (opt) {
+            var active = currentLang === opt.code;
+            wrap.appendChild(h('button', {
+                type: 'button',
+                class: 'lang-option' + (active ? ' is-active' : ''),
+                role: 'radio',
+                lang: opt.code,
+                'aria-checked': active ? 'true' : 'false',
+                title: opt.note,
+                text: opt.label,
+                onclick: function () {
+                    if (currentLang === opt.code) return;
+                    if (onChange) onChange();
+                    setLang(opt.code);
+                    route();
+                }
+            }));
+        });
+        return wrap;
     }
 
     // --- Home -------------------------------------------------------------
@@ -893,13 +1255,13 @@
             ]);
         });
 
-        var toolButtons = TOOLS.map(function (t) {
+        var toolButtons = TOOLS.map(function (tool) {
             return h('button', {
                 class: 'quiz-button about-button',
-                onclick: function () { go('#/tools/' + t.id); }
+                onclick: function () { go('#/tools/' + tool.id); }
             }, [
-                h('span', { class: 'quiz-button-label', text: t.emoji + ' ' + t.label }),
-                h('span', { class: 'quiz-button-subtitle', text: t.subtitle })
+                h('span', { class: 'quiz-button-label', text: tool.emoji + ' ' + tool.label }),
+                h('span', { class: 'quiz-button-subtitle', text: tool.subtitle })
             ]);
         });
 
@@ -907,8 +1269,8 @@
             class: 'quiz-button about-button',
             onclick: function () { go('#/about'); }
         }, [
-            h('span', { class: 'quiz-button-label', text: 'ℹ️ About These Quizzes' }),
-            h('span', { class: 'quiz-button-subtitle', text: 'Learn more about each assessment' })
+            h('span', { class: 'quiz-button-label', text: tr('aboutBtn') }),
+            h('span', { class: 'quiz-button-subtitle', text: tr('aboutBtnSub') })
         ]));
 
         return h('div', { class: 'home-container' }, [
@@ -934,12 +1296,13 @@
                         }, [h('i', { class: 'fab ' + s[1] + ' social-icon' })]);
                     })),
                     h('a', { class: 'home-workshop-link', href: 'index.html' }, [
-                        h('span', { text: '🎓 Join the 3-Day Live Workshop' }),
-                        h('small', { text: 'Study smarter, score higher' })
+                        h('span', { text: tr('workshop') }),
+                        h('small', { text: tr('workshopSub') })
                     ])
                 ]),
                 h('div', { class: 'home-right' }, [
-                    h('h1', { class: 'quiz-title', text: 'Know Yourself Better' })
+                    languageSwitch(),
+                    h('h1', { class: 'quiz-title', text: tr('homeTitle') })
                 ].concat(quotesCarousel(), sections, toolButtons))
             ])
         ]);
@@ -983,10 +1346,13 @@
     }
 
     // --- Username gate ----------------------------------------------------
+    // The name gate is also where the language is picked: the questions, the
+    // options and the whole result page follow whatever is chosen here.
     function usernameView(meta) {
         var input = h('input', {
-            type: 'text', id: 'name', placeholder: 'Enter your name',
-            autocomplete: 'given-name', required: 'required'
+            type: 'text', id: 'name', placeholder: tr('namePlaceholder'),
+            autocomplete: 'given-name', required: 'required',
+            value: readState().userName || ''
         });
 
         var form = h('form', {
@@ -995,14 +1361,20 @@
                 e.preventDefault();
                 var name = input.value.trim();
                 if (!name) return;
-                writeState({ userName: name, quizId: meta.id, answers: [] });
+                writeState({ userName: name, lang: currentLang, quizId: meta.id, answers: [] });
                 go('#/quiz/' + meta.id);
             }
         }, [
-            h('div', { class: 'form-group' }, [
-                h('label', { for: 'name', text: "What's your name?" }), input
+            h('div', { class: 'form-group lang-group' }, [
+                h('label', { class: 'lang-group-label', text: tr('langLabel') }),
+                // Keep whatever has been typed across the re-render.
+                languageSwitch(function () { writeState({ userName: input.value.trim() }); }),
+                h('p', { class: 'lang-hint', text: tr('langHint') })
             ]),
-            h('button', { type: 'submit', class: 'submit-button', text: 'Start Quiz' })
+            h('div', { class: 'form-group' }, [
+                h('label', { for: 'name', text: tr('namePrompt') }), input
+            ]),
+            h('button', { type: 'submit', class: 'submit-button', text: tr('startQuiz') })
         ]);
 
         setTimeout(function () { input.focus(); }, 50);
@@ -1010,10 +1382,13 @@
         return h('div', { class: 'username-container' }, [
             h('div', { class: 'username-card' }, [
                 h('h2', { text: meta.title }),
-                h('p', { class: 'username-meta', text: meta.questions + ' questions · about ' + Math.max(2, Math.round(meta.questions * 0.25)) + ' min' }),
+                h('p', {
+                    class: 'username-meta',
+                    text: tr('meta', { q: meta.questions, m: Math.max(2, Math.round(meta.questions * 0.25)) })
+                }),
                 form,
                 h('button', {
-                    class: 'back-home-button', onclick: function () { go('#/'); }, text: '← Back to all assessments'
+                    class: 'back-home-button', onclick: function () { go('#/'); }, text: tr('backAll')
                 })
             ])
         ]);
@@ -1070,12 +1445,12 @@
                     if (current < total - 1) { current++; draw(); }
                     else { persist(); go('#/results/' + quiz.id); }
                 },
-                text: current === total - 1 ? 'Submit' : 'Next'
+                text: current === total - 1 ? tr('submit') : tr('next')
             });
 
             host.innerHTML = '';
             host.appendChild(h('div', { class: 'quiz-header' }, [
-                h('div', { class: 'quiz-title-small', text: 'Question ' + (current + 1) + ' of ' + total }),
+                h('div', { class: 'quiz-title-small', text: tr('questionOf', { n: current + 1, t: total }) }),
                 h('div', { class: 'question-counter', text: (current + 1) + '/' + total }),
                 h('div', { class: 'quiz-progress-track' }, [
                     h('div', {
@@ -1099,7 +1474,7 @@
                                 clearTimeout(advanceTimer);
                                 if (current > 0) { current--; draw(); }
                             },
-                            text: 'Back'
+                            text: tr('back')
                         }),
                         nextBtn
                     ])
@@ -1137,7 +1512,7 @@
         var userName = state.userName || '';
 
         if (state.quizId !== quiz.id || !answers.length) {
-            return errorView('No answers found for this assessment. Please take it again.');
+            return errorView(tr('noAnswers'));
         }
 
         var result = scoreQuiz(quiz, answers);
@@ -1152,7 +1527,7 @@
             case 'dominant-domain': renderDominantDomain(card, quiz, result, userName); break;
             case 'profile': renderProfile(card, quiz, result, userName); break;
             case 'plan': renderPlan(card, quiz, result, userName); break;
-            default: card.appendChild(h('p', { text: 'Unsupported result type.' }));
+            default: card.appendChild(h('p', { text: tr('unsupported') }));
         }
 
         var actions = h('div', { class: 'result-actions' }, [
@@ -1162,14 +1537,14 @@
                     var safe = (userName || 'my').replace(/\s+/g, '_').replace(/[^\w-]/g, '');
                     downloadResultCard(card, safe + '_' + quiz.id + '_results.png');
                 },
-                text: 'Download as Image'
+                text: tr('download')
             }),
             h('button', {
                 class: 'download-button download-button-solid',
                 onclick: function () {
                     openDialog(function () { clearAnswers(); go('#/'); });
                 },
-                text: 'Return to Home'
+                text: tr('returnHome')
             })
         ]);
 
@@ -1193,21 +1568,21 @@
         var label = level.label || r.band.label;
         var text = level.description || r.band.text;
 
-        card.appendChild(scoreRing(r.percentage, color, quiz.resultsTitle.replace('Your ', '')));
+        card.appendChild(scoreRing(r.percentage, color, quiz.ringCaption || quiz.resultsTitle.replace('Your ', '')));
         if (level.emoji) card.appendChild(h('div', { class: 'result-emoji', text: level.emoji }));
         card.appendChild(h('h2', { class: 'result-label', style: 'color:' + color, text: label }));
-        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is where you stand right now.') }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gStand')) }));
         if (text) card.appendChild(h('p', { class: 'result-text', text: text }));
         if (level.range) card.appendChild(h('p', { class: 'result-range', text: level.range }));
 
         if (level.tip) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '💡 Try this' }), h('p', { text: level.tip })
+                h('h4', { text: tr('tryThis') }), h('p', { text: level.tip })
             ]));
         }
         if (level.steps && level.steps.length) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '✅ Your next steps' }),
+                h('h4', { text: tr('nextSteps') }),
                 h('ul', {}, level.steps.map(function (s) { return h('li', { text: s }); }))
             ]));
         }
@@ -1215,11 +1590,11 @@
 
     function renderRingDomains(card, quiz, r, userName) {
         var color = r.band.color || '#1E5EFF';
-        card.appendChild(scoreRing(r.percentage, color, 'Overall'));
+        card.appendChild(scoreRing(r.percentage, color, tr('overall')));
         card.appendChild(h('h2', { class: 'result-label', style: 'color:' + color, text: r.band.label }));
-        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is your breakdown.') }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gBreakdown')) }));
         if (r.band.text) card.appendChild(h('p', { class: 'result-text', text: r.band.text }));
-        card.appendChild(h('h3', { class: 'result-subhead', text: 'Domain Breakdown' }));
+        card.appendChild(h('h3', { class: 'result-subhead', text: tr('domainBreakdown') }));
         card.appendChild(domainBars(r.domains, quiz.domains, quiz.domainBands));
     }
 
@@ -1227,18 +1602,18 @@
         card.appendChild(donutChart(r.chart));
         if (r.band) {
             card.appendChild(h('h2', { class: 'result-label', text: r.band.label }));
-            if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is what your answers show.') }));
+            if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gAnswers')) }));
             if (r.band.text) card.appendChild(h('p', { class: 'result-text', text: r.band.text }));
         } else if (userName) {
-            card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is your profile.') }));
+            card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gProfile')) }));
         }
     }
 
     function renderPieBand(card, quiz, r, userName) {
         var band = r.band;
-        card.appendChild(scoreRing(r.percentage, band.color || '#1E5EFF', 'Overall'));
+        card.appendChild(scoreRing(r.percentage, band.color || '#1E5EFF', tr('overall')));
         card.appendChild(h('h2', { class: 'result-label', style: 'color:' + band.color, text: band.label }));
-        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is your agility level.') }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gAgility')) }));
         if (band.text) card.appendChild(h('p', { class: 'result-text', text: band.text }));
     }
 
@@ -1252,16 +1627,16 @@
         if (r.estimatedIQ !== undefined) {
             card.appendChild(h('div', { class: 'result-bignum', style: 'color:' + color }, [
                 h('span', { text: String(r.estimatedIQ) }),
-                h('small', { text: 'estimated score · ' + r.totalScore + ' of ' + r.maxScore + ' correct' })
+                h('small', { text: tr('estimated', { c: r.totalScore, m: r.maxScore }) })
             ]));
         } else {
-            card.appendChild(scoreRing(r.percentage, color, 'Overall'));
+            card.appendChild(scoreRing(r.percentage, color, tr('overall')));
         }
 
         card.appendChild(h('h2', { class: 'result-label', style: 'color:' + color, text: band.label }));
-        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is how you did.') }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gDid')) }));
         if (band.text) card.appendChild(h('p', { class: 'result-text', text: band.text }));
-        card.appendChild(h('h3', { class: 'result-subhead', text: 'Breakdown by Area' }));
+        card.appendChild(h('h3', { class: 'result-subhead', text: tr('breakdownArea') }));
         card.appendChild(domainBars(r.domains, quiz.domains, quiz.domainBands));
     }
 
@@ -1279,15 +1654,15 @@
             limit: quiz.maxDominant
         });
 
-        card.appendChild(scoreRing(r.percentage, color, 'Overall load'));
+        card.appendChild(scoreRing(r.percentage, color, tr('overallLoad')));
         card.appendChild(h('h2', { class: 'result-label', style: 'color:' + color, text: band.label }));
-        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, 'here is what your answers point to right now.') }));
+        if (userName) card.appendChild(h('p', { class: 'result-greeting', text: greeting(userName, tr('gPoint')) }));
         if (band.text) card.appendChild(h('p', { class: 'result-text', text: band.text }));
 
         if (tops.length) {
             card.appendChild(h('h3', {
                 class: 'result-subhead',
-                text: tops.length > 1 ? 'Your dominant patterns' : 'Your dominant pattern'
+                text: tops.length > 1 ? tr('domPatterns') : tr('domPattern')
             }));
             tops.forEach(function (d) {
                 var meta = (quiz.domains || {})[d.name] || {};
@@ -1303,33 +1678,33 @@
                     ]),
                     h('p', { class: 'plan-lead', text: plan.lead }),
                     plan.sequence ? h('p', { class: 'plan-sequence', text: plan.sequence }) : null,
-                    plan.do && plan.do.length ? h('ul', { class: 'plan-do' }, plan.do.map(function (t) {
-                        return h('li', { text: t });
+                    plan.do && plan.do.length ? h('ul', { class: 'plan-do' }, plan.do.map(function (line) {
+                        return h('li', { text: line });
                     })) : null,
                     plan.avoid ? h('p', { class: 'plan-avoid' }, [
-                        h('strong', { text: 'Don’t start with: ' }), document.createTextNode(plan.avoid)
+                        h('strong', { text: tr('dontStart') }), document.createTextNode(plan.avoid)
                     ]) : null,
                     plan.rule ? h('p', { class: 'plan-rule', text: plan.rule }) : null
                 ]));
             });
         } else {
-            card.appendChild(h('p', { class: 'result-text', text: 'No single pattern is standing out, and nothing is scoring high enough to need managing first. Go straight to the work.' }));
+            card.appendChild(h('p', { class: 'result-text', text: tr('noDominant') }));
         }
 
         if (band.smallest) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '⭐ ' + (quiz.reflection || 'The smallest useful thing right now') }),
+                h('h4', { text: '⭐ ' + (quiz.reflection || tr('smallest')) }),
                 h('p', { text: band.smallest })
             ]));
         }
 
-        card.appendChild(h('h3', { class: 'result-subhead', text: 'All four scores' }));
+        card.appendChild(h('h3', { class: 'result-subhead', text: tr('allFour') }));
         card.appendChild(domainBars(r.domains, quiz.domains, quiz.domainBands));
 
         if (quiz.closing) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: 'STOP → CHECK → CHOOSE → STUDY' }),
-                h('ul', {}, (quiz.closing.steps || []).map(function (t) { return h('li', { text: t }); })),
+                h('h4', { text: quiz.closingTitle || tr('stopCheck') }),
+                h('ul', {}, (quiz.closing.steps || []).map(function (line) { return h('li', { text: line }); })),
                 quiz.closing.line ? h('p', { class: 'plan-rule', text: quiz.closing.line }) : null
             ]));
         }
@@ -1346,30 +1721,33 @@
         card.appendChild(h('div', { class: 'profile-hero', style: '--profile-color:' + color }, [
             h('div', { class: 'profile-hero-emoji', text: profile.emoji || '✨' })
         ]));
+        var profileName = profile.label || profile.name || r.top.name;
         card.appendChild(h('h2', {
             class: 'result-label', style: 'color:' + color,
-            text: (userName ? userName + ', you are ' : 'You are ') + (profile.label || profile.name || r.top.name)
+            text: userName
+                ? tr('youAreNamed', { name: userName, profile: profileName })
+                : tr('youAre', { profile: profileName })
         }));
         if (profile.description) card.appendChild(h('p', { class: 'result-text', text: profile.description }));
 
         if (profile.traits && profile.traits.length) {
-            card.appendChild(h('ul', { class: 'trait-list' }, profile.traits.map(function (t) {
-                return h('li', { class: 'trait-chip', text: t });
+            card.appendChild(h('ul', { class: 'trait-list' }, profile.traits.map(function (trait) {
+                return h('li', { class: 'trait-chip', text: trait });
             })));
         }
         if (profile.strengths) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '💪 Your strengths' }), h('p', { text: profile.strengths })
+                h('h4', { text: tr('strengths') }), h('p', { text: profile.strengths })
             ]));
         }
         if (profile.growthArea) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '🌱 Your growth area' }), h('p', { text: profile.growthArea })
+                h('h4', { text: tr('growth') }), h('p', { text: profile.growthArea })
             ]));
         }
         if (profile.forFacilitator) {
             card.appendChild(h('div', { class: 'result-tip' }, [
-                h('h4', { text: '🎯 What this means for your learning' }),
+                h('h4', { text: tr('meansLearning') }),
                 h('p', { text: profile.forFacilitator })
             ]));
         }
@@ -1378,7 +1756,7 @@
         if (r.secondary) {
             var sec = quiz.profiles[r.secondary.name] || {};
             card.appendChild(h('div', { class: 'result-secondary' }, [
-                h('h4', { text: 'Your secondary type' }),
+                h('h4', { text: tr('secondary') }),
                 h('p', {}, [
                     h('span', { class: 'domain-emoji', text: sec.emoji || '' }),
                     document.createTextNode(' ' + (sec.label || sec.name || r.secondary.name))
@@ -1386,7 +1764,7 @@
             ]));
         }
 
-        card.appendChild(h('h3', { class: 'result-subhead', text: quiz.breakdownTitle || 'Your Breakdown' }));
+        card.appendChild(h('h3', { class: 'result-subhead', text: quiz.breakdownTitle || tr('yourBreakdown') }));
         card.appendChild(donutChart(r.chart));
     }
 
@@ -1395,31 +1773,34 @@
         var s = p.strategy || {};
 
         card.appendChild(h('div', { class: 'result-emoji', text: s.emoji || '🗺️' }));
+        var subjectTitle = s.title || tr('planSubject');
         card.appendChild(h('h2', {
             class: 'result-label',
-            text: (userName ? userName + "'s" : 'Your') + ' Personalized Strategy for ' + (s.title || 'Your Subject')
+            text: userName
+                ? tr('planTitleNamed', { name: userName, subject: subjectTitle })
+                : tr('planTitle', { subject: subjectTitle })
         }));
-        card.appendChild(h('p', { class: 'result-greeting', text: "Based on your answers, here's exactly how you should study." }));
+        card.appendChild(h('p', { class: 'result-greeting', text: tr('planLead') }));
 
         if (p.urgency) {
             card.appendChild(h('div', { class: 'result-urgency', text: p.urgency }));
         }
 
         if (s.steps && s.steps.length) {
-            card.appendChild(h('h3', { class: 'result-subhead', text: 'Your Step-by-Step Method' }));
+            card.appendChild(h('h3', { class: 'result-subhead', text: tr('stepMethod') }));
             card.appendChild(h('ol', { class: 'plan-steps' }, s.steps.map(function (step) {
                 return h('li', { text: step });
             })));
         }
 
         [
-            ['🔁 Revision Schedule', p.revisionFrequency],
-            ['✍️ How to Encode It', p.encodingAdvice],
-            ['🎯 Practice Plan', p.practiceAdvice],
-            ['⏱️ Daily Time Split', p.timeAdvice],
-            ['🧠 Visualization', s.visualization],
-            ['📝 Practice Style', s.practice],
-            ['📅 Revision Approach', s.revision]
+            [tr('rowRevision'), p.revisionFrequency],
+            [tr('rowEncode'), p.encodingAdvice],
+            [tr('rowPractice'), p.practiceAdvice],
+            [tr('rowTime'), p.timeAdvice],
+            [tr('rowVis'), s.visualization],
+            [tr('rowPStyle'), s.practice],
+            [tr('rowRApproach'), s.revision]
         ].forEach(function (row) {
             if (!row[1]) return;
             card.appendChild(h('div', { class: 'result-tip' }, [
@@ -1436,7 +1817,7 @@
                 h('ul', { class: 'about-list' }, section.quizzes.map(function (q) {
                     return h('li', {}, [
                         h('strong', { text: q.emoji + ' ' + q.title }),
-                        h('span', { text: ' — ' + q.subtitle + ' (' + q.questions + ' questions)' })
+                        h('span', { text: tr('aboutItem', { sub: q.subtitle, n: q.questions }) })
                     ]);
                 }))
             ]);
@@ -1444,18 +1825,12 @@
 
         return h('div', { class: 'about-container' }, [
             h('div', { class: 'about-content' }, [
-                h('h1', { text: 'About These Assessments' }),
-                h('p', {
-                    text: 'These are self-reflection tools, not diagnostic tests. They are designed to ' +
-                        'show you how you currently study, focus, and think about yourself — so you know ' +
-                        'which habits to change first. No score here is a verdict on your ability.'
-                }),
-                h('p', {
-                    text: 'Nothing you enter is uploaded or stored on a server. Your name and answers stay ' +
-                        'in your own browser for the length of the session and are cleared when you return home.'
-                })
+                languageSwitch(),
+                h('h1', { text: tr('aboutTitle') }),
+                h('p', { text: tr('aboutP1') }),
+                h('p', { text: tr('aboutP2') })
             ].concat(groups, [
-                h('button', { class: 'back-home-button', onclick: function () { go('#/'); }, text: '← Back to all assessments' })
+                h('button', { class: 'back-home-button', onclick: function () { go('#/'); }, text: tr('backAll') })
             ]))
         ]);
     }
@@ -1496,7 +1871,7 @@
     // 12. ROUTER
     // =====================================================================
 
-    function findMeta(id) {
+    function findMeta(catalogue, id) {
         var found = null;
         catalogue.sections.forEach(function (s) {
             s.quizzes.forEach(function (q) { if (q.id === id) found = q; });
@@ -1517,21 +1892,26 @@
         var view = parts[0] || 'home';
         var id = parts[1];
 
-        var app = appEl();
-        if (app) app.innerHTML = '<div class="quiz-loading" role="status">Loading…</div>';
+        // The language is re-read on every route so a switch made on one view
+        // is in force by the time the next one renders.
+        currentLang = readLang();
+        applyLangToDocument(currentLang);
 
-        return loadCatalogue().then(function (data) {
+        var app = appEl();
+        if (app) app.innerHTML = '<div class="quiz-loading" role="status">' + tr('loading') + '</div>';
+
+        return loadCatalogue(currentLang).then(function (data) {
             if (view === 'home') {
-                document.title = 'Know Yourself Better — Free Student Assessments | Super Learner Academy';
+                document.title = tr('titleHome');
                 return render(homeView(data));
             }
             if (view === 'about') {
-                document.title = 'About These Assessments | Super Learner Academy';
+                document.title = tr('titleAbout');
                 return render(aboutView(data));
             }
             if (view === 'tools') {
-                var tool = TOOLS.filter(function (t) { return t.id === id; })[0];
-                if (!tool) return render(errorView('That tool does not exist.'));
+                var tool = TOOLS.filter(function (item) { return item.id === id; })[0];
+                if (!tool) return render(errorView(tr('noTool')));
                 document.title = tool.label + ' | Super Learner Academy';
                 return loadTools().then(function (tools) {
                     var host = h('div', { class: 'tool-container' });
@@ -1542,28 +1922,27 @@
                 });
             }
             if (view === 'username') {
-                var meta = findMeta(id);
-                if (!meta) return render(errorView('That assessment does not exist.'));
+                var meta = findMeta(data, id);
+                if (!meta) return render(errorView(tr('noQuiz')));
                 document.title = meta.title + ' | Super Learner Academy';
                 return render(usernameView(meta));
             }
             if (view === 'quiz' || view === 'results') {
-                return loadQuiz(id).then(function (quiz) {
+                return loadQuiz(id, currentLang).then(function (quiz) {
                     document.title = quiz.title + ' | Super Learner Academy';
                     render(view === 'quiz' ? quizView(quiz) : resultsView(quiz));
                 });
             }
             go('#/');
         }).catch(function (err) {
-            render(errorView(
-                'Could not load the assessments (' + err.message + '). ' +
-                'Check your connection and reload the page.'
-            ));
+            render(errorView(tr('loadFail', { m: err.message })));
         });
     }
 
     window.addEventListener('hashchange', route);
     document.addEventListener('DOMContentLoaded', function () {
+        currentLang = readLang();
+        applyLangToDocument(currentLang);
         if (!window.location.hash) window.location.replace('#/');
         route();
     });
@@ -1590,6 +1969,12 @@
         poleBand: poleBand,
         generateStudyPlan: generateStudyPlan,
         scoreQuiz: scoreQuiz,
+        mergeTranslation: mergeTranslation,
+        scoreText: scoreText,
+        readLang: readLang,
+        setLang: setLang,
+        getLang: function () { return currentLang; },
+        tr: tr,
         optionsFor: optionsFor,
         readState: readState,
         writeState: writeState,

@@ -210,6 +210,59 @@ scoring rules that were embedded in each `*Results.jsx`. That generator depended
 source and is **not** reproducible now that `quiz-assessment-app` is gone - the JSON files are the
 source of truth from here on. Edit them directly.
 
+### Hindi / English: English is the source of truth for SCORING, Hindi only for display
+
+Every quiz runs in either language. The picker is on the name gate (`usernameView`), which is what
+the feature was asked for, and the home/about views carry the same switch so the app is never half
+translated. The choice lives in `sessionStorage` (`sla_quiz_state.lang`) **and** `localStorage`
+(`sla_quiz_lang`), so it survives a refresh and is remembered as the default next visit.
+
+- **Translations are sidecar files**: `QuizQuestions/hi/<id>.json` (plus `hi/index.json` for the
+  catalogue). They mirror the English file's shape and carry **display strings only**. `loadQuiz()`
+  always fetches the English file first, then layers the sidecar over it with `mergeTranslation()`.
+  A missing or broken sidecar silently falls back to English - it is never fatal.
+- **`mergeTranslation()` is a structural overlay**: arrays merge by INDEX, objects by KEY, anything
+  the sidecar omits stays English. So **option order and array lengths must never diverge** between
+  a file and its sidecar - a reordered option would silently attach the right score to the wrong
+  Hindi line. `scripts/check_translations.py` is the guard; run `py -3 scripts/check_translations.py`
+  after editing any `QuizQuestions/*.json`.
+- **Three scorers match on option TEXT** - `tally-vark` (English keywords), `tally-word-list`
+  (Social Type's `wordLists`) and `tally-option`'s `opt.key || text` fallback. `mergeTranslation()`
+  therefore stashes the original English string as `textEn`, and those scorers read it through
+  `scoreText(opt)`, never the translated `text`. Don't "simplify" that back to `opt.text`.
+- **Map KEYS are identifiers, not copy**: `domains`, `plans`, `profiles`, `strategies`,
+  `wordLists` and `categories` keep their English keys in a sidecar. The Hindi name goes in the
+  entry's `label` (domains/profiles) or in a `categoryLabels` map (VARK, Social Type), which
+  `tallyVARK`/`tallyWordLists` use for the chart legend only. Translating `categories` in place
+  would break the counter, because it is also the counter's key list.
+- **`poles` IS translated in place** (Brain Dominance, Motivation) - `poleBand()` matches
+  `band.poleAbove` against the pole's INDEX, so the two names are display-only.
+- **Keys a sidecar may ADD** that the English file doesn't have: `ringCaption` (Hindi has no
+  `'Your '` prefix for `renderRing` to strip), `label`, `categoryLabels`, `closingTitle`, and
+  `advice` (see below). Everything else must already exist in the English file.
+- **UI chrome** (buttons, headings, greetings, "Question 3 of 15") is not in the JSON - it lives in
+  the `STRINGS` table in `quiz.js` and is read through `tr('key', vars)`. The lookup is named `tr`,
+  not `t`, because several callbacks in that file already bind `t` as a loop variable. The
+  confirmation dialog is static markup in `quiz.html` and is translated in place via `data-i18n`
+  attributes.
+- **`generateStudyPlan()`'s advice copy moved out of the function body** into the `PLAN_ADVICE`
+  table, and is read through `adviceFor(quiz, group, tag)`. A quiz's own `advice` key overrides it,
+  which is how `hi/study-strategy.json` translates those lines. English behaviour is unchanged -
+  `study-strategy.json` has no `advice` key, so the defaults apply.
+- **The Devanagari webfont is loaded on demand.** Montserrat/Inter carry no Devanagari, so
+  `ensureHindiFont()` injects Noto Sans Devanagari the first time Hindi is picked, and
+  `:root[data-lang="hi"]` in `quiz.css` switches to it. English visitors never pay for the request.
+- **Content that must NOT be translated**: the IQ items that test English vocabulary
+  (`EPHEMERAL`, `UBIQUITOUS`), the English letter/month sequences (`AZ, BY, CX`, `J, F, M, A`) and
+  the `APPLE = 50` letter-sum puzzle keep their English terms - translating them changes what the
+  question actually tests. Social Type's question text is just `1/20`..`20/20`, so it has no
+  translation at all; only its adjectives do.
+- **Tests**: `tests/unit/quiz-i18n.test.js` asserts that the same answers produce identical numbers
+  in both languages for all 19 quizzes, that `textEn` survives the merge, that a missing sidecar
+  falls back to English, and that no sidecar restates a scoring key.
+- **The 11 tools in `quiz-tools.js` are still English only.** That was out of scope here; if they
+  are ever translated they need their own approach, since their copy is inline in the JS.
+
 ## Shared site chrome (`site-nav.css` / `site-nav.js`) and `about.html`
 
 Added for Google's Search Quality Rater / E-E-A-T signals: a reader (or a human rater)
@@ -243,3 +296,4 @@ must be able to tell who runs the site and how to contact them from any page.
 - `quotes.json` feeds a rotating quote slider (`showQuote`/`nextQuote` in `script.js`); it's independent of `data.json`.
 - `Super_Learner_Academy_Ebook.pdf` and `Favicon SLA/`, `Images/` are static assets referenced directly by the HTML — no asset pipeline.
 - `scripts/` holds one-off Python/Pillow maintenance scripts (`generate_mandala.py`, `recenter_host_photo.py`) for regenerating/fixing image assets in `Images/`. These aren't part of a build (there is none) and aren't run automatically — re-run them by hand only when the relevant source asset changes.
+- `scripts/check_translations.py` is different: it's a **validator**, not a generator. It checks every `QuizQuestions/hi/*.json` against its English original (array lengths, unknown keys, keys the scorers read) and should be run after any edit to a quiz JSON.

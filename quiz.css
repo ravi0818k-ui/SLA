@@ -1713,3 +1713,96 @@ input, textarea, [contenteditable="true"] {
   .fg-cell { width: 18px; height: 18px; }
   .fg-bar { width: 11px; margin-left: -5.5px; }
 }
+
+
+/* ==========================================================================
+   LANGUAGE SWITCH (English / Hindi)
+
+   The picker on the name gate is the one the brief asks for; the copy on the
+   home and about views follows the same choice so the app is never half
+   translated. Devanagari has taller ascenders/descenders than Latin, so
+   [data-lang="hi"] puts Noto Sans Devanagari first (quiz.js injects that
+   webfont only once Hindi is picked) and opens the line-height a little.
+   ========================================================================== */
+
+.lang-switch {
+    display: inline-flex;
+    gap: 6px;
+    padding: 4px;
+    margin: 0 0 14px;
+    background: #eef1f6;
+    border-radius: 999px;
+}
+
+.lang-option {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #4a5568;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.4;
+    padding: 7px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.lang-option:hover {
+    color: #1E5EFF;
+}
+
+.lang-option.is-active {
+    background: #fff;
+    color: #1E5EFF;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.14);
+}
+
+.lang-option:focus-visible {
+    outline: 2px solid #1E5EFF;
+    outline-offset: 2px;
+}
+
+.lang-group {
+    text-align: left;
+}
+
+.lang-group-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.lang-hint {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #6b7280;
+}
+
+:root[data-lang="hi"] body,
+:root[data-lang="hi"] .app-container {
+    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+:root[data-lang="hi"] .question-text,
+:root[data-lang="hi"] .option-text,
+:root[data-lang="hi"] .result-text,
+:root[data-lang="hi"] .domain-note,
+:root[data-lang="hi"] .plan-lead {
+    line-height: 1.75;
+}
+
+/* The picker is the first thing on the name card; keep it off the edge on
+   narrow phones, where the two pills otherwise touch the card border. */
+@media (max-width: 480px) {
+    .lang-switch {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lang-option {
+        flex: 1;
+        padding: 8px 10px;
+    }
+}

@@ -52,7 +52,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="site-nav.css?v=1.0.0">
-    <link rel="stylesheet" href="quiz.css?v=1.0.1">
+    <link rel="stylesheet" href="quiz.css?v=1.1.0">
 </head>
 <body data-page="quiz">
 
@@ -112,14 +112,14 @@
     <div id="quiz-dialog" class="quiz-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="quiz-dialog-title">
         <div class="quiz-dialog-backdrop" data-dialog-cancel></div>
         <div class="quiz-dialog-panel">
-            <h2 class="quiz-dialog-title" id="quiz-dialog-title">Return to Home Page?</h2>
+            <h2 class="quiz-dialog-title" id="quiz-dialog-title" data-i18n="dlgTitle">Return to Home Page?</h2>
             <div class="quiz-dialog-body">
-                <p>Are you sure you want to go to the main page?</p>
-                <p><strong>Warning:</strong> If you leave this page, you will not be able to re-download your results. Please make sure you have downloaded your results before leaving.</p>
+                <p data-i18n="dlgBody1">Are you sure you want to go to the main page?</p>
+                <p><strong data-i18n="dlgWarn">Warning:</strong><span data-i18n="dlgBody2"> If you leave this page, you will not be able to re-download your results. Please make sure you have downloaded your results before leaving.</span></p>
             </div>
             <div class="quiz-dialog-actions">
-                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-outline" data-dialog-cancel>Cancel</button>
-                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-filled" data-dialog-confirm>Yes, Return Home</button>
+                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-outline" data-dialog-cancel data-i18n="dlgCancel">Cancel</button>
+                <button type="button" class="quiz-dialog-btn quiz-dialog-btn-filled" data-dialog-confirm data-i18n="dlgConfirm">Yes, Return Home</button>
             </div>
         </div>
     </div>
@@ -172,6 +172,6 @@
     </footer>
 
     <script src="site-nav.js?v=1.0.0" defer></script>
-    <script src="quiz.js?v=1.0.2"></script>
+    <script src="quiz.js?v=1.1.0"></script>
 </body>
 </html>
