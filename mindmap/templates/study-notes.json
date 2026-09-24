@@ -1,0 +1,81 @@
+{
+  "id": "study-notes",
+  "name": "Study Notes",
+  "description": "Turn one chapter into a map you can revise from.",
+  "icon": "📚",
+  "view": {
+    "layout": "mindmap",
+    "theme": "sla"
+  },
+  "root": {
+    "text": "Chapter Title",
+    "children": [
+      {
+        "text": "Key Terms",
+        "children": [
+          {
+            "text": "Term 1 = definition"
+          },
+          {
+            "text": "Term 2 = definition"
+          }
+        ]
+      },
+      {
+        "text": "Main Ideas",
+        "children": [
+          {
+            "text": "Idea"
+          },
+          {
+            "text": "Why it matters"
+          }
+        ]
+      },
+      {
+        "text": "Formulas / Rules",
+        "children": [
+          {
+            "text": "Formula 1"
+          },
+          {
+            "text": "When to use it"
+          }
+        ]
+      },
+      {
+        "text": "Examples",
+        "children": [
+          {
+            "text": "Worked example"
+          },
+          {
+            "text": "Common mistake"
+          }
+        ]
+      },
+      {
+        "text": "Questions I Got Wrong",
+        "children": [
+          {
+            "text": "Question"
+          },
+          {
+            "text": "What I missed"
+          }
+        ]
+      },
+      {
+        "text": "Recall Prompts",
+        "children": [
+          {
+            "text": "Explain it out loud"
+          },
+          {
+            "text": "Draw it from memory"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+/* ==========================================================================
+   OpenMind landing page (PAGE-01)
+   ========================================================================== */
+
+.om-page { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ------------------------------------------------------------------ hero */
+
+.om-hero {
+    padding: 56px 20px 44px;
+    background:
+        radial-gradient(900px 340px at 12% -10%, rgba(255, 107, 0, .14), transparent 65%),
+        radial-gradient(760px 320px at 92% 0%, rgba(30, 94, 255, .14), transparent 62%),
+        var(--om-surface);
+    border-bottom: 1px solid var(--om-border);
+}
+
+.om-hero-inner { max-width: 880px; margin: 0 auto; position: relative; }
+
+.om-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--deep-learning-blue);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -.01em;
+}
+:root[data-theme="dark"] .om-logo,
+.om-logo { color: var(--om-ink); }
+.om-logo-mark {
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--deep-learning-blue);
+    color: #fff;
+}
+
+.om-theme-toggle {
+    position: absolute;
+    top: 0; right: 58px;
+    width: 38px; height: 38px;
+    border: 1px solid var(--om-border-strong);
+    border-radius: 50%;
+    background: var(--om-surface);
+    color: var(--om-ink-2);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.om-title {
+    margin: 26px 0 12px;
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.16;
+    letter-spacing: -.02em;
+    max-width: 18ch;
+}
+
+.om-lede {
+    margin: 0 0 24px;
+    max-width: 62ch;
+    font-size: 16.5px;
+    line-height: 1.66;
+    color: var(--om-ink-2);
+}
+
+.om-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.om-btn-ghost { background: transparent; }
+
+.om-privacy {
+    margin: 18px 0 0;
+    font-size: 13.5px;
+    color: var(--om-ink-3);
+    display: flex; align-items: center; gap: 8px;
+}
+
+/* --------------------------------------------------------------- sections */
+
+.om-main { flex: 1; max-width: 1060px; width: 100%; margin: 0 auto; padding: 44px 20px 64px; }
+
+.om-section + .om-section { margin-top: 52px; }
+.om-section-head { margin-bottom: 18px; }
+.om-section-head h2 { margin: 0 0 4px; font-size: 21px; letter-spacing: -.01em; }
+.om-section-sub { margin: 0; color: var(--om-ink-3); font-size: 14px; }
+
+.om-empty { color: var(--om-ink-3); font-size: 14.5px; margin: 0; }
+
+/* recent maps */
+.om-recent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+    gap: 12px;
+}
+.om-recent-card {
+    position: relative;
+    border: 1px solid var(--om-border);
+    border-radius: var(--om-radius);
+    background: var(--om-surface);
+    box-shadow: var(--om-shadow);
+    transition: transform .14s ease, box-shadow .14s ease;
+}
+.om-recent-card:hover { transform: translateY(-2px); box-shadow: var(--om-shadow-lg); }
+.om-recent-open {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 40px 15px 15px;
+    text-decoration: none;
+    color: inherit;
+}
+.om-recent-title { font-weight: 600; font-size: 15px; }
+.om-recent-meta { font-size: 12.5px; color: var(--om-ink-3); }
+.om-recent-delete {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 26px; height: 26px;
+    border: none; border-radius: 7px;
+    background: none; color: var(--om-ink-3);
+    font-size: 17px; line-height: 1; cursor: pointer;
+}
+.om-recent-delete:hover { background: var(--om-surface-3); color: var(--om-danger); }
+
+/* templates */
+.om-templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+    gap: 12px;
+}
+.om-template {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 16px;
+    border: 1px solid var(--om-border);
+    border-radius: var(--om-radius);
+    background: var(--om-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .14s ease, transform .14s ease;
+}
+.om-template:hover { border-color: var(--om-accent); transform: translateY(-2px); }
+.om-template-icon { font-size: 24px; }
+.om-template-name { font-weight: 600; font-size: 14.5px; }
+.om-template-desc { font-size: 12.5px; color: var(--om-ink-3); line-height: 1.45; }
+
+/* features */
+.om-features {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+    gap: 20px 28px;
+}
+.om-features h3 { margin: 0 0 5px; font-size: 15.5px; }
+.om-features p { margin: 0; color: var(--om-ink-2); font-size: 14px; line-height: 1.6; }
+
+/* steps */
+.om-steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+.om-steps li { color: var(--om-ink-2); font-size: 14.5px; line-height: 1.65; }
+.om-steps strong { color: var(--om-ink); }
+.om-note {
+    margin: 18px 0 0;
+    padding: 14px 16px;
+    border-left: 3px solid var(--growth-green);
+    background: var(--om-surface);
+    border-radius: 0 var(--om-radius-sm) var(--om-radius-sm) 0;
+    color: var(--om-ink-2);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* footer */
+.om-footer { border-top: 1px solid var(--om-border); background: var(--om-surface); }
+.om-footer-inner { max-width: 1060px; margin: 0 auto; padding: 28px 20px 40px; }
+.om-footer-brand { margin: 0 0 10px; font-weight: 600; font-size: 14.5px; }
+.om-footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 10px; }
+.om-footer-links a { font-size: 13.5px; }
+.om-footer-note { margin: 0; font-size: 12.5px; color: var(--om-ink-3); max-width: 70ch; }
+
+body.is-dropping::after {
+    content: 'Drop the file to import it';
+    position: fixed; inset: 12px;
+    display: grid; place-items: center;
+    border: 2px dashed var(--om-accent);
+    border-radius: 18px;
+    background: rgba(255, 107, 0, .06);
+    color: var(--om-ink);
+    font: 600 16px var(--font-body);
+    z-index: 9990;
+    pointer-events: none;
+}
+
+@media (max-width: 560px) {
+    .om-hero { padding: 40px 18px 32px; }
+    .om-theme-toggle { right: 56px; top: -4px; }
+    .om-cta-row .om-btn { flex: 1 1 100%; }
+}

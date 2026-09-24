@@ -1,0 +1,60 @@
+{
+  "id": "goal-planning",
+  "name": "Goal Planning",
+  "description": "One goal broken into habits, milestones and checks.",
+  "icon": "🎯",
+  "view": {
+    "layout": "right",
+    "theme": "sla"
+  },
+  "root": {
+    "text": "My Goal",
+    "children": [
+      {
+        "text": "Why It Matters"
+      },
+      {
+        "text": "Target Date"
+      },
+      {
+        "text": "Milestones",
+        "children": [
+          {
+            "text": "By month 1"
+          },
+          {
+            "text": "By month 2"
+          },
+          {
+            "text": "By month 3"
+          }
+        ]
+      },
+      {
+        "text": "Daily Habits",
+        "children": [
+          {
+            "text": "Habit 1"
+          },
+          {
+            "text": "Habit 2"
+          }
+        ]
+      },
+      {
+        "text": "What Could Stop Me",
+        "children": [
+          {
+            "text": "Obstacle"
+          },
+          {
+            "text": "If-then plan"
+          }
+        ]
+      },
+      {
+        "text": "How I'll Measure It"
+      }
+    ]
+  }
+}

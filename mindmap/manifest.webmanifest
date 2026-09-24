@@ -1,0 +1,24 @@
+{
+  "name": "OpenMind — Mind Maps for Students",
+  "short_name": "OpenMind",
+  "description": "A free mind-map maker that runs entirely in your browser. Build study maps, collapse what you know, export to PNG, SVG, PDF or Markdown.",
+  "id": "/mindmap/",
+  "start_url": "./editor.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f6fb",
+  "theme_color": "#0B2A5B",
+  "lang": "en",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "New mind map", "url": "./editor.html?template=blank" },
+    { "name": "Study notes template", "url": "./editor.html?template=study-notes" },
+    { "name": "All maps", "url": "./index.html" }
+  ]
+}

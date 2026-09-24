@@ -1,0 +1,52 @@
+{
+  "id": "brainstorming",
+  "name": "Brainstorming",
+  "description": "Get every idea out first, sort them after.",
+  "icon": "💡",
+  "view": {
+    "layout": "mindmap",
+    "theme": "classic"
+  },
+  "root": {
+    "text": "The Question",
+    "children": [
+      {
+        "text": "Wild Ideas"
+      },
+      {
+        "text": "Practical Ideas"
+      },
+      {
+        "text": "What Others Did"
+      },
+      {
+        "text": "Constraints",
+        "children": [
+          {
+            "text": "Time"
+          },
+          {
+            "text": "Money"
+          },
+          {
+            "text": "Skills"
+          }
+        ]
+      },
+      {
+        "text": "Best Three",
+        "children": [
+          {
+            "text": "Pick 1"
+          },
+          {
+            "text": "Pick 2"
+          },
+          {
+            "text": "Pick 3"
+          }
+        ]
+      }
+    ]
+  }
+}

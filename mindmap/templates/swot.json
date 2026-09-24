@@ -1,0 +1,47 @@
+{
+  "id": "swot",
+  "name": "SWOT Analysis",
+  "description": "Strengths, Weaknesses, Opportunities, Threats.",
+  "icon": "🧭",
+  "view": {
+    "layout": "mindmap",
+    "theme": "classic"
+  },
+  "root": {
+    "text": "SWOT",
+    "children": [
+      {
+        "text": "Strengths",
+        "children": [
+          {
+            "text": "What I do well"
+          }
+        ]
+      },
+      {
+        "text": "Weaknesses",
+        "children": [
+          {
+            "text": "What slows me down"
+          }
+        ]
+      },
+      {
+        "text": "Opportunities",
+        "children": [
+          {
+            "text": "What I can use"
+          }
+        ]
+      },
+      {
+        "text": "Threats",
+        "children": [
+          {
+            "text": "What could go wrong"
+          }
+        ]
+      }
+    ]
+  }
+}

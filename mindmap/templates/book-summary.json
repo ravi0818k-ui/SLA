@@ -1,0 +1,54 @@
+{
+  "id": "book-summary",
+  "name": "Book Summary",
+  "description": "Capture a book in one page: thesis, ideas, takeaways.",
+  "icon": "📖",
+  "view": {
+    "layout": "right",
+    "theme": "paper"
+  },
+  "root": {
+    "text": "Book Title",
+    "children": [
+      {
+        "text": "Author & Context"
+      },
+      {
+        "text": "Core Argument",
+        "children": [
+          {
+            "text": "In one sentence"
+          }
+        ]
+      },
+      {
+        "text": "Key Chapters",
+        "children": [
+          {
+            "text": "Chapter 1"
+          },
+          {
+            "text": "Chapter 2"
+          },
+          {
+            "text": "Chapter 3"
+          }
+        ]
+      },
+      {
+        "text": "Best Quotes"
+      },
+      {
+        "text": "What I'll Actually Do",
+        "children": [
+          {
+            "text": "Action 1"
+          },
+          {
+            "text": "Action 2"
+          }
+        ]
+      }
+    ]
+  }
+}

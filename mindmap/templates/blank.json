@@ -1,0 +1,24 @@
+{
+  "id": "blank",
+  "name": "Blank Mind Map",
+  "description": "One central topic. Start from nothing.",
+  "icon": "⭕",
+  "view": {
+    "layout": "mindmap",
+    "theme": "sla"
+  },
+  "root": {
+    "text": "Central Topic",
+    "children": [
+      {
+        "text": "Idea 1"
+      },
+      {
+        "text": "Idea 2"
+      },
+      {
+        "text": "Idea 3"
+      }
+    ]
+  }
+}

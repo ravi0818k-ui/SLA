@@ -1,0 +1,73 @@
+{
+  "id": "exam-revision",
+  "name": "Exam Revision Plan",
+  "description": "Spread a syllabus across the weeks you have left.",
+  "icon": "🗓",
+  "view": {
+    "layout": "org",
+    "theme": "sla"
+  },
+  "root": {
+    "text": "Exam - subject",
+    "children": [
+      {
+        "text": "Syllabus",
+        "children": [
+          {
+            "text": "Unit 1"
+          },
+          {
+            "text": "Unit 2"
+          },
+          {
+            "text": "Unit 3"
+          }
+        ]
+      },
+      {
+        "text": "Weak Areas",
+        "children": [
+          {
+            "text": "Topic I keep forgetting"
+          }
+        ]
+      },
+      {
+        "text": "Revision Schedule",
+        "children": [
+          {
+            "text": "Week 1 - first pass"
+          },
+          {
+            "text": "Week 2 - active recall"
+          },
+          {
+            "text": "Week 3 - past papers"
+          }
+        ]
+      },
+      {
+        "text": "Practice",
+        "children": [
+          {
+            "text": "Past paper 1"
+          },
+          {
+            "text": "Timed test"
+          }
+        ]
+      },
+      {
+        "text": "Day Before",
+        "children": [
+          {
+            "text": "Light revision only"
+          },
+          {
+            "text": "Sleep"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -96,6 +96,27 @@ committing:
 python -c "from PIL import ImageFont; ImageFont.truetype('generatenotes/fonts/handwriting_r.ttf', 32)"
 ```
 
+## Mind maps
+
+**https://www.superlearneracademy.in/mindmap/**
+
+**OpenMind** — a free mind-map editor that runs entirely in the browser: build a
+map, collapse the branches you can already recall, and export the rest as PNG,
+SVG, PDF, Markdown or a `.openmind` file. Maps are stored on the device in
+IndexedDB; there is no account, no backend and nothing is uploaded. It installs
+as a PWA and keeps working offline.
+
+Unlike the rest of the site it is written as native ES modules under
+`mindmap/src/`, so **it has to be served over http** rather than opened from
+the filesystem:
+
+```bash
+python -m http.server 8000   # then open http://localhost:8000/mindmap/
+```
+
+`mindmap/docs/README.md` is the developer reference (module map, data model,
+layout engine, file format, invariants).
+
 ## Landing page
 
 `index.html` and `thank-you.html` are driven by `data.json`; see `CLAUDE.md` for

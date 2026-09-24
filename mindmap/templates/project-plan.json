@@ -1,0 +1,59 @@
+{
+  "id": "project-plan",
+  "name": "Project Plan",
+  "description": "Scope, tasks, owners and deadlines in one view.",
+  "icon": "🗂",
+  "view": {
+    "layout": "org",
+    "theme": "blueprint"
+  },
+  "root": {
+    "text": "Project Name",
+    "children": [
+      {
+        "text": "Goal",
+        "children": [
+          {
+            "text": "Done looks like..."
+          }
+        ]
+      },
+      {
+        "text": "Milestones",
+        "children": [
+          {
+            "text": "Milestone 1"
+          },
+          {
+            "text": "Milestone 2"
+          }
+        ]
+      },
+      {
+        "text": "Tasks",
+        "children": [
+          {
+            "text": "Task - owner - due"
+          },
+          {
+            "text": "Task - owner - due"
+          }
+        ]
+      },
+      {
+        "text": "Risks",
+        "children": [
+          {
+            "text": "Risk"
+          },
+          {
+            "text": "Backup plan"
+          }
+        ]
+      },
+      {
+        "text": "Deadline"
+      }
+    ]
+  }
+}

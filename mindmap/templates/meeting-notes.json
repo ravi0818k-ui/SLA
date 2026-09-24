@@ -1,0 +1,43 @@
+{
+  "id": "meeting-notes",
+  "name": "Meeting Notes",
+  "description": "Agenda, decisions and next steps, captured live.",
+  "icon": "📝",
+  "view": {
+    "layout": "right",
+    "theme": "mono"
+  },
+  "root": {
+    "text": "Meeting - date",
+    "children": [
+      {
+        "text": "Attendees"
+      },
+      {
+        "text": "Agenda",
+        "children": [
+          {
+            "text": "Item 1"
+          },
+          {
+            "text": "Item 2"
+          }
+        ]
+      },
+      {
+        "text": "Decisions"
+      },
+      {
+        "text": "Action Items",
+        "children": [
+          {
+            "text": "Who - what - by when"
+          }
+        ]
+      },
+      {
+        "text": "Follow Up"
+      }
+    ]
+  }
+}

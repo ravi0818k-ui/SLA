@@ -1,0 +1,58 @@
+{
+  "templates": [
+    {
+      "id": "blank",
+      "name": "Blank Mind Map",
+      "description": "One central topic. Start from nothing.",
+      "icon": "⭕"
+    },
+    {
+      "id": "study-notes",
+      "name": "Study Notes",
+      "description": "Turn one chapter into a map you can revise from.",
+      "icon": "📚"
+    },
+    {
+      "id": "book-summary",
+      "name": "Book Summary",
+      "description": "Capture a book in one page: thesis, ideas, takeaways.",
+      "icon": "📖"
+    },
+    {
+      "id": "brainstorming",
+      "name": "Brainstorming",
+      "description": "Get every idea out first, sort them after.",
+      "icon": "💡"
+    },
+    {
+      "id": "project-plan",
+      "name": "Project Plan",
+      "description": "Scope, tasks, owners and deadlines in one view.",
+      "icon": "🗂"
+    },
+    {
+      "id": "swot",
+      "name": "SWOT Analysis",
+      "description": "Strengths, Weaknesses, Opportunities, Threats.",
+      "icon": "🧭"
+    },
+    {
+      "id": "goal-planning",
+      "name": "Goal Planning",
+      "description": "One goal broken into habits, milestones and checks.",
+      "icon": "🎯"
+    },
+    {
+      "id": "meeting-notes",
+      "name": "Meeting Notes",
+      "description": "Agenda, decisions and next steps, captured live.",
+      "icon": "📝"
+    },
+    {
+      "id": "exam-revision",
+      "name": "Exam Revision Plan",
+      "description": "Spread a syllabus across the weeks you have left.",
+      "icon": "🗓"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-A static (no build step) webinar registration landing page for Super Learner Academy — pure HTML/CSS/vanilla JS, deployed via GitHub Pages behind the custom domain in `CNAME` (`www.superlearneracademy.in`). Three pages: `index.html` (landing page), `thank-you.html` (post-payment page) and `quiz.html` (the free "Know Yourself Better" assessment app - see its own section below). All copy, prices, dates, and links are non-technical and driven from `data.json` so the page can be updated without editing HTML. See `theme.md` for the color/typography/spacing design system (source of truth is `style.css`'s `:root` tokens — `design-reference.md` describes an earlier/different project variant and should not be used for this site's actual styling).
+A static (no build step) webinar registration landing page for Super Learner Academy — pure HTML/CSS/vanilla JS, deployed via GitHub Pages behind the custom domain in `CNAME` (`www.superlearneracademy.in`). Main pages: `index.html` (landing page), `thank-you.html` (post-payment page), `quiz.html` (the free "Know Yourself Better" assessment app) and `mindmap/` (the OpenMind mind-map editor) — the last two have their own sections below. All copy, prices, dates, and links are non-technical and driven from `data.json` so the page can be updated without editing HTML. See `theme.md` for the color/typography/spacing design system (source of truth is `style.css`'s `:root` tokens — `design-reference.md` describes an earlier/different project variant and should not be used for this site's actual styling).
 
 Registration currently goes through **SuperProfile** (`data.json`'s `registration.link`), which redirects straight to `thank-you.html` with no query param, webhook, or transaction id to confirm payment — `initThankYouPage` in `script.js` always shows the "paid" view (no gate). `razorpay.md` documents a **future** migration plan to Razorpay (payment verification, webhook-to-Google-Sheets); none of that is live yet, so don't assume Razorpay params/verification exist.
 
@@ -34,7 +34,7 @@ npx vitest run tests/unit/faq.test.js          # run a single file
 npx vitest run tests/unit/faq.test.js -t "keyboard"  # run a single test by name
 ```
 
-There is no build, lint, or dev-server script — open `index.html` directly or serve the folder statically to preview.
+There is no build, lint, or dev-server script — open `index.html` directly or serve the folder statically to preview. **The mind-map app is the exception: it uses native ES modules, so it must be served over http** (`python -m http.server 8000` → `http://localhost:8000/mindmap/`); opening `mindmap/editor.html` from `file://` fails at the first import.
 
 ## Architecture
 
@@ -263,6 +263,111 @@ translated. The choice lives in `sessionStorage` (`sla_quiz_state.lang`) **and**
 - **The 11 tools in `quiz-tools.js` are still English only.** That was out of scope here; if they
   are ever translated they need their own approach, since their copy is inline in the JS.
 
+## Mind map app (`mindmap/`)
+
+A third self-contained app — **OpenMind**, a free mind-map editor — in the same no-build shape as
+the rest of the site, aimed at the same student audience (map a chapter, collapse what you can
+already recall, export a one-page revision sheet). Two pages: `mindmap/index.html` (landing,
+recent maps, templates) and `mindmap/editor.html` (the editor). **No backend, no account, no AI,
+no Pyodide** — everything runs in the browser and maps are stored on the device.
+`mindmap/docs/README.md` is the full developer reference; the essentials are below.
+
+### It uses native ES modules — unlike script.js and quiz.js
+
+This is the one part of the repo that is **not** a single IIFE file. `mindmap/src/` is ~35 small
+ES modules loaded with `<script type="module">`. Consequences:
+
+- **`file://` will not work** — modules need http. Serve the folder
+  (`python -m http.server 8000` → `http://localhost:8000/mindmap/`) to preview.
+- **Tests import the modules directly** (`import { MindMap } from '../../mindmap/src/core/MindMap.js'`)
+  instead of the `new Function(scriptContent)` trick `tests/setup.js` needs for `script.js`. There
+  is no `window.SLA`-style test surface here and none is needed.
+- Tests live in `tests/unit/mindmap-*.test.js` and `tests/properties/mindmap.property.test.js`
+  (~80 tests, all passing). The property tests are numbered **M1–M8** and that numbering is
+  mirrored in `mindmap/docs/README.md` — change one, change the other. They are unrelated to the
+  numbered properties in `.kiro/specs/.../design.md`, which are the landing page's.
+
+### One-directional render pipeline — nothing renders itself
+
+```
+model change -> Editor.commit() -> LayoutEngine.calculate() -> SVGCanvas.render() + panels render
+```
+
+`Editor.run(command)` in `mindmap/src/app.js` is the single entry point for every action; the
+toolbar, menu bar, context menu, mobile bar and keyboard all call it. **Adding a button means
+adding one element with `data-command="…"` to `editor.html`** — `ui/Toolbar.js` binds them by
+delegation, so no JS change is needed. The static markup in both HTML files is the real no-JS
+fallback, as everywhere else on this site.
+
+### Things that look wrong but are deliberate
+
+- **The content-protection layer is NOT installed here.** `script.js` and `quiz.js` block
+  right-click / F12 / Ctrl+C; doing that in an editor would break its own copy, paste, context
+  menu and typing. Don't "restore consistency" by adding it.
+- **`topic.position` is a manual *nudge*, not a coordinate.** The auto layout always runs and the
+  offset is added afterwards to the topic *and its whole subtree*, so a dragged branch keeps its
+  shape and stays joined to its parent. Treating it as an absolute position detaches branches.
+- **`topic.style` is sparse on purpose.** A missing key means "inherit from the theme", which is
+  why switching theme never discards a deliberate choice. Don't fill it with resolved defaults.
+  `style.width` works the same way: absent means "size the box to its text", and it is what the
+  width grip on the focused node's right edge (and the Format panel's Width field) writes.
+- **The inline editor measures itself from its own textarea value**, via `textBox()` in
+  `layout/metrics.js` — the same function the layout sizes nodes with, plus a few px of slack so
+  the browser doesn't wrap one character earlier than our measurement did. Sizing it from the
+  last laid-out node instead is the bug where typing `you` into a fresh topic showed `yo / u`.
+- **The focused topic carries two handles** drawn by `SVGCanvas`: a “+” that runs `add-child`
+  and a width grip. `DragDrop` skips both, the way it skips the collapse toggle, and exports
+  render with `primaryId: null` so neither reaches a PNG or SVG.
+- **All five layouts come from one tidy-tree function** (`layout/TreeLayout.js`) with the axis as a
+  parameter. A parent's band is the *sum* of its children's bands — that is what guarantees
+  non-overlap (property M1). Don't special-case a layout; parameterise it.
+- **Text is measured with an offscreen canvas 2d context** (`util/measure.js`), not by measuring
+  live SVG `<text>`, which would cost a reflow per node. jsdom has no canvas, so tests silently
+  use the character-width estimate — that's why one "Not implemented: getContext" line appears in
+  test output. It is not a failure.
+- **Markdown export escapes `*_~[]` etc. and the importer un-escapes them.** A topic literally
+  called `*star*` used to come back as `star`; property M5 exists because of that bug. Don't
+  simplify either side without the other.
+- **Panes carry two classes in lockstep** — `is-X-hidden` (read by the desktop grid) and
+  `is-X-open` (read by the overlay breakpoints) — so one toggle means the same thing at every
+  width. See `Editor.togglePane()`.
+- **Numbering is display-only.** `topic.numbering` on a parent numbers its subtree; the prefix is
+  computed by `MindMap.numberPrefix()` and joined to the text only in `displayText()`
+  (`layout/metrics.js`). Writing it into `topic.text` would break the Markdown round trip (M5),
+  search and the outline.
+- **Focus (F3) and drill-down (F4) are view state, not model state.** Focus passes `dimmedIds` to
+  the renderer; drill-down passes `rootId` to `calculate()` so the layout walks from a different
+  topic. Only "show level N" (`Alt+1…9`) touches the model, because `collapsed` is saved with the
+  map. An export taken while drilled deliberately exports that branch.
+- **`MindMap.fromState()` is the trust boundary.** It re-links orphans to the root, rebuilds every
+  `children` array from `parentId` and breaks cycles, so a corrupt or hand-edited `.openmind` file
+  opens instead of hanging. Import paths must go through it, never assign `topics` directly.
+
+### Format, storage and PWA
+
+`.openmind` is one versioned JSON object (`formatVersion` / `meta` / `view` / `map` / `assets`);
+`migrate()` in `core/Document.js` is the only place a version bump is handled, and a newer *major*
+version is refused rather than half-read. Storage is IndexedDB (`openmind` db: `maps`,
+`templates`, `prefs`) with a **localStorage fallback** for private windows; autosave debounces
+700 ms and flushes on `pagehide`.
+
+`sw.js` is registered with scope `./` so it can never intercept the rest of the site.
+**There is no build step to hash filenames, so bump `CACHE_VERSION` in `sw.js` whenever a shell
+file changes**, or returning visitors keep the old copy. `mindmap/icons/*.png` are generated with
+Pillow (same habit as `scripts/generate_mandala.py`), not hand-drawn.
+
+### Templates are data
+
+`mindmap/templates/*.json` plus `index.json`. Adding a template = adding a file and an index row;
+no application code changes. Each is `{ id, name, description, icon, view, root }` where `root` is
+the nested `{ text, children }` outline that `import/JSON.js` already reads.
+
+### On-demand CDN
+
+jsPDF is fetched from cdnjs **inside `export/PDF.js` only**, the same pattern the quiz tools use
+for pdf.js/epub.js — nothing else on the page pays for it. PNG/PDF export of a map containing a
+*remote* `http` image will fail (canvas tainting); uploaded images are data URIs and are fine.
+
 ## Shared site chrome (`site-nav.css` / `site-nav.js`) and `about.html`
 
 Added for Google's Search Quality Rater / E-E-A-T signals: a reader (or a human rater)
@@ -272,9 +377,11 @@ must be able to tell who runs the site and how to contact them from any page.
   `style.css` or `quiz.css`, because those two never load on the same page. `site-nav.js` only
   wires up open/close (plus Escape, backdrop click and a tab loop); the panel markup is **static
   HTML duplicated in each page**, so the About/Contact/Tools links exist with JS disabled.
-- Present on `index.html`, `about.html`, `quiz.html`, `thank-you.html` and
-  `generatenotes/index.html`. The copy in `generatenotes/` uses `../` hrefs — if you edit the nav
-  or footer, edit **all five**.
+- Present on `index.html`, `about.html`, `quiz.html`, `thank-you.html`, `resources.html`,
+  `generatenotes/index.html` and `mindmap/index.html`. The copies in `generatenotes/` and
+  `mindmap/` use `../` hrefs — if you edit the nav or footer, edit **all seven**.
+  (`mindmap/editor.html` deliberately has no site nav: it is a full-screen app whose own top bar
+  links back to `mindmap/index.html`.)
 - Nav z-indexes are 9993–9995 on purpose: **below** `index.html`'s `.top-bar` (9999), the quiz's
   `.quiz-dialog` (9999) and `#protection-popup`, and **above** the landing page's `.sticky-cta`
   (9990). `.top-bar ~ .site-nav .site-nav-toggle` drops the button to `top: 58px` on pages that

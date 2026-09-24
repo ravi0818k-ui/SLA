@@ -1,0 +1,609 @@
+/* ==========================================================================
+   OpenMind editor (PAGE-02)
+
+   Layout is one CSS grid: topbar / toolbar / body / statusbar, with the body
+   split into sidebar | canvas | properties. Hiding a pane is a class on the
+   shell, so no JavaScript measures anything.
+   ========================================================================== */
+
+html, body { height: 100%; overflow: hidden; }
+body[data-page="mindmap-editor"] { background: var(--om-surface-2); }
+
+.mm-shell {
+    display: grid;
+    grid-template-rows: var(--om-topbar-h) var(--om-toolbar-h) 1fr var(--om-status-h);
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* ---------------------------------------------------------------- topbar */
+
+.mm-topbar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 12px;
+    background: var(--deep-learning-blue);
+    color: #fff;
+    z-index: 30;
+}
+:root[data-theme="dark"] .mm-topbar { background: #0a1220; }
+
+.mm-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15px;
+}
+.mm-brand-mark { display: grid; place-items: center; opacity: .95; }
+
+.mm-menubar { display: flex; align-items: center; gap: 2px; }
+.mm-menu { position: relative; }
+
+.mm-menu-button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: none;
+    color: rgba(255, 255, 255, .88);
+    font: 500 13.5px/1 var(--font-body);
+    cursor: pointer;
+}
+.mm-menu-button:hover,
+.mm-menu.is-open .mm-menu-button { background: rgba(255, 255, 255, .16); color: #fff; }
+
+.mm-menu-list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 240px;
+    padding: 6px;
+    border: 1px solid var(--om-border);
+    border-radius: 10px;
+    background: var(--om-surface);
+    box-shadow: var(--om-shadow-lg);
+    z-index: 40;
+}
+.mm-menu.is-open .mm-menu-list { display: block; }
+
+.mm-menu-list button,
+.mm-menu-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 7px 9px;
+    border: none;
+    border-radius: 7px;
+    background: none;
+    color: var(--om-ink);
+    font: 500 13.5px/1.25 var(--font-body);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+.mm-menu-list button:hover:not(:disabled),
+.mm-menu-list a:hover { background: var(--om-surface-3); }
+.mm-menu-list button:disabled { opacity: .4; cursor: not-allowed; }
+.mm-menu-list button.is-active::after { content: '\2713'; color: var(--om-accent); }
+.mm-menu-list hr { margin: 5px 4px; border: none; border-top: 1px solid var(--om-border); }
+.mm-menu-list kbd { background: transparent; border-color: transparent; color: var(--om-ink-3); }
+
+.mm-title-field { margin-left: auto; }
+.mm-title-field input {
+    width: clamp(140px, 24vw, 320px);
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    font: 600 13.5px var(--font-body);
+    text-align: center;
+}
+.mm-title-field input:hover { background: rgba(255, 255, 255, .2); }
+.mm-title-field input::placeholder { color: rgba(255, 255, 255, .6); }
+/* The focused field switches to the panel surface, not a hard-coded white:
+   in dark mode --om-ink is near-white, so #fff here meant white on white. */
+.mm-title-field input:focus {
+    background: var(--om-surface);
+    color: var(--om-ink);
+    border-color: var(--om-accent);
+    outline: none;
+}
+.mm-title-field input:focus::placeholder { color: var(--om-ink-3); }
+
+.mm-topbar-right { display: flex; gap: 4px; }
+.mm-icon-btn {
+    width: 30px; height: 30px;
+    border: none; border-radius: 7px;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+.mm-icon-btn:hover { background: rgba(255, 255, 255, .24); }
+
+/* --------------------------------------------------------------- toolbar */
+
+.mm-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    background: var(--om-surface);
+    border-bottom: 1px solid var(--om-border);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    z-index: 20;
+}
+
+.mm-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: none;
+    color: var(--om-ink);
+    font: 500 13px/1 var(--font-body);
+    white-space: nowrap;
+    cursor: pointer;
+}
+.mm-tool:hover:not(:disabled) { background: var(--om-surface-3); }
+.mm-tool:disabled { opacity: .38; cursor: not-allowed; }
+.mm-tool-primary { background: var(--om-accent); color: #fff; font-weight: 600; }
+.mm-tool-primary:hover:not(:disabled) { background: #e85f00; }
+
+.mm-tool-group { display: inline-flex; gap: 2px; padding: 2px; background: var(--om-surface-3); border-radius: 9px; }
+.mm-tool-chip { padding: 5px 10px; font-size: 12.5px; border-radius: 7px; }
+.mm-tool-chip.is-active { background: var(--om-surface); box-shadow: var(--om-shadow); font-weight: 600; }
+
+.mm-tool-sep { width: 1px; height: 22px; background: var(--om-border); }
+.mm-tool-spacer { flex: 1; }
+
+/* ------------------------------------------------------------------ body */
+
+.mm-body {
+    display: grid;
+    grid-template-columns: 268px 1fr 280px;
+    min-height: 0;
+}
+.mm-shell.is-sidebar-hidden .mm-body { grid-template-columns: 0 1fr 280px; }
+.mm-shell.is-properties-hidden .mm-body { grid-template-columns: 268px 1fr 0; }
+.mm-shell.is-sidebar-hidden.is-properties-hidden .mm-body { grid-template-columns: 0 1fr 0; }
+.mm-shell.is-sidebar-hidden .mm-sidebar,
+.mm-shell.is-properties-hidden .mm-properties { display: none; }
+
+/* sidebar */
+.mm-sidebar {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--om-surface);
+    border-right: 1px solid var(--om-border);
+}
+.mm-sidebar-tabs { display: flex; padding: 8px 8px 0; gap: 2px; border-bottom: 1px solid var(--om-border); }
+.mm-sidebar-tab {
+    flex: 1;
+    padding: 8px 6px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--om-ink-3);
+    font: 600 12.5px/1 var(--font-body);
+    cursor: pointer;
+}
+.mm-sidebar-tab.is-active { color: var(--om-ink); border-bottom-color: var(--om-accent); }
+
+.mm-sidebar-panel { flex: 1; min-height: 0; overflow: auto; padding: 12px; }
+.mm-panel-hint { margin: 0 0 10px; font-size: 12px; line-height: 1.5; color: var(--om-ink-3); }
+
+/* outline */
+.mm-outline-list, .mm-outline-children { list-style: none; margin: 0; padding: 0; }
+.mm-outline-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 6px 3px 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.mm-outline-row:hover { background: var(--om-surface-3); }
+.mm-outline-row.is-selected { background: color-mix(in srgb, var(--om-accent) 14%, transparent); }
+.mm-outline-twisty {
+    width: 16px; height: 16px;
+    flex: none;
+    border: none; border-radius: 4px;
+    background: none;
+    color: var(--om-ink-3);
+    font-size: 10px; line-height: 1;
+    cursor: pointer;
+}
+.mm-outline-twisty.is-empty { opacity: .35; cursor: default; }
+.mm-outline-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+    outline: none;
+    border-radius: 4px;
+    word-break: break-word;
+}
+.mm-outline-text:focus { background: var(--om-surface); box-shadow: 0 0 0 2px var(--om-focus); }
+.mm-outline-icons { font-size: 12px; }
+.mm-outline-badge { font-size: 10px; opacity: .6; }
+
+/* search */
+.mm-search-results { display: grid; gap: 4px; }
+.mm-search-hit {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border: 1px solid var(--om-border);
+    border-radius: 8px;
+    background: var(--om-surface-2);
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+}
+.mm-search-hit:hover { border-color: var(--om-accent); }
+.mm-search-hit-text { font-size: 13.5px; font-weight: 500; }
+.mm-search-hit-where { font-size: 11.5px; color: var(--om-ink-3); }
+
+/* navigator */
+.mm-navigator { border: 1px solid var(--om-border); border-radius: 8px; overflow: hidden; background: var(--om-surface-2); }
+.mm-navigator-svg { display: block; width: 100%; height: auto; cursor: crosshair; }
+.mm-navigator-node { fill: var(--om-border-strong); }
+.mm-navigator-node.is-selected { fill: var(--om-accent); }
+.mm-navigator-view { fill: rgba(30, 94, 255, .1); stroke: var(--smart-blue); stroke-width: 1; }
+
+/* -------------------------------------------------------------- canvas */
+
+.mm-canvas-wrap {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--om-surface-2);
+}
+
+.mm-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--mm-canvas, var(--om-surface-2));
+    touch-action: none;
+    cursor: default;
+}
+.mm-canvas.is-panning { cursor: grabbing; }
+body.is-space-pan .mm-canvas { cursor: grab; }
+
+.mm-node { cursor: pointer; }
+.mm-node-shape { transition: filter .12s ease; }
+.mm-node:hover .mm-node-shape { filter: brightness(1.03); }
+.mm-node.is-selected .mm-node-shape { stroke: var(--smart-blue); stroke-width: 2.5; }
+.mm-node.is-primary .mm-node-shape { stroke: var(--om-accent); stroke-width: 2.5; }
+.mm-node.is-match .mm-node-shape { stroke: var(--success-gold); stroke-width: 3; }
+.mm-node.is-editing { opacity: 0; pointer-events: none; }
+.mm-node.is-dimmed { opacity: .22; }
+.mm-node.is-drop-target .mm-node-shape { stroke: var(--growth-green); stroke-width: 3; stroke-dasharray: 5 3; }
+.mm-node-text { user-select: none; white-space: pre; }
+
+.mm-badge circle { fill: var(--om-surface); stroke: var(--om-border-strong); stroke-width: 1; }
+.mm-badge text { fill: var(--om-ink-2); }
+
+.mm-toggle { cursor: pointer; }
+.mm-toggle:hover circle { fill: var(--om-surface-3); }
+.mm-toggle-count { font-family: var(--font-body); }
+
+/* "+" quick-add and the width grip, shown on the focused topic only */
+.mm-quick-add { cursor: pointer; opacity: .55; transition: opacity .12s ease; }
+.mm-quick-add:hover { opacity: 1; }
+.mm-quick-add-dot { fill: var(--om-surface); stroke-width: 1.5; }
+.mm-quick-add line { stroke: var(--om-ink-2); stroke-width: 1.8; stroke-linecap: round; }
+.mm-quick-add:hover .mm-quick-add-dot { fill: var(--om-accent); stroke: var(--om-accent); }
+.mm-quick-add:hover line { stroke: #fff; }
+
+.mm-resize-handle { cursor: ew-resize; opacity: .5; transition: opacity .12s ease; }
+.mm-resize-handle:hover { opacity: 1; }
+.mm-resize-grip { fill: var(--om-accent); }
+.mm-canvas.is-resizing { cursor: ew-resize; }
+
+.mm-drag-ghost { fill: rgba(30, 94, 255, .12); stroke: var(--smart-blue); stroke-width: 2; stroke-dasharray: 6 4; }
+.mm-relationship-label { font: 500 11px var(--font-body); fill: var(--om-ink-2); }
+.mm-boundary-label { font: 600 11px var(--font-body); }
+
+/* the inline text editor sits on top of the node it replaces */
+.mm-inline-editor {
+    position: absolute;
+    z-index: 10;
+    margin: 0;
+    border: 2px solid var(--om-accent);
+    border-radius: 10px;
+    background: var(--om-surface);
+    color: var(--om-ink);
+    resize: none;
+    overflow: hidden;
+    box-shadow: var(--om-shadow-lg);
+}
+.mm-inline-editor:focus { outline: none; }
+
+.mm-outline-number {
+    margin-right: 5px;
+    color: var(--om-ink-3);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+}
+
+.mm-replace-row { display: flex; gap: 6px; margin: 6px 0 10px; }
+.mm-replace-row .mm-input { flex: 1; }
+
+.mm-status-drill {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* floating buttons (mainly for touch) */
+.mm-fab-group {
+    position: absolute;
+    right: 16px; bottom: 16px;
+    display: grid;
+    gap: 8px;
+    justify-items: center;
+}
+.mm-fab {
+    width: 50px; height: 50px;
+    border: none; border-radius: 50%;
+    background: var(--om-accent);
+    color: #fff;
+    font-size: 22px; line-height: 1;
+    box-shadow: var(--om-shadow-lg);
+    cursor: pointer;
+}
+.mm-fab-sm {
+    width: 36px; height: 36px;
+    font-size: 17px;
+    background: var(--om-surface);
+    color: var(--om-ink);
+    border: 1px solid var(--om-border-strong);
+}
+
+/* ------------------------------------------------------- properties pane */
+
+.mm-properties {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--om-surface);
+    border-left: 1px solid var(--om-border);
+}
+.mm-properties-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--om-border);
+}
+.mm-properties-head h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--om-ink-3); }
+.mm-properties-head .mm-icon-btn { background: var(--om-surface-3); color: var(--om-ink-2); }
+.mm-properties-body { flex: 1; min-height: 0; overflow: auto; padding: 12px; }
+
+.mm-panel-empty { margin: 4px 0 16px; font-size: 13.5px; color: var(--om-ink-3); }
+.mm-panel-note {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mm-panel-section { margin-bottom: 18px; }
+.mm-panel-title {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--om-ink-3);
+}
+.mm-panel-field {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 7px;
+}
+.mm-panel-label { font-size: 12.5px; color: var(--om-ink-2); }
+.mm-panel-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.mm-panel-footer { margin-top: 14px; border-top: 1px solid var(--om-border); padding-top: 12px; }
+
+.mm-toggle-row { display: flex; gap: 4px; }
+.mm-toggle-btn {
+    width: 30px; height: 28px;
+    border: 1px solid var(--om-border-strong);
+    border-radius: 6px;
+    background: var(--om-surface);
+    color: var(--om-ink);
+    font: 600 13px var(--font-body);
+    cursor: pointer;
+}
+.mm-toggle-btn.is-on { background: var(--om-accent); border-color: var(--om-accent); color: #fff; }
+
+.mm-color-field { display: flex; align-items: center; gap: 6px; }
+.mm-color { width: 42px; height: 28px; padding: 0; border: 1px solid var(--om-border-strong); border-radius: 6px; background: none; cursor: pointer; }
+.mm-color-clear {
+    width: 24px; height: 24px;
+    border: none; border-radius: 6px;
+    background: var(--om-surface-3);
+    color: var(--om-ink-2);
+    cursor: pointer;
+}
+
+.mm-icon-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+.mm-icon-choice {
+    width: 28px; height: 28px;
+    border: 1px solid var(--om-border);
+    border-radius: 6px;
+    background: var(--om-surface);
+    font-size: 14px;
+    cursor: pointer;
+}
+.mm-icon-choice.is-on { border-color: var(--om-accent); background: color-mix(in srgb, var(--om-accent) 14%, var(--om-surface)); }
+
+.mm-tag-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.mm-tag {
+    padding: 3px 8px;
+    border: 1px solid var(--om-border);
+    border-radius: 999px;
+    background: var(--om-surface-2);
+    font-size: 11.5px;
+    color: var(--om-ink-2);
+    cursor: pointer;
+}
+.mm-link-list { display: grid; gap: 4px; }
+.mm-link-row { display: flex; align-items: center; gap: 6px; font-size: 12.5px; }
+.mm-link-row a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mm-link-remove { border: none; background: none; color: var(--om-ink-3); cursor: pointer; font-size: 14px; }
+
+/* ------------------------------------------------------------- statusbar */
+
+.mm-statusbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    background: var(--om-surface);
+    border-top: 1px solid var(--om-border);
+    font-size: 12.5px;
+    color: var(--om-ink-2);
+}
+.mm-status-btn {
+    border: none;
+    border-radius: 5px;
+    background: none;
+    color: var(--om-ink-2);
+    font: 500 12.5px var(--font-body);
+    padding: 3px 7px;
+    cursor: pointer;
+}
+.mm-status-btn:hover { background: var(--om-surface-3); }
+.mm-status-zoom { min-width: 44px; text-align: center; font-variant-numeric: tabular-nums; }
+.mm-status-sep { width: 1px; height: 16px; background: var(--om-border); }
+.mm-status-spacer { flex: 1; }
+.mm-status-save[data-state="saving"] { color: var(--memory-orange); }
+.mm-status-save[data-state="error"] { color: var(--om-danger); }
+.mm-status-save[data-state="dirty"] { color: var(--om-ink-3); }
+
+/* ----------------------------------------------------- mobile bottom bar */
+
+.mm-mobilebar { display: none; }
+
+.mm-fatal {
+    position: fixed; inset: auto 16px 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: var(--om-danger);
+    color: #fff;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+.mm-noscript {
+    max-width: 640px;
+    margin: 12vh auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+/* Panes are toggled by two classes kept in lockstep: `is-X-hidden` (what the
+   desktop grid reads) and `is-X-open` (what the overlay breakpoints read).
+   That way a pane that is open by default on a wide screen can be closed by
+   default on a narrow one without the toggle meaning two different things. */
+
+/* Tablet: the format panel becomes an overlay and starts closed — styling is
+   the least-used pane. */
+@media (max-width: 1080px) {
+    .mm-body,
+    .mm-shell.is-properties-hidden .mm-body { grid-template-columns: 240px 1fr 0; }
+    .mm-properties {
+        position: absolute;
+        top: calc(var(--om-topbar-h) + var(--om-toolbar-h));
+        right: 0;
+        bottom: var(--om-status-h);
+        width: 280px;
+        z-index: 25;
+        box-shadow: var(--om-shadow-lg);
+        display: none;
+    }
+    .mm-shell.is-properties-open .mm-properties { display: flex; }
+}
+
+/* Phone: a simplified UI — canvas, floating action button, bottom toolbar.
+   The desktop editor is deliberately not just scaled down (requirement 17). */
+@media (max-width: 720px) {
+    .mm-shell { grid-template-rows: var(--om-topbar-h) 1fr auto; }
+    .mm-toolbar,
+    .mm-statusbar,
+    .mm-menubar { display: none; }
+
+    .mm-title-field { margin-left: auto; }
+    .mm-title-field input { width: 44vw; }
+
+    .mm-body,
+    .mm-shell.is-properties-hidden .mm-body { grid-template-columns: 1fr; position: relative; }
+
+    .mm-shell .mm-sidebar {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: min(86vw, 320px);
+        z-index: 25;
+        display: flex;
+        box-shadow: var(--om-shadow-lg);
+        transform: translateX(-102%);
+        transition: transform .2s ease;
+    }
+    .mm-shell.is-sidebar-open .mm-sidebar { transform: none; }
+
+    .mm-properties { top: 0; bottom: 0; width: min(86vw, 320px); }
+
+    .mm-mobilebar {
+        display: grid;
+        grid-auto-flow: column;
+        background: var(--om-surface);
+        border-top: 1px solid var(--om-border);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .mm-mobilebar button {
+        display: grid;
+        justify-items: center;
+        gap: 3px;
+        padding: 9px 4px;
+        border: none;
+        background: none;
+        color: var(--om-ink-2);
+        font: 500 10.5px var(--font-body);
+        cursor: pointer;
+    }
+    .mm-mobilebar button span:first-child { font-size: 17px; }
+    .mm-mobilebar button:disabled { opacity: .4; }
+
+    .mm-fab-group { right: 12px; bottom: 12px; }
+}
+
+@media print {
+    .mm-topbar, .mm-toolbar, .mm-sidebar, .mm-properties, .mm-statusbar,
+    .mm-mobilebar, .mm-fab-group { display: none !important; }
+    .mm-shell { grid-template-rows: 1fr; height: auto; }
+    html, body { overflow: visible; height: auto; background: #fff; }
+}

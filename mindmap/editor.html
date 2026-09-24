@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mind Map Editor — OpenMind | Super Learner Academy</title>
+    <meta name="description" content="A free, offline mind-map editor for students. Build, style and export mind maps in your browser — nothing is uploaded.">
+    <link rel="canonical" href="https://www.superlearneracademy.in/mindmap/editor.html">
+    <meta name="robots" content="noindex">
+
+    <!-- Favicon (shared with the rest of the site) -->
+    <link rel="icon" type="image/x-icon" href="../Favicon SLA/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon SLA/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon SLA/apple-icon-180x180.png">
+    <meta name="theme-color" content="#0B2A5B">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="OpenMind">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css?v=1.0.0">
+    <link rel="stylesheet" href="css/editor.css?v=1.0.0">
+</head>
+<body data-page="mindmap-editor">
+
+<div class="mm-shell">
+
+    <!-- ============================ TOP BAR + MENUS ============================ -->
+    <header class="mm-topbar">
+        <a class="mm-brand" href="index.html" title="OpenMind home">
+            <span class="mm-brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="3.2"/><circle cx="4" cy="5" r="2.2"/><circle cx="4" cy="19" r="2.2"/><circle cx="20" cy="8" r="2.2"/><circle cx="20" cy="17" r="2.2"/>
+                    <path d="M9 11 6 6M9 13.5 6 17.5M15 11l3-2M15 13l3 3" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span class="mm-brand-name">OpenMind</span>
+        </a>
+
+        <nav class="mm-menubar" aria-label="Main menu">
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">File</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="new">New map…</button>
+                    <button type="button" role="menuitem" data-command="open">Open…<kbd>Ctrl+O</kbd></button>
+                    <button type="button" role="menuitem" data-command="save">Save now<kbd>Ctrl+S</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="import">Import file…</button>
+                    <button type="button" role="menuitem" data-command="export">Export…<kbd>Ctrl+E</kbd></button>
+                    <button type="button" role="menuitem" data-command="print">Print<kbd>Ctrl+P</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="duplicate-map">Duplicate this map</button>
+                    <button type="button" role="menuitem" data-command="delete-map">Delete this map…</button>
+                    <hr>
+                    <a role="menuitem" href="index.html">Back to OpenMind home</a>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">Edit</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="undo">Undo<kbd>Ctrl+Z</kbd></button>
+                    <button type="button" role="menuitem" data-command="redo">Redo<kbd>Ctrl+Y</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="copy" data-needs-selection>Copy<kbd>Ctrl+C</kbd></button>
+                    <button type="button" role="menuitem" data-command="cut" data-needs-selection>Cut<kbd>Ctrl+X</kbd></button>
+                    <button type="button" role="menuitem" data-command="paste">Paste<kbd>Ctrl+V</kbd></button>
+                    <button type="button" role="menuitem" data-command="duplicate" data-needs-selection>Duplicate<kbd>Ctrl+D</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="copy-style" data-needs-selection>Copy style<kbd>Ctrl+Shift+C</kbd></button>
+                    <button type="button" role="menuitem" data-command="paste-style" data-needs-selection>Paste style<kbd>Ctrl+Shift+V</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="rename" data-needs-selection>Rename<kbd>F2</kbd></button>
+                    <button type="button" role="menuitem" data-command="delete" data-needs-selection>Delete<kbd>Del</kbd></button>
+                    <button type="button" role="menuitem" data-command="delete-only" data-needs-selection>Delete, keep sub-topics<kbd>Shift+Del</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="move-up" data-needs-selection>Move up<kbd>Ctrl+Shift+↑</kbd></button>
+                    <button type="button" role="menuitem" data-command="move-down" data-needs-selection>Move down<kbd>Ctrl+Shift+↓</kbd></button>
+                    <button type="button" role="menuitem" data-command="move-top" data-needs-selection>Move to first</button>
+                    <button type="button" role="menuitem" data-command="move-bottom" data-needs-selection>Move to last</button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="select-level" data-needs-selection>Select same level<kbd>Ctrl+Shift+A</kbd></button>
+                    <button type="button" role="menuitem" data-command="select-children" data-needs-selection>Select sub-topics<kbd>Ctrl+Alt+A</kbd></button>
+                    <button type="button" role="menuitem" data-command="select-root">Go to central topic<kbd>Ctrl+Home</kbd></button>
+                    <button type="button" role="menuitem" data-command="search">Find &amp; replace…<kbd>Ctrl+F</kbd></button>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">View</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="zoom-in">Zoom in<kbd>Ctrl++</kbd></button>
+                    <button type="button" role="menuitem" data-command="zoom-out">Zoom out<kbd>Ctrl+-</kbd></button>
+                    <button type="button" role="menuitem" data-command="zoom-reset">Zoom to 100%<kbd>Ctrl+0</kbd></button>
+                    <button type="button" role="menuitem" data-command="fit">Fit to screen</button>
+                    <button type="button" role="menuitem" data-command="center">Centre map<kbd>Home</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="expand-all">Expand all<kbd>Alt+0</kbd></button>
+                    <button type="button" role="menuitem" data-command="collapse-all">Collapse all</button>
+                    <button type="button" role="menuitem" data-command="level" data-arg="1">Show level 1<kbd>Alt+1</kbd></button>
+                    <button type="button" role="menuitem" data-command="level" data-arg="2">Show level 2<kbd>Alt+2</kbd></button>
+                    <button type="button" role="menuitem" data-command="level" data-arg="3">Show level 3<kbd>Alt+3</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="focus-branch" data-needs-selection>Focus on this branch<kbd>F3</kbd></button>
+                    <button type="button" role="menuitem" data-command="drill-down" data-needs-selection>Drill down into branch<kbd>F4</kbd></button>
+                    <button type="button" role="menuitem" data-command="drill-up">Drill back up<kbd>Shift+F4</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="toggle-sidebar">Show / hide sidebar</button>
+                    <button type="button" role="menuitem" data-command="toggle-properties">Show / hide format panel</button>
+                    <button type="button" role="menuitem" data-command="toggle-dark">Dark / light mode</button>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">Insert</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="add-child">Child topic<kbd>Tab</kbd></button>
+                    <button type="button" role="menuitem" data-command="add-sibling" data-needs-selection>Sibling topic<kbd>Enter</kbd></button>
+                    <button type="button" role="menuitem" data-command="add-sibling-before" data-needs-selection>Sibling before<kbd>Shift+Enter</kbd></button>
+                    <button type="button" role="menuitem" data-command="insert-parent" data-needs-selection>Parent topic<kbd>Shift+Ins</kbd></button>
+                    <button type="button" role="menuitem" data-command="add-multiple">Several topics…<kbd>Ctrl+M</kbd></button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="edit-note" data-needs-selection>Note…</button>
+                    <button type="button" role="menuitem" data-command="add-link" data-needs-selection>Hyperlink…</button>
+                    <button type="button" role="menuitem" data-command="add-image" data-needs-selection>Image…</button>
+                    <button type="button" role="menuitem" data-command="add-tag" data-needs-selection>Tag…</button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="start-relationship" data-needs-selection>Relationship arrow</button>
+                    <button type="button" role="menuitem" data-command="toggle-boundary" data-needs-selection>Boundary around branch</button>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">Format</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="theme" data-arg="sla" data-active-when="theme:sla">Theme: Super Learner</button>
+                    <button type="button" role="menuitem" data-command="theme" data-arg="classic" data-active-when="theme:classic">Theme: Classic</button>
+                    <button type="button" role="menuitem" data-command="theme" data-arg="blueprint" data-active-when="theme:blueprint">Theme: Blueprint</button>
+                    <button type="button" role="menuitem" data-command="theme" data-arg="paper" data-active-when="theme:paper">Theme: Paper</button>
+                    <button type="button" role="menuitem" data-command="theme" data-arg="mono" data-active-when="theme:mono">Theme: Mono</button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="numbering" data-arg="number" data-needs-selection>Number this branch (1, 1.1)</button>
+                    <button type="button" role="menuitem" data-command="numbering" data-arg="letter" data-needs-selection>Number this branch (A, A.1)</button>
+                    <button type="button" role="menuitem" data-command="numbering" data-arg="roman" data-needs-selection>Number this branch (I, I.1)</button>
+                    <button type="button" role="menuitem" data-command="numbering" data-arg="" data-needs-selection>Remove numbering</button>
+                    <hr>
+                    <button type="button" role="menuitem" data-command="toggle-properties">Format panel</button>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">Layout</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="layout" data-arg="mindmap" data-active-when="layout:mindmap">Mind map</button>
+                    <button type="button" role="menuitem" data-command="layout" data-arg="right" data-active-when="layout:right">Right tree</button>
+                    <button type="button" role="menuitem" data-command="layout" data-arg="left" data-active-when="layout:left">Left tree</button>
+                    <button type="button" role="menuitem" data-command="layout" data-arg="org" data-active-when="layout:org">Organisation chart</button>
+                    <button type="button" role="menuitem" data-command="layout" data-arg="logic" data-active-when="layout:logic">Logic chart</button>
+                </div>
+            </div>
+
+            <div class="mm-menu">
+                <button type="button" class="mm-menu-button" aria-expanded="false">Help</button>
+                <div class="mm-menu-list" role="menu">
+                    <button type="button" role="menuitem" data-command="help">Keyboard shortcuts</button>
+                    <a role="menuitem" href="https://github.com/ravi0818k-ui/SLA/blob/main/mindmap/docs/README.md" target="_blank" rel="noopener noreferrer">Documentation</a>
+                    <a role="menuitem" href="../about.html">About Super Learner Academy</a>
+                </div>
+            </div>
+        </nav>
+
+        <label class="mm-title-field">
+            <span class="sr-only">Map title</span>
+            <input type="text" data-doc-title value="Untitled Mind Map" maxlength="200" aria-label="Map title">
+        </label>
+
+        <div class="mm-topbar-right">
+            <button type="button" class="mm-icon-btn" data-command="toggle-dark" title="Dark / light mode" aria-label="Toggle dark mode">&#9681;</button>
+            <button type="button" class="mm-icon-btn" data-command="help" title="Keyboard shortcuts" aria-label="Keyboard shortcuts">?</button>
+        </div>
+    </header>
+
+    <!-- ============================== TOOLBAR ============================== -->
+    <div class="mm-toolbar" role="toolbar" aria-label="Editing tools">
+        <button type="button" class="mm-tool" data-command="add-child"><span aria-hidden="true">&#43;</span> Topic</button>
+        <button type="button" class="mm-tool" data-command="add-sibling" data-needs-selection><span aria-hidden="true">&#8627;</span> Sibling</button>
+        <button type="button" class="mm-tool" data-command="add-multiple" title="Paste an indented list (Ctrl+M)">&#9776; List</button>
+        <span class="mm-tool-sep" role="separator"></span>
+        <button type="button" class="mm-tool" data-command="edit-note" data-needs-selection>Note</button>
+        <button type="button" class="mm-tool" data-command="add-image" data-needs-selection>Image</button>
+        <button type="button" class="mm-tool" data-command="add-link" data-needs-selection>Link</button>
+        <span class="mm-tool-sep" role="separator"></span>
+        <button type="button" class="mm-tool" data-command="undo" title="Undo (Ctrl+Z)">&#8630; Undo</button>
+        <button type="button" class="mm-tool" data-command="redo" title="Redo (Ctrl+Y)">&#8631; Redo</button>
+        <span class="mm-tool-sep" role="separator"></span>
+        <div class="mm-tool-group" role="group" aria-label="Layout">
+            <button type="button" class="mm-tool mm-tool-chip" data-command="layout" data-arg="mindmap" data-active-when="layout:mindmap" aria-pressed="true">Mind map</button>
+            <button type="button" class="mm-tool mm-tool-chip" data-command="layout" data-arg="right" data-active-when="layout:right" aria-pressed="false">Right</button>
+            <button type="button" class="mm-tool mm-tool-chip" data-command="layout" data-arg="left" data-active-when="layout:left" aria-pressed="false">Left</button>
+            <button type="button" class="mm-tool mm-tool-chip" data-command="layout" data-arg="org" data-active-when="layout:org" aria-pressed="false">Org</button>
+        </div>
+        <span class="mm-tool-spacer"></span>
+        <button type="button" class="mm-tool" data-command="fit">Fit</button>
+        <button type="button" class="mm-tool mm-tool-primary" data-command="export">Export</button>
+    </div>
+
+    <!-- =============================== BODY =============================== -->
+    <div class="mm-body">
+
+        <aside class="mm-sidebar" id="mm-sidebar" aria-label="Map navigation">
+            <div class="mm-sidebar-tabs" role="tablist">
+                <button type="button" role="tab" class="mm-sidebar-tab is-active" data-panel-tab="outline" aria-selected="true">Outline</button>
+                <button type="button" role="tab" class="mm-sidebar-tab" data-panel-tab="search" aria-selected="false">Search</button>
+                <button type="button" role="tab" class="mm-sidebar-tab" data-panel-tab="navigator" aria-selected="false">Map</button>
+            </div>
+
+            <div class="mm-sidebar-panel" data-panel="outline" role="tabpanel">
+                <p class="mm-panel-hint">Click to select, double-click to rename. Tab adds a child, Enter adds a sibling.</p>
+                <div data-outline class="mm-outline"></div>
+            </div>
+
+            <div class="mm-sidebar-panel" data-panel="search" role="tabpanel" hidden>
+                <label class="sr-only" for="mm-search">Search the map</label>
+                <input id="mm-search" class="mm-input" type="search" data-search-input placeholder="Search topics, notes, tags…" autocomplete="off">
+                <p class="mm-panel-hint" data-search-summary>Search topic text, notes and tags.</p>
+                <div class="mm-replace-row">
+                    <label class="sr-only" for="mm-replace">Replace with</label>
+                    <input id="mm-replace" class="mm-input" type="text" data-replace-input placeholder="Replace with…" autocomplete="off">
+                    <button type="button" class="mm-btn mm-btn-sm" data-replace-run>Replace all</button>
+                </div>
+                <div data-search-results class="mm-search-results"></div>
+            </div>
+
+            <div class="mm-sidebar-panel" data-panel="navigator" role="tabpanel" hidden>
+                <p class="mm-panel-hint">Click anywhere to jump there.</p>
+                <div data-navigator class="mm-navigator"></div>
+            </div>
+        </aside>
+
+        <main class="mm-canvas-wrap" id="mm-canvas-wrap">
+            <svg id="mm-canvas" class="mm-canvas" role="application" aria-label="Mind map canvas"></svg>
+
+            <div class="mm-fab-group">
+                <button type="button" class="mm-fab mm-fab-sm" data-command="zoom-out" aria-label="Zoom out">&minus;</button>
+                <button type="button" class="mm-fab mm-fab-sm" data-command="zoom-in" aria-label="Zoom in">&plus;</button>
+                <button type="button" class="mm-fab" data-command="add-child" aria-label="Add topic">&#43;</button>
+            </div>
+        </main>
+
+        <aside class="mm-properties" aria-label="Format">
+            <header class="mm-properties-head">
+                <h2>Format</h2>
+                <button type="button" class="mm-icon-btn" data-command="toggle-properties" aria-label="Hide format panel">&times;</button>
+            </header>
+            <div id="mm-properties-body" class="mm-properties-body"></div>
+        </aside>
+    </div>
+
+    <!-- ============================= STATUS BAR ============================= -->
+    <footer class="mm-statusbar">
+        <button type="button" class="mm-status-btn" data-command="zoom-out" aria-label="Zoom out">&minus;</button>
+        <span class="mm-status-zoom" data-zoom-label>100%</span>
+        <button type="button" class="mm-status-btn" data-command="zoom-in" aria-label="Zoom in">&plus;</button>
+        <button type="button" class="mm-status-btn" data-command="fit">Fit</button>
+        <span class="mm-status-sep"></span>
+        <button type="button" class="mm-status-btn mm-status-drill" data-command="drill-up" data-drill hidden>↑ Back up</button>
+        <span data-topic-count>1 topic</span>
+        <span class="mm-status-spacer"></span>
+        <span class="mm-status-save" data-save-status data-state="saved">Saved &#10003;</span>
+    </footer>
+
+    <!-- Mobile bottom toolbar: the desktop editor is not just scaled down. -->
+    <nav class="mm-mobilebar" aria-label="Quick actions">
+        <button type="button" data-command="add-child"><span aria-hidden="true">&#43;</span><span>Topic</span></button>
+        <button type="button" data-command="rename" data-needs-selection><span aria-hidden="true">&#9998;</span><span>Rename</span></button>
+        <button type="button" data-command="panel" data-arg="outline"><span aria-hidden="true">&#9776;</span><span>Outline</span></button>
+        <button type="button" data-command="search"><span aria-hidden="true">&#128269;</span><span>Search</span></button>
+        <button type="button" data-command="export"><span aria-hidden="true">&#11015;</span><span>Export</span></button>
+    </nav>
+</div>
+
+<noscript>
+    <div class="mm-noscript">
+        <h1>OpenMind needs JavaScript</h1>
+        <p>The mind-map editor runs entirely in your browser, so it needs JavaScript switched on. Nothing is uploaded — your maps stay on this device.</p>
+        <p><a href="../index.html">Back to Super Learner Academy</a></p>
+    </div>
+</noscript>
+
+<script type="module" src="src/boot-editor.js?v=1.0.0"></script>
+</body>
+</html>
