@@ -292,3 +292,42 @@ describe('Data Loading - Successful Fetch', () => {
         expect(document.querySelector('[data-bind="registration.buttonText"]').textContent).toBe('Register Now');
     });
 });
+
+describe('Data Loading - {{placeholder}} templates and [data-bind-html]', () => {
+    const data = {
+        registration: { currency: '₹', price: '455' },
+        workshop: { dateRangeLong: 'Friday 2nd to Sunday 4th October' },
+        faq: {
+            price: {
+                question: 'Why {{registration.currency}}{{registration.price}}?',
+                answer: 'Runs <strong>{{workshop.dateRangeLong}}</strong>.'
+            }
+        }
+    };
+
+    it('fills placeholders in [data-bind] text', () => {
+        document.body.innerHTML = '<span data-bind="faq.price.question">fallback</span>';
+        window.SLA.injectContent(data);
+        expect(document.querySelector('span').textContent).toBe('Why ₹455?');
+    });
+
+    it('injects HTML with filled placeholders into [data-bind-html]', () => {
+        document.body.innerHTML = '<p data-bind-html="faq.price.answer">fallback</p>';
+        window.SLA.injectContent(data);
+        const p = document.querySelector('p');
+        expect(p.querySelector('strong').textContent).toBe('Friday 2nd to Sunday 4th October');
+        expect(p.textContent).toBe('Runs Friday 2nd to Sunday 4th October.');
+    });
+
+    it('keeps static HTML when the [data-bind-html] path is missing', () => {
+        document.body.innerHTML = '<p data-bind-html="faq.missing.answer"><b>fallback</b></p>';
+        window.SLA.injectContent(data);
+        expect(document.querySelector('p').innerHTML).toBe('<b>fallback</b>');
+    });
+
+    it('leaves unknown placeholders as-is and escapes substituted values in HTML mode', () => {
+        expect(window.SLA.fillTemplate('{{nope.x}} ok', data, false)).toBe('{{nope.x}} ok');
+        expect(window.SLA.fillTemplate('{{a}}', { a: '<i>x</i>' }, true)).toBe('&lt;i&gt;x&lt;/i&gt;');
+        expect(window.SLA.fillTemplate('{{a}}', { a: '<i>x</i>' }, false)).toBe('<i>x</i>');
+    });
+});

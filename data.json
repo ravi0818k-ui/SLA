@@ -1,16 +1,17 @@
 {
     "countdown": {
-        "endDate": "2026-09-26T12:00:00",
+        "endDate": "2026-10-02T12:00:00",
         "timezone": "Asia/Kolkata",
-        "expiredMessage": "Registration Closed!"
+        "expiredMessage": "Registration Closed!",
+        "closesText": "2nd October at 12:00 PM"
     },
     "registration": {
-        "price": "21",
+        "price": "455",
         "originalPrice": "4999",
         "currency": "₹",
-        "link": "https://superprofile.bio/e/7A9dyPcu",
-        "buttonText": "Reserve My Seat for ₹21",
-        "priceHeadline": "Join for just ₹21",
+        "link": "https://superprofile.bio/e/onmob4mz",
+        "buttonText": "Reserve My Seat for ₹455",
+        "priceHeadline": "Join for just ₹455",
         "priceNote": "One-time payment • No hidden fees • Certificate included",
         "refundNote": "Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below."
     },
@@ -19,11 +20,12 @@
         "format": "3 LIVE Sessions · 2.5 Hours Each · Techniques That Stay for Life",
         "coach": "Abhishek Ranjan",
         "days": 3,
-        "startDate": "2026-09-26T16:00:00",
-        "dateRange": "26–28 September",
+        "startDate": "2026-10-02T16:00:00",
+        "dateRange": "02–04 October",
+        "dateRangeLong": "Friday 2nd to Sunday 4th October",
         "sessionTime": "4:00 PM – 6:30 PM IST",
         "platform": "Live on Zoom",
-        "schedule": "26–28 September • 4:00 PM–6:30 PM IST • Live on Zoom"
+        "schedule": "02–04 October • 4:00 PM–6:30 PM IST • Live on Zoom"
     },
     "whatsapp": {
         "link": "https://chat.whatsapp.com/JBS46Qt3Qs34Gc35YyxPX2",
@@ -34,6 +36,20 @@
         "emailHref": "mailto:support@superlearneracademy.in",
         "instagram": "https://www.instagram.com/superlearneracademy",
         "instagramHandle": "@superlearneracademy"
+    },
+    "faq": {
+        "attend": {
+            "question": "How do I attend the LIVE session?",
+            "answer": "The workshop runs for 3 days &mdash; <strong>{{workshop.dateRangeLong}}</strong>, from <strong>{{workshop.sessionTime}}</strong> each day. Every session is <strong>LIVE on Zoom</strong> with Coach Abhishek Ranjan &mdash; not pre-recorded. After registration you'll receive a confirmation with all the details, and the joining link is shared in our WhatsApp community group before the first session begins."
+        },
+        "registrationClose": {
+            "question": "When does registration close?",
+            "answer": "Registration closes on <strong>{{countdown.closesText}}</strong> — a few hours before the first session begins. Seats at this price are limited, so we recommend registering early to avoid missing out."
+        },
+        "price": {
+            "question": "Why is it priced at {{registration.currency}}{{registration.price}} when it's worth {{registration.currency}}{{registration.originalPrice}}?",
+            "answer": "{{registration.currency}}{{registration.price}} is a limited-time launch price to make this accessible to as many students as possible. There are no hidden fees — this one-time payment covers all 3 LIVE days, the editable worksheets, WhatsApp community access, and your completion certificate."
+        }
     },
     "analytics": {
         "gtmId": "",

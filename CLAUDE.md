@@ -49,7 +49,10 @@ All behavior lives in `script.js` (one file, ~900 lines, IIFE-style top-level fu
 `data.json` is fetched at runtime and injected into the DOM through declarative attributes rather than templating:
 - `data-bind="path.to.value"` → sets `textContent` (dot path resolved by `getNestedValue`)
 - `data-bind-href="path.to.value"` → sets `href`
+- `data-bind-html="path.to.value"` → sets `innerHTML` (used for FAQ answers in `data.json`'s `faq` section, which need `<strong>`)
 - `data-dynamic-only` → hidden entirely if `data.json` fails to load
+
+Strings bound either way may contain `{{path.to.value}}` placeholders, filled by `fillTemplate()` from the same `data.json` (e.g. `faq.price.answer` uses `{{registration.price}}`), so a price/date is defined once and reused in prose. Values substituted into `data-bind-html` are HTML-escaped; the template itself is not.
 
 The static text/markup already in the HTML is the fallback shown when the fetch fails, so `index.html` and `thank-you.html` must always contain sane default copy, not placeholders. See `.kiro/specs/sla-webinar-landing-page/design.md` for the full schema and validation rules for `data.json`.
 

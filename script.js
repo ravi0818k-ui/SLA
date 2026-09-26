@@ -87,6 +87,27 @@ function showProtectionAlert() {
         }, obj);
     }
 
+    /**
+     * Replaces {{path.to.value}} placeholders in a string with values from data,
+     * so copy in data.json (e.g. FAQ answers) can reuse the price/dates defined once.
+     * Unknown paths are left as-is. When escape is true (HTML injection), the
+     * substituted values are HTML-escaped; the surrounding template is not.
+     */
+    function fillTemplate(value, data, escape) {
+        if (typeof value !== 'string') return value;
+        return value.replace(/\{\{\s*([\w.]+)\s*\}\}/g, function (match, path) {
+            var resolved = getNestedValue(data, path);
+            if (resolved === undefined || typeof resolved === 'object') return match;
+            resolved = String(resolved);
+            return escape ? escapeHTML(resolved) : resolved;
+        });
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     // ========================
     // DATA LOADING
     // ========================
@@ -128,7 +149,17 @@ function showProtectionAlert() {
             var path = element.getAttribute('data-bind');
             var value = getNestedValue(data, path);
             if (value !== undefined) {
-                element.textContent = value;
+                element.textContent = fillTemplate(value, data, false);
+            }
+        });
+
+        // Inject HTML content (for copy that needs <strong> etc., e.g. FAQ answers)
+        var htmlElements = document.querySelectorAll('[data-bind-html]');
+        htmlElements.forEach(function (element) {
+            var path = element.getAttribute('data-bind-html');
+            var value = getNestedValue(data, path);
+            if (value !== undefined) {
+                element.innerHTML = fillTemplate(value, data, true);
             }
         });
 
@@ -988,6 +1019,7 @@ function showProtectionAlert() {
         injectContent: injectContent,
         hideDynamicElements: hideDynamicElements,
         getNestedValue: getNestedValue,
+        fillTemplate: fillTemplate,
         isValidURL: isValidURL,
         handleInvalidCTALinks: handleInvalidCTALinks,
         initCountdown: initCountdown,
