@@ -386,6 +386,12 @@ must be able to tell who runs the site and how to contact them from any page.
   `.quiz-dialog` (9999) and `#protection-popup`, and **above** the landing page's `.sticky-cta`
   (9990). `.top-bar ~ .site-nav .site-nav-toggle` drops the button to `top: 58px` on pages that
   have the urgency banner, so don't move the nav out of its sibling position after `.top-bar`.
+- **The menu is hidden while a quiz question is on screen.** `quiz.js`'s router writes
+  `data-view="<view>"` onto `<html>` on every navigation, and `quiz.css` has
+  `:root[data-view="quiz"] .site-nav { display: none }` — the fixed toggle sits exactly where the
+  question card's progress badge ("3/15") is. `site-nav.js` exposes `window.SLASiteNav`
+  (`isOpen`/`close`) purely so the router can close an open panel instead of leaving body scroll
+  locked behind a button that just became invisible.
 - **`about.html`** is the E-E-A-T page: who runs the site, the founder's background, an explicit
   "what we will not claim" list (it restates the no-pseudo-science / no-invented-numbers rules
   above), what the free tools do with your data, refund terms, and contact. It carries an

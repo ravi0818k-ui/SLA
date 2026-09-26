@@ -1806,3 +1806,17 @@ input, textarea, [contenteditable="true"] {
         padding: 8px 10px;
     }
 }
+
+/* ==========================================================
+   Site chrome while a quiz is being answered
+   ----------------------------------------------------------
+   The shared hamburger button (site-nav.css) is fixed to the
+   top-right, which is where the question card's progress badge
+   ("3/15") sits — the two collide. A student mid-question also
+   has no reason to leave the page, and the quiz view has its own
+   Exit control, so the whole menu is hidden for that one route.
+   quiz.js writes data-view onto <html> on every navigation.
+   ========================================================== */
+:root[data-view="quiz"] .site-nav {
+    display: none;
+}

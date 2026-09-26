@@ -86,6 +86,24 @@ describe('quiz.html shell', () => {
     });
 });
 
+describe('site menu visibility', () => {
+    it('marks the active view on <html> so the hamburger can be hidden mid-quiz', async () => {
+        await boot('#/');
+        expect(document.documentElement.getAttribute('data-view')).toBe('home');
+
+        await boot('#/quiz/' + allIds[0]);
+        expect(document.documentElement.getAttribute('data-view')).toBe('quiz');
+
+        await boot('#/results/' + allIds[0]);
+        expect(document.documentElement.getAttribute('data-view')).toBe('results');
+    });
+
+    it('hides the whole menu for the quiz view only', () => {
+        const css = readFileSync(resolve(ROOT, 'quiz.css'), 'utf-8');
+        expect(css).toMatch(/:root\[data-view="quiz"\]\s*\.site-nav\s*\{[^}]*display:\s*none/);
+    });
+});
+
 describe('home view', () => {
     it('renders a button for every quiz and every tool', async () => {
         await boot('#/');

@@ -74,6 +74,11 @@
             if (isOpen() && toggle.offsetParent === null) close(false);
         });
 
+        // A page that hides the toggle for one of its own views (the quiz app
+        // does this while a question is on screen) needs a way to close the
+        // panel without simulating a click on a now-invisible button.
+        window.SLASiteNav = { isOpen: isOpen, close: close };
+
         // Keep tabbing inside the panel while it is open.
         panel.addEventListener('keydown', function (e) {
             if (e.key !== 'Tab') return;

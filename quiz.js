@@ -216,6 +216,20 @@
         document.head.appendChild(link);
     }
 
+    // The active view is echoed onto <html> so the shared site chrome can react
+    // to it in CSS. The quiz view hides the hamburger button: it is fixed to the
+    // top-right, which is exactly where the question card's progress badge sits,
+    // and a student mid-question has no reason to leave the page.
+    function applyViewToDocument(view) {
+        if (typeof document === 'undefined' || !document.documentElement) return;
+        document.documentElement.setAttribute('data-view', view);
+        // If the panel happens to be open, close it rather than leaving body
+        // scroll locked behind a button that is now invisible.
+        if (view === 'quiz' && window.SLASiteNav && window.SLASiteNav.isOpen()) {
+            window.SLASiteNav.close(false);
+        }
+    }
+
     function applyLangToDocument(lang) {
         if (typeof document === 'undefined' || !document.documentElement) return;
         document.documentElement.setAttribute('data-lang', lang);
@@ -1896,6 +1910,7 @@
         // is in force by the time the next one renders.
         currentLang = readLang();
         applyLangToDocument(currentLang);
+        applyViewToDocument(view);
 
         var app = appEl();
         if (app) app.innerHTML = '<div class="quiz-loading" role="status">' + tr('loading') + '</div>';
