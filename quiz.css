@@ -1335,6 +1335,32 @@ input, textarea, [contenteditable="true"] {
   margin: 12px 0 0;
 }
 
+.result-guide {
+  background: #FFF3E0;
+  border-left: 4px solid var(--memory-orange);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0 0;
+  text-align: left;
+}
+
+.result-guide h4 { font-family: var(--font-heading); font-size: 15px; color: var(--deep-learning-blue); margin-bottom: 6px; }
+.result-guide p { color: #444; font-size: 14px; line-height: 1.7; margin: 0 0 12px; }
+
+.result-guide-link {
+  display: inline-block;
+  background: var(--memory-orange);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.result-guide-link:hover, .result-guide-link:focus-visible { background: var(--deep-learning-blue); color: #fff; }
+
 .result-disclaimer {
   font-size: 12px;
   line-height: 1.7;

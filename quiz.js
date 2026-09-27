@@ -287,6 +287,9 @@
             smallest: 'The smallest useful thing right now',
             allFour: 'All four scores',
             stopCheck: 'STOP → CHECK → CHOOSE → STUDY',
+            guideTitle: '📘 Free guide: The Four Kinds of Exhaustion',
+            guideText: 'All four types in one printable PDF: how each one feels, why it happens, what to do about it, and which study task fits. Keep it for the next time you feel tired before studying.',
+            guideBtn: 'Download the PDF guide',
             strengths: '💪 Your strengths',
             growth: '🌱 Your growth area',
             meansLearning: '🎯 What this means for your learning',
@@ -369,6 +372,9 @@
             smallest: 'अभी का सबसे छोटा उपयोगी कदम',
             allFour: 'चारों स्कोर',
             stopCheck: 'रुकें → जाँचें → चुनें → पढ़ें',
+            guideTitle: '📘 मुफ़्त गाइड: थकान के चार प्रकार',
+            guideText: 'चारों प्रकार एक प्रिंट करने योग्य PDF में: हर प्रकार कैसा लगता है, क्यों होता है, क्या करें और कौन-सा पढ़ाई का काम सही है। (गाइड अंग्रेज़ी में है।)',
+            guideBtn: 'PDF गाइड डाउनलोड करें',
             strengths: '💪 आपकी ताकतें',
             growth: '🌱 आपका विकास क्षेत्र',
             meansLearning: '🎯 आपकी पढ़ाई के लिए इसका मतलब',
@@ -1720,6 +1726,22 @@
                 h('h4', { text: quiz.closingTitle || tr('stopCheck') }),
                 h('ul', {}, (quiz.closing.steps || []).map(function (line) { return h('li', { text: line }); })),
                 quiz.closing.line ? h('p', { class: 'plan-rule', text: quiz.closing.line }) : null
+            ]));
+        }
+
+        // Printable companion PDF (scripts/generate_exhaustion_guide.py builds it).
+        if (quiz.guide) {
+            card.appendChild(h('div', { class: 'result-guide' }, [
+                h('h4', { text: tr('guideTitle') }),
+                h('p', { text: tr('guideText') }),
+                h('a', {
+                    class: 'result-guide-link',
+                    href: quiz.guide,
+                    download: '',
+                    target: '_blank',
+                    rel: 'noopener',
+                    text: tr('guideBtn')
+                })
             ]));
         }
 

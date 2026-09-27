@@ -241,6 +241,15 @@ describe('results view', () => {
         expect(app.querySelector('.result-disclaimer').textContent).toContain('not a medical');
     });
 
+    it('links the printable exhaustion guide PDF, and the file exists', async () => {
+        const app = await showResults('tiredness', 3);
+        const quiz = loadQuizJSON('tiredness');
+        const link = app.querySelector('.result-guide-link');
+        expect(link).toBeTruthy();
+        expect(link.getAttribute('href')).toBe(quiz.guide);
+        expect(existsSync(resolve(ROOT, quiz.guide))).toBe(true);
+    });
+
     it('shows no action plan when nothing is exhausted', async () => {
         const app = await showResults('tiredness', 0);
         expect(app.querySelectorAll('.plan-block').length).toBe(0);
