@@ -95,7 +95,7 @@ Ad traffic lands on `index.html` and needs to render fast, but there's no build-
 
 Font Awesome's stylesheet (cdnjs `all.min.css`) is loaded in `index.html`'s `<head>` via `rel="preload"` + an `onload` swap (with a `<noscript>` fallback), not a normal blocking `<link rel="stylesheet">` — this lets the hero paint without waiting on the CDN request. The hero's orbiting badges (see above) do use FA icons above the fold now, but the deferred load still works fine for them in practice (icons pop in a beat after paint, screenshot-verified) — don't "fix" this into a blocking `<link>` on that assumption alone. `thank-you.html` intentionally keeps Font Awesome render-blocking because its success checkmark (`fas fa-check`) is the first thing visible there; don't "fix" that inconsistency without checking whether the icon in question is above the fold on that page.
 
-The Google Fonts `<link>` in `<head>` is the only loader for Montserrat/Inter — don't reintroduce a second `@import url(...)` for the same fonts inside `style.css` (one existed and was removed as a redundant render-blocking request).
+The Google Fonts `<link>` in `<head>` is the only loader for the page fonts (Tomorrow/Lato on `index.html` + `thank-you.html` since the Nov 2026 brand refresh; Montserrat/Inter on the other pages) — don't reintroduce a second `@import url(...)` for the same fonts inside `style.css` (one existed and was removed as a redundant render-blocking request).
 
 ## Quiz app (`quiz.html`)
 

@@ -4,6 +4,17 @@
 > This describes the **current, live** theme. `design-reference.md` documents an earlier/different
 > project variant (different palette, Poppins font) — don't use it for this site's actual styling.
 
+
+> **Brand refresh (Nov 2026) — `index.html` + `thank-you.html` (the pages that load `style.css`).**
+> The token *names* below are unchanged, but their values now follow the SLA brand guide:
+> `--deep-learning-blue` #182633 (Midnight Navy) · `--memory-orange` #ED3C6B (Learner Pink) ·
+> `--red-orange` #D11D4D (Crimson) · `--success-gold` #FFF743 (Bright Idea yellow) · `--smart-blue` #E47849 (Ember);
+> darkest stop #0F1822, mid-navy #22344A. Fonts: **Tomorrow** (headings, 600/700) + **Lato** (body, 400/700/900),
+> loaded by the Google Fonts `<link>` on those two pages. Brand assets: `Images/brand/` (logo SVGs) and
+> `Images/illustrations/` (struggle + super-learner scenes, 3 pillar icons; drawn in Illustrator, source .ai kept
+> outside the repo). quiz/about/resources/mindmap still use their own CSS with Montserrat/Inter.
+> Hex values in the tables below describe the pre-refresh theme.
+
 ---
 
 ## 1. Color Palette

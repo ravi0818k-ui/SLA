@@ -5,10 +5,10 @@ import math
 
 CX, CY = 200, 200
 COLORS = {
-    "blue": "#1E5EFF",     # --smart-blue
-    "orange": "#FF6B00",   # --memory-orange
-    "gold": "#FFC107",     # --success-gold
-    "deep": "#0B2A5B",     # --deep-learning-blue
+    "blue": "#E47849",     # --smart-blue (brand Ember)
+    "orange": "#ED3C6B",   # --memory-orange (brand Pink)
+    "gold": "#FFF743",     # --success-gold (brand Yellow)
+    "deep": "#182633",     # --deep-learning-blue (brand Navy)
 }
 
 

@@ -3,20 +3,20 @@
    =========================== */
 :root {
     /* Colors */
-    --deep-learning-blue: #0B2A5B;
-    --memory-orange: #FF6B00;
-    --success-gold: #FFC107;
+    --deep-learning-blue: #182633;      /* SLA brand: Midnight Navy */
+    --memory-orange: #ED3C6B;           /* SLA brand: Learner Pink */
+    --success-gold: #FFF743;            /* SLA brand: Bright Idea yellow */
     --growth-green: #34A853;
-    --smart-blue: #1E5EFF;
-    --red-orange: #ff5e3a;
+    --smart-blue: #E47849;              /* SLA brand: Ember */
+    --red-orange: #D11D4D;              /* SLA brand: Crimson Spark */
 
     /* Gradients */
-    --cta-gradient: linear-gradient(135deg, #FF6B00, #ff5e3a);
-    --topbar-gradient: linear-gradient(135deg, #FF6B00, #ff5e3a);
+    --cta-gradient: linear-gradient(135deg, #ED3C6B, #D11D4D);
+    --topbar-gradient: linear-gradient(135deg, #ED3C6B, #D11D4D);
 
     /* Typography */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Tomorrow', 'Montserrat', sans-serif;
+    --font-body: 'Lato', 'Inter', sans-serif;
 
     /* Spacing */
     --section-padding: 80px 20px;
@@ -25,7 +25,7 @@
     /* Shadows */
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.1);
-    --cta-shadow: 0 8px 25px rgba(255, 94, 58, 0.4);
+    --cta-shadow: 0 8px 25px rgba(209, 29, 77, 0.4);
 
     /* Border Radius */
     --radius-card: 16px;
@@ -216,14 +216,14 @@ h1, h2, h3, h4, h5, h6 {
 .cta-button {
     background: var(--cta-gradient);
     color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1rem;
     padding: 18px 36px;
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255, 94, 58, 0.4);
+    box-shadow: 0 8px 25px rgba(209, 29, 77, 0.4);
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -235,7 +235,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 35px rgba(255, 94, 58, 0.5);
+    box-shadow: 0 12px 35px rgba(209, 29, 77, 0.5);
 }
 
 .cta-button:active {
@@ -245,13 +245,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Pulse Animation */
 @keyframes pulse-anim {
     0% {
-        box-shadow: 0 8px 25px rgba(255, 94, 58, 0.4);
+        box-shadow: 0 8px 25px rgba(209, 29, 77, 0.4);
     }
     50% {
-        box-shadow: 0 8px 40px rgba(255, 94, 58, 0.6);
+        box-shadow: 0 8px 40px rgba(209, 29, 77, 0.6);
     }
     100% {
-        box-shadow: 0 8px 25px rgba(255, 94, 58, 0.4);
+        box-shadow: 0 8px 25px rgba(209, 29, 77, 0.4);
     }
 }
 
@@ -387,7 +387,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 280px;
     border-radius: 50%;
     border: 4px solid var(--smart-blue);
-    box-shadow: 0 15px 40px rgba(30, 94, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(228, 120, 73, 0.3);
     object-fit: cover;
     animation: float 3s ease-in-out infinite;
 }
@@ -437,8 +437,8 @@ h1, h2, h3, h4, h5, h6 {
     aspect-ratio: 1 / 1;
     transform: translate(-50%, -50%);
     background:
-        radial-gradient(circle at 34% 38%, rgba(30, 94, 255, 0.38), transparent 55%),
-        radial-gradient(circle at 66% 58%, rgba(255, 107, 0, 0.35), transparent 55%);
+        radial-gradient(circle at 34% 38%, rgba(228, 120, 73, 0.38), transparent 55%),
+        radial-gradient(circle at 66% 58%, rgba(237, 60, 107, 0.35), transparent 55%);
     filter: blur(8px);
     z-index: 0;
     pointer-events: none;
@@ -808,7 +808,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 280px;
     border-radius: 50%;
     border: 4px solid var(--smart-blue);
-    box-shadow: 0 15px 40px rgba(30, 94, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(228, 120, 73, 0.3);
     background: var(--deep-learning-blue);
     color: #ffffff;
     font-family: var(--font-heading);
@@ -910,7 +910,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     z-index: 9999;
-    background: linear-gradient(135deg, #FF6B00, #ff5e3a);
+    background: linear-gradient(135deg, #ED3C6B, #D11D4D);
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -934,7 +934,7 @@ body {
    Countdown Timer Section
    =========================== */
 .countdown-section {
-    background: linear-gradient(135deg, #0a1628, #0B2A5B);
+    background: linear-gradient(135deg, #0F1822, #182633);
     padding: var(--section-padding);
     text-align: center;
     color: #ffffff;
@@ -992,7 +992,7 @@ body {
    =========================== */
 .challenges-section {
     padding: var(--section-padding);
-    background: #f8f9fa;
+    background: #F5F6F8;
     text-align: center;
 }
 
@@ -1046,7 +1046,7 @@ body {
 .pillar-card {
     position: relative;
     background: #ffffff;
-    border: 2px solid #eef1f6;
+    border: 2px solid #E3E7EC;
     border-radius: var(--radius-card);
     padding: 36px 28px 28px;
     text-align: left;
@@ -1068,7 +1068,7 @@ body {
     font-weight: 800;
     font-size: 2.5rem;
     line-height: 1;
-    color: #eef1f6;
+    color: #E3E7EC;
 }
 
 .pillar-icon {
@@ -1107,7 +1107,7 @@ body {
     font-weight: 500;
     padding: 6px 12px;
     border-radius: var(--radius-pill);
-    background: #f4f6fa;
+    background: #F5F6F8;
     color: var(--deep-learning-blue);
 }
 
@@ -1127,7 +1127,7 @@ body {
    =========================== */
 .science-section {
     padding: var(--section-padding);
-    background: #f4f7fc;
+    background: #F5F6F8;
     text-align: center;
 }
 
@@ -1210,17 +1210,17 @@ body {
 }
 
 .day-card-header {
-    background: linear-gradient(135deg, #FF6B00, #ff5e3a);
+    background: linear-gradient(135deg, #ED3C6B, #D11D4D);
     padding: 24px;
     color: #ffffff;
 }
 
 .day-card-header.day-2-header {
-    background: linear-gradient(135deg, #1E5EFF, #0B2A5B);
+    background: linear-gradient(135deg, #E3A443, #E47849);
 }
 
 .day-card-header.day-3-header {
-    background: linear-gradient(135deg, #34A853, #1a6b3c);
+    background: linear-gradient(135deg, #243A52, #182633);
 }
 
 .curriculum-grid-3 {
@@ -1334,15 +1334,15 @@ body {
     width: 260px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 34px rgba(11, 42, 91, 0.28);
+    box-shadow: 0 10px 34px rgba(24, 38, 51, 0.28);
     position: relative;
     /* The coach photo is a transparent cutout, so this background shows through
        around the subject. Echoes .hero-visual::before's blue+orange glow so the
        two cutout photos on the page get the same lighting treatment. */
     background:
-        radial-gradient(circle at 34% 30%, rgba(30, 94, 255, 0.38), transparent 58%),
-        radial-gradient(circle at 70% 62%, rgba(255, 107, 0, 0.30), transparent 58%),
-        linear-gradient(165deg, #1d4079 0%, #0B2A5B 55%, #071e3f 100%);
+        radial-gradient(circle at 34% 30%, rgba(228, 120, 73, 0.38), transparent 58%),
+        radial-gradient(circle at 70% 62%, rgba(237, 60, 107, 0.30), transparent 58%),
+        linear-gradient(165deg, #243A52 0%, #182633 55%, #0F1822 100%);
 }
 
 /* Soft inner rim so the card edge reads against the white section */
@@ -1447,7 +1447,7 @@ body {
 }
 
 .ebook-download-btn:hover {
-    background: #e65c00;
+    background: #C51E4B;
     transform: translateY(-2px);
 }
 
@@ -1480,7 +1480,7 @@ body {
     border-radius: 0;
     border: none;
     box-shadow: none;
-    background: linear-gradient(135deg, #1a3a6b, #0B2A5B);
+    background: linear-gradient(135deg, #22344A, #182633);
     font-size: 4rem;
 }
 
@@ -1541,7 +1541,7 @@ body {
    =========================== */
 .quotes-section {
     padding: 50px 20px;
-    background: linear-gradient(135deg, #0a1628, #0B2A5B);
+    background: linear-gradient(135deg, #0F1822, #182633);
 }
 
 .quotes-slider {
@@ -1746,7 +1746,7 @@ body {
    =========================== */
 .faq-section {
     padding: var(--section-padding);
-    background: #f8f9fa;
+    background: #F5F6F8;
     text-align: center;
 }
 
@@ -1814,7 +1814,7 @@ body {
 .footer {
     padding: 30px 20px;
     text-align: center;
-    background: #0a1628;
+    background: #0F1822;
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.9rem;
 }
@@ -1827,7 +1827,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(10, 22, 40, 0.95);
+    background: rgba(15, 24, 34, 0.95);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 16px 20px;
@@ -1858,7 +1858,7 @@ body {
     justify-content: center;
     cursor: pointer;
     z-index: 9980;
-    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(237, 60, 107, 0.3);
     transition: transform 0.3s;
 }
 
@@ -2048,7 +2048,7 @@ body {
    Thank-You Hero Section (legacy — keep for compatibility)
    =========================== */
 .thank-you-hero {
-    background: linear-gradient(135deg, #0a1628, #0B2A5B);
+    background: linear-gradient(135deg, #0F1822, #182633);
     color: #ffffff;
     padding: 100px 20px 80px;
     text-align: center;
@@ -2116,13 +2116,13 @@ body {
    =========================== */
 .next-steps-section {
     padding: var(--section-padding);
-    background: #f8f9fa;
+    background: #F5F6F8;
 }
 
 .next-steps-section .section-title {
     text-align: center;
     margin-bottom: 2.5rem;
-    color: #1a1a2e;
+    color: #182633;
 }
 
 .next-steps-grid {
@@ -2151,7 +2151,7 @@ body {
 .next-step-card h3 {
     font-size: 1.15rem;
     margin-bottom: 0.75rem;
-    color: #1a1a2e;
+    color: #182633;
 }
 
 .next-step-card p {
@@ -2170,7 +2170,7 @@ body {
     margin: 0 auto 1.2rem;
     font-size: 1.6rem;
     color: #ffffff;
-    background: linear-gradient(135deg, #ff8c00, #ff5e3a);
+    background: linear-gradient(135deg, #E47849, #D11D4D);
 }
 
 .next-step-icon.whatsapp-icon {
@@ -2193,7 +2193,7 @@ body {
 .workshop-details-section .section-title {
     text-align: center;
     margin-bottom: 2rem;
-    color: #1a1a2e;
+    color: #182633;
 }
 
 .workshop-details-card {
@@ -2251,13 +2251,13 @@ body {
 .whatsapp-cta-section {
     padding: var(--section-padding);
     text-align: center;
-    background: #f8f9fa;
+    background: #F5F6F8;
 }
 
 .whatsapp-cta-section .section-title {
     text-align: center;
     margin-bottom: 0.75rem;
-    color: #1a1a2e;
+    color: #182633;
 }
 
 .whatsapp-description {
@@ -2427,7 +2427,7 @@ body {
 /* --- Audience qualifier section (directly after hero) --- */
 .for-whom-section {
     padding: 56px 20px;
-    background: #f8f9fa;
+    background: #F5F6F8;
     text-align: center;
 }
 
@@ -2450,7 +2450,7 @@ body {
     font-size: 1rem;
     color: #333;
     background: #ffffff;
-    border: 1px solid #eef1f6;
+    border: 1px solid #E3E7EC;
     border-radius: 12px;
     padding: 12px 16px;
 }
@@ -2484,7 +2484,7 @@ body {
     font-size: 1.05rem;
     color: #333;
     padding: 10px 0;
-    border-bottom: 1px solid #eef1f6;
+    border-bottom: 1px solid #E3E7EC;
 }
 
 .outcomes-list li:last-child {
@@ -3025,3 +3025,98 @@ object {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
+
+/* ===========================
+   SLA brand refresh (Nov 2026): logo, brand illustrations, pillar icons
+   Assets: Images/brand/*.svg and Images/illustrations/*.svg, drawn in Illustrator
+   (source .ai files live in the brand kit, not in this repo)
+   =========================== */
+.hero-brand-logo {
+    display: block;
+    width: 230px;
+    height: auto;
+    margin: 0 0 1.25rem -14px; /* the SVG has built-in padding on the left */
+}
+.highlight-pink { color: var(--memory-orange); }
+
+.cta-illustrated {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    padding: 32px 40px 32px 24px;
+    text-align: left;
+}
+.cta-illustration { width: 100%; height: auto; display: block; }
+.cta-kicker {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--memory-orange);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+.cta-illustrated-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    color: var(--deep-learning-blue);
+    margin-bottom: 0.9rem;
+}
+.cta-illustrated-text { color: #555; font-size: 1.05rem; margin-bottom: 1.5rem; }
+.cta-illustrated .trust-note { margin-top: 0.9rem; }
+
+.pillar-icon img {
+    width: 96px;
+    height: 96px;
+    display: block;
+    margin: 0 auto;
+}
+
+.pricing-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 500px);
+    align-items: center;
+    gap: 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.pricing-layout .pricing-card { margin: 0; }
+.pricing-illustration {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    justify-self: center;
+    animation: sla-float 6s ease-in-out infinite;
+}
+@keyframes sla-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pricing-illustration { animation: none; }
+}
+@media (max-width: 992px) {
+    .cta-illustrated { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; gap: 16px; }
+    .cta-illustration { max-width: 460px; margin: 0 auto; }
+    .pricing-layout { grid-template-columns: 1fr; gap: 24px; }
+    .pricing-layout .pricing-card { margin: 0 auto; }
+    .pricing-illustration { max-width: 380px; }
+    .hero-brand-logo { margin: 0 auto 1rem; }
+}
+@media (max-width: 480px) {
+    .cta-illustrated-title { font-size: 1.4rem; }
+    .pricing-illustration { max-width: 300px; }
+    .hero-brand-logo { width: 190px; }
+}
+
+/* Shared chrome (site-nav.css) hard-codes Montserrat/Inter for the other pages; on the two
+   style.css pages only Tomorrow + Lato are loaded, so map the nav/footer onto the brand fonts. */
+.site-nav, .site-footer { font-family: var(--font-body); }
+.site-nav-brand, .site-footer h2, .site-footer-brand strong { font-family: var(--font-heading); }

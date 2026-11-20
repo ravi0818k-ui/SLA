@@ -46,7 +46,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6.5 (loaded non-blocking - no icons appear above the fold) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -81,7 +81,7 @@
     </script>
 
     <link rel="stylesheet" href="site-nav.css?v=1.0.1">
-    <link rel="stylesheet" href="style.css?v=1.1.3">
+    <link rel="stylesheet" href="style.css?v=1.2.0">
 </head>
 <body>
 
@@ -127,6 +127,7 @@
     <section class="hero" id="hero">
         <div class="container hero-content">
             <div class="hero-text">
+                <img src="Images/brand/sla-logo-horizontal-dark.svg" alt="Super Learner Academy logo" class="hero-brand-logo" width="1120" height="538" decoding="async">
                 <h1>Sharpen Your Child's <span class="highlight">Memory</span> in Just 3 Days</h1>
                 <p class="hero-format" data-bind="workshop.format">3 LIVE Sessions &middot; 2 Hours Each &middot; Techniques That Stay for Life</p>
                 <p class="sub-headline">Science-backed memory, focus, and mindset strategies that turn your child's study hours into better grades. Not harder work. Smarter learning.</p>
@@ -268,13 +269,19 @@
                 </div>
             </div>
 
-            <!-- CTA after Challenges -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
+            <!-- CTA after Challenges: brand illustration (Images/illustrations; Illustrator source lives in the brand kit) -->
+            <div class="section-cta cta-illustrated">
+                <img src="Images/illustrations/illus-struggle.svg" alt="Illustration of a tired student at a desk late at night, behind a tall pile of books" class="cta-illustration" width="1400" height="1100" loading="lazy" decoding="async">
+                <div class="cta-illustrated-copy">
+                    <p class="cta-kicker">Sounds familiar?</p>
+                    <h3 class="cta-illustrated-title">More hours won't fix it. <span class="highlight-pink">A better method will.</span></h3>
+                    <p class="cta-illustrated-text">In 3 LIVE sessions you learn how memory, focus and mindset actually work, and leave with a study system you can use on tonight's homework.</p>
+                    <a href="#" class="cta-button" data-bind-href="registration.link">
+                        <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    </a>
+                    <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
+                    <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
+                </div>
             </div>
         </div>
     </section>
@@ -287,7 +294,7 @@
             <div class="pillars-grid">
                 <div class="pillar-card scroll-reveal">
                     <div class="pillar-number">01</div>
-                    <div class="pillar-icon"><i class="fas fa-brain"></i></div>
+                    <div class="pillar-icon"><img src="Images/illustrations/pillar-memory.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
                     <h3>Memory &amp; Brain</h3>
                     <p>Stop forgetting what you studied last week. Learn how your brain actually stores and retrieves information — then use techniques built on that.</p>
                     <ul class="pillar-tags">
@@ -299,7 +306,7 @@
                 </div>
                 <div class="pillar-card scroll-reveal">
                     <div class="pillar-number">02</div>
-                    <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="pillar-icon"><img src="Images/illustrations/pillar-focus.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
                     <h3>Study &amp; Focus</h3>
                     <p>Replace re-reading and highlighting — the two least effective methods — with practice strategies proven to move exam scores.</p>
                     <ul class="pillar-tags">
@@ -311,7 +318,7 @@
                 </div>
                 <div class="pillar-card scroll-reveal">
                     <div class="pillar-number">03</div>
-                    <div class="pillar-icon"><i class="fas fa-seedling"></i></div>
+                    <div class="pillar-icon"><img src="Images/illustrations/pillar-mindset.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
                     <h3>Mindset &amp; Learning</h3>
                     <p>Techniques fail without the right identity behind them. Build the self-belief and calm of someone who knows they can learn anything.</p>
                     <ul class="pillar-tags">
@@ -650,6 +657,8 @@
         <div class="container">
             <h2 class="section-title light">Join the 3-Day LIVE Workshop</h2>
             <p class="section-subtitle light" data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</p>
+            <div class="pricing-layout">
+            <img src="Images/illustrations/illus-superlearner.svg" alt="Illustration of a confident student standing on a stack of books, holding up a glowing idea bulb, with Memory, Focus and Mindset badges" class="pricing-illustration" width="1400" height="1400" loading="lazy" decoding="async">
             <div class="pricing-card scroll-reveal">
                 <div class="price-anchor">
                     <span class="price-anchor-label">Regular Price</span>
@@ -668,6 +677,7 @@
                 <p class="refund-note"><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
                 <p class="seats-left">⚡ Limited seats available for this batch</p>
                 <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
+            </div>
             </div>
         </div>
     </section>
