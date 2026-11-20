@@ -13,6 +13,9 @@
 > loaded by the Google Fonts `<link>` on those two pages. Brand assets: `Images/brand/` (logo SVGs) and
 > `Images/illustrations/` (struggle + super-learner scenes, 3 pillar icons; drawn in Illustrator, source .ai kept
 > outside the repo). quiz/about/resources/mindmap still use their own CSS with Montserrat/Inter.
+> Illustrations v2 (flat, outline-free, same student before -> after): `illus-struggle`, `illus-superlearner` (badges are HTML `.art-badge`),
+> `illus-before-after` (#outcomes) and six `science-*.svg` spots in the `#science` cards. Their micro-animations live in a `<style>`
+> inside each SVG (ids `anim*`) and stop under prefers-reduced-motion. Regenerate via the brand kit (`_build\website_v2.jsx` + `inject_svg_anim.py`).
 > Hex values in the tables below describe the pre-refresh theme.
 
 ---

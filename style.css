@@ -3120,3 +3120,85 @@ object {
    style.css pages only Tomorrow + Lato are loaded, so map the nav/footer onto the brand fonts. */
 .site-nav, .site-footer { font-family: var(--font-body); }
 .site-nav-brand, .site-footer h2, .site-footer-brand strong { font-family: var(--font-heading); }
+
+/* ===========================
+   Illustration v2 (flat, logo-matched): HTML badges, science spots, before/after
+   SVG micro-animations live inside the SVG files and respect prefers-reduced-motion.
+   =========================== */
+.pricing-art {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0;
+    justify-self: center;
+}
+.pricing-art .pricing-illustration { max-width: 100%; }
+.art-badges { list-style: none; margin: 0; padding: 0; }
+.art-badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: var(--deep-learning-blue);
+    font-family: var(--font-body);
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 8px 16px 8px 8px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    animation: sla-badge-float 4s ease-in-out infinite;
+}
+.art-badge::before {
+    content: "\2713";
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--memory-orange);
+    color: #ffffff;
+    font-size: 0.85rem;
+}
+.art-badge-1 { left: -2%; top: 30%; }
+.art-badge-2 { right: -2%; top: 50%; animation-delay: -1.3s; }
+.art-badge-3 { left: 4%; top: 74%; animation-delay: -2.6s; }
+@keyframes sla-badge-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.science-icon img {
+    width: 140px;
+    height: 140px;
+    display: block;
+}
+
+.outcomes-art { max-width: 720px; margin: 0 auto 2rem; }
+.outcomes-art img { width: 100%; height: auto; display: block; }
+.outcomes-art-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+    text-align: center;
+}
+.art-label {
+    justify-self: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+}
+.art-label-before { background: #E3E7EC; color: #5A6675; }
+.art-label-after { background: #FDE4EC; color: var(--red-orange); }
+
+@media (prefers-reduced-motion: reduce) {
+    .art-badge { animation: none; }
+}
+@media (max-width: 480px) {
+    .art-badge { font-size: 0.8rem; padding: 6px 12px 6px 6px; }
+    .art-badge::before { width: 20px; height: 20px; font-size: 0.7rem; }
+    .science-icon img { width: 96px; height: 96px; }
+    .art-label { font-size: 0.8rem; padding: 5px 10px; }
+}
