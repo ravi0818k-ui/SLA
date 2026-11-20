@@ -267,6 +267,13 @@ function showProtectionAlert() {
     function updateCountdownDisplay() {
         var remaining = calculateTimeRemaining(countdownEndDate);
 
+        // Weekly batch: when this Saturday's slot passes, roll to next week's.
+        var weekly = countdownData && countdownData.countdown && countdownData.countdown.weekly;
+        if (remaining === null && weekly && typeof weekly.day === 'number') {
+            countdownEndDate = getNextWeeklyOccurrence(weekly.day, weekly.time);
+            remaining = calculateTimeRemaining(countdownEndDate);
+        }
+
         if (remaining === null) {
             showExpiredMessage();
             return;
@@ -317,13 +324,45 @@ function showProtectionAlert() {
      * - Starts the 1-second interval to update the display
      * - Handles edge cases: past dates, invalid dates, corrupted localStorage
      */
+    /**
+     * Returns the next occurrence (strictly after `now`) of a weekly IST slot
+     * as an ISO string with a +05:30 offset, e.g. "2026-11-21T19:00:00+05:30".
+     * @param {number} day - 0 = Sunday ... 6 = Saturday (IST)
+     * @param {string} time - "HH:MM" in IST
+     * @param {number} [now] - epoch ms, defaults to Date.now()
+     */
+    function getNextWeeklyOccurrence(day, time, now) {
+        var IST_OFFSET_MS = 330 * 60000;
+        var parts = String(time || '00:00').split(':');
+        var hh = parseInt(parts[0], 10) || 0;
+        var mm = parseInt(parts[1], 10) || 0;
+        var nowMs = typeof now === 'number' ? now : Date.now();
+
+        // Shift into IST "wall clock" and read it with UTC getters.
+        var ist = new Date(nowMs + IST_OFFSET_MS);
+        var target = Date.UTC(ist.getUTCFullYear(), ist.getUTCMonth(), ist.getUTCDate(), hh, mm, 0);
+        target += ((day - ist.getUTCDay() + 7) % 7) * 86400000;
+        if (target - IST_OFFSET_MS <= nowMs) target += 7 * 86400000;
+
+        var t = new Date(target);
+        function pad(n) { return String(n).padStart(2, '0'); }
+        return t.getUTCFullYear() + '-' + pad(t.getUTCMonth() + 1) + '-' + pad(t.getUTCDate()) +
+            'T' + pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes()) + ':00+05:30';
+    }
+
     function initCountdown(data) {
         countdownData = data;
 
         var endDateFromData = null;
 
         try {
-            endDateFromData = data && data.countdown && data.countdown.endDate ? data.countdown.endDate : null;
+            var cd = data && data.countdown;
+            if (cd && cd.weekly && typeof cd.weekly.day === 'number') {
+                // Recurring weekly batch: always count down to the next slot.
+                endDateFromData = getNextWeeklyOccurrence(cd.weekly.day, cd.weekly.time);
+            } else {
+                endDateFromData = cd && cd.endDate ? cd.endDate : null;
+            }
         } catch (e) {
             console.error('[SLA] Error reading countdown data:', e.message);
             showExpiredMessage();
@@ -1039,6 +1078,7 @@ function showProtectionAlert() {
         getStaggerDelay: getStaggerDelay,
         playConfetti: playConfetti,
         formatWorkshopDate: formatWorkshopDate,
+        getNextWeeklyOccurrence: getNextWeeklyOccurrence,
         initThankYouPage: initThankYouPage,
         trackPurchaseConversion: trackPurchaseConversion
     };

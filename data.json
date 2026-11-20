@@ -1,9 +1,9 @@
 {
     "countdown": {
-        "endDate": "2026-10-02T12:00:00",
+        "weekly": { "day": 6, "time": "19:00" },
         "timezone": "Asia/Kolkata",
         "expiredMessage": "Registration Closed!",
-        "closesText": "2nd October at 12:00 PM"
+        "closesText": "Saturday at 7:00 PM IST"
     },
     "registration": {
         "price": "455",
@@ -17,15 +17,14 @@
     },
     "workshop": {
         "name": "Super Learner Academy - 3 Day Live Workshop",
-        "format": "3 LIVE Sessions · 2.5 Hours Each · Techniques That Stay for Life",
+        "format": "3 LIVE Sessions · 2 Hours Each · Techniques That Stay for Life",
         "coach": "Abhishek Ranjan",
         "days": 3,
-        "startDate": "2026-10-02T16:00:00",
-        "dateRange": "02–04 October",
-        "dateRangeLong": "Friday 2nd to Sunday 4th October",
-        "sessionTime": "4:00 PM – 6:30 PM IST",
+        "dateRange": "Every Saturday",
+        "dateRangeLong": "every Saturday",
+        "sessionTime": "7:00 PM – 9:00 PM IST",
         "platform": "Live on Zoom",
-        "schedule": "02–04 October • 4:00 PM–6:30 PM IST • Live on Zoom"
+        "schedule": "Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom"
     },
     "whatsapp": {
         "link": "https://chat.whatsapp.com/JBS46Qt3Qs34Gc35YyxPX2",
@@ -40,11 +39,11 @@
     "faq": {
         "attend": {
             "question": "How do I attend the LIVE session?",
-            "answer": "The workshop runs for 3 days &mdash; <strong>{{workshop.dateRangeLong}}</strong>, from <strong>{{workshop.sessionTime}}</strong> each day. Every session is <strong>LIVE on Zoom</strong> with Coach Abhishek Ranjan &mdash; not pre-recorded. After registration you'll receive a confirmation with all the details, and the joining link is shared in our WhatsApp community group before the first session begins."
+            "answer": "Live sessions run <strong>{{workshop.dateRangeLong}}</strong>, from <strong>{{workshop.sessionTime}}</strong>. Every session is <strong>LIVE on Zoom</strong> with Coach Abhishek Ranjan &mdash; not pre-recorded. After registration you'll receive a confirmation with all the details, and the joining link is shared in our WhatsApp community group before the first session begins."
         },
         "registrationClose": {
             "question": "When does registration close?",
-            "answer": "Registration closes on <strong>{{countdown.closesText}}</strong> — a few hours before the first session begins. Seats at this price are limited, so we recommend registering early to avoid missing out."
+            "answer": "Registration for each week's batch stays open until <strong>{{countdown.closesText}}</strong>, when the live session begins. Seats at this price are limited, so we recommend registering early to avoid missing out."
         },
         "price": {
             "question": "Why is it priced at {{registration.currency}}{{registration.price}} when it's worth {{registration.currency}}{{registration.originalPrice}}?",
