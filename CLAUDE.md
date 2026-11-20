@@ -16,9 +16,9 @@ All copy on this site is written to one niche — **helping students get better 
 - **The pain** is *studying hard but marks not moving*: forgetting by exam day, long hours with average results, focus breaking in minutes, re-reading/highlighting as the only method, no revision system, and the self-image of being "just an average student." The `#challenges` section is written against exactly these six.
 - **The promised outcome** is *better grades through smarter method, not more hours*. Lead with the grade/score result; skills (recall, focus, calm) are the mechanism, not the headline.
 - **Three content pillars** structure the whole page, and each maps to one workshop day. Keep this mapping consistent everywhere it appears (`#pillars` cards, the three `.day-card`s in `#curriculum`, the hero's `.hero-features`, the hero orbit badges, and the "What will I learn in 3 days" FAQ answer) — changing one means changing all of them:
-  1. **Memory & Brain** (Day 1) — Hook System, observation training, neurobics, how the brain learns
-  2. **Study & Focus** (Day 2) — active recall, spaced practice, revision scheduling, concentration
-  3. **Mindset & Learning** (Day 3) — growth mindset, self-talk, meditation, learner identity/exam confidence
+  1. **Memory & Brain** (Day 1) — Hook System (peg method), Linking System, observation challenge, imagination/association/location mnemonics + memory palace, neurobics, how the brain learns
+  2. **Study & Focus** (Day 2) — active recall, spaced practice, revision scheduling, concentration, Feynman Technique, mind-map notes, skimming & scanning (reading for understanding, never a standalone speed-reading claim)
+  3. **Mindset & Learning** (Day 3) — growth mindset, self-talk, meditation, learner identity/exam confidence, building your own study routine
 
 **Two content rules that are easy to violate:**
 

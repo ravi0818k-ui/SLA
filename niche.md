@@ -88,7 +88,7 @@ The pillar structure is load-bearing — it repeats in five places, and they mus
 |---|---|
 | Hero `.hero-features` | 🧠 Memory & Brain · 🎯 Study & Focus · 🌱 Mindset & Growth |
 | Hero orbit badges | Hook System, Neurobics, Growth Mindset, Deep Focus, Meditation, Read Faster |
-| `#pillars` section | Three cards, one per pillar, each with four technique tags |
+| `#pillars` section | Three cards, one per pillar, each with its technique tags (6 / 6 / 5 since the Nov 2026 keyword update) |
 | `#curriculum` day cards | Day 1 = Pillar 01, Day 2 = Pillar 02, Day 3 = Pillar 03 |
 | FAQ "What will I learn in 3 days?" | Answer is structured day-by-day as the three pillars |
 
