@@ -54,7 +54,7 @@ describe('bright page (index.html)', () => {
     it('audience picker: every tab controls an existing panel', () => {
         loadPage('index.html');
         const tabs = document.querySelectorAll('[role="tab"]');
-        expect(tabs.length).toBe(5);
+        expect(tabs.length).toBe(7);
         tabs.forEach((t) => {
             const panel = document.getElementById(t.getAttribute('aria-controls'));
             expect(panel).not.toBeNull();

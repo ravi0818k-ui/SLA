@@ -21,7 +21,7 @@ How it works:
 
 Rules:
 - `#reviews` on the bright page stays `hidden` until `bright.showTestimonials` is `true`, and the cards must hold **real** reviews first.
-- `index.html#upsc` (or `#jee`, `#law`, `#parents`, `#school`) opens that audience tab. Use it for audience-specific ads.
+- `index.html#upsc` (or `#cbse`, `#state`, `#jee`, `#law`, `#parents`, `#school`) opens that audience tab. Use it for audience-specific ads.
 - `tests/unit/structure.test.js` now checks `index-classic.html`. `tests/unit/design-switch.test.js` covers the flag, the guards, the picker, the CTAs and the images.
 
 ## Positioning & content niche
