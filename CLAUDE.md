@@ -8,6 +8,22 @@ A static (no build step) webinar registration landing page for Super Learner Aca
 
 Registration currently goes through **SuperProfile** (`data.json`'s `registration.link`), which redirects straight to `thank-you.html` with no query param, webhook, or transaction id to confirm payment — `initThankYouPage` in `script.js` always shows the "paid" view (no gate). `razorpay.md` documents a **future** migration plan to Razorpay (payment verification, webhook-to-Google-Sheets); none of that is live yet, so don't assume Razorpay params/verification exist.
 
+## Design switch: Bright Mind (Hinglish) vs classic backup
+
+Since Nov 2026 the landing page exists in two designs, chosen by **one flag in `data.json`: `site.design`**.
+- `"bright"` (default): `index.html`, the Hinglish, problem-first "Bright Mind" page. Styles are in `bright.css`, page-only JS is in `bright.js` (audience-picker tabs, reveal-on-scroll, the reviews flag, GA4 `register_click`/`whatsapp_click` events). Illustrations come from `Images/story/*.svg` and logo/icons from `Images/bright/`. Copy for it lives in `data.json`'s `bright` block.
+- `"classic"`: `index-classic.html` + `style-classic.css`, a **frozen backup** of the previous English page (it keeps the old hero, orbit badges and so on). Don't develop on it. Edit `style.css` only for the other pages that still use it (thank-you, about and so on).
+
+How it works:
+- Each page has a tiny inline guard script in `<head>`. It reads `data.json` and `location.replace()`s to the other file (keeping `?utm…` and `#hash`) when the flag doesn't match.
+- `?design=classic` or `?design=bright` overrides the flag for previewing; it is remembered in `sessionStorage` (`sla_design`) for that tab.
+- `script.js` now also publishes the loaded data as `window.SLA_DATA` and a `sla:data` DOM event (used by `bright.js`).
+
+Rules:
+- `#reviews` on the bright page stays `hidden` until `bright.showTestimonials` is `true`, and the cards must hold **real** reviews first.
+- `index.html#upsc` (or `#jee`, `#law`, `#parents`, `#school`) opens that audience tab. Use it for audience-specific ads.
+- `tests/unit/structure.test.js` now checks `index-classic.html`. `tests/unit/design-switch.test.js` covers the flag, the guards, the picker, the CTAs and the images.
+
 ## Positioning & content niche
 
 All copy on this site is written to one niche — **helping students get better grades by teaching practical, science-informed strategies for memory, focus, study skills, and growth mindset.** `niche.md` is the full reference (audience profile, pain vocabulary, pillar topic banks, message hierarchy, off-niche list); the working rules are below. When editing headlines, section copy, FAQ answers, testimonials, or `data.json` text, keep it inside this frame:

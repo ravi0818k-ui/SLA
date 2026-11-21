@@ -1,4 +1,22 @@
 {
+    "site": {
+        "design": "bright",
+        "_help": "Which landing page visitors see. \"bright\" = new Hinglish Bright Mind page (index.html). \"classic\" = backup of the old page (index-classic.html, styles in style-classic.css). Change this one word to switch the live site. Preview without switching: add ?design=classic or ?design=bright to the URL (remembered for that browser tab; close the tab to reset)."
+    },
+    "bright": {
+        "topBar": "3 din ka LIVE Workshop",
+        "dateRange": "Har Shanivaar",
+        "heroEyebrow": "Class 6 se UPSC tak · LIVE on Zoom",
+        "heroTitle": "Padha hua yaad nahi rehta? <span class=\"hl\">Galti aapki nahi, method ki hai.</span>",
+        "heroSub": "3 din ka LIVE workshop – memory, focus aur confidence ke liye. Ratta chhodiye, samajh kar yaad rakhna seekhiye.",
+        "buttonText": "Abhi Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "stickyText": "Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "trustLine": "UPI / Card se payment · 24 ghante refund policy · Certificate milega",
+        "whatsappText": "WhatsApp par sawal poochein",
+        "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mujhe%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye.",
+        "showTestimonials": false,
+        "_showTestimonialsHelp": "Keep false until the review cards in index.html (#reviews) hold REAL, verified student reviews."
+    },
     "countdown": {
         "weekly": { "day": 6, "time": "19:00" },
         "timezone": "Asia/Kolkata",
