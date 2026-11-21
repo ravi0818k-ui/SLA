@@ -12,7 +12,7 @@ Registration currently goes through **SuperProfile** (`data.json`'s `registratio
 
 Since Nov 2026 the landing page exists in two designs, chosen by **one flag in `data.json`: `site.design`**.
 - `"bright"` (default): `index.html`, the Hinglish, problem-first "Bright Mind" page. Styles are in `bright.css`, page-only JS is in `bright.js` (audience-picker tabs, reveal-on-scroll, the reviews flag, GA4 `register_click`/`whatsapp_click` events). Illustrations come from `Images/story/*.svg` and logo/icons from `Images/bright/`. Copy for it lives in `data.json`'s `bright` block.
-- `"classic"`: `index-classic.html` + `style-classic.css`, a **frozen backup** of the previous English page (it keeps the old hero, orbit badges and so on). Don't develop on it. Edit `style.css` only for the other pages that still use it (thank-you, about and so on).
+- `"classic"`: `index-classic.html` + `style-classic.css`, a **frozen backup** of the previous English page (it keeps the old hero, orbit badges and so on). It is also the source of the English ad page `/ads-1/` (see below), so edit it only for that page, then rebuild. Edit `style.css` only for the other pages that still use it (thank-you, about and so on).
 
 How it works:
 - Each page has a tiny inline guard script in `<head>`. It reads `data.json` and `location.replace()`s to the other file (keeping `?utm…` and `#hash`) when the flag doesn't match.
@@ -23,6 +23,22 @@ Rules:
 - `#reviews` on the bright page stays `hidden` until `bright.showTestimonials` is `true`, and the cards must hold **real** reviews first.
 - `index.html#upsc` (or `#cbse`, `#state`, `#jee`, `#law`, `#parents`, `#school`) opens that audience tab. Use it for audience-specific ads.
 - `tests/unit/structure.test.js` now checks `index-classic.html`. `tests/unit/design-switch.test.js` covers the flag, the guards, the picker, the CTAs and the images.
+
+## Ad landing pages (/ads-1/, /ads-2/ ...)
+
+Paid campaigns point at fixed paths, one per audience/language, listed in **`ad-pages.json`**:
+- `/ads-1/` = `index-classic.html` (English, classic design, the default English ad page). Because of this, `index-classic.html` is no longer only a frozen backup: it is the English ad page source.
+- `/ads-2/` = `index.html` (Hinglish, Bright Mind).
+- More will be added (e.g. an English Bright Mind page, an AI-training audience). Add an entry to `ad-pages.json` (new source page, if needed, in the repo root), run the build, commit.
+
+`ads-N/index.html` files are **generated**. Never edit them. Edit the source page and run `npm run build:ads` (`scripts/build-ad-pages.js`; `-- --check` only reports stale pages). The generator:
+- prefixes relative URLs with `../`;
+- turns links to the landing page into same-page links (`index.html#faq` becomes `#faq`), so ad visitors stay on their page;
+- removes the design-switch guard, since an ad path always shows its own design;
+- sets `<html data-root="../">`. `script.js`'s `siteRoot()` reads it to fetch `data.json`/`quotes.json`;
+- makes the page `noindex, follow` with a self canonical/og:url. Ad pages stay out of `sitemap.xml`.
+
+`tests/unit/ad-pages.test.js` fails when a generated page is out of date with its source, has a broken local path, links back to the root landing page, or still has the redirect. So after any change to `index.html`/`index-classic.html`, run `npm run build:ads` before committing. Audience deep links work on ad pages too: `/ads-2/#upsc`.
 
 ## Positioning & content niche
 

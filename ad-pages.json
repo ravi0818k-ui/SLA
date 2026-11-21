@@ -1,0 +1,16 @@
+{
+    "_help": "Ad landing pages, one folder per path (superlearneracademy.in/ads-1/ ...). Each page is a GENERATED copy of a source page: edit the source, then run `npm run build:ads` and commit the result. To add a new path (e.g. an English or AI-training audience), add an entry here, run the build, and point that ad campaign at the new URL. Ad pages are noindex (no duplicate content in Google Search) and have no design-switch redirect: each path always shows its own page.",
+    "baseUrl": "https://www.superlearneracademy.in",
+    "pages": [
+        {
+            "path": "ads-1",
+            "source": "index-classic.html",
+            "label": "English, classic design (default English ad page)"
+        },
+        {
+            "path": "ads-2",
+            "source": "index.html",
+            "label": "Hinglish, Bright Mind design"
+        }
+    ]
+}

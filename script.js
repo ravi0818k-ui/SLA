@@ -113,12 +113,21 @@ function showProtectionAlert() {
     // ========================
 
     /**
+     * Path prefix to the site root. Ad landing pages live one folder deep (/ads-1/, /ads-2/ ...)
+     * and carry <html data-root="../">, so their JSON fetches still reach the root files.
+     */
+    function siteRoot() {
+        var r = document.documentElement.getAttribute('data-root');
+        return r && /^(\.\.\/)+$/.test(r) ? r : '';
+    }
+
+    /**
      * Fetches data.json, parses it, and injects content into the DOM.
      * Returns the parsed data object on success, or undefined on failure.
      */
     async function loadData() {
         try {
-            var response = await fetch('data.json?v=' + Date.now());
+            var response = await fetch(siteRoot() + 'data.json?v=' + Date.now());
             if (!response.ok) {
                 throw new Error('HTTP ' + response.status);
             }
@@ -833,7 +842,7 @@ function showProtectionAlert() {
      */
     async function initQuotesSlider() {
         try {
-            var response = await fetch('quotes.json?v=' + Date.now());
+            var response = await fetch(siteRoot() + 'quotes.json?v=' + Date.now());
             if (!response.ok) return;
             quotesData = await response.json();
             if (quotesData.length === 0) return;
@@ -1057,6 +1066,7 @@ function showProtectionAlert() {
     }
 
     window.SLA = {
+        siteRoot: siteRoot,
         loadData: loadData,
         injectContent: injectContent,
         hideDynamicElements: hideDynamicElements,

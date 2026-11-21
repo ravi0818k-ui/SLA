@@ -5,7 +5,8 @@
   "description": "Super Learner Academy - 2 Day Live Webinar Landing Page",
   "scripts": {
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "build:ads": "node scripts/build-ad-pages.js"
   },
   "devDependencies": {
     "vitest": "^3.2.3",
