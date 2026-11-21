@@ -11,6 +11,16 @@
             "path": "ads-2",
             "source": "index.html",
             "label": "Hinglish, Bright Mind design"
+        },
+        {
+            "path": "ads-3",
+            "source": "index-hi.html",
+            "label": "Hindi (Devanagari), Bright Mind design, Kripa headings"
+        },
+        {
+            "path": "ads-4",
+            "source": "index-board.html",
+            "label": "Board exam topper angle (CBSE / State Board, Class 9-12), Hinglish, Bright Mind"
         }
     ]
 }

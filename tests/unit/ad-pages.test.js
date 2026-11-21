@@ -17,6 +17,8 @@ describe('ad-pages.json', () => {
         const byPath = Object.fromEntries(cfg.pages.map((p) => [p.path, p.source]));
         expect(byPath['ads-1']).toBe('index-classic.html');
         expect(byPath['ads-2']).toBe('index.html');
+        expect(byPath['ads-3']).toBe('index-hi.html');
+        expect(byPath['ads-4']).toBe('index-board.html');
     });
     it('paths are unique, URL-safe and sources exist', () => {
         const paths = cfg.pages.map((p) => p.path);
@@ -73,6 +75,58 @@ for (const page of cfg.pages) {
         });
     });
 }
+
+const data = JSON.parse(read('data.json'));
+const visibleText = (html) => html.split('<body')[1]
+    .replace(/<script[\s\S]*?<\/script>|<!--[\s\S]*?-->|<svg[\s\S]*?<\/svg>/g, ' ')
+    .replace(/<[^>]+>/g, '\n');
+const boundKeys = (html, prefix) => [...html.matchAll(new RegExp(`data-bind(?:-html|-href)?="${prefix}\\.(\\w+)"`, 'g'))].map((m) => m[1]);
+
+describe('/ads-3/ source: Hindi (Devanagari) page', () => {
+    const html = read('index-hi.html');
+    it('is Hindi, loads Kripa and the Devanagari overrides', () => {
+        expect(html).toMatch(/<html lang="hi">/);
+        expect(html).toMatch(/fonts\.googleapis\.com\/css2\?family=Kripa/);
+        expect(html).toMatch(/href="bright-hi\.css\?v=/);
+        expect(read('bright-hi.css')).toMatch(/--fh: 'Kripa'/);
+    });
+    it('binds to data.json "hindi" (never the Hinglish "bright" copy) and every key exists', () => {
+        expect(html).not.toMatch(/data-bind(?:-html|-href)?="bright\./);
+        const keys = boundKeys(html, 'hindi');
+        expect(keys.length).toBeGreaterThan(10);
+        for (const k of new Set(keys)) expect(typeof data.hindi[k]).toBe('string');
+    });
+    it('has no Hinglish (Roman Hindi) sentences left in the visible copy', () => {
+        const left = visibleText(html).split('\n').filter((t) => /\b(hai|nahi|aur|karein|mein|kya|seekh\w*|padh\w*|yaad)\b/i.test(t));
+        expect(left).toEqual([]);
+    });
+    it('FAQ JSON-LD matches the visible FAQ count', () => {
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+    });
+});
+
+describe('/ads-4/ source: board exam page', () => {
+    const html = read('index-board.html');
+    it('leads with the board-exam topper message and opens on the CBSE tab', () => {
+        expect(data.board.heroTitle).toMatch(/topper/i);
+        expect(data.board.heroTitle).toMatch(/learning potential/i);
+        const first = html.match(/<button[^>]*role="tab"[^>]*>/);
+        expect(first[0]).toMatch(/id="tab-cbse"/);
+        expect(first[0]).toMatch(/aria-selected="true"/);
+        for (const id of ['cbse', 'state', 'school', 'parents']) expect(html).toContain(`id="panel-${id}"`);
+    });
+    it('binds to data.json "board" and every key exists', () => {
+        expect(html).not.toMatch(/data-bind(?:-html|-href)?="bright\./);
+        for (const k of new Set(boundKeys(html, 'board'))) expect(typeof data.board[k]).toBe('string');
+    });
+    it('never promises a rank or marks (aspiration only)', () => {
+        const text = visibleText(html) + JSON.stringify(data.board);
+        expect(text).not.toMatch(/guarantee|pakka topper|\d+\s*%|100 ?percent|rank \d/i);
+    });
+    it('FAQ JSON-LD matches the visible FAQ count', () => {
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+    });
+});
 
 describe('script.js siteRoot()', () => {
     it('reads data-root only when it is a ../ chain', () => {

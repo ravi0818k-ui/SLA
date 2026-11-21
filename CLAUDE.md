@@ -29,6 +29,9 @@ Rules:
 Paid campaigns point at fixed paths, one per audience/language, listed in **`ad-pages.json`**:
 - `/ads-1/` = `index-classic.html` (English, classic design, the default English ad page). Because of this, `index-classic.html` is no longer only a frozen backup: it is the English ad page source.
 - `/ads-2/` = `index.html` (Hinglish, Bright Mind).
+- `/ads-3/` = `index-hi.html` (Hindi in Devanagari, Bright Mind). Headings use the Google font **Kripa** (by Kedar Gadge, one weight only), and body copy uses Poppins, which has Devanagari. The overrides are in `bright-hi.css`: no faux bold, a hairline stroke on headings, no letter-spacing, taller line-height. Copy is bound to `data.json` → `hindi`.
+- `/ads-4/` = `index-board.html` (board-exam angle, "Board exam mein topper banna hai? Apni learning potential unlock kijiye."; Hinglish, CBSE tab first, extra `#topper` habits section, extra "tuition ki jagah?" FAQ). Copy is bound to `data.json` → `board`. "Topper" stays an aspiration, never a promised rank or marks; a test checks for % and guarantee wording.
+- `index-hi.html` and `index-board.html` are hand-maintained sources (noindex). Change shared sections in `index.html` **and** in them. Each page's FAQPage JSON-LD must match its visible FAQ.
 - More will be added (e.g. an English Bright Mind page, an AI-training audience). Add an entry to `ad-pages.json` (new source page, if needed, in the repo root), run the build, commit.
 
 `ads-N/index.html` files are **generated**. Never edit them. Edit the source page and run `npm run build:ads` (`scripts/build-ad-pages.js`; `-- --check` only reports stale pages). The generator:

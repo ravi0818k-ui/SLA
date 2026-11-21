@@ -17,6 +17,33 @@
         "showTestimonials": false,
         "_showTestimonialsHelp": "Keep false until the review cards in index.html (#reviews) hold REAL, verified student reviews."
     },
+    "hindi": {
+        "_help": "Copy for the Hindi (Devanagari) page index-hi.html -> /ads-3/. Same keys as \"bright\".",
+        "topBar": "3 दिन की LIVE वर्कशॉप",
+        "dateRange": "हर शनिवार",
+        "sessionTime": "शाम 7:00 – 9:00 बजे (IST)",
+        "heroEyebrow": "कक्षा 6 से UPSC तक · Zoom पर LIVE",
+        "heroTitle": "पढ़ा हुआ याद नहीं रहता? <span class=\"hl\">गलती आपकी नहीं, तरीके की है।</span>",
+        "heroSub": "3 दिन की LIVE वर्कशॉप – याददाश्त, फ़ोकस और आत्मविश्वास के लिए। रटना छोड़िए, समझकर याद रखना सीखिए।",
+        "buttonText": "अभी सीट बुक करें – {{registration.currency}}{{registration.price}}",
+        "stickyText": "सीट बुक करें – {{registration.currency}}{{registration.price}}",
+        "trustLine": "UPI / कार्ड से भुगतान · 24 घंटे की रिफ़ंड पॉलिसी · सर्टिफ़िकेट मिलेगा",
+        "whatsappText": "WhatsApp पर सवाल पूछें",
+        "whatsappChat": "https://wa.me/919151726759?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20Super%20Learner%20Academy%20%E0%A4%95%E0%A5%80%203%20%E0%A4%A6%E0%A4%BF%E0%A4%A8%20%E0%A4%95%E0%A5%80%20%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%95%E0%A4%B6%E0%A5%89%E0%A4%AA%20%E0%A4%95%E0%A5%87%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%9C%E0%A4%BE%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%9A%E0%A4%BE%E0%A4%B9%E0%A4%BF%E0%A4%8F%E0%A5%A4"
+    },
+    "board": {
+        "_help": "Copy for the board-exam page index-board.html -> /ads-4/. Same keys as \"bright\". Aspiration, never a promise of rank or marks.",
+        "topBar": "Board Exam Special · 3 din LIVE",
+        "dateRange": "Har Shanivaar",
+        "heroEyebrow": "CBSE & State Board · Class 9–12 · LIVE on Zoom",
+        "heroTitle": "Board exam mein topper banna hai? <span class=\"hl\">Apni learning potential unlock kijiye.</span>",
+        "heroSub": "Zyada ghante nahi, smart method. 3 din ke LIVE workshop mein seekhiye NCERT yaad rakhna, board exam tak ka revision plan aur exam-day focus.",
+        "buttonText": "Abhi Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "stickyText": "Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "trustLine": "UPI / Card se payment · 24 ghante refund policy · Certificate milega",
+        "whatsappText": "WhatsApp par sawal poochein",
+        "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mujhe%20board%20exam%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye."
+    },
     "countdown": {
         "weekly": { "day": 6, "time": "19:00" },
         "timezone": "Asia/Kolkata",
