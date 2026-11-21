@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- NEW landing page (Bright Mind design, Hinglish), Nov 2026. Live when data.json site.design = "bright".
+     The previous page is preserved as index-classic.html (+ style-classic.css). Styles: bright.css. Page JS: bright.js (+ shared script.js). -->
+<html lang="hi-Latn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3-Day LIVE Workshop for Students — Study Smarter, Score Higher | ₹455</title>
-    <meta name="description" content="3-Day LIVE workshop for students, every Saturday on Zoom: memory techniques (Hook/peg and linking systems, memory palace), active recall, spaced repetition, Feynman Technique and focus training. ₹455, certificate included.">
-    <meta name="keywords" content="memory techniques for students, how to study smarter, improve focus, better grades, growth mindset, learning techniques, neurobics, spaced repetition, active recall, retrieval practice, forgetting curve, peg system, linking system, memory palace, mnemonics, observation skills, Feynman technique, mind map notes, skimming and scanning, study routine, exam preparation, JEE NEET UPSC study techniques">
+    <title>Padha Hua Yaad Nahi Rehta? 3-Day LIVE Memory &amp; Focus Workshop | ₹455</title>
+    <meta name="description" content="3 din ka LIVE workshop (Hinglish, Zoom par, har Shanivaar): Hook aur Linking system, memory palace, active recall, spaced revision, focus aur exam confidence. Class 6 se UPSC tak. Sirf ₹455, certificate ke saath.">
+    <meta name="keywords" content="memory techniques for students, padha hua yaad kaise rakhe, yaad kaise kare, how to study smarter, improve focus, better grades, active recall, spaced repetition, peg system, linking system, memory palace, Feynman technique, mind map notes, study routine, exam preparation, JEE NEET UPSC study techniques, law students memory">
     <link rel="canonical" href="https://www.superlearneracademy.in/">
+    <meta name="theme-color" content="#3A5BFF">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Study Smarter, Score Higher — 3 Day Live Workshop">
-    <meta property="og:description" content="Science-backed memory, focus, and mindset strategies for students who want better grades — not just longer study hours.">
+    <meta property="og:title" content="Padha hua yaad nahi rehta? Galti aapki nahi, method ki hai.">
+    <meta property="og:description" content="3 din ka LIVE workshop – memory, focus aur confidence ke liye. Class 6 se UPSC tak. ₹455.">
     <meta property="og:url" content="https://www.superlearneracademy.in/">
-    <meta property="og:image" content="https://www.superlearneracademy.in/Images/Your%20host.webp">
+    <meta property="og:image" content="https://www.superlearneracademy.in/Images/story/og-live-class.jpg">
+
+    <!-- Design switch (see data.json -> site.design: "bright" | "classic"). If the flag says "classic",
+         visitors are sent to the backup page index-classic.html. Preview either design with ?design=classic
+         or ?design=bright (remembered for this browser tab). Also marks <html class="js"> for reveal animations. -->
+    <script>
+    document.documentElement.className += ' js';
+    (function (me) {
+        var other = me === 'bright' ? 'index-classic.html' : 'index.html';
+        function go(d) { if ((d === 'bright' || d === 'classic') && d !== me) location.replace(other + location.search + location.hash); }
+        var m = /[?&]design=(bright|classic)\b/.exec(location.search), forced = m ? m[1] : null;
+        try { if (forced) sessionStorage.setItem('sla_design', forced); else forced = sessionStorage.getItem('sla_design'); } catch (e) {}
+        if (forced) { go(forced); return; }
+        if (!window.fetch) return;
+        fetch('data.json?v=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) { go(d && d.site && d.site.design); }).catch(function () {});
+    })('bright');
+    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417193820"></script>
@@ -43,16 +62,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="Favicon SLA/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="Favicon SLA/apple-icon-180x180.png">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome 6.5 (loaded non-blocking - no icons appear above the fold) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-
-    <!-- Stylesheet -->
     <!-- Publisher identity: who runs this site, and a real contact route.
          Kept in sync with about.html, which states the same thing in prose. -->
     <script type="application/ld+json">
@@ -81,19 +90,33 @@
     }
     </script>
 
-    <link rel="stylesheet" href="site-nav.css?v=1.0.1">
-    <link rel="stylesheet" href="style.css?v=1.2.0">
-</head>
-<body>
+    <!-- Fonts: Bright Mind type pair -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- ========== TOP BAR (Urgency Banner) ========== -->
-    <div class="top-bar" aria-label="Urgency banner">
-<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">Every Saturday</span> &bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
+    <link rel="preload" as="image" href="Images/story/01_exam-blank.svg">
+    <link rel="stylesheet" href="site-nav.css?v=1.0.1">
+    <link rel="stylesheet" href="bright.css?v=1.0.0">
+</head>
+<body data-design="bright">
+
+    <!-- ========== TOP BAR ========== -->
+    <div class="b-topbar" aria-label="Workshop summary">
+        <p>🔥 <span data-bind="bright.topBar">3 din ka LIVE Workshop</span> · <span data-bind="bright.dateRange">Har Shanivaar</span> · Sirf <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span><span class="b-topbar-extra"> · Seats limited</span></p>
     </div>
 
-    <!-- ========== SITE MENU (hamburger, top-right) ==========
-         Markup is static so the About / Contact / Tools links exist without
-         JavaScript; site-nav.js only wires up open/close. -->
+    <!-- ========== HEADER ========== -->
+    <header class="b-header">
+        <div class="b-wrap b-header-row">
+            <a href="index.html" class="b-logo" aria-label="Super Learner Academy – home">
+                <img src="Images/bright/sla-c-logo.svg" alt="Super Learner Academy" width="413" height="99">
+            </a>
+            <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-sm b-header-cta" data-bind-href="registration.link">Seat Book Karein</a>
+        </div>
+    </header>
+
+    <!-- ========== SITE MENU (hamburger, top-right; same markup as the other pages) ========== -->
     <nav class="site-nav" aria-label="Site menu">
         <button type="button" class="site-nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="site-nav-panel" aria-label="Open menu">
             <span class="site-nav-bars" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -124,827 +147,403 @@
         </div>
     </nav>
 
-    <!-- ========== HERO SECTION ========== -->
-    <section class="hero" id="hero">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <img src="Images/brand/sla-logo-horizontal-dark.svg" alt="Super Learner Academy logo" class="hero-brand-logo" width="1120" height="538" decoding="async">
-                <h1>Sharpen Your Child's <span class="highlight">Memory</span> in Just 3 Days</h1>
-                <p class="hero-format" data-bind="workshop.format">3 LIVE Sessions &middot; 2 Hours Each &middot; Techniques That Stay for Life</p>
-                <p class="sub-headline">Science-backed memory, focus, and mindset strategies that turn your child's study hours into better grades. Not harder work. Smarter learning.</p>
-                <ul class="hero-meta">
-                    <li><span class="hero-meta-icon" aria-hidden="true">📅</span><span data-bind="workshop.dateRange">Every Saturday</span></li>
-                    <li><span class="hero-meta-icon" aria-hidden="true">🕓</span><span data-bind="workshop.sessionTime">7:00 PM – 9:00 PM IST</span></li>
-                    <li><span class="hero-meta-icon" aria-hidden="true">🎥</span><span data-bind="workshop.platform">Live on Zoom</span></li>
+    <main>
+    <!-- ========== HERO: problem first ========== -->
+    <section class="b-hero" id="top">
+        <div class="b-wrap b-hero-grid">
+            <div class="b-hero-text">
+                <p class="b-chip"><span class="b-dot" aria-hidden="true"></span><span data-bind="bright.heroEyebrow">Class 6 se UPSC tak · LIVE on Zoom</span></p>
+                <h1 data-bind-html="bright.heroTitle">Padha hua yaad nahi rehta? <span class="hl">Galti aapki nahi, method ki hai.</span></h1>
+                <p class="b-lead" data-bind="bright.heroSub">3 din ka LIVE workshop – memory, focus aur confidence ke liye. Ratta chhodiye, samajh kar yaad rakhna seekhiye.</p>
+                <ul class="b-meta">
+                    <li><span aria-hidden="true">📅</span> <span data-bind="bright.dateRange">Har Shanivaar</span></li>
+                    <li><span aria-hidden="true">🕖</span> <span data-bind="workshop.sessionTime">7:00 PM – 9:00 PM IST</span></li>
+                    <li><span aria-hidden="true">🎥</span> Zoom par LIVE</li>
+                    <li><span aria-hidden="true">🗣️</span> Hinglish mein</li>
                 </ul>
-                <ul class="hero-features">
-                    <li><span class="hero-feature-icon" aria-hidden="true">🧠</span> Memory &amp; Brain</li>
-                    <li><span class="hero-feature-icon" aria-hidden="true">🎯</span> Study &amp; Focus</li>
-                    <li><span class="hero-feature-icon" aria-hidden="true">🌱</span> Mindset &amp; Growth</li>
-                </ul>
-                <div class="hero-price">
-                    <span class="hero-price-strike"><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></span>
-                    <span class="hero-price-main">Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></span>
+                <p class="b-price"><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></strong> <span>ek baar ka payment</span></p>
+                <div class="b-ctas">
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-lg" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
+                    <a href="https://wa.me/919151726759" class="b-btn b-btn-ghost b-btn-lg b-wa" data-bind-href="bright.whatsappChat" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M8.6 7.2c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.4.2.5.3 0 .2 0 .9-.3 1.6-.3.7-1.7 1.4-2.3 1.4-.6.1-1.2.3-4-.8-3.4-1.4-5.5-4.9-5.7-5.1-.2-.2-1.4-1.8-1.4-3.4 0-1.6.8-2.4 1.1-2.8z"/></svg><span data-bind="bright.whatsappText">WhatsApp par sawal poochein</span></a>
                 </div>
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note hero-text-trust" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
-                <ul class="trust-strip">
-                    <li><span class="trust-check" aria-hidden="true">✓</span> LIVE on Zoom</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> Hinglish</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> Certificate Included</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> UPI / Cards</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> 24-Hour Refund Policy</li>
-                </ul>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
+                <p class="b-trust" data-bind="bright.trustLine">UPI / Card se payment · 24 ghante refund policy · Certificate milega</p>
             </div>
-            <div class="hero-image">
-                <div class="hero-visual">
-                    <div class="hero-mandala" aria-hidden="true"></div>
-                    <img src="Images/Ramanujan.webp" alt="Illustration of Srinivasa Ramanujan working in his notebook" class="hero-coach-img" width="840" height="840" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
-                    <div class="hero-orbit" aria-hidden="true">
-                        <div class="orbit-anchor orbit-n">
-                            <div class="hero-badge badge-read">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-book-open"></i></span>
-                                <span class="hero-badge-text">Read Faster</span>
-                            </div>
-                        </div>
-                        <div class="orbit-anchor orbit-e">
-                            <div class="hero-badge badge-remember">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-memory"></i></span>
-                                <span class="hero-badge-text">Hook System</span>
-                            </div>
-                        </div>
-                        <div class="orbit-anchor orbit-s">
-                            <div class="hero-badge badge-focus">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-bullseye"></i></span>
-                                <span class="hero-badge-text">Focus Better</span>
-                            </div>
-                        </div>
-                        <div class="orbit-anchor orbit-w">
-                            <div class="hero-badge badge-photo">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-seedling"></i></span>
-                                <span class="hero-badge-text">Growth Mindset</span>
-                            </div>
-                        </div>
-                        <div class="orbit-anchor orbit-meditation">
-                            <div class="hero-badge badge-meditation">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-spa"></i></span>
-                                <span class="hero-badge-text">Meditation</span>
-                            </div>
-                        </div>
-                        <div class="orbit-anchor orbit-concentration">
-                            <div class="hero-badge badge-concentration">
-                                <span class="hero-badge-icon"><i class="fa-solid fa-brain"></i></span>
-                                <span class="hero-badge-text">Neurobics</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fills the dead space under the hero photo (most visible on
-                     mobile, where the photo is the last thing before the next
-                     section). Static markup is the first quote so it renders
-                     with the hero even if script.js never runs; initHeroQuotes
-                     then rotates through the rest. -->
-                <figure class="hero-quote">
-                    <blockquote class="hero-quote-text" id="hero-quote-text">&ldquo;I have not trodden through a conventional university course, but I am striking out a new path for myself.&rdquo;</blockquote>
-                    <figcaption class="hero-quote-author" id="hero-quote-author">&mdash; Srinivasa Ramanujan, letter to G. H. Hardy, 1913</figcaption>
-                </figure>
+            <div class="b-hero-art">
+                <div class="b-hero-blob" aria-hidden="true"></div>
+                <img src="Images/story/01_exam-blank.svg" alt="Exam hall mein ek student: chapter padha tha, par answer yaad nahi aa raha" width="1200" height="900" fetchpriority="high" decoding="async">
+                <span class="b-sticker b-sticker-1" aria-hidden="true">Memory</span>
+                <span class="b-sticker b-sticker-2" aria-hidden="true">Focus</span>
+                <span class="b-sticker b-sticker-3" aria-hidden="true">Mindset</span>
             </div>
         </div>
     </section>
 
-    <!-- ========== WHO IS THIS FOR (Audience Qualifier - Ads traffic) ========== -->
-    <section class="for-whom-section" id="for-whom">
-        <div class="container">
-            <h2 class="section-title">Who Is This Workshop For?</h2>
-            <p class="section-subtitle">Built for students. Perfect for you if you're one of these:</p>
-            <ul class="for-whom-list">
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> Class 6&ndash;12 students</li>
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> College students</li>
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> Competitive exam aspirants</li>
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who forget what they study</li>
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who struggle to concentrate</li>
-                <li><span class="for-whom-check" aria-hidden="true">✓</span> Students who want a better revision system</li>
-            </ul>
-        </div>
-    </section>
+    <!-- ========== AUDIENCE PICKER ========== -->
+    <section class="b-section b-soft" id="aapke-liye">
+        <div class="b-wrap">
+            <p class="b-eyebrow">YEH AAPKE LIYE HAI</p>
+            <h2>Aap kaun hain? Apna group chuniye</h2>
+            <p class="b-sub">Har group ki problem alag hai – par jad ek hi hai: padhne ka method.</p>
 
-    <!-- ========== CHALLENGES / PAIN POINTS ========== -->
-    <section class="challenges-section" id="challenges">
-        <div class="container">
-            <h2 class="section-title">Studying Hard but Marks Not Moving?</h2>
-            <p class="section-subtitle">If any of these sound like you, the problem isn't effort — it's method.</p>
-            <div class="challenges-grid">
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-brain"></i></div>
-                    <h3>You Forget It by Exam Day</h3>
-                    <p>You revised the chapter twice, but in the exam hall the answer just won't come back.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Long Hours, Average Marks</h3>
-                    <p>You study more than your friends who score higher — and can't work out what they're doing differently.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-mobile-screen"></i></div>
-                    <h3>Focus Breaks in 10 Minutes</h3>
-                    <p>You sit down to study and your attention is gone before the first page is finished.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-highlighter"></i></div>
-                    <h3>Re-Reading &amp; Highlighting</h3>
-                    <p>Your main study method is the one research ranks lowest for actually retaining information.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-calendar-xmark"></i></div>
-                    <h3>No Revision System</h3>
-                    <p>Everything gets crammed the night before, then disappears from memory a week later.</p>
-                </div>
-                <div class="challenge-card scroll-reveal">
-                    <div class="challenge-icon"><i class="fas fa-heart-crack"></i></div>
-                    <h3>"I'm Just an Average Student"</h3>
-                    <p>You've quietly accepted a ceiling on your marks — when it's your method, not your ability, holding you there.</p>
-                </div>
+            <div class="b-tabs" role="tablist" aria-label="Apna group chuniye">
+                <button type="button" class="b-tab" role="tab" id="tab-school" aria-controls="panel-school" aria-selected="true">Class 6–10</button>
+                <button type="button" class="b-tab" role="tab" id="tab-jee" aria-controls="panel-jee" aria-selected="false">JEE / NEET</button>
+                <button type="button" class="b-tab" role="tab" id="tab-law" aria-controls="panel-law" aria-selected="false">College / Law</button>
+                <button type="button" class="b-tab" role="tab" id="tab-upsc" aria-controls="panel-upsc" aria-selected="false">UPSC</button>
+                <button type="button" class="b-tab" role="tab" id="tab-parents" aria-controls="panel-parents" aria-selected="false">Parents</button>
             </div>
 
-            <!-- CTA after Challenges: brand illustration (Images/illustrations; Illustrator source lives in the brand kit) -->
-            <div class="section-cta cta-illustrated">
-                <img src="Images/illustrations/illus-struggle.svg" alt="Illustration of a tired student resting her head on her hand at a desk late at night, beside a tall pile of books" class="cta-illustration" width="1200" height="880" loading="lazy" decoding="async">
-                <div class="cta-illustrated-copy">
-                    <p class="cta-kicker">Sounds familiar?</p>
-                    <h3 class="cta-illustrated-title">More hours won't fix it. <span class="highlight-pink">A better method will.</span></h3>
-                    <p class="cta-illustrated-text">In 3 LIVE sessions you learn how memory, focus and mindset actually work, and leave with a study system you can use on tonight's homework.</p>
-                    <a href="#" class="cta-button" data-bind-href="registration.link">
-                        <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                    </a>
-                    <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
-                    <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== THE 3 PILLARS (Content Framework) ========== -->
-    <section class="pillars-section" id="pillars">
-        <div class="container">
-            <h2 class="section-title">The 3 Pillars of a Super Learner</h2>
-            <p class="section-subtitle">Better grades don't come from studying longer. They come from getting these three things right.</p>
-            <div class="pillars-grid">
-                <div class="pillar-card scroll-reveal">
-                    <div class="pillar-number">01</div>
-                    <div class="pillar-icon"><img src="Images/illustrations/pillar-memory.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
-                    <h3>Memory &amp; Brain</h3>
-                    <p>Stop forgetting what you studied last week. Learn how your brain actually stores and retrieves information — then use techniques built on that.</p>
-                    <ul class="pillar-tags">
-                        <li>Hook System</li>
-                        <li>Observation Training</li>
-                        <li>Neurobics</li>
-                        <li>How the Brain Learns</li>
-                        <li>Linking System</li>
-                        <li>Memory Palace</li>
+            <div class="b-panel" role="tabpanel" id="panel-school" aria-labelledby="tab-school">
+                <img src="Images/story/06_phone-distraction.svg" alt="Student ki kitaab khuli hai, par dhyaan phone ke notifications par hai" width="1200" height="900" loading="lazy" decoding="async">
+                <div>
+                    <h3>Kitaab khuli hai, par dhyaan phone par? Chapter padha, test mein bhool gaye?</h3>
+                    <p class="b-panel-label">Workshop mein aap seekhenge:</p>
+                    <ul class="b-checks">
+                        <li>Hook aur Linking system se lists, dates aur formulas yaad karna</li>
+                        <li>Concentration drills – bina phone ke focus ke saath padhna</li>
+                        <li>Exam se pehle ka simple revision plan</li>
                     </ul>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
                 </div>
-                <div class="pillar-card scroll-reveal">
-                    <div class="pillar-number">02</div>
-                    <div class="pillar-icon"><img src="Images/illustrations/pillar-focus.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
-                    <h3>Study &amp; Focus</h3>
-                    <p>Replace re-reading and highlighting — the two least effective methods — with practice strategies proven to move exam scores.</p>
-                    <ul class="pillar-tags">
-                        <li>Active Recall</li>
-                        <li>Spaced Practice</li>
-                        <li>Deep Concentration</li>
-                        <li>Revision Systems</li>
-                        <li>Feynman Technique</li>
-                        <li>Mind-Map Notes</li>
+            </div>
+            <div class="b-panel" role="tabpanel" id="panel-jee" aria-labelledby="tab-jee">
+                <img src="Images/story/03_jee-burnout.svg" alt="JEE aspirant raat 2 baje modules ke dher ke beech thaka hua baitha hai" width="1200" height="900" loading="lazy" decoding="async">
+                <div>
+                    <h3>Ghanton padhai, phir bhi test mein formula aur concepts yaad nahi aate?</h3>
+                    <p class="b-panel-label">Workshop mein aap seekhenge:</p>
+                    <ul class="b-checks">
+                        <li>Active recall aur spaced revision – modules ko baar-baar padhne ki jagah</li>
+                        <li>Formulas aur reactions ko hooks se yaad rakhna</li>
+                        <li>Mock test se pehle calm aur focused rehna</li>
                     </ul>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
                 </div>
-                <div class="pillar-card scroll-reveal">
-                    <div class="pillar-number">03</div>
-                    <div class="pillar-icon"><img src="Images/illustrations/pillar-mindset.svg" alt="" width="240" height="240" loading="lazy" decoding="async"></div>
-                    <h3>Mindset &amp; Learning</h3>
-                    <p>Techniques fail without the right identity behind them. Build the self-belief and calm of someone who knows they can learn anything.</p>
-                    <ul class="pillar-tags">
-                        <li>Growth Mindset</li>
-                        <li>Self-Talk</li>
-                        <li>Meditation</li>
-                        <li>Exam Confidence</li>
-                        <li>Your Own Study Routine</li>
+            </div>
+            <div class="b-panel" role="tabpanel" id="panel-law" aria-labelledby="tab-law">
+                <img src="Images/story/05_law-rote.svg" alt="Law student moti kitaabon ke saath sections ratt rahi hai, par yaad nahi reh raha" width="1200" height="900" loading="lazy" decoding="async">
+                <div>
+                    <h3>Sections, case names aur definitions – ratta maarte ho, phir bhool jaate ho?</h3>
+                    <p class="b-panel-label">Workshop mein aap seekhenge:</p>
+                    <ul class="b-checks">
+                        <li>Linking aur memory palace se lambi lists yaad rakhna</li>
+                        <li>Feynman technique – samajh kar yaad, ratta nahi</li>
+                        <li>Mind-map notes jo revision ko fast banate hain</li>
                     </ul>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ========== WHAT YOU'LL LEARN (3-Day Curriculum) ========== -->
-    <section class="curriculum-section" id="curriculum">
-        <div class="container">
-            <h2 class="section-title">What You'll Learn in 3 LIVE Days</h2>
-            <p class="section-subtitle">One pillar per day, taught LIVE by Coach Abhishek Ranjan &mdash; each with techniques you can use on tonight's homework.</p>
-            <div class="curriculum-grid curriculum-grid-3">
-                <!-- Day 1 Card -->
-                <div class="day-card scroll-reveal">
-                    <div class="day-card-header">
-                        <span class="day-badge">DAY 1</span>
-                        <h3>Memory &amp; Brain</h3>
-                        <span class="day-pillar-tag">Pillar 01</span>
-                    </div>
-                    <ul class="day-checklist">
-                        <li><i class="fas fa-check"></i><span>The <strong>Hook System</strong> (peg method) &amp; <strong>Linking System</strong> — remember a 20-item list, dates and formulas in order</span></li>
-                        <li><i class="fas fa-check"></i><span>The 2-minute <strong>observation challenge</strong> — notice shape, colour and position so you encode it the first time</span></li>
-                        <li><i class="fas fa-check"></i><span><strong>Imagination, association &amp; location</strong> — the three building blocks of every mnemonic, including the memory palace</span></li>
-                        <li><i class="fas fa-check"></i><span><strong>Neurobics</strong> — daily exercises that sharpen recall</span></li>
-                        <li><i class="fas fa-check"></i><span>How memory actually works, so you stop fighting your brain</span></li>
+            <div class="b-panel" role="tabpanel" id="panel-upsc" aria-labelledby="tab-upsc">
+                <img src="Images/story/04_upsc-overload.svg" alt="UPSC aspirant akhbaaron aur bade syllabus chart ke saamne pareshan hai" width="1200" height="900" loading="lazy" decoding="async">
+                <div>
+                    <h3>Syllabus itna bada ki aage padhte-padhte pichla bhool jaate ho?</h3>
+                    <p class="b-panel-label">Workshop mein aap seekhenge:</p>
+                    <ul class="b-checks">
+                        <li>Spaced revision calendar – kab kya revise karna hai</li>
+                        <li>Newspaper aur notes ko mind-map mein badalna</li>
+                        <li>Lambe study hours mein focus aur energy bachana</li>
                     </ul>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
                 </div>
-                <!-- Day 2 Card -->
-                <div class="day-card scroll-reveal">
-                    <div class="day-card-header day-2-header">
-                        <span class="day-badge">DAY 2</span>
-                        <h3>Study &amp; Focus</h3>
-                        <span class="day-pillar-tag">Pillar 02</span>
-                    </div>
-                    <ul class="day-checklist">
-                        <li><i class="fas fa-check"></i><span><strong>Active recall</strong> &amp; <strong>spaced practice</strong> — the two highest-scoring study methods</span></li>
-                        <li><i class="fas fa-check"></i><span>Build a revision schedule that beats last-minute cramming</span></li>
-                        <li><i class="fas fa-check"></i><span>Concentration drills for distraction-free study blocks</span></li>
-                        <li><i class="fas fa-check"></i><span>Breathing exercises for mental clarity before exams</span></li>
-                        <li><i class="fas fa-check"></i><span><strong>Feynman Technique</strong> &amp; <strong>mind-map notes</strong> — break, highlight, connect, then recall from a blank page</span></li>
-                        <li><i class="fas fa-check"></i><span>Smart reading basics — <strong>skimming</strong> for the big picture, <strong>scanning</strong> for the exact fact</span></li>
+            </div>
+            <div class="b-panel" role="tabpanel" id="panel-parents" aria-labelledby="tab-parents">
+                <img src="Images/story/02_parent-worry.svg" alt="Maa chinta se dekh rahi hain, bachcha der raat kitaabon par ubaasi le raha hai" width="1200" height="900" loading="lazy" decoding="async">
+                <div>
+                    <h3>Bachcha der raat tak padhta hai, phir bhi marks nahi badhte?</h3>
+                    <p class="b-panel-label">Workshop se aapke bachche ko milega:</p>
+                    <ul class="b-checks">
+                        <li>Padhne ka sahi tareeka – ek aur tuition nahi</li>
+                        <li>Hinglish mein LIVE class – aap saath baith sakte hain</li>
+                        <li>Roz ka study routine jo woh khud follow kar sake</li>
                     </ul>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
                 </div>
-                <!-- Day 3 Card -->
-                <div class="day-card scroll-reveal">
-                    <div class="day-card-header day-3-header">
-                        <span class="day-badge">DAY 3</span>
-                        <h3>Mindset &amp; Growth</h3>
-                        <span class="day-pillar-tag">Pillar 03</span>
-                    </div>
-                    <ul class="day-checklist">
-                        <li><i class="fas fa-check"></i><span><strong>Growth mindset</strong> — why "I'm just bad at maths" is a fixable belief</span></li>
-                        <li><i class="fas fa-check"></i><span>Self-talk &amp; meditation to stay calm under exam pressure</span></li>
-                        <li><i class="fas fa-check"></i><span>Learning-style survey — discover how you learn best</span></li>
-                        <li><i class="fas fa-check"></i><span>Design <strong>your own study routine</strong> — observe, experiment, adapt</span></li>
-                        <li><i class="fas fa-check"></i><span>Your completion certificate &amp; bonus content</span></li>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROBLEMS ========== -->
+    <section class="b-section" id="problem">
+        <div class="b-wrap">
+            <p class="b-eyebrow">SOUND FAMILIAR?</p>
+            <h2>Kya yeh aapke saath bhi hota hai?</h2>
+            <div class="b-grid3">
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-brain.svg" alt="" width="56" height="56" loading="lazy"><h3>Exam mein answer yaad hi nahi aata</h3><p>Chapter do baar revise kiya, par exam hall mein sab blank.</p></div>
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-spaced.svg" alt="" width="56" height="56" loading="lazy"><h3>Ghanton padhai, marks average</h3><p>Doston se zyada padhte ho, phir bhi score unse kam.</p></div>
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-focus.svg" alt="" width="56" height="56" loading="lazy"><h3>10 minute mein focus toot jaata hai</h3><p>Pehla page khatam hone se pehle dhyaan phone par.</p></div>
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-book.svg" alt="" width="56" height="56" loading="lazy"><h3>Bas padhna aur highlight karna</h3><p>Research ke hisaab se yeh yaad rakhne ka sabse kamzor tareeka hai.</p></div>
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-recall.svg" alt="" width="56" height="56" loading="lazy"><h3>Revision ka koi plan nahi</h3><p>Sab kuch exam se ek raat pehle – aur hafte baad sab gayab.</p></div>
+                <div class="b-card b-pain rv"><img src="Images/bright/ic-sprout.svg" alt="" width="56" height="56" loading="lazy"><h3>“Main toh average student hoon”</h3><p>Problem aapki ability mein nahi, method mein hai.</p></div>
+            </div>
+            <p class="b-punch">Zyada ghante padhne se yeh theek nahi hoga. <span>Sahi method se hoga.</span></p>
+        </div>
+    </section>
+
+    <!-- ========== 3 DAYS ========== -->
+    <section class="b-section b-soft" id="workshop">
+        <div class="b-wrap">
+            <p class="b-eyebrow">3 DIN KA PLAN</p>
+            <h2>3 din, 3 pillars</h2>
+            <p class="b-sub">Har din ek pillar – aur har din aisi technique jo aap usi raat ke homework par use kar sakte hain.</p>
+            <div class="b-grid3 b-days">
+                <article class="b-day rv">
+                    <header class="b-day-head b-day-1"><span>DAY 1</span><h3>Memory &amp; Brain</h3></header>
+                    <ul class="b-checks">
+                        <li>Hook (peg) aur Linking system – lists, dates, formulas</li>
+                        <li>2-minute observation challenge</li>
+                        <li>Imagination, association, location – memory palace</li>
+                        <li>Neurobics – roz ki brain exercises</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== OUTCOMES (What you'll be able to do) + CTA after curriculum ========== -->
-    <section class="outcomes-section" id="outcomes">
-        <div class="container">
-            <h2 class="section-title">What You'll Be Able to Do</h2>
-            <p class="section-subtitle">After 3 days, you'll have practical techniques to:</p>
-            <figure class="outcomes-art">
-                <img src="Images/illustrations/illus-before-after.svg" alt="Illustration of the same student before the workshop, tired and confused, and after it, smiling with a bright idea" width="1200" height="600" loading="lazy" decoding="async">
-                <figcaption class="outcomes-art-labels">
-                    <span class="art-label art-label-before">Before: re-reading &amp; forgetting</span>
-                    <span class="art-label art-label-after">After: recall, focus &amp; a plan</span>
-                </figcaption>
-            </figure>
-            <ul class="outcomes-list">
-                <li><span class="outcome-check" aria-hidden="true">✓</span> Remember what you study more effectively</li>
-                <li><span class="outcome-check" aria-hidden="true">✓</span> Improve concentration while studying</li>
-                <li><span class="outcome-check" aria-hidden="true">✓</span> Use active recall and spaced revision</li>
-                <li><span class="outcome-check" aria-hidden="true">✓</span> Build a practical revision routine</li>
-                <li><span class="outcome-check" aria-hidden="true">✓</span> Study with less passive rereading</li>
-            </ul>
-            <p class="outcomes-note">You'll learn the method. Your marks follow from applying it consistently &mdash; we don't promise a number.</p>
-
-            <!-- CTA after 3-day curriculum -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== COUNTDOWN TIMER ========== -->
-    <section class="countdown-section" id="countdown">
-        <div class="container">
-            <h2 class="section-title light">Registration Closes In</h2>
-            <div class="countdown-timer" id="countdown-timer">
-                <div class="countdown-box">
-                    <span class="countdown-number" id="countdown-days">00</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="countdown-hours">00</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="countdown-minutes">00</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="countdown-seconds">00</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-            <p class="countdown-expired" id="countdown-expired" style="display:none;"></p>
-        </div>
-    </section>
-
-    <!-- ========== QUOTES SLIDER ========== -->
-    <section class="quotes-section">
-        <div class="container">
-            <div class="quotes-slider" id="quotes-slider">
-                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                <p class="quote-text" id="quote-text">Loading...</p>
-                <p class="quote-author" id="quote-author"></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== WHY IT WORKS (Learning Science) ========== -->
-    <section class="science-section" id="science">
-        <div class="container">
-            <h2 class="section-title">Why These Techniques Work</h2>
-            <p class="section-subtitle">These aren't motivational tricks. Each one is built on how memory and attention actually function.</p>
-            <div class="science-grid">
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-hook.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Memory needs a hook</h3>
-                    <p>Your brain stores information by connecting it to something it already knows. Random facts have nothing to attach to — which is why they vanish. The Hook System gives every fact a place to hang, so recall becomes retrieval instead of guesswork.</p>
-                </div>
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-recall.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Recall beats re-reading</h3>
-                    <p>Re-reading feels productive because the page looks familiar — but familiarity isn't memory. Pulling an answer <em>out</em> of your head strengthens the pathway far more than putting it in again. That's active recall (retrieval practice), and it's the single biggest lever on exam marks.</p>
-                </div>
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-forgetting.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Forgetting is scheduled</h3>
-                    <p>Memory fades on a predictable curve, first measured by Hermann Ebbinghaus as the <em>forgetting curve</em>. Revising at the right intervals — just as a fact starts to slip — resets that curve and locks it in for months. Same total study time, dramatically more retained.</p>
-                </div>
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-attention.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Attention is trainable</h3>
-                    <p>Focus isn't a personality trait you're born with or without. Neurobics and concentration drills train it the way exercise trains a muscle — measurably, in weeks, not years.</p>
-                </div>
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-growth.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Your brain keeps changing</h3>
-                    <p>Neuroplasticity means ability isn't fixed at birth. Students who believe intelligence can grow take on harder problems, recover faster from bad marks, and improve more over a year — which is why mindset is a pillar, not a pep talk.</p>
-                </div>
-                <div class="science-card scroll-reveal">
-                    <div class="science-icon"><img src="Images/illustrations/science-calm.svg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></div>
-                    <h3>Calm unlocks recall</h3>
-                    <p>Exam stress physically interferes with memory retrieval — you knew it last night and blank today. Breathing and meditation practice lower that interference so you can access what you already learned.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== WHO THIS EVENT IS FOR ========== -->
-    <section class="who-for-section" id="who-for">
-        <div class="container">
-            <h2 class="section-title">Who This Event Is For:</h2>
-            <div class="who-for-card">
-                <ul class="who-for-list">
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span><strong>Students from Class 6 to graduation</strong> who want their marks to finally match the hours they put in.</span></li>
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span><strong>Board and competitive exam aspirants</strong> (JEE, NEET, UPSC, CA) carrying a large syllabus they need to actually retain.</span></li>
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span>Anyone who <strong>forgets what they studied</strong> within days, or loses focus minutes after sitting down.</span></li>
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span>Students stuck at "average" who suspect the problem is their <strong>method, not their ability</strong>.</span></li>
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span><strong>Parents</strong> who want to give their child a learning system instead of another tuition class.</span></li>
-                    <li><span class="who-check"><i class="fas fa-check-circle"></i></span><span>Working professionals and lifelong learners who need to absorb new material fast.</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== MEET YOUR COACH ========== -->
-    <section class="coach-section" id="coach">
-        <div class="container">
-            <h2 class="section-title">Meet Your Coach</h2>
-            <p class="section-subtitle">Who's actually teaching this &mdash; and why he built it.</p>
-            <div class="coach-content scroll-reveal">
-                <div class="coach-card">
-                    <div class="coach-card-image">
-                        <img src="Images/host.webp" alt="Abhishek Ranjan - Super Learner Academy Coach" class="coach-img coach-profile-img" width="640" height="640" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
-                    </div>
-                    <div class="coach-card-overlay">
-                        <h4 class="coach-card-name">Abhishek Ranjan</h4>
-                        <p class="coach-card-role">Learning Science Coach</p>
-                    </div>
-                </div>
-                <div class="coach-bio">
-                    <h3 class="coach-name">Abhishek Ranjan</h3>
-                    <p class="coach-role-subtitle">Learning Science Coach &bull; NIT Allahabad Graduate &bull; Software Engineer</p>
-                    <p class="coach-description">Abhishek is on a mission to help thousands of students enhance their cognitive abilities, accelerate their learning process, and achieve their full potential.</p>
-                    <p class="coach-description">He built Super Learner Academy after seeing the same pattern again and again: students putting in long hours with re-reading and highlighting, then losing it all by exam day &mdash; not because they lacked ability, but because nobody had ever taught them <em>how</em> to learn. So he teaches the method itself: memory techniques like the Hook System, active recall and spaced revision, concentration training, and the growth mindset that keeps students using them. He teaches all 3 days LIVE himself, and answers questions in the doubt-clearing sessions.</p>
-                    <ul class="coach-credentials">
-                        <li><i class="fas fa-check"></i><span>NIT Allahabad Passout & Software Engineer</span></li>
-                        <li><i class="fas fa-check"></i><span>Memory & Focus Techniques Expert</span></li>
-                        <li><i class="fas fa-check"></i><span>Trained hundreds of students & professionals</span></li>
-                        <li><i class="fas fa-check"></i><span>Creator of Super Learner Academy Program</span></li>
+                </article>
+                <article class="b-day rv">
+                    <header class="b-day-head b-day-2"><span>DAY 2</span><h3>Study &amp; Focus</h3></header>
+                    <ul class="b-checks">
+                        <li>Active recall aur spaced revision</li>
+                        <li>Cramming se behtar revision schedule</li>
+                        <li>Concentration drills aur breathing</li>
+                        <li>Feynman technique aur mind-map notes</li>
                     </ul>
-                    <p class="coach-tagline">"Learn Smarter. Remember Better."</p>
-                    <div class="coach-ebook">
-                        <p class="coach-ebook-label"><i class="fas fa-book"></i> Author of E-book: "Improve Grades and Make Sharp Mind"</p>
-                        <a href="Super_Learner_Academy_Ebook.pdf" download class="ebook-download-btn">
-                            <i class="fas fa-download"></i> Download Free E-Book
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA after the coach/trust block. On a phone the run from the
-                 outcomes CTA to the pricing CTA was ~7,700px (about 9 screens)
-                 with only the sticky bar to convert on; this breaks it up at
-                 the point where a cold visitor has just seen who's teaching. -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
+                </article>
+                <article class="b-day rv">
+                    <header class="b-day-head b-day-3"><span>DAY 3</span><h3>Mindset &amp; Growth</h3></header>
+                    <ul class="b-checks">
+                        <li>Growth mindset – “main maths mein weak hoon” badla ja sakta hai</li>
+                        <li>Self-talk aur exam se pehle calm rehna</li>
+                        <li>Learning-style survey – aap kaise best seekhte hain</li>
+                        <li>Apna study routine banana + certificate</li>
+                    </ul>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- ========== WHAT'S INCLUDED ========== -->
-    <section class="included-section" id="included">
-        <div class="container">
-            <h2 class="section-title">What's Included</h2>
-            <p class="section-subtitle">Live on Zoom &bull; Ask questions &bull; Doubt clearing &bull; Worksheets &bull; WhatsApp community</p>
-            <div class="included-grid">
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-video"></i></div>
-                    <h3>3 Days LIVE Interactive Sessions</h3>
-                    <p>Real-time Q&amp;A with Coach Abhishek Ranjan on Zoom — not pre-recorded videos.</p>
-                </div>
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-file-alt"></i></div>
-                    <h3>Editable PDF Worksheets</h3>
-                    <p>Editable PDF practice materials to reinforce what you learn.</p>
-                </div>
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-users"></i></div>
-                    <h3>Community Access</h3>
-                    <p>Join the WhatsApp community of fellow super learners.</p>
-                </div>
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Completion Certificate</h3>
-                    <p>Get a certificate to showcase your new learning skills.</p>
-                </div>
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-headset"></i></div>
-                    <h3>Doubt Clearing Session</h3>
-                    <p>Dedicated time to get your personal questions answered.</p>
-                </div>
-                <div class="included-card scroll-reveal">
-                    <div class="included-icon"><i class="fas fa-infinity"></i></div>
-                    <h3>Lifetime Technique Access</h3>
-                    <p>Once learned, these techniques stay with you forever.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== TESTIMONIALS ========== -->
-    <section class="testimonials-section" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Our Students Say</h2>
-            <!--
-              BLOCKING BEFORE PAID TRAFFIC: the three testimonials below are placeholders.
-              Either (a) replace each quote, name and .testimonial-result badge with a REAL
-              student result you can verify and have written permission to publish, or
-              (b) delete this whole <section id="testimonials"> — the CTA block at the end of
-              it can move up into #included. Do NOT ship unverifiable social proof: it reads
-              as fake to cold ad traffic and costs more conversions than it wins.
-              The result badge must only summarise what that student actually reported —
-              never invent a score number.
-            -->
-            <div class="testimonials-grid">
-                <div class="testimonial-card scroll-reveal">
-                    <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-result"><i class="fas fa-arrow-trend-up"></i> Recalls full chapters</p>
-                    <p class="testimonial-text">"I was struggling to remember anything I studied. After this workshop I can recall entire chapters with ease — revision before a test takes me half the time it used to. The memory techniques are game-changing!"</p>
-                    <div class="testimonial-author">
-                        <strong>Priya S.</strong>
-                        <span>Engineering Student</span>
-                    </div>
-                </div>
-                <div class="testimonial-card scroll-reveal">
-                    <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-result"><i class="fas fa-arrow-trend-up"></i> 2-hour focus blocks</p>
-                    <p class="testimonial-text">"My focus has improved dramatically. I can study for 2 hours straight now without getting distracted, and I finally have a revision schedule instead of cramming. Totally worth the investment!"</p>
-                    <div class="testimonial-author">
-                        <strong>Rahul M.</strong>
-                        <span>UPSC Aspirant</span>
-                    </div>
-                </div>
-                <div class="testimonial-card scroll-reveal">
-                    <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-result"><i class="fas fa-arrow-trend-up"></i> Calmer in the exam hall</p>
-                    <p class="testimonial-text">"Abhishek sir explains everything so simply. I used to blank out under pressure — the breathing exercises alone made a huge difference in my exam performance."</p>
-                    <div class="testimonial-author">
-                        <strong>Sneha K.</strong>
-                        <span>CA Student</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA after testimonials / trust section -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note trust-note-light" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== PRICING / REGISTER ========== -->
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <h2 class="section-title light">Join the 3-Day LIVE Workshop</h2>
-            <p class="section-subtitle light" data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</p>
-            <div class="pricing-layout">
-            <figure class="pricing-art">
-                <img src="Images/illustrations/illus-superlearner.svg" alt="Illustration of the same student, now smiling and holding up a glowing idea bulb" class="pricing-illustration" width="1000" height="1000" loading="lazy" decoding="async">
-                <ul class="art-badges" aria-label="Three pillars covered">
-                    <li class="art-badge art-badge-1">Memory</li>
-                    <li class="art-badge art-badge-2">Focus</li>
-                    <li class="art-badge art-badge-3">Mindset</li>
-                </ul>
-            </figure>
-            <div class="pricing-card scroll-reveal">
-                <div class="price-anchor">
-                    <span class="price-anchor-label">Regular Price</span>
-                    <span class="original-price">
-                        <span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span>
-                    </span>
-                </div>
-                <p class="price-launch-label">Launch Price</p>
-                <div class="current-price">
-                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">455</span>
-                </div>
-                <p class="pricing-note">One-time payment &bull; No hidden fees</p>
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="refund-note"><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
-                <p class="seats-left">⚡ Limited seats available for this batch</p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
-            </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FAQ ACCORDION ========== -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-accordion">
-                <!-- FAQ Item 1 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What is Super Learner Academy?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Super Learner Academy is an initiative by Abhishek Ranjan (Software Engineer by profession, Teacher by hobby, Alumnus of NIT Allahabad) that teaches scientifically-backed learning techniques to help students study smarter, remember more, and perform better in exams and everyday life.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 2 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Who is this LIVE workshop for?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>It's built for <strong>students</strong> first — Class 6 to graduation, and board or competitive exam aspirants (JEE, NEET, UPSC, CA) — who forget what they study, lose focus quickly, or want a real revision system. Parents attend alongside their child, and working professionals or lifelong learners who need to absorb new material fast are welcome too.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 3 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What will I learn in 3 days?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The workshop is built around three pillars — one per day. <strong>Day 1 (Memory &amp; Brain):</strong> the Hook System (peg method) and Linking System, the observation challenge, imagination–association–location mnemonics and the memory palace, neurobics, and how memory actually works. <strong>Day 2 (Study &amp; Focus):</strong> active recall, spaced practice, revision scheduling, concentration drills, the Feynman Technique, mind-map notes, and skimming &amp; scanning. <strong>Day 3 (Mindset &amp; Growth):</strong> growth mindset, self-talk, meditation for exam calm, building your own study routine, plus your learning-style survey, completion certificate and bonus content.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 3b -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Is this based on real science or just motivational tips?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Real science. Every technique taught is grounded in established findings from cognitive psychology and neuroscience — active recall and spaced practice (consistently the highest-rated study techniques in learning research), memory encoding and retrieval cues, attention training, and neuroplasticity behind growth mindset. You'll learn <em>why</em> each method works on your brain, not just how to do it — because understanding the mechanism is what makes students stick with it.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 3c -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Will this actually improve my grades?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The workshop gives you the methods; your marks follow from applying them consistently. Students who replace re-reading with active recall and spaced revision typically see the difference within one exam cycle — better retention, faster revision, and far less last-minute cramming. We won't promise a specific number, because that depends on your subjects and how consistently you practise. What we do guarantee is a complete, usable learning system by the end of Day 3.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 4 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Is there a refund policy?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! If you attend the full workshop and feel it didn't add value, you can reach out to us within 24 hours after the session ends for a complete refund. We're confident you'll love the content.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 5 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span data-bind="faq.attend.question">How do I attend the LIVE session?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-bind-html="faq.attend.answer">Live sessions run <strong>every Saturday</strong>, from <strong>7:00 PM – 9:00 PM IST</strong>. Every session is <strong>LIVE on Zoom</strong> with Coach Abhishek Ranjan &mdash; not pre-recorded. After registration you'll receive a confirmation with all the details, and the joining link is shared in our WhatsApp community group before the first session begins.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 6 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Do I need any prior knowledge?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No prior knowledge is needed! The workshop is designed for beginners and advanced learners alike. We start from the basics and progress to powerful techniques that anyone can apply immediately.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 7 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What will be the language of the workshop?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The workshop is conducted in Hinglish (a mix of Hindi and English) so that everyone can understand easily and follow along comfortably.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 8 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span data-bind="faq.registrationClose.question">When does registration close?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-bind-html="faq.registrationClose.answer">Registration for each week's batch stays open until <strong>Saturday at 7:00 PM IST</strong>, when the live session begins. Seats at this price are limited, so we recommend registering early to avoid missing out.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 9 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span data-bind="faq.price.question">Why is it priced at ₹455 when it's worth ₹4999?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-bind-html="faq.price.answer">₹455 is a limited-time launch price to make this accessible to as many students as possible. There are no hidden fees — this one-time payment covers all 3 LIVE days, the editable worksheets, WhatsApp community access, and your completion certificate.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 10 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What do I need to join the LIVE workshop?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Just a smartphone, tablet, or laptop with a stable internet connection and the Zoom app (or browser). No special software or prior setup is required.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 11 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>What if I miss a live session?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We strongly recommend attending live for the best experience and to ask questions in real time. Session recordings, where available, are shared with registered participants through the WhatsApp community group.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 12 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Will I get a certificate?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! Every participant who completes the 3-day LIVE workshop receives a Certificate of Completion from Super Learner Academy.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 13 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Can I ask questions during the workshop?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely — that's the point of it being LIVE and interactive. You can ask Coach Abhishek questions in real time, each day includes a dedicated doubt-clearing session, and you can post questions anytime in the WhatsApp community group.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 14 -->
-                <div class="faq-item">
-                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span>Who do I contact if I have more questions?</span>
-                        <i class="fas fa-chevron-down faq-chevron"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>You can reach us at superlearneracademy@gmail.com or call/WhatsApp 9151726759, and we'll be happy to help.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA after FAQ -->
-            <div class="section-cta">
-                <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-                </a>
-                <p class="trust-note"><span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
-                <p class="trust-note">Attend the full workshop and you're covered by our 24-hour refund policy &mdash; see the refund question above.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== SITE FOOTER ==========
-         Publisher identity + a real contact route (E-E-A-T: a reader should be
-         able to tell who runs this site and how to reach a human). -->
-    <footer class="site-footer has-sticky-cta">
-        <div class="site-footer-inner">
-            <div class="site-footer-brand">
-                <strong>Super Learner Academy</strong>
-                <p>Practical, science-informed learning strategies &mdash; memory, focus, study method and mindset &mdash; for students who want better grades without longer hours.</p>
-                <p>Founded and taught by <a href="about.html">Abhishek Ranjan</a>, NIT Allahabad graduate and software engineer.</p>
-            </div>
-
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="b-section" id="kaise">
+        <div class="b-wrap b-split">
+            <img src="Images/story/07_live-class.svg" alt="Zoom par LIVE class: coach dimaag ke baare mein samjha rahe hain, students haath utha kar sawal pooch rahe hain" width="1200" height="900" loading="lazy" decoding="async">
             <div>
-                <h2>Site</h2>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="index.html#faq">FAQ</a></li>
-                    <li><a href="index.html#coach">Meet Your Coach</a></li>
-                </ul>
+                <p class="b-eyebrow">KAISE HOTA HAI</p>
+                <h2>Ghar baithe, LIVE class</h2>
+                <ol class="b-steps">
+                    <li><strong>Seat book karein</strong><span><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span>, UPI ya card se. Bas 2 minute.</span></li>
+                    <li><strong>Confirmation + WhatsApp group</strong><span>Registration ke baad confirmation milta hai. Zoom joining link WhatsApp community group mein share hota hai.</span></li>
+                    <li><strong><span data-bind="bright.dateRange">Har Shanivaar</span> LIVE class</strong><span><span data-bind="workshop.sessionTime">7:00 PM – 9:00 PM IST</span>, Coach Abhishek ke saath. Sawal live poochiye, doubt wahin clear.</span></li>
+                    <li><strong>Practice + certificate</strong><span>Editable worksheets se practice; teeno din poore karne par certificate.</span></li>
+                </ol>
             </div>
+        </div>
+    </section>
 
-            <div>
-                <h2>Free Tools</h2>
-                <ul>
-                    <li><a href="quiz.html">Know Yourself Better &mdash; Quizzes</a></li>
-                    <li><a href="generatenotes/index.html">Notes PDF Generator</a></li>
-                    <li><a href="resources.html">Free Resources &mdash; Printables</a></li>
-                    <li><a href="Super_Learner_Academy_Ebook.pdf">Free E-book</a></li>
-                </ul>
+    <!-- ========== BEFORE / AFTER ========== -->
+    <section class="b-section b-soft" id="badlav">
+        <div class="b-wrap">
+            <p class="b-eyebrow">PEHLE vs BAAD MEIN</p>
+            <h2>Same student, naya method</h2>
+            <div class="b-ba">
+                <figure class="rv"><img src="Images/story/01_exam-blank.svg" alt="Pehle: exam mein student ko kuch yaad nahi aa raha" width="1200" height="900" loading="lazy" decoding="async"><figcaption class="b-tag b-tag-before">Pehle: ratta, bhoolna, tension</figcaption></figure>
+                <figure class="rv"><img src="Images/story/08_exam-confident.svg" alt="Baad mein: wahi student aaraam se yaad karke likh rahi hai" width="1200" height="900" loading="lazy" decoding="async"><figcaption class="b-tag b-tag-after">Baad mein: recall, focus aur ek plan</figcaption></figure>
             </div>
+            <p class="b-note">Method hum sikhate hain; marks aapki regular practice se aate hain. Isliye hum koi number promise nahi karte.</p>
+        </div>
+    </section>
 
+    <!-- ========== SCIENCE ========== -->
+    <section class="b-section b-blue" id="science">
+        <div class="b-wrap">
+            <p class="b-eyebrow">LEARNING SCIENCE</p>
+            <h2>Yeh kaam kyun karta hai?</h2>
+            <p class="b-sub">Motivation ki baatein nahi. Har technique is par based hai ki dimaag yaad kaise rakhta hai.</p>
+            <div class="b-grid3">
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-hook.svg" alt="" width="64" height="64" loading="lazy"><h3>Yaad ko “hook” chahiye</h3><p>Nayi baat tab tikti hai jab woh kisi jaani-pehchaani cheez se jud jaaye. Hook System yahi sikhata hai.</p></div>
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-recall.svg" alt="" width="64" height="64" loading="lazy"><h3>Dobara padhne se behtar: khud se yaad karna</h3><p>Page dekh kar sab familiar lagta hai, par yaad nahi hota. Khud se answer nikalne se memory mazboot hoti hai.</p></div>
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-spaced.svg" alt="" width="64" height="64" loading="lazy"><h3>Bhoolna ek pattern hai</h3><p>Memory ek tay curve par fade hoti hai (Ebbinghaus ka forgetting curve). Sahi time par revision use reset karta hai.</p></div>
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-focus.svg" alt="" width="64" height="64" loading="lazy"><h3>Focus practice se badhta hai</h3><p>Concentration janam se milne wala gun nahi. Drills se yeh muscle ki tarah train hota hai.</p></div>
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-sprout.svg" alt="" width="64" height="64" loading="lazy"><h3>Dimaag badal sakta hai</h3><p>Neuroplasticity: ability fixed nahi hai. Practice se dimaag naye connections banata hai.</p></div>
+                <div class="b-card b-sci rv"><img src="Images/bright/ic-calm.svg" alt="" width="64" height="64" loading="lazy"><h3>Shaant dimaag zyada yaad karta hai</h3><p>Exam ka stress recall mein rukawat daalta hai. Breathing aur meditation se dimaag clear rehta hai.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COACH ========== -->
+    <section class="b-section" id="coach">
+        <div class="b-wrap b-split b-coach">
+            <div class="b-coach-photo">
+                <img src="Images/host.webp" alt="Abhishek Ranjan - Super Learner Academy Coach" class="coach-img" width="640" height="640" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="coach-fallback" style="display:none;" aria-label="Coach initials">AR</div>
+            </div>
             <div>
-                <h2>Contact</h2>
-                <p>Questions about the workshop, a payment or a refund? Email us &mdash; a real person reads it.</p>
-                <p class="site-footer-contact-line"><svg class="site-footer-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.2 6.3 12 12.9l8.8-6.6" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="mailto:support@superlearneracademy.in" data-bind="contact.email" data-bind-href="contact.emailHref">support@superlearneracademy.in</a></p>
-                <div class="site-footer-social">
-                    <a href="https://www.instagram.com/superlearneracademy" target="_blank" rel="noopener noreferrer" aria-label="Super Learner Academy on Instagram" data-bind-href="contact.instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" stroke="none"/></svg></a>
-                    <a href="mailto:support@superlearneracademy.in" aria-label="Email Super Learner Academy" data-bind-href="contact.emailHref"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.2 6.3 12 12.9l8.8-6.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                <p class="b-eyebrow">AAPKE COACH</p>
+                <h2>Abhishek Ranjan</h2>
+                <p class="b-role">Learning Science Coach · NIT Allahabad alumnus · Software Engineer</p>
+                <p>Abhishek ne Super Learner Academy isliye shuru ki kyunki unhone baar-baar ek hi cheez dekhi: students ghanton re-reading aur highlighting karte hain, aur exam tak sab bhool jaate hain. Woh wahi techniques sikhate hain jo learning research mein sabse kaam ki maani jaati hain – simple Hinglish mein.</p>
+                <ul class="b-checks">
+                    <li>Memory aur focus techniques coach</li>
+                    <li>Hundreds of students aur professionals ko train kar chuke hain</li>
+                    <li>E-book “Improve Grades and Make Sharp Mind” ke author</li>
+                </ul>
+                <p class="b-quote">“Learn smarter. Remember better.”</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STUDENT REVIEWS (hidden) ==========
+         Shown only when data.json bright.showTestimonials = true. Before switching it on, replace the three
+         placeholder cards with REAL, verified student reviews (name, class/exam, their own words). Never invent
+         a quote or a marks number. -->
+    <section class="b-section b-soft" id="reviews" hidden>
+        <div class="b-wrap">
+            <p class="b-eyebrow">STUDENTS KYA KEHTE HAIN</p>
+            <h2>Asli students, asli badlav</h2>
+            <div class="b-grid3">
+                <blockquote class="b-card b-review"><p>Yahan asli student ka review aayega.</p><footer>Student ka naam · Class / exam</footer></blockquote>
+                <blockquote class="b-card b-review"><p>Yahan asli student ka review aayega.</p><footer>Student ka naam · Class / exam</footer></blockquote>
+                <blockquote class="b-card b-review"><p>Yahan asli parent ka review aayega.</p><footer>Parent ka naam · Shehar</footer></blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COUNTDOWN ========== -->
+    <section class="b-countdown" id="countdown" data-dynamic-only>
+        <div class="b-wrap">
+            <h2>Is hafte ki registration band hone mein</h2>
+            <div class="b-timer" id="countdown-timer">
+                <div><span id="countdown-days">00</span><small>Din</small></div>
+                <div><span id="countdown-hours">00</span><small>Ghante</small></div>
+                <div><span id="countdown-minutes">00</span><small>Minute</small></div>
+                <div><span id="countdown-seconds">00</span><small>Second</small></div>
+            </div>
+            <p class="b-expired" id="countdown-expired" style="display:none;"></p>
+        </div>
+    </section>
+
+    <!-- ========== PRICE ========== -->
+    <section class="b-section b-yellow" id="price">
+        <div class="b-wrap">
+            <div class="b-pricecard">
+                <div class="b-price-left">
+                    <p class="b-eyebrow">AGLA LIVE BATCH JOIN KAREIN</p>
+                    <h2>Aapko kya milega</h2>
+                    <ul class="b-checks">
+                        <li>3 LIVE sessions, 2-2 ghante, Zoom par</li>
+                        <li>Real-time Q&amp;A aur doubt-clearing session</li>
+                        <li>Editable PDF worksheets practice ke liye</li>
+                        <li>WhatsApp community access</li>
+                        <li>Certificate of Completion</li>
+                        <li>Hinglish mein, beginners ke liye bhi aasaan</li>
+                    </ul>
+                </div>
+                <div class="b-price-right">
+                    <p class="b-was">Regular price <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
+                    <p class="b-now"><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></p>
+                    <p class="b-once">Ek baar ka payment · koi hidden fee nahi</p>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg b-btn-block" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
+                    <p class="b-refund">🛡️ Poora workshop attend karein – value na lage toh session khatam hone ke 24 ghante ke andar full refund.</p>
+                    <p class="b-limited">⚡ Is batch mein seats limited hain</p>
+                </div>
+                <span class="b-sticker b-price-sticker" aria-hidden="true">Sirf ₹455!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="b-section" id="faq">
+        <div class="b-wrap b-narrow">
+            <p class="b-eyebrow">SAWAAL-JAWAB</p>
+            <h2>Aapke sawaal</h2>
+            <div class="b-faq">
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Yeh workshop kiske liye hai?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Class 6 se graduation tak ke students, aur board ya competitive exam (JEE, NEET, UPSC, CA, Law) ki taiyari karne wale – jo padha hua bhool jaate hain, jaldi focus kho dete hain, ya revision ka system chahte hain. Parents bachche ke saath baith sakte hain.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Workshop kis language mein hai?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Hinglish mein (Hindi + English), taaki sab aasani se samajh sakein.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Class kab aur kaise hoti hai?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p><strong><span data-bind="bright.dateRange">Har Shanivaar</span>, <span data-bind="workshop.sessionTime">7:00 PM – 9:00 PM IST</span></strong>, Zoom par LIVE – recorded nahi. Registration ke baad confirmation milta hai, aur joining link WhatsApp community group mein pehle session se pehle share hota hai.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Kya isse marks sach mein improve honge?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Workshop aapko method deta hai; marks us method ko regularly apply karne se aate hain. Hum koi specific number promise nahi karte, kyunki woh aapke subjects aur practice par depend karta hai. Jo hum dete hain: re-reading ki jagah active recall aur spaced revision ka ek clear system.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Kya yeh real science par based hai?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Haan. Active recall aur spaced practice learning research mein sabse effective study techniques maani jaati hain. Har technique ke saath aap yeh bhi samjhenge ki woh dimaag par kaam kyun karti hai – sirf “kaise” nahi, “kyun” bhi.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Refund policy kya hai?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Poora workshop attend karne ke baad agar aapko value na lage, toh session khatam hone ke 24 ghante ke andar humse contact karein – full refund milega.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Join karne ke liye kya chahiye?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Bas smartphone, tablet ya laptop, stable internet aur Zoom app (ya browser). Koi prior knowledge nahi chahiye – basics se shuru karte hain.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Session miss ho gaya toh?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>LIVE attend karna sabse accha hai, taaki aap sawal pooch sakein. Recordings, jab available hon, WhatsApp community group mein share ki jaati hain.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Certificate milega?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Haan, teeno din poore karne par Super Learner Academy ka Certificate of Completion milta hai.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Aur sawal hain toh?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Email karein <a href="mailto:support@superlearneracademy.in" data-bind-href="contact.emailHref"><span data-bind="contact.email">support@superlearneracademy.in</span></a> ya <a href="https://wa.me/919151726759" data-bind-href="bright.whatsappChat" target="_blank" rel="noopener noreferrer">WhatsApp par message karein</a>.</p></div></div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="site-footer-bottom">
-            <p>&copy; 2026 Super Learner Academy. All rights reserved. &middot; <a href="mailto:support@superlearneracademy.in">support@superlearneracademy.in</a></p>
+    <!-- ========== FINAL CTA ========== -->
+    <section class="b-final">
+        <div class="b-wrap b-split">
+            <div>
+                <h2>Agla LIVE batch is Shanivaar</h2>
+                <p>3 din, 6 ghante, ek naya tareeka padhne ka. Seat abhi book karein.</p>
+                <div class="b-ctas">
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg" data-bind-href="registration.link"><span data-bind="bright.buttonText">Abhi Seat Book Karein – ₹455</span></a>
+                    <a href="https://wa.me/919151726759" class="b-btn b-btn-outline-white b-btn-lg" data-bind-href="bright.whatsappChat" target="_blank" rel="noopener noreferrer"><span data-bind="bright.whatsappText">WhatsApp par sawal poochein</span></a>
+                </div>
+            </div>
+            <img src="Images/story/08_exam-confident.svg" alt="Student aaraam se exam likh rahi hai, idea bulb jal raha hai" width="1200" height="900" loading="lazy" decoding="async">
         </div>
+    </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="b-footer">
+        <div class="b-wrap b-footer-grid">
+            <div>
+                <img src="Images/bright/sla-c-logo-reverse.svg" alt="Super Learner Academy" width="413" height="99" loading="lazy" class="b-footer-logo">
+                <p>Learn how to learn. Students ke liye 3 din ka LIVE workshop – memory, focus aur mindset.</p>
+            </div>
+            <div>
+                <p class="b-foot-head">Workshop</p>
+                <a href="#aapke-liye">Kiske liye</a><a href="#workshop">3 din ka plan</a><a href="#science">Science</a><a href="#coach">Coach</a><a href="#faq">FAQ</a>
+            </div>
+            <div>
+                <p class="b-foot-head">Free tools</p>
+                <a href="quiz.html">Quiz</a><a href="mindmap/index.html">Mind Maps</a><a href="generatenotes/index.html">Notes Generator</a><a href="resources.html">Resources</a><a href="about.html">About Us</a>
+            </div>
+            <div>
+                <p class="b-foot-head">Contact</p>
+                <a href="mailto:support@superlearneracademy.in" data-bind-href="contact.emailHref"><span data-bind="contact.email">support@superlearneracademy.in</span></a>
+                <a href="https://www.instagram.com/superlearneracademy" data-bind-href="contact.instagram" target="_blank" rel="noopener noreferrer"><span data-bind="contact.instagramHandle">@superlearneracademy</span></a>
+            </div>
+        </div>
+        <p class="b-copy">© Super Learner Academy</p>
     </footer>
 
-    <!-- ========== STICKY CTA ========== -->
+    <!-- ========== STICKY CTA (mobile) ========== -->
     <div class="sticky-cta" aria-label="Registration call to action">
-        <a href="#" class="cta-button sticky-cta-button" data-bind-href="registration.link">
-            <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
-        </a>
+        <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary sticky-cta-button" data-bind-href="registration.link"><span data-bind="bright.stickyText">Seat Book Karein – ₹455</span></a>
+        <a href="https://wa.me/919151726759" class="b-sticky-wa" data-bind-href="bright.whatsappChat" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp par sawal poochein"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.8 13.6c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.8-.3-1.4-.5-2.4-1-4-3.5-4.1-3.7-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.8.8c.2.1.4.2.5.3.1.2.1.8-.1 1.4z"/></svg></a>
     </div>
 
-    <!-- ========== SCROLL TO TOP ========== -->
-    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
-    <!-- Script -->
     <script src="site-nav.js?v=1.1.0" defer></script>
-    <script src="script.js?v=1.0.6"></script>
+    <script src="bright.js?v=1.0.0" defer></script>
+    <script src="script.js?v=1.0.7"></script>
 </body>
 </html>

@@ -13,9 +13,11 @@ function loadHTML(filename) {
     return readFileSync(filePath, 'utf-8');
 }
 
-describe('Landing Page Structural Requirements', () => {
+// These assertions describe the ORIGINAL landing page, which is now kept as the
+// switchable backup index-classic.html (data.json site.design = "classic").
+describe('Landing Page Structural Requirements (classic backup)', () => {
     beforeEach(() => {
-        const html = loadHTML('index.html');
+        const html = loadHTML('index-classic.html');
         document.documentElement.innerHTML = html;
     });
 

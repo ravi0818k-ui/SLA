@@ -1016,6 +1016,9 @@ function showProtectionAlert() {
     document.addEventListener('DOMContentLoaded', async function () {
         var isThankYouPage = document.body.getAttribute('data-page') === 'thank-you';
         var data = await loadData();
+        // Shared with page-specific scripts (bright.js) so they don't fetch data.json again.
+        window.SLA_DATA = data;
+        try { document.dispatchEvent(new CustomEvent('sla:data', { detail: data || null })); } catch (e) { /* old browsers: no CustomEvent */ }
 
         if (data) {
             if (isThankYouPage) {
