@@ -14,21 +14,22 @@ const script = read('script.js');
 
 describe('price comes only from data.json', () => {
     for (const page of cfg.pages) {
-        it(`/${page.path}/ shows ₹99 everywhere when data.json says 99`, () => {
+        // the HTML fallback price is 99: switch data.json to 149 and check no fallback ₹99 is left anywhere
+        it(`/${page.path}/ shows the data.json price everywhere (no ₹99 fallback left when it says 149)`, () => {
             const data = JSON.parse(read('data.json'));
-            data.registration.price = '99';
+            data.registration.price = '149';
             const dom = new JSDOM(read(`${page.path}/index.html`), { runScripts: 'outside-only' });
             dom.window.eval(script);
             dom.window.SLA.injectContent(data);
             const doc = dom.window.document;
             const text = doc.body.textContent;
-            expect(text).not.toMatch(/₹\s?455/);
-            expect(text).toMatch(/₹\s?99\b/);
+            expect(text).not.toMatch(/₹\s?99\b/);
+            expect(text).toMatch(/₹\s?149\b/);
             const promise = doc.querySelector('[data-bind^="promise."]');
-            expect(promise.textContent).toMatch(/₹99/);
+            expect(promise.textContent).toMatch(/₹149/);
             for (const s of doc.querySelectorAll('script[type="application/ld+json"]')) {
                 const j = JSON.parse(s.textContent);
-                if (j.offers) expect(j.offers.price).toBe('99');
+                if (j.offers) expect(j.offers.price).toBe('149');
             }
         });
     }

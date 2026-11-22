@@ -26,6 +26,11 @@
             "path": "ads-5",
             "source": "index-board.html",
             "label": "Board exam topper angle (CBSE / State Board, Class 9-12), Hinglish, Bright Mind (was /ads-4/ until 2026-11-22)"
+        },
+        {
+            "path": "ads-6",
+            "source": "index-pro.html",
+            "label": "Professionals between jobs: 'laid off? learn how to master any subject faster', English copy, Bright Mind (added 2026-11-22)"
         }
     ]
 }

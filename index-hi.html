@@ -30,26 +30,15 @@
 
     <script>document.documentElement.className += ' js';</script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417193820"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-18417193820');
-    </script>
-
-    <!-- Google Analytics 4 - Super Learner Academy WEBSITE -->
+    <!-- Google tag (gtag.js): ONE library download serves both GA4 and Google Ads through two config calls
+         (loading gtag.js twice cost mobile speed). Keep both IDs here. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM45CDB7GK"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-
       gtag('js', new Date());
-
-      // GA4: Main Website
-      gtag('config', 'G-YM45CDB7GK');
+      gtag('config', 'G-YM45CDB7GK'); // GA4: Main Website
+      gtag('config', 'AW-18417193820'); // Google Ads (conversions, remarketing)
     </script>
 
     <!-- Favicon -->
@@ -118,7 +107,7 @@
   "image": "https://www.superlearneracademy.in/Images/story/og-live-class.jpg",
   "offers": {
     "@type": "Offer",
-    "price": "455",
+    "price": "99",
     "priceCurrency": "INR",
     "category": "Paid",
     "url": "https://www.superlearneracademy.in/",
@@ -244,7 +233,10 @@
     <!-- Fonts: Kripa (Devanagari headings, by Kedar Gadge) + Poppins (Devanagari body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kripa&family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts load without blocking the first paint (display=swap shows text at once in a fallback font). -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Kripa&family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kripa&family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kripa&family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
 
     <link rel="preload" as="image" href="Images/story/01_exam-blank.svg">
     <link rel="stylesheet" href="site-nav.css?v=1.0.1">
@@ -255,7 +247,7 @@
 
     <!-- ========== TOP BAR ========== -->
     <div class="b-topbar" aria-label="Workshop summary">
-        <p>🔥 <span data-bind="hindi.topBar">3 दिन की LIVE वर्कशॉप</span> · <span data-bind="hindi.dateRange">हर शनिवार</span> · सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span><span class="b-topbar-extra"> · सीटें सीमित</span></p>
+        <p>🔥 <span data-bind="hindi.topBar">3 दिन की LIVE वर्कशॉप</span> · <span data-bind="hindi.dateRange">हर शनिवार</span> · सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="b-topbar-extra"> · सीटें सीमित</span></p>
     </div>
 
     <!-- ========== HEADER ========== -->
@@ -313,10 +305,10 @@
                     <li><span aria-hidden="true">🎥</span> Zoom पर LIVE</li>
                     <li><span aria-hidden="true">🗣️</span> आसान हिंदी में</li>
                 </ul>
-                <p class="b-price"><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></strong> <span>एक बार का भुगतान</span></p>
+                <p class="b-price"><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>एक बार का भुगतान</span></p>
                 <p class="b-promise"><span aria-hidden="true">✅</span> <span data-bind="promise.hindiShort">एक ही क़ीमत में पूरा कोर्स · आख़िर में कोई और कोर्स नहीं बेचते</span></p>
                 <div class="b-ctas">
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-lg" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-lg" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                     <a href="https://wa.me/919151726759" class="b-btn b-btn-ghost b-btn-lg b-wa" data-bind-href="hindi.whatsappChat" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M8.6 7.2c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.4.2.5.3 0 .2 0 .9-.3 1.6-.3.7-1.7 1.4-2.3 1.4-.6.1-1.2.3-4-.8-3.4-1.4-5.5-4.9-5.7-5.1-.2-.2-1.4-1.8-1.4-3.4 0-1.6.8-2.4 1.1-2.8z"/></svg><span data-bind="hindi.whatsappText">WhatsApp पर सवाल पूछें</span></a>
                 </div>
                 <p class="b-trust" data-bind="hindi.trustLine">UPI / कार्ड से भुगतान · 24 घंटे की रिफ़ंड पॉलिसी · सर्टिफ़िकेट मिलेगा</p>
@@ -358,7 +350,7 @@
                         <li>एकाग्रता के अभ्यास – फ़ोन के बिना ध्यान लगाकर पढ़ना</li>
                         <li>परीक्षा से पहले का आसान रिवीज़न प्लान</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel" role="tabpanel" id="panel-cbse" aria-labelledby="tab-cbse">
@@ -372,7 +364,7 @@
                         <li>बोर्ड परीक्षा तक का स्पेस्ड रिवीज़न कैलेंडर</li>
                         <li>तारीखों, फ़ॉर्मूलों और परिभाषाओं के लिए मेमोरी हुक</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel" role="tabpanel" id="panel-state" aria-labelledby="tab-state">
@@ -386,7 +378,7 @@
                         <li>लंबे उत्तर और लिस्ट लिंकिंग सिस्टम से याद करना</li>
                         <li>रोज़ थोड़ा रिवीज़न करके परीक्षा की रात का तनाव कम करना</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel" role="tabpanel" id="panel-jee" aria-labelledby="tab-jee">
@@ -399,7 +391,7 @@
                         <li>फ़ॉर्मूले और रिएक्शन हुक से याद रखना</li>
                         <li>मॉक टेस्ट से पहले शांत और एकाग्र रहना</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel" role="tabpanel" id="panel-law" aria-labelledby="tab-law">
@@ -412,7 +404,7 @@
                         <li>फ़ाइनमैन तकनीक – समझकर याद, रटना नहीं</li>
                         <li>माइंड-मैप नोट्स, जो रिवीज़न तेज़ बनाते हैं</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel b-panel-upsc" role="tabpanel" id="panel-upsc" aria-labelledby="tab-upsc">
@@ -428,7 +420,7 @@
                         <li>अख़बार और नोट्स को माइंड-मैप में बदलना</li>
                         <li>लंबे पढ़ाई के घंटों में फ़ोकस और ऊर्जा बचाना</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
             <div class="b-panel" role="tabpanel" id="panel-parents" aria-labelledby="tab-parents">
@@ -441,7 +433,7 @@
                         <li>आसान हिंदी में LIVE क्लास – आप साथ बैठ सकते हैं</li>
                         <li>रोज़ का पढ़ाई का रूटीन, जिसे वह खुद फ़ॉलो कर सके</li>
                     </ul>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                 </div>
             </div>
         </div>
@@ -510,7 +502,7 @@
                 <p class="b-eyebrow">कैसे होता है</p>
                 <h2>घर बैठे, LIVE क्लास</h2>
                 <ol class="b-steps">
-                    <li><strong>सीट बुक करें</strong><span><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span>, UPI या कार्ड से। बस 2 मिनट।</span></li>
+                    <li><strong>सीट बुक करें</strong><span><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>, UPI या कार्ड से। बस 2 मिनट।</span></li>
                     <li><strong>कन्फ़र्मेशन + WhatsApp ग्रुप</strong><span>रजिस्ट्रेशन के बाद कन्फ़र्मेशन मिलता है। Zoom जॉइनिंग लिंक WhatsApp कम्युनिटी ग्रुप में शेयर होता है।</span></li>
                     <li><strong><span data-bind="hindi.dateRange">हर शनिवार</span> LIVE क्लास</strong><span><span data-bind="hindi.sessionTime">शाम 7:00 – 9:00 बजे (IST)</span>, कोच अभिषेक के साथ। सवाल LIVE पूछिए, डाउट वहीं क्लियर।</span></li>
                     <li><strong>अभ्यास + सर्टिफ़िकेट</strong><span>एडिट होने वाली वर्कशीट से अभ्यास; तीनों दिन पूरे करने पर सर्टिफ़िकेट।</span></li>
@@ -592,7 +584,7 @@
     <section class="b-section b-soft" id="vaada">
         <div class="b-wrap">
             <p class="b-eyebrow">हमारा वादा</p>
-            <h2><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span> में पूरा कोर्स। <span class="hl">आख़िर में कोई “असली कोर्स” नहीं बेचते।</span></h2>
+            <h2><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span> में पूरा कोर्स। <span class="hl">आख़िर में कोई “असली कोर्स” नहीं बेचते।</span></h2>
             <p class="b-sub">आजकल कई सस्ते वेबिनार सिर्फ़ ट्रेलर होते हैं – आधा सिखाते हैं और आख़िर में बड़ा कोर्स बेचते हैं। हम ऐसा नहीं करते।</p>
             <div class="b-vs b-vs-promise rv" role="table" aria-label="हमारा वादा">
                 <div class="b-vs-row b-vs-head" role="row"><span class="b-vs-them" role="columnheader">अक्सर सस्ते वेबिनार</span><span class="b-vs-us" role="columnheader">सुपर लर्नर एकेडमी</span></div>
@@ -638,13 +630,13 @@
                 </div>
                 <div class="b-price-right">
                     <p class="b-was">सामान्य कीमत <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
-                    <p class="b-now"><span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></p>
+                    <p class="b-now"><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
                     <p class="b-once">एक बार का भुगतान · कोई छिपा शुल्क नहीं</p>
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg b-btn-block" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg b-btn-block" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                     <p class="b-refund">🛡️ पूरी वर्कशॉप अटेंड करें – फ़ायदा न लगे तो सेशन ख़त्म होने के 24 घंटे के अंदर पूरा रिफ़ंड।</p>
                     <p class="b-limited">⚡ इस बैच में सीटें सीमित हैं</p>
                 </div>
-                <span class="b-sticker b-price-sticker" aria-hidden="true">सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span>!</span>
+                <span class="b-sticker b-price-sticker" aria-hidden="true">सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>!</span>
             </div>
         </div>
     </section>
@@ -710,7 +702,7 @@
                 <h2>अगला LIVE बैच इस शनिवार</h2>
                 <p>3 दिन, 6 घंटे, पढ़ने का एक नया तरीका। सीट अभी बुक करें।</p>
                 <div class="b-ctas">
-                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹455</span></a>
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
                     <a href="https://wa.me/919151726759" class="b-btn b-btn-outline-white b-btn-lg" data-bind-href="hindi.whatsappChat" target="_blank" rel="noopener noreferrer"><span data-bind="hindi.whatsappText">WhatsApp पर सवाल पूछें</span></a>
                 </div>
             </div>
@@ -745,7 +737,7 @@
 
     <!-- ========== STICKY CTA (mobile) ========== -->
     <div class="sticky-cta" aria-label="Registration call to action">
-        <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary sticky-cta-button" data-bind-href="registration.link"><span data-bind="hindi.stickyText">सीट बुक करें – ₹455</span></a>
+        <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary sticky-cta-button" data-bind-href="registration.link"><span data-bind="hindi.stickyText">सीट बुक करें – ₹99</span></a>
         <a href="https://wa.me/919151726759" class="b-sticky-wa" data-bind-href="hindi.whatsappChat" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp पर सवाल पूछें"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.8 13.6c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.8-.3-1.4-.5-2.4-1-4-3.5-4.1-3.7-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.8.8c.2.1.4.2.5.3.1.2.1.8-.1 1.4z"/></svg></a>
     </div>
 
@@ -753,6 +745,6 @@
 
     <script src="site-nav.js?v=1.1.0" defer></script>
     <script src="bright.js?v=1.0.0" defer></script>
-    <script src="script.js?v=1.0.9"></script>
+    <script src="script.js?v=1.0.9" defer></script>
 </body>
 </html>

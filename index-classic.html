@@ -16,26 +16,15 @@
     <meta property="og:url" content="https://www.superlearneracademy.in/">
     <meta property="og:image" content="https://www.superlearneracademy.in/Images/Your%20host.webp">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417193820"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-18417193820');
-    </script>
-
-    <!-- Google Analytics 4 - Super Learner Academy WEBSITE -->
+    <!-- Google tag (gtag.js): ONE library download serves both GA4 and Google Ads through two config calls
+         (loading gtag.js twice cost mobile speed). Keep both IDs here. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM45CDB7GK"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-
       gtag('js', new Date());
-
-      // GA4: Main Website
-      gtag('config', 'G-YM45CDB7GK');
+      gtag('config', 'G-YM45CDB7GK'); // GA4: Main Website
+      gtag('config', 'AW-18417193820'); // Google Ads (conversions, remarketing)
     </script>
 
     <!-- Favicon -->
@@ -47,7 +36,10 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Fonts load without blocking the first paint (display=swap shows text at once in a fallback font). -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@600;700&family=Lato:wght@400;700;900&display=swap"></noscript>
 
     <!-- Font Awesome 6.5 (loaded non-blocking - no icons appear above the fold) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -104,7 +96,7 @@
 
     <!-- ========== TOP BAR (Urgency Banner) ========== -->
     <div class="top-bar" aria-label="Urgency banner">
-<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">Every Saturday</span> &bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
+<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">Every Saturday</span> &bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
     </div>
 
     <!-- ========== SITE MENU (hamburger, top-right) ==========
@@ -160,10 +152,10 @@
                 </ul>
                 <div class="hero-price">
                     <span class="hero-price-strike"><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></span>
-                    <span class="hero-price-main">Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span></span>
+                    <span class="hero-price-main">Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span>
                 </div>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note hero-text-trust" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
                 <ul class="trust-strip">
@@ -295,7 +287,7 @@
                     <h3 class="cta-illustrated-title">More hours won't fix it. <span class="highlight-pink">A better method will.</span></h3>
                     <p class="cta-illustrated-text">In 3 LIVE sessions you learn how memory, focus and mindset actually work, and leave with a study system you can use on tonight's homework.</p>
                     <a href="#" class="cta-button" data-bind-href="registration.link">
-                        <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                        <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                     </a>
                     <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
                     <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
@@ -435,7 +427,7 @@
             <!-- CTA after 3-day curriculum -->
             <div class="section-cta">
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
             </div>
@@ -579,7 +571,7 @@
                  the point where a cold visitor has just seen who's teaching. -->
             <div class="section-cta">
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
             </div>
@@ -679,7 +671,7 @@
             <!-- CTA after testimonials / trust section -->
             <div class="section-cta">
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note trust-note-light" data-bind="registration.priceNote">One-time payment • No hidden fees • Certificate included</p>
             </div>
@@ -689,7 +681,7 @@
     <!-- ========== OUR PROMISE (USP): one low price = the full course, no upsell. Price comes from data.json ========== -->
     <section class="promise-section" id="our-promise">
         <div class="container">
-            <h2 class="section-title">The Full Course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">455</span>. <span class="highlight">Not a Sales Pitch.</span></h2>
+            <h2 class="section-title">The Full Course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>. <span class="highlight">Not a Sales Pitch.</span></h2>
             <p class="section-subtitle">Many low-cost webinars are a trailer: they teach half, then spend the end selling an expensive course. We don't.</p>
             <div class="promise-table" role="table" aria-label="Our promise">
                 <div class="promise-row promise-head" role="row"><span class="promise-them" role="columnheader">Typical low-cost webinar</span><span class="promise-us" role="columnheader">Super Learner Academy</span></div>
@@ -725,12 +717,12 @@
                 </div>
                 <p class="price-launch-label">Launch Price</p>
                 <div class="current-price">
-                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">455</span>
+                    <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">99</span>
                 </div>
                 <p class="pricing-note">One-time payment &bull; No hidden fees</p>
                 <p class="pricing-promise">✅ <span data-bind="promise.englishShort">The full course in one price · No upsell at the end</span></p>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="refund-note"><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
                 <p class="seats-left">⚡ Limited seats available for this batch</p>
@@ -858,7 +850,7 @@
                 <!-- FAQ Item 9 -->
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
-                        <span data-bind="faq.price.question">Why is it priced at ₹455 when it's worth ₹4999?</span>
+                        <span data-bind="faq.price.question">Why is it priced at ₹99 when it's worth ₹4999?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
                     </div>
                     <div class="faq-answer">
@@ -920,7 +912,7 @@
             <!-- CTA after FAQ -->
             <div class="section-cta">
                 <a href="#" class="cta-button" data-bind-href="registration.link">
-                    <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+                    <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note"><span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
                 <p class="trust-note">Attend the full workshop and you're covered by our 24-hour refund policy &mdash; see the refund question above.</p>
@@ -978,7 +970,7 @@
     <!-- ========== STICKY CTA ========== -->
     <div class="sticky-cta" aria-label="Registration call to action">
         <a href="#" class="cta-button sticky-cta-button" data-bind-href="registration.link">
-            <span data-bind="registration.buttonText">Reserve My Seat for ₹455</span>
+            <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
         </a>
     </div>
 
@@ -989,6 +981,6 @@
 
     <!-- Script -->
     <script src="site-nav.js?v=1.1.0" defer></script>
-    <script src="script.js?v=1.0.9"></script>
+    <script src="script.js?v=1.0.9" defer></script>
 </body>
 </html>

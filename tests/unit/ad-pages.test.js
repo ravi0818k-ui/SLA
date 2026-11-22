@@ -13,13 +13,14 @@ const { buildPage, prefixUrl } = require('../../scripts/build-ad-pages.js');
 const cfg = JSON.parse(read('ad-pages.json'));
 
 describe('ad-pages.json', () => {
-    it('lists ads-1 (English classic), ads-2 (Bright Mind), ads-3 (Hindi), ads-4 (parents), ads-5 (board)', () => {
+    it('lists ads-1 (English classic), ads-2 (Bright Mind), ads-3 (Hindi), ads-4 (parents), ads-5 (board), ads-6 (professionals)', () => {
         const byPath = Object.fromEntries(cfg.pages.map((p) => [p.path, p.source]));
         expect(byPath['ads-1']).toBe('index-classic.html');
         expect(byPath['ads-2']).toBe('index.html');
         expect(byPath['ads-3']).toBe('index-hi.html');
         expect(byPath['ads-4']).toBe('index-parents.html');
         expect(byPath['ads-5']).toBe('index-board.html');
+        expect(byPath['ads-6']).toBe('index-pro.html');
     });
     it('paths are unique, URL-safe and sources exist', () => {
         const paths = cfg.pages.map((p) => p.path);
@@ -166,6 +167,41 @@ describe('/ads-4/ source: parents page (Class 3-5, tuition vs exam)', () => {
     });
 });
 
+describe('/ads-6/ source: professionals page (laid off, preparing for the next job)', () => {
+    const html = read('index-pro.html');
+    it('leads with the professional situation and the "master any subject faster" promise of method', () => {
+        expect(data.pro.heroTitle).toMatch(/laid off/i);
+        expect(data.pro.heroTitle).toMatch(/next job/i);
+        expect(data.pro.heroTitle).toMatch(/master any subject faster/i);
+        expect(html).toMatch(/<html lang="en">/);
+        expect(html).toContain('id="watch-vs-interview"');
+        expect((html.match(/class="b-vs-row"/g) || []).length).toBeGreaterThanOrEqual(8);
+    });
+    it('uses the professionals illustration set (Images/story/16-19)', () => {
+        for (const f of ['16_laid-off-restart', '17_tutorial-overload', '18_interview-confident', '19_recall-system']) {
+            expect(html).toContain(`Images/story/${f}.svg`);
+            expect(existsSync(resolve(root, `Images/story/${f}.svg`))).toBe(true);
+        }
+        expect(existsSync(resolve(root, 'Images/story/og-pro.jpg'))).toBe(true);
+    });
+    it('binds to data.json "pro" and every key exists', () => {
+        expect(html).not.toMatch(/data-bind(?:-html|-href)?="(?:bright|board|parents|hindi)\./);
+        const keys = boundKeys(html, 'pro');
+        expect(keys.length).toBeGreaterThan(10);
+        for (const k of new Set(keys)) expect(typeof data.pro[k]).toBe('string');
+    });
+    it('is honest: no job, offer, salary or placement promise, and says the sessions are Hinglish', () => {
+        const text = visibleText(html);
+        expect(text).toMatch(/don't promise jobs, interview calls, offers or salaries/);
+        expect(text).toMatch(/don't offer placement/);
+        expect(text).toMatch(/Hinglish \(Hindi \+ English\)/);
+        expect(text + JSON.stringify(data.pro)).not.toMatch(/guarantee|placement assistance|get hired in|\d+\s*%|100 ?percent|salary hike/i);
+    });
+    it('FAQ JSON-LD matches the visible FAQ count', () => {
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+    });
+});
+
 describe('USP on every ad page: one low price = the full course, no upsell', () => {
     for (const page of cfg.pages) {
         const html = read(page.source);
@@ -190,6 +226,20 @@ describe('USP on every ad page: one low price = the full course, no upsell', () 
     it('script.js keeps the JSON-LD offer price in sync with data.json', () => {
         expect(read('script.js')).toMatch(/function syncOfferPrice\(data\)/);
     });
+});
+
+describe('page speed basics on every ad page source', () => {
+    for (const page of cfg.pages) {
+        const html = read(page.source);
+        it(`${page.source} loads gtag.js once (GA4 + Ads configs), fonts without blocking, script.js deferred`, () => {
+            expect((html.match(/googletagmanager\.com\/gtag\/js/g) || []).length).toBe(1);
+            expect(html).toContain("gtag('config', 'G-YM45CDB7GK')");
+            expect(html).toContain("gtag('config', 'AW-18417193820')");
+            expect(html).not.toMatch(/<link href="https:\/\/fonts\.googleapis\.com\/css2[^>]*rel="stylesheet">/);
+            expect(html).toMatch(/fonts\.googleapis\.com\/css2[^"]*" media="print" onload="this\.media='all'"/);
+            expect(html).toMatch(/<script src="script\.js\?v=[0-9.]+" defer><\/script>/);
+        });
+    }
 });
 
 describe('script.js siteRoot()', () => {

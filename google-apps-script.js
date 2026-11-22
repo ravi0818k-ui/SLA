@@ -35,7 +35,7 @@ function doGet(e) {
         "registration": {
           "closeDate": data[1] || "",
           "buttonText": data[2] || "Register Now",
-          "price": data[3] ? String(data[3]) : "455",
+          "price": data[3] ? String(data[3]) : "99",
           "originalPrice": data[4] ? String(data[4]) : "4999",
           "currency": data[5] || "₹",
           "paymentLink": data[6] || "#"
