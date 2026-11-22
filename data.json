@@ -63,13 +63,19 @@
         "expiredMessage": "Registration Closed!",
         "closesText": "Saturday at 7:00 PM IST"
     },
+    "promise": {
+        "_help": "USP shown on every ad page: one low price buys the FULL course, and nothing is sold at the end. The price comes from registration.price, so change the price only there.",
+        "hinglishShort": "{{registration.currency}}{{registration.price}} mein poora course · End mein koi extra course nahi bechte",
+        "hindiShort": "{{registration.currency}}{{registration.price}} में पूरा कोर्स · आख़िर में कोई और कोर्स नहीं बेचते",
+        "englishShort": "The full course for {{registration.currency}}{{registration.price}} · No upsell at the end"
+    },
     "registration": {
         "price": "455",
         "originalPrice": "4999",
         "currency": "₹",
         "link": "https://superprofile.bio/e/onmob4mz",
-        "buttonText": "Reserve My Seat for ₹455",
-        "priceHeadline": "Join for just ₹455",
+        "buttonText": "Reserve My Seat for {{registration.currency}}{{registration.price}}",
+        "priceHeadline": "Join for just {{registration.currency}}{{registration.price}}",
         "priceNote": "One-time payment • No hidden fees • Certificate included",
         "refundNote": "Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below."
     },
@@ -105,7 +111,11 @@
         },
         "price": {
             "question": "Why is it priced at {{registration.currency}}{{registration.price}} when it's worth {{registration.currency}}{{registration.originalPrice}}?",
-            "answer": "{{registration.currency}}{{registration.price}} is a limited-time launch price to make this accessible to as many students as possible. There are no hidden fees — this one-time payment covers all 3 LIVE days, the editable worksheets, WhatsApp community access, and your completion certificate."
+            "answer": "We keep the price low so any student can join. It is the full course, not a trailer: there are no hidden fees and no upsell. This one payment covers all 3 LIVE days, the editable worksheets, WhatsApp community access and your completion certificate."
+        },
+        "noUpsell": {
+            "question": "Will you try to sell me another course at the end?",
+            "answer": "No. This is the full course: every technique from all 3 days, the worksheets, the certificate and the WhatsApp community are included in the one payment. There is no sales pitch at the end of the sessions."
         }
     },
     "analytics": {

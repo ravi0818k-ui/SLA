@@ -166,6 +166,32 @@ describe('/ads-4/ source: parents page (Class 3-5, tuition vs exam)', () => {
     });
 });
 
+describe('USP on every ad page: one low price = the full course, no upsell', () => {
+    for (const page of cfg.pages) {
+        const html = read(page.source);
+        it(`${page.source} shows the promise section and the no-upsell FAQ`, () => {
+            expect(html).toMatch(/id="(?:vaada|our-promise)"/);
+            expect(html).toMatch(/upsell|अपसेल/i);
+            expect(html).toMatch(/promise\.(?:hinglish|hindi|english)Short/);
+        });
+        it(`${page.source} takes every visible price from data.json (change the price only there)`, () => {
+            const body = html.split('<body')[1].replace(/<script[\s\S]*?<\/script>/g, '');
+            // the only literal price allowed is fallback text inside an element bound to data.json
+            const loose = body.replace(/<(\w+)[^>]*data-bind(?:-html)?="[^"]+"[^>]*>[^<]*<\/\1>/g, '').match(/₹\s?\d{2,}/g) || [];
+            expect(loose).toEqual([]);
+            expect(html).not.toMatch(/<title>[^<]*₹\d/);
+        });
+    }
+    it('data.json has the promise copy and templated (not hard-coded) prices', () => {
+        for (const k of ['hinglishShort', 'hindiShort', 'englishShort']) expect(data.promise[k]).toContain('{{registration.price}}');
+        expect(data.registration.buttonText).toContain('{{registration.price}}');
+        expect(JSON.stringify(data)).not.toMatch(/₹\s?\d/);
+    });
+    it('script.js keeps the JSON-LD offer price in sync with data.json', () => {
+        expect(read('script.js')).toMatch(/function syncOfferPrice\(data\)/);
+    });
+});
+
 describe('script.js siteRoot()', () => {
     it('reads data-root only when it is a ../ chain', () => {
         const fn = new Function(read('script.js'));

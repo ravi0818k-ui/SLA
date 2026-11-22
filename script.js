@@ -182,6 +182,8 @@ function showProtectionAlert() {
             }
         });
 
+        syncOfferPrice(data);
+
         // CTA link handling (Requirement 4.5):
         // If href is empty or not a valid URL, prevent navigation on click
         handleInvalidCTALinks();
@@ -739,6 +741,24 @@ function showProtectionAlert() {
         var progressTrack = document.querySelector('.progress-bar-track');
         if (progressBlock) progressBlock.style.display = 'none';
         if (progressTrack) progressTrack.style.display = 'none';
+    }
+
+    /**
+     * Keeps the structured-data offer price (Course JSON-LD) equal to data.json registration.price,
+     * so the price only ever needs changing in data.json.
+     */
+    function syncOfferPrice(data) {
+        var price = data && data.registration && data.registration.price;
+        if (!price) return;
+        document.querySelectorAll('script[type="application/ld+json"]').forEach(function (s) {
+            try {
+                var j = JSON.parse(s.textContent);
+                if (j && j.offers && j.offers.price !== undefined && String(j.offers.price) !== String(price)) {
+                    j.offers.price = String(price);
+                    s.textContent = JSON.stringify(j, null, 2);
+                }
+            } catch (e) { /* leave malformed blocks alone */ }
+        });
     }
 
     /**

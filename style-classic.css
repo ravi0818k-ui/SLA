@@ -3202,3 +3202,23 @@ object {
     .science-icon img { width: 96px; height: 96px; }
     .art-label { font-size: 0.8rem; padding: 5px 10px; }
 }
+
+/* USP: "full course for one low price, no upsell" (#our-promise) */
+.promise-section { padding: var(--section-padding); background: #FFF8FA; text-align: center; }
+.promise-table { max-width: 860px; margin: 32px auto 0; border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--card-shadow); background: #fff; text-align: left; }
+.promise-row { display: grid; grid-template-columns: 1fr 1fr; }
+.promise-row + .promise-row { border-top: 1px solid #F0E3E8; }
+.promise-row > span { position: relative; padding: 14px 18px 14px 44px; font-family: var(--font-body); font-size: 1rem; }
+.promise-row > span::before { position: absolute; left: 16px; top: 14px; font-weight: 700; }
+.promise-them { color: #777; background: #FAFAFA; }
+.promise-them::before { content: "✗"; color: var(--red-orange); }
+.promise-us { font-weight: 700; color: var(--deep-learning-blue); border-left: 2px solid #F0E3E8; }
+.promise-us::before { content: "✓"; color: var(--growth-green); }
+.promise-head > span { font-family: var(--font-heading); font-weight: 800; padding-left: 18px; }
+.promise-head > span::before { content: none; }
+.promise-head > .promise-them { background: #EEE; }
+.promise-head > .promise-us { background: var(--cta-gradient); color: #fff; }
+.promise-note { margin-top: 22px; font-size: 1.1rem; color: var(--deep-learning-blue); }
+.pricing-promise { font-weight: 700; color: var(--growth-green); margin: 6px 0 14px; }
+@media (max-width: 600px) { .promise-row > span { padding: 12px 10px 12px 32px; font-size: .9rem; } .promise-row > span::before { left: 10px; top: 12px; } .promise-head > span { padding-left: 10px; } }
+.promise-section .highlight { color: var(--memory-orange); }
