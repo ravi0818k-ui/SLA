@@ -32,7 +32,7 @@
         "whatsappChat": "https://wa.me/919151726759?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20Super%20Learner%20Academy%20%E0%A4%95%E0%A5%80%203%20%E0%A4%A6%E0%A4%BF%E0%A4%A8%20%E0%A4%95%E0%A5%80%20%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%95%E0%A4%B6%E0%A5%89%E0%A4%AA%20%E0%A4%95%E0%A5%87%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%9C%E0%A4%BE%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%9A%E0%A4%BE%E0%A4%B9%E0%A4%BF%E0%A4%8F%E0%A5%A4"
     },
     "board": {
-        "_help": "Copy for the board-exam page index-board.html -> /ads-4/. Same keys as \"bright\". Aspiration, never a promise of rank or marks.",
+        "_help": "Copy for the board-exam page index-board.html -> /ads-5/. Same keys as \"bright\". Aspiration, never a promise of rank or marks.",
         "topBar": "Board Exam Special · 3 din LIVE",
         "dateRange": "Har Shanivaar",
         "heroEyebrow": "CBSE & State Board · Class 9–12 · LIVE on Zoom",
@@ -43,6 +43,19 @@
         "trustLine": "UPI / Card se payment · 24 ghante refund policy · Certificate milega",
         "whatsappText": "WhatsApp par sawal poochein",
         "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mujhe%20board%20exam%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye."
+    },
+    "parents": {
+        "_help": "Copy for the parents page index-parents.html -> /ads-4/ (parents of Class 3-5 children: scores at home tuition, not in the exam). Same keys as \"bright\". Never promise marks or numbers.",
+        "topBar": "Parents Special · 3 din LIVE",
+        "dateRange": "Har Shanivaar",
+        "heroEyebrow": "Parents ke liye · Class 3–5 ke bachche · LIVE on Zoom",
+        "heroTitle": "Tuition mein sab aata hai… <span class=\"hl\">toh exam mein kyun nahi likh paata?</span>",
+        "heroSub": "School bhi, tuition bhi, aur aap roz saath baithte hain – phir bhi report card wahi. Kami mehnat mein nahi, yaad rakhne ke tareeke mein hai. 3 din ke LIVE workshop mein seekhiye bachche ko khud se yaad karke likhna kaise sikhayein.",
+        "buttonText": "Abhi Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "stickyText": "Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "trustLine": "UPI / Card se payment · 24 ghante refund policy · Certificate milega",
+        "whatsappText": "WhatsApp par sawal poochein",
+        "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mere%20bachche%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye.%20Woh%20Class%20___%20mein%20hai."
     },
     "countdown": {
         "weekly": { "day": 6, "time": "19:00" },

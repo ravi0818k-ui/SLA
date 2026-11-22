@@ -13,12 +13,13 @@ const { buildPage, prefixUrl } = require('../../scripts/build-ad-pages.js');
 const cfg = JSON.parse(read('ad-pages.json'));
 
 describe('ad-pages.json', () => {
-    it('lists ads-1 (English classic) and ads-2 (Bright Mind)', () => {
+    it('lists ads-1 (English classic), ads-2 (Bright Mind), ads-3 (Hindi), ads-4 (parents), ads-5 (board)', () => {
         const byPath = Object.fromEntries(cfg.pages.map((p) => [p.path, p.source]));
         expect(byPath['ads-1']).toBe('index-classic.html');
         expect(byPath['ads-2']).toBe('index.html');
         expect(byPath['ads-3']).toBe('index-hi.html');
-        expect(byPath['ads-4']).toBe('index-board.html');
+        expect(byPath['ads-4']).toBe('index-parents.html');
+        expect(byPath['ads-5']).toBe('index-board.html');
     });
     it('paths are unique, URL-safe and sources exist', () => {
         const paths = cfg.pages.map((p) => p.path);
@@ -105,7 +106,7 @@ describe('/ads-3/ source: Hindi (Devanagari) page', () => {
     });
 });
 
-describe('/ads-4/ source: board exam page', () => {
+describe('/ads-5/ source: board exam page', () => {
     const html = read('index-board.html');
     it('leads with the board-exam topper message and opens on the CBSE tab', () => {
         expect(data.board.heroTitle).toMatch(/topper/i);
@@ -122,6 +123,43 @@ describe('/ads-4/ source: board exam page', () => {
     it('never promises a rank or marks (aspiration only)', () => {
         const text = visibleText(html) + JSON.stringify(data.board);
         expect(text).not.toMatch(/guarantee|pakka topper|\d+\s*%|100 ?percent|rank \d/i);
+    });
+    it('FAQ JSON-LD matches the visible FAQ count', () => {
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+    });
+});
+
+describe('/ads-4/ source: parents page (Class 3-5, tuition vs exam)', () => {
+    const html = read('index-parents.html');
+    it('leads with the parent question: scores at tuition, not in the exam', () => {
+        expect(data.parents.heroTitle).toMatch(/tuition/i);
+        expect(data.parents.heroTitle).toMatch(/exam/i);
+        expect(data.parents.heroEyebrow).toMatch(/Class 3/);
+        expect(html).toContain('id="farq"');
+        expect((html.match(/class="b-vs-row"/g) || []).length).toBeGreaterThanOrEqual(4);
+    });
+    it('uses the parents illustration set (Images/story/11-15)', () => {
+        for (const f of ['11_report-card-worry', '12_tuition-vs-exam', '13_teach-back-at-home', '14_kid-exam-blank', '15_kid-exam-confident']) {
+            expect(html).toContain(`Images/story/${f}.svg`);
+            expect(existsSync(resolve(root, `Images/story/${f}.svg`))).toBe(true);
+        }
+    });
+    it('binds to data.json "parents" and every key exists', () => {
+        expect(html).not.toMatch(/data-bind(?:-html|-href)?="(?:bright|board)\./);
+        expect(visibleText(html)).not.toMatch(/board|NCERT|CBSE/i);
+        const keys = boundKeys(html, 'parents');
+        expect(keys.length).toBeGreaterThan(10);
+        for (const k of new Set(keys)) expect(typeof data.parents[k]).toBe('string');
+    });
+    it('is honest about age: says Class 3-5 attend with a parent and there is no separate kids batch', () => {
+        const faq = visibleText(html);
+        expect(faq).toMatch(/Class 3 ya 4/);
+        expect(faq).toMatch(/parent bachche ke saath baith kar attend/i);
+        expect(faq).toMatch(/alag batch nahi/);
+    });
+    it('never promises marks or numbers', () => {
+        const text = visibleText(html) + JSON.stringify(data.parents);
+        expect(text).not.toMatch(/guarantee|pakka|\d+\s*%|100 ?percent|rank \d|topper/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
         expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);

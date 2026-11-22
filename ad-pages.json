@@ -19,8 +19,13 @@
         },
         {
             "path": "ads-4",
+            "source": "index-parents.html",
+            "label": "Parents of Class 3-5 children: 'tuition mein aata hai, exam mein kyun nahi?', Hinglish, Bright Mind"
+        },
+        {
+            "path": "ads-5",
             "source": "index-board.html",
-            "label": "Board exam topper angle (CBSE / State Board, Class 9-12), Hinglish, Bright Mind"
+            "label": "Board exam topper angle (CBSE / State Board, Class 9-12), Hinglish, Bright Mind (was /ads-4/ until 2026-11-22)"
         }
     ]
 }
