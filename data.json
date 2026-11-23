@@ -18,7 +18,7 @@
         "_showTestimonialsHelp": "Keep false until the review cards in index.html (#reviews) hold REAL, verified student reviews."
     },
     "hindi": {
-        "_help": "Copy for the Hindi (Devanagari) page index-hi.html -> /ads-3/. Same keys as \"bright\".",
+        "_help": "Copy for the Hindi (Devanagari) page index-hi.html -> /hindi-ads-3-students/. Same keys as \"bright\".",
         "topBar": "3 दिन की LIVE वर्कशॉप",
         "dateRange": "हर शनिवार",
         "sessionTime": "शाम 7:00 – 9:00 बजे (IST)",
@@ -32,7 +32,7 @@
         "whatsappChat": "https://wa.me/919151726759?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20Super%20Learner%20Academy%20%E0%A4%95%E0%A5%80%203%20%E0%A4%A6%E0%A4%BF%E0%A4%A8%20%E0%A4%95%E0%A5%80%20%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%95%E0%A4%B6%E0%A5%89%E0%A4%AA%20%E0%A4%95%E0%A5%87%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%9C%E0%A4%BE%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%9A%E0%A4%BE%E0%A4%B9%E0%A4%BF%E0%A4%8F%E0%A5%A4"
     },
     "board": {
-        "_help": "Copy for the board-exam page index-board.html -> /ads-5/. Same keys as \"bright\". Aspiration, never a promise of rank or marks.",
+        "_help": "Copy for the board-exam page index-board.html -> /board-ads-5-topper/. Same keys as \"bright\". Aspiration, never a promise of rank or marks.",
         "topBar": "Board Exam Special · 3 din LIVE",
         "dateRange": "Har Shanivaar",
         "heroEyebrow": "CBSE & State Board · Class 9–12 · LIVE on Zoom",
@@ -45,7 +45,7 @@
         "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mujhe%20board%20exam%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye."
     },
     "parents": {
-        "_help": "Copy for the parents page index-parents.html -> /ads-4/ (parents of Class 3-5 children: scores at home tuition, not in the exam). Same keys as \"bright\". Never promise marks or numbers.",
+        "_help": "Copy for the parents page index-parents.html -> /parents-ads-4-tuition-vs-exam/ (parents of Class 3-5 children: scores at home tuition, not in the exam). Same keys as \"bright\". Never promise marks or numbers.",
         "topBar": "Parents Special · 3 din LIVE",
         "dateRange": "Har Shanivaar",
         "heroEyebrow": "Parents ke liye · Class 3–5 ke bachche · LIVE on Zoom",
@@ -58,7 +58,7 @@
         "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mere%20bachche%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye.%20Woh%20Class%20___%20mein%20hai."
     },
     "pro": {
-        "_help": "Copy for the professionals page index-pro.html -> /ads-6/ (laid off / between jobs, must learn new skills fast). English copy; the sessions are Hinglish. Same keys as \"bright\". Never promise a job, interview call, offer, salary or placement.",
+        "_help": "Copy for the professionals page index-pro.html -> /career-ads-6-professionals/ (laid off / between jobs, must learn new skills fast). English copy; the sessions are Hinglish. Same keys as \"bright\". Never promise a job, interview call, offer, salary or placement.",
         "topBar": "For Professionals · 3-day LIVE workshop",
         "dateRange": "Every Saturday",
         "heroEyebrow": "For professionals between jobs · LIVE on Zoom",
@@ -69,6 +69,14 @@
         "trustLine": "UPI / Card · 24-hour refund policy · Certificate included",
         "whatsappText": "Ask on WhatsApp",
         "whatsappChat": "https://wa.me/919151726759?text=Hi%2C%20I%27m%20a%20professional%20preparing%20for%20my%20next%20job.%20I%27d%20like%20to%20know%20more%20about%20the%203-day%20Super%20Learner%20Academy%20workshop."
+    },
+    "simple": {
+        "_help": "Copy for the simple one-column page index-simple.html -> /simple-ads-7-everyone/ (all audiences, competitor-style webinar sign-up page, trust palette in simple.css). English; the sessions are Hinglish. No crossed-out 'regular price' on this page.",
+        "heroEyebrow": "3-Day LIVE Workshop · Every Saturday",
+        "heroTitle": "Learn faster. <span class=\"hl\">Remember what you study.</span>",
+        "heroSub": "Simple, research-backed methods for memory, focus and revision – for students, parents and working professionals.",
+        "buttonText": "Register Now for {{registration.currency}}{{registration.price}}",
+        "whatsappChat": "https://wa.me/919151726759?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20the%203-day%20Super%20Learner%20Academy%20workshop."
     },
     "countdown": {
         "weekly": {

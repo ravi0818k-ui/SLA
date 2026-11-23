@@ -1,36 +1,62 @@
 {
-    "_help": "Ad landing pages, one folder per path (superlearneracademy.in/ads-1/ ...). Each page is a GENERATED copy of a source page: edit the source, then run `npm run build:ads` and commit the result. To add a new path (e.g. an English or AI-training audience), add an entry here, run the build, and point that ad campaign at the new URL. Ad pages are noindex (no duplicate content in Google Search) and have no design-switch redirect: each path always shows its own page.",
+    "_help": "Ad landing pages, one folder per path. Each page is a GENERATED copy of a source page: edit the source, then run `npm run build:ads` and commit the result. Paths are meaningful names (angle-ads-N-audience, e.g. /parents-ads-4-tuition-vs-exam/); `aliases` are older URLs (the original /ads-N/) that get an identical copy whose canonical points at the main path, so ads already running never break. To add a page, add an entry here, run the build, and point the campaign at the new URL. Ad pages are noindex and have no design-switch redirect.",
     "baseUrl": "https://www.superlearneracademy.in",
     "pages": [
         {
-            "path": "ads-1",
+            "path": "english-ads-1-students",
             "source": "index-classic.html",
+            "aliases": [
+                "ads-1"
+            ],
             "label": "English, classic design (default English ad page)"
         },
         {
-            "path": "ads-2",
+            "path": "hinglish-ads-2-students",
             "source": "index.html",
+            "aliases": [
+                "ads-2"
+            ],
             "label": "Hinglish, Bright Mind design"
         },
         {
-            "path": "ads-3",
+            "path": "hindi-ads-3-students",
             "source": "index-hi.html",
+            "aliases": [
+                "ads-3"
+            ],
             "label": "Hindi (Devanagari), Bright Mind design, Kripa headings"
         },
         {
-            "path": "ads-4",
+            "path": "parents-ads-4-tuition-vs-exam",
             "source": "index-parents.html",
+            "aliases": [
+                "ads-4"
+            ],
             "label": "Parents of Class 3-5 children: 'tuition mein aata hai, exam mein kyun nahi?', Hinglish, Bright Mind"
         },
         {
-            "path": "ads-5",
+            "path": "board-ads-5-topper",
             "source": "index-board.html",
+            "aliases": [
+                "ads-5"
+            ],
             "label": "Board exam topper angle (CBSE / State Board, Class 9-12), Hinglish, Bright Mind (was /ads-4/ until 2026-11-22)"
         },
         {
-            "path": "ads-6",
+            "path": "career-ads-6-professionals",
             "source": "index-pro.html",
+            "aliases": [
+                "ads-6"
+            ],
             "label": "Professionals between jobs: 'laid off? learn how to master any subject faster', English copy, Bright Mind (added 2026-11-22)"
+        },
+        {
+            "path": "simple-ads-7-everyone",
+            "source": "index-simple.html",
+            "aliases": [
+                "ads-7"
+            ],
+            "label": "Simple one-column page for all audiences (competitor-style webinar sign-up), English, trust palette (simple.css), added 2026-11-23"
         }
     ]
 }

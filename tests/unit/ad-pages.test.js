@@ -1,5 +1,5 @@
 /**
- * Ad landing pages (/ads-1/, /ads-2/ ...): generated copies of a source page, listed in ad-pages.json.
+ * Ad landing pages (/english-ads-1-students/ ... with the old /ads-N/ URLs kept as aliases): generated copies of a source page, listed in ad-pages.json.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
@@ -13,17 +13,26 @@ const { buildPage, prefixUrl } = require('../../scripts/build-ad-pages.js');
 const cfg = JSON.parse(read('ad-pages.json'));
 
 describe('ad-pages.json', () => {
-    it('lists ads-1 (English classic), ads-2 (Bright Mind), ads-3 (Hindi), ads-4 (parents), ads-5 (board), ads-6 (professionals)', () => {
-        const byPath = Object.fromEntries(cfg.pages.map((p) => [p.path, p.source]));
-        expect(byPath['ads-1']).toBe('index-classic.html');
-        expect(byPath['ads-2']).toBe('index.html');
-        expect(byPath['ads-3']).toBe('index-hi.html');
-        expect(byPath['ads-4']).toBe('index-parents.html');
-        expect(byPath['ads-5']).toBe('index-board.html');
-        expect(byPath['ads-6']).toBe('index-pro.html');
+    it('gives every page a meaningful path and keeps the old /ads-N/ URL as an alias', () => {
+        const bySource = Object.fromEntries(cfg.pages.map((p) => [p.source, p]));
+        const want = { 'index-classic.html': ['english-ads-1-students', 'ads-1'], 'index.html': ['hinglish-ads-2-students', 'ads-2'],
+            'index-hi.html': ['hindi-ads-3-students', 'ads-3'], 'index-parents.html': ['parents-ads-4-tuition-vs-exam', 'ads-4'],
+            'index-board.html': ['board-ads-5-topper', 'ads-5'], 'index-pro.html': ['career-ads-6-professionals', 'ads-6'],
+            'index-simple.html': ['simple-ads-7-everyone', 'ads-7'] };
+        for (const [src, [p, alias]] of Object.entries(want)) {
+            expect(bySource[src].path).toBe(p);
+            expect(bySource[src].aliases).toContain(alias);
+        }
+    });
+    it('every alias folder is an identical, up-to-date copy whose canonical is the main path', () => {
+        for (const page of cfg.pages) for (const alias of page.aliases || []) {
+            const main = read(`${page.path}/index.html`);
+            expect(read(`${alias}/index.html`)).toBe(main);
+            expect(main).toContain(`<link rel="canonical" href="${cfg.baseUrl}/${page.path}/">`);
+        }
     });
     it('paths are unique, URL-safe and sources exist', () => {
-        const paths = cfg.pages.map((p) => p.path);
+        const paths = cfg.pages.flatMap((p) => [p.path].concat(p.aliases || []));
         expect(new Set(paths).size).toBe(paths.length);
         for (const p of cfg.pages) {
             expect(p.path).toMatch(/^[a-z0-9-]+$/);
@@ -196,6 +205,31 @@ describe('/ads-6/ source: professionals page (laid off, preparing for the next j
         expect(text).toMatch(/don't offer placement/);
         expect(text).toMatch(/Hinglish \(Hindi \+ English\)/);
         expect(text + JSON.stringify(data.pro)).not.toMatch(/guarantee|placement assistance|get hired in|\d+\s*%|100 ?percent|salary hike/i);
+    });
+    it('FAQ JSON-LD matches the visible FAQ count', () => {
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+    });
+});
+
+describe('/ads-7/ source: simple one-column page', () => {
+    const html = read('index-simple.html');
+    it('stays short and simple: one column, few sections, own light stylesheet', () => {
+        expect((html.match(/<section/g) || []).length).toBeLessThanOrEqual(8);
+        expect(html).toMatch(/href="simple\.css\?v=/);
+        expect(html).not.toMatch(/bright\.css/);
+    });
+    it('uses the trust palette and shows one honest price (no crossed-out regular price)', () => {
+        const css = read('simple.css');
+        for (const c of ['--navy', '--green', '--blue']) expect(css).toContain(c);
+        expect(html).not.toMatch(/originalPrice|<s>/);
+    });
+    it('binds to data.json "simple" and every key exists', () => {
+        const keys = boundKeys(html, 'simple');
+        expect(keys.length).toBeGreaterThan(4);
+        for (const k of new Set(keys)) expect(typeof data.simple[k]).toBe('string');
+    });
+    it('never promises marks, ranks or jobs', () => {
+        expect(visibleText(html) + JSON.stringify(data.simple)).not.toMatch(/guarantee|\d+\s*%|100 ?percent|10x/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
         expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Builds the ad landing pages listed in ad-pages.json (e.g. /ads-1/, /ads-2/).
+ * Builds the ad landing pages listed in ad-pages.json (e.g. /parents-ads-4-tuition-vs-exam/), plus a copy at each
+ * alias (the original /ads-N/ URLs) so ads that still point there keep working.
  *
  * GitHub Pages has no URL rewrites, so each path is a real folder holding a copy of its source page.
  * The copy is adjusted so it works one folder deep:
@@ -81,15 +82,19 @@ function buildAll(opts) {
         if (!/^[a-z0-9-]+$/.test(page.path)) throw new Error('Bad path in ad-pages.json: ' + page.path);
         const src = fs.readFileSync(path.join(ROOT, page.source), 'utf-8');
         const html = buildPage(src, page, cfg);
-        const file = path.join(ROOT, page.path, 'index.html');
-        const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf-8') : null;
-        if (current !== html) {
-            stale.push(page.path);
-            if (!opts.check) {
-                fs.mkdirSync(path.dirname(file), { recursive: true });
-                fs.writeFileSync(file, html, 'utf-8');
+        // the main path plus any aliases (older URLs such as /ads-1/): identical copies, canonical = main path
+        [page.path].concat(page.aliases || []).forEach(function (dir) {
+            if (!/^[a-z0-9-]+$/.test(dir)) throw new Error('Bad alias in ad-pages.json: ' + dir);
+            const file = path.join(ROOT, dir, 'index.html');
+            const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf-8') : null;
+            if (current !== html) {
+                stale.push(dir);
+                if (!opts.check) {
+                    fs.mkdirSync(path.dirname(file), { recursive: true });
+                    fs.writeFileSync(file, html, 'utf-8');
+                }
             }
-        }
+        });
     });
     return stale;
 }

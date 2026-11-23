@@ -1,0 +1,120 @@
+/* Simple one-column ad page (/ads-7/, index-simple.html). Trust palette:
+   navy = authority and stability, calm blue = clarity, lots of white = honesty,
+   green = "safe to pay" (buttons, checks, guarantee), sunshine = attention, used only for the price and urgency. */
+:root {
+    --navy: #0B2545; --navy-2: #13315C; --blue: #1E56D6; --blue-soft: #EAF1FF; --bg: #F5F8FD;
+    --green: #15A05A; --green-d: #0E7D45; --green-soft: #E6F6EE; --sun: #FFC93C; --sun-soft: #FFF4D2;
+    --ink: #14213D; --muted: #55607A; --line: #DCE4F2; --white: #FFFFFF;
+    --r: 16px; --shadow: 0 6px 24px rgba(11, 37, 69, .08);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; color: var(--navy); }
+h2 { font-size: 1.45rem; text-align: center; }
+.s-wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+/* top bar: logo + next-batch countdown */
+.s-top { background: var(--navy); color: var(--white); position: sticky; top: 0; z-index: 20; }
+.s-top .s-wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
+.s-logo img { width: 150px; }
+.s-count { display: flex; align-items: center; gap: 10px; font-size: .72rem; }
+.s-count p { margin: 0; opacity: .85; text-align: right; line-height: 1.25; }
+.s-timer { display: flex; gap: 6px; }
+.s-timer div { text-align: center; min-width: 34px; }
+.s-timer span { display: block; font-weight: 700; font-size: 1.05rem; color: var(--sun); line-height: 1.1; }
+.s-timer small { font-size: .58rem; opacity: .8; text-transform: uppercase; letter-spacing: .04em; }
+.s-expired { margin: 0; font-weight: 600; color: var(--sun); }
+
+/* sections */
+.s-sec { padding: 36px 0; }
+.s-white { background: var(--white); }
+.s-card { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
+
+/* hero */
+.s-hero { background: linear-gradient(180deg, var(--blue-soft), var(--bg)); padding: 28px 0 32px; text-align: center; }
+.s-tag { display: inline-block; background: var(--sun-soft); color: var(--navy); border: 1.5px solid var(--sun); border-radius: 999px; padding: 4px 14px; font-size: .8rem; font-weight: 600; margin: 0 0 14px; }
+.s-hero h1 { font-size: clamp(1.75rem, 6vw, 2.5rem); font-weight: 700; letter-spacing: -.01em; }
+.s-hero h1 .hl { color: var(--blue); }
+.s-lead { color: var(--muted); font-size: 1.02rem; margin: 0 auto 18px; max-width: 560px; }
+.s-price { display: inline-flex; align-items: baseline; gap: 10px; background: var(--white); border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 18px; margin: 0 0 12px; }
+.s-price strong { font-size: 2.5rem; color: var(--navy); line-height: 1; }
+.s-price span { color: var(--muted); font-size: .9rem; }
+.s-promise { display: block; width: fit-content; margin: 0 auto 18px; background: var(--green-soft); color: var(--green-d); border-radius: 10px; padding: 8px 14px; font-weight: 600; font-size: .9rem; }
+.s-trust { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; color: var(--muted); font-size: .82rem; }
+
+/* buttons: green = safe, go */
+.s-btn { display: inline-block; background: var(--green); color: var(--white); font-weight: 700; font-size: 1.05rem; text-decoration: none; padding: 15px 30px; border-radius: 12px; box-shadow: 0 6px 0 var(--green-d); transition: transform .12s ease, box-shadow .12s ease; }
+.s-btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 var(--green-d); }
+.s-btn:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.s-btn-block { display: block; text-align: center; }
+.s-center { text-align: center; }
+.s-note { text-align: center; color: var(--muted); font-size: .8rem; margin: 10px 0 0; }
+
+/* coach intro */
+.s-coach { display: flex; gap: 16px; align-items: center; padding: 16px; margin-top: 24px; text-align: left; }
+.s-coach img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 3px solid var(--blue-soft); flex: none; }
+.s-coach h3 { font-size: 1.05rem; margin: 0 0 2px; }
+.s-coach p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+/* date / time */
+.s-when { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; border: 2px solid var(--navy); }
+.s-when div { padding: 16px 8px; }
+.s-when div + div { border-left: 1.5px solid var(--line); }
+.s-when b { display: block; color: var(--navy); font-size: .98rem; }
+.s-when small { color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; }
+
+/* learn list */
+.s-list { list-style: none; padding: 0; margin: 18px 0 22px; display: grid; gap: 10px; }
+.s-list li { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: var(--white); border: 1.5px solid var(--line); border-left: 4px solid var(--blue); border-radius: 12px; }
+.s-list img { width: 40px; height: 40px; flex: none; }
+.s-list b { color: var(--navy); }
+
+/* who should join */
+.s-who { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0 22px; }
+.s-who figure { margin: 0; background: var(--white); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; text-align: center; }
+.s-who img { aspect-ratio: 4 / 3; object-fit: cover; background: var(--bg); }
+.s-who figcaption { padding: 8px 4px; font-weight: 600; font-size: .82rem; color: var(--navy); }
+
+/* promise */
+.s-promise-box { padding: 22px 20px; border: 2px solid var(--green); background: var(--white); }
+.s-promise-box h2 { margin-bottom: 6px; }
+.s-checks { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+.s-checks li { position: relative; padding-left: 30px; }
+.s-checks li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--white); font-size: .75rem; font-weight: 700; display: grid; place-items: center; }
+
+/* FAQ (script.js toggles .faq-item.active) */
+.s-faq { display: grid; gap: 8px; margin-top: 18px; }
+.faq-item { background: var(--white); border: 1.5px solid var(--line); border-radius: 12px; }
+.faq-question { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; font-weight: 600; color: var(--navy); cursor: pointer; }
+.faq-question::after { content: "+"; font-size: 1.3rem; color: var(--blue); line-height: 1; }
+.faq-item.active .faq-question::after { content: "–"; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.faq-answer p { margin: 0; padding: 0 16px 14px; color: var(--muted); font-size: .92rem; }
+.faq-item.active .faq-answer { max-height: 600px; }
+
+/* final + footer */
+.s-final { background: var(--navy); color: var(--white); text-align: center; padding: 36px 0; }
+.s-final h2 { color: var(--white); }
+.s-final p { opacity: .9; margin: 0 0 18px; }
+.s-contact { margin-top: 18px; font-size: .88rem; }
+.s-contact a { color: var(--white); }
+.s-foot { background: #071A33; color: rgba(255, 255, 255, .7); text-align: center; font-size: .78rem; padding: 16px 0 90px; }
+.s-foot a { color: rgba(255, 255, 255, .85); }
+
+/* sticky mobile CTA (script.js adds .visible after the hero) */
+.sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px; background: rgba(255, 255, 255, .97); border-top: 1px solid var(--line); transform: translateY(110%); transition: transform .25s ease; }
+.sticky-cta.visible { transform: none; }
+.sticky-cta .s-btn { display: block; text-align: center; padding: 13px; }
+@media (min-width: 900px) { .sticky-cta { display: none; } .s-foot { padding-bottom: 16px; } }
+
+@media (max-width: 560px) {
+    .s-logo img { width: 120px; }
+    .s-count p { display: none; }
+    .s-who { grid-template-columns: repeat(2, 1fr); }
+    .s-when { grid-template-columns: 1fr; }
+    .s-when div + div { border-left: 0; border-top: 1.5px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .s-btn, .sticky-cta, .faq-answer { transition: none; } }
