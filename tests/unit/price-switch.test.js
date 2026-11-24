@@ -17,6 +17,7 @@ describe('price comes only from data.json', () => {
         // the HTML fallback price is 99: switch data.json to 149 and check no fallback ₹99 is left anywhere
         it(`/${page.path}/ shows the data.json price everywhere (no ₹99 fallback left when it says 149)`, () => {
             const data = JSON.parse(read('data.json'));
+            data.freeSignup.enabled = false; // paid mode (free mode is covered in free-signup.test.js)
             data.registration.price = '149';
             const dom = new JSDOM(read(`${page.path}/index.html`), { runScripts: 'outside-only' });
             dom.window.eval(script);

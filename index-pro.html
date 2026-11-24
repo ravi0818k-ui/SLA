@@ -260,12 +260,17 @@
     <link rel="preload" as="image" href="Images/story/16_laid-off-restart.svg">
     <link rel="stylesheet" href="site-nav.css?v=1.0.1">
     <link rel="stylesheet" href="bright.css?v=1.0.5">
+    <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
+         workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
+         the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
+    <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free],html.sla-wait [data-bind$="buttonText"],html.sla-wait [data-bind$="stickyText"],html.sla-wait [data-bind$="trustLine"],html.sla-wait [data-bind^="promise."]{visibility:hidden}</style>
+    <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
 </head>
 <body data-design="bright">
 
     <!-- ========== TOP BAR ========== -->
     <div class="b-topbar" aria-label="Workshop summary">
-        <p>🔥 <span data-bind="pro.topBar">For Professionals · 3-day LIVE workshop</span> · <span data-bind="pro.dateRange">Every Saturday</span> · Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="b-topbar-extra"> · Seats limited</span></p>
+        <p>🔥 <span data-bind="pro.topBar">For Professionals · 3-day LIVE workshop</span> · <span data-bind="pro.dateRange">Every Saturday</span><span data-paid> · Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span><span data-free> · Free to join</span><span class="b-topbar-extra"> · Seats limited</span></p>
     </div>
 
     <!-- ========== HEADER ========== -->
@@ -323,7 +328,8 @@
                     <li><span aria-hidden="true">💼</span> Fits around your job hunt</li>
                     <li><span aria-hidden="true">🗣️</span> Hinglish sessions</li>
                 </ul>
-                <p class="b-price"><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>one-time payment</span></p>
+                <p class="b-price" data-paid><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>one-time payment</span></p>
+                <p class="b-price" data-free><strong>FREE</strong> <span>no payment needed</span></p>
                 <p class="b-promise"><span aria-hidden="true">✅</span> <span data-bind="promise.englishShort">The full course for one low price · No upsell at the end</span></p>
                 <div class="b-ctas">
                     <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-lg" data-bind-href="registration.link"><span data-bind="pro.buttonText">Book My Seat – ₹99</span></a>
@@ -470,7 +476,7 @@
                 <p class="b-eyebrow">HOW IT WORKS</p>
                 <h2>LIVE, from home, on a weekend evening</h2>
                 <ol class="b-steps">
-                    <li><strong>Book your seat</strong><span><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>, by UPI or card. Takes 2 minutes.</span></li>
+                    <li><strong>Book your seat</strong><span data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>, by UPI or card. Takes 2 minutes.</span><span data-free>Free – no payment needed. Takes 1 minute.</span></li>
                     <li><strong>Confirmation + WhatsApp group</strong><span>You get a confirmation after registering. The Zoom joining link is shared in the WhatsApp community group.</span></li>
                     <li><strong><span data-bind="pro.dateRange">Every Saturday</span>, LIVE</strong><span><span data-bind="workshop.sessionTime">7:00 PM – 9:00 PM IST</span>, with Coach Abhishek. Ask your questions live.</span></li>
                     <li><strong>Practise + certificate</strong><span>Editable worksheets to practise on your own material; a certificate when you complete all three days.</span></li>
@@ -521,7 +527,7 @@
     <section class="b-section b-soft" id="our-promise">
         <div class="b-wrap">
             <p class="b-eyebrow">OUR PROMISE</p>
-            <h2>The full course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>. <span class="hl">Not a sales pitch.</span></h2>
+            <h2><span data-paid>The full course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>.</span><span data-free>The full course, free.</span> <span class="hl">Not a sales pitch.</span></h2>
             <p class="b-sub">Many low-cost webinars are just a trailer: half a method, then a big course pitched at the end. We don't do that.</p>
             <div class="b-vs b-vs-promise rv" role="table" aria-label="Our promise">
                 <div class="b-vs-row b-vs-head" role="row"><span class="b-vs-them" role="columnheader">Typical low-cost webinars</span><span class="b-vs-us" role="columnheader">Super Learner Academy</span></div>
@@ -530,7 +536,8 @@
                 <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">A hard sell for an expensive course at the end</span><span class="b-vs-us" role="cell">No upsell, no sales pitch</span></div>
                 <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">Extra fees for worksheets or a certificate</span><span class="b-vs-us" role="cell">Worksheets, certificate and WhatsApp community included</span></div>
             </div>
-            <p class="b-note b-promise-note"><strong>The price you pay is the whole price.</strong></p>
+            <p class="b-note b-promise-note" data-paid><strong>The price you pay is the whole price.</strong></p>
+            <p class="b-note b-promise-note" data-free><strong>Free, and still the full course – no hidden fees, no pitch at the end.</strong></p>
         </div>
     </section>
 
@@ -560,20 +567,25 @@
                         <li>Real-time Q&amp;A and doubt-clearing</li>
                         <li>Editable PDF worksheets for practice</li>
                         <li>WhatsApp community access</li>
-                        <li><strong>The full course for this one price – no upsell at the end</strong></li>
+                        <li data-paid><strong>The full course for this one price – no upsell at the end</strong></li>
+                        <li data-free><strong>The full course, free – no upsell at the end</strong></li>
                         <li>Certificate of Completion</li>
                         <li>Techniques you can use on any skill, for life</li>
                     </ul>
                 </div>
                 <div class="b-price-right">
-                    <p class="b-was">Regular price <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
-                    <p class="b-now"><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
-                    <p class="b-once">One-time payment · no hidden fees</p>
+                    <p class="b-was" data-paid>Regular price <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
+                    <p class="b-now" data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
+                    <p class="b-once" data-paid>One-time payment · no hidden fees</p>
+                    <p class="b-now" data-free>FREE</p>
+                    <p class="b-once" data-free>No payment · no hidden fees</p>
                     <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg b-btn-block" data-bind-href="registration.link"><span data-bind="pro.buttonText">Book My Seat – ₹99</span></a>
-                    <p class="b-refund">🛡️ Attend the full workshop – if you don't find value, get a full refund within 24 hours of the last session.</p>
+                    <p class="b-refund" data-paid>🛡️ Attend the full workshop – if you don't find value, get a full refund within 24 hours of the last session.</p>
+                    <p class="b-refund" data-free>🙏 We're a new academy, so the first batches are free. If the workshop helps you, just share your honest feedback.</p>
                     <p class="b-limited">⚡ Limited seats in this batch</p>
                 </div>
-                <span class="b-sticker b-price-sticker" aria-hidden="true">Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>!</span>
+                <span class="b-sticker b-price-sticker" aria-hidden="true" data-paid>Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>!</span>
+                <span class="b-sticker b-price-sticker" aria-hidden="true" data-free>FREE!</span>
             </div>
         </div>
     </section>
@@ -616,9 +628,13 @@
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Is this based on real science?</span><span class="b-chev" aria-hidden="true"></span></div>
                     <div class="faq-answer"><div><p>Yes. Active recall and spaced practice are among the most effective study techniques in learning research. With each technique you also learn why it works on the brain.</p></div></div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item" data-paid>
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>What is the refund policy?</span><span class="b-chev" aria-hidden="true"></span></div>
                     <div class="faq-answer"><div><p>Attend the full workshop. If you don't find value, contact us within 24 hours of the last session for a full refund.</p></div></div>
+                </div>
+                <div class="faq-item" data-free>
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Why is it free? What's the catch?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>No catch. We're a new academy, so the first batches are free – we want people to try the method properly. All 3 LIVE evenings, the worksheets, the WhatsApp community and the certificate are free. If the workshop helps you, we'll ask for your honest feedback at the end – that's all.</p></div></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>What do I need to join?</span><span class="b-chev" aria-hidden="true"></span></div>
@@ -645,7 +661,7 @@
         <div class="b-wrap b-split">
             <div>
                 <h2>Your next job will ask you to learn something new. Learn how to learn it first.</h2>
-                <p>3 evenings, 6 hours, the full course for one low price. The next LIVE batch is this Saturday – book your seat now.</p>
+                <p>3 evenings, 6 hours, the full course <span data-paid>for one low price</span><span data-free>– free</span>. The next LIVE batch is this Saturday – book your seat now.</p>
                 <div class="b-ctas">
                     <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg" data-bind-href="registration.link"><span data-bind="pro.buttonText">Book My Seat – ₹99</span></a>
                     <a href="https://wa.me/919151726759" class="b-btn b-btn-outline-white b-btn-lg" data-bind-href="pro.whatsappChat" target="_blank" rel="noopener noreferrer"><span data-bind="pro.whatsappText">Ask on WhatsApp</span></a>
@@ -690,6 +706,6 @@
 
     <script src="site-nav.js?v=1.1.0" defer></script>
     <script src="bright.js?v=1.0.0" defer></script>
-    <script src="script.js?v=1.0.9" defer></script>
+    <script src="script.js?v=1.1.1" defer></script>
 </body>
 </html>

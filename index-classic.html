@@ -87,16 +87,21 @@
         try { if (forced) sessionStorage.setItem('sla_design', forced); else forced = sessionStorage.getItem('sla_design'); } catch (e) {}
         if (forced) { go(forced); return; }
         if (!window.fetch) return;
-        fetch('data.json?v=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) { go(d && d.site && d.site.design); }).catch(function () {});
+        fetch('data.json?v=' + Math.floor(Date.now() / 300000)).then(function (r) { return r.json(); }).then(function (d) { go(d && d.site && d.site.design); }).catch(function () {});
     })('classic');
     </script>
     <link rel="stylesheet" href="style-classic.css?v=1.2.1">
+    <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
+         workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
+         the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
+    <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free],html.sla-wait [data-bind$="buttonText"],html.sla-wait [data-bind$="stickyText"],html.sla-wait [data-bind$="trustLine"],html.sla-wait [data-bind^="promise."]{visibility:hidden}</style>
+    <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
 </head>
 <body data-design="classic">
 
     <!-- ========== TOP BAR (Urgency Banner) ========== -->
     <div class="top-bar" aria-label="Urgency banner">
-<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">Every Saturday</span> &bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
+<p class="top-bar-text">🔥 3-Day LIVE Workshop &bull; <span data-bind="workshop.dateRange">Every Saturday</span> <span data-paid>&bull; Only <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span><span data-free>&bull; Free to join</span><span class="top-bar-extra"> &bull; <span class="blink-text">Limited Seats</span></span></p>
     </div>
 
     <!-- ========== SITE MENU (hamburger, top-right) ==========
@@ -151,8 +156,9 @@
                     <li><span class="hero-feature-icon" aria-hidden="true">🌱</span> Mindset &amp; Growth</li>
                 </ul>
                 <div class="hero-price">
-                    <span class="hero-price-strike"><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></span>
-                    <span class="hero-price-main">Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span>
+                    <span class="hero-price-strike" data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></span>
+                    <span class="hero-price-main" data-free>Join free · no payment needed</span>
+                    <span class="hero-price-main" data-paid>Join for just <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span>
                 </div>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
                     <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
@@ -162,11 +168,12 @@
                     <li><span class="trust-check" aria-hidden="true">✓</span> LIVE on Zoom</li>
                     <li><span class="trust-check" aria-hidden="true">✓</span> Hinglish</li>
                     <li><span class="trust-check" aria-hidden="true">✓</span> Certificate Included</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> UPI / Cards</li>
-                    <li><span class="trust-check" aria-hidden="true">✓</span> 24-Hour Refund Policy</li>
+                    <li data-paid><span class="trust-check" aria-hidden="true">✓</span> UPI / Cards</li>
+                    <li data-paid><span class="trust-check" aria-hidden="true">✓</span> 24-Hour Refund Policy</li>
+                    <li data-free><span class="trust-check" aria-hidden="true">✓</span> Free · No Payment</li>
                     <li><span class="trust-check" aria-hidden="true">✓</span> Full Course · No Upsell</li>
                 </ul>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
+                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" data-paid width="380" height="60" loading="lazy" decoding="async">
             </div>
             <div class="hero-image">
                 <div class="hero-visual">
@@ -290,7 +297,7 @@
                         <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                     </a>
                     <p class="trust-note">3-Day LIVE Interactive Workshop &bull; <span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
-                    <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img">
+                    <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" data-paid>
                 </div>
             </div>
         </div>
@@ -681,7 +688,7 @@
     <!-- ========== OUR PROMISE (USP): one low price = the full course, no upsell. Price comes from data.json ========== -->
     <section class="promise-section" id="our-promise">
         <div class="container">
-            <h2 class="section-title">The Full Course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>. <span class="highlight">Not a Sales Pitch.</span></h2>
+            <h2 class="section-title"><span data-paid>The Full Course for <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>.</span><span data-free>The Full Course, Free.</span> <span class="highlight">Not a Sales Pitch.</span></h2>
             <p class="section-subtitle">Many low-cost webinars are a trailer: they teach half, then spend the end selling an expensive course. We don't.</p>
             <div class="promise-table" role="table" aria-label="Our promise">
                 <div class="promise-row promise-head" role="row"><span class="promise-them" role="columnheader">Typical low-cost webinar</span><span class="promise-us" role="columnheader">Super Learner Academy</span></div>
@@ -690,7 +697,8 @@
                 <div class="promise-row" role="row"><span class="promise-them" role="cell">A sales pitch for a bigger course at the end</span><span class="promise-us" role="cell">No upsell. No sales pitch.</span></div>
                 <div class="promise-row" role="row"><span class="promise-them" role="cell">Extra fees for worksheets or a certificate</span><span class="promise-us" role="cell">Worksheets, certificate and WhatsApp community included</span></div>
             </div>
-            <p class="promise-note"><strong>The price you pay is the full price.</strong></p>
+            <p class="promise-note" data-paid><strong>The price you pay is the full price.</strong></p>
+            <p class="promise-note" data-free><strong>Free, and still the full course – no hidden fees, no pitch at the end.</strong></p>
         </div>
     </section>
 
@@ -709,24 +717,28 @@
                 </ul>
             </figure>
             <div class="pricing-card scroll-reveal">
-                <div class="price-anchor">
+                <div class="price-anchor" data-paid>
                     <span class="price-anchor-label">Regular Price</span>
                     <span class="original-price">
                         <span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span>
                     </span>
                 </div>
-                <p class="price-launch-label">Launch Price</p>
-                <div class="current-price">
+                <p class="price-launch-label" data-paid>Launch Price</p>
+                <p class="price-launch-label" data-free>First batches</p>
+                <div class="current-price" data-free><span class="price-amount">FREE</span></div>
+                <div class="current-price" data-paid>
                     <span class="currency" data-bind="registration.currency">₹</span><span class="price-amount" data-bind="registration.price">99</span>
                 </div>
-                <p class="pricing-note">One-time payment &bull; No hidden fees</p>
+                <p class="pricing-note" data-paid>One-time payment &bull; No hidden fees</p>
+                <p class="pricing-note" data-free>No payment &bull; No hidden fees</p>
                 <p class="pricing-promise">✅ <span data-bind="promise.englishShort">The full course in one price · No upsell at the end</span></p>
                 <a href="#" class="cta-button" data-bind-href="registration.link">
                     <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
-                <p class="refund-note"><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
+                <p class="refund-note" data-free>🙏 We're a new academy, so the first batches are free. If the workshop helps you, just share your honest feedback.</p>
+                <p class="refund-note" data-paid><span class="refund-icon" aria-hidden="true">🛡️</span> <span data-bind="registration.refundNote">Attend the full workshop and you're covered by our 24-hour refund policy. See refund terms below.</span></p>
                 <p class="seats-left">⚡ Limited seats available for this batch</p>
-                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" width="380" height="60" loading="lazy" decoding="async">
+                <img src="Images/Payment Gateway.jpg" alt="Secure Payment - UPI, Cards, Net Banking" class="payment-gateway-img" data-paid width="380" height="60" loading="lazy" decoding="async">
             </div>
             </div>
         </div>
@@ -787,8 +799,17 @@
                         <p>The workshop gives you the methods; your marks follow from applying them consistently. Students who replace re-reading with active recall and spaced revision typically see the difference within one exam cycle — better retention, faster revision, and far less last-minute cramming. We won't promise a specific number, because that depends on your subjects and how consistently you practise. What we do guarantee is a complete, usable learning system by the end of Day 3.</p>
                     </div>
                 </div>
-                <!-- FAQ Item 4 -->
-                <div class="faq-item">
+                <!-- FAQ Item 4 (paid mode: refund; free mode: why free) -->
+                <div class="faq-item" data-free>
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
+                        <span>Why is it free? What's the catch?</span>
+                        <i class="fas fa-chevron-down faq-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No catch. We're a new academy, so the first batches are free – we want students to try the method properly. All 3 LIVE days, the worksheets, the WhatsApp community and the certificate are free. If the workshop helps you, we'll ask for your honest feedback at the end – that's all.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-paid>
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0">
                         <span>Is there a refund policy?</span>
                         <i class="fas fa-chevron-down faq-chevron"></i>
@@ -915,7 +936,7 @@
                     <span data-bind="registration.buttonText">Reserve My Seat for ₹99</span>
                 </a>
                 <p class="trust-note"><span data-bind="workshop.schedule">Every Saturday • 7:00 PM–9:00 PM IST • Live on Zoom</span></p>
-                <p class="trust-note">Attend the full workshop and you're covered by our 24-hour refund policy &mdash; see the refund question above.</p>
+                <p class="trust-note" data-paid>Attend the full workshop and you're covered by our 24-hour refund policy &mdash; see the refund question above.</p>
             </div>
         </div>
     </section>
@@ -953,7 +974,7 @@
 
             <div>
                 <h2>Contact</h2>
-                <p>Questions about the workshop, a payment or a refund? Email us &mdash; a real person reads it.</p>
+                <p>Questions about the workshop<span data-paid>, a payment or a refund</span>? Email us &mdash; a real person reads it.</p>
                 <p class="site-footer-contact-line"><svg class="site-footer-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.2 6.3 12 12.9l8.8-6.6" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="mailto:support@superlearneracademy.in" data-bind="contact.email" data-bind-href="contact.emailHref">support@superlearneracademy.in</a></p>
                 <div class="site-footer-social">
                     <a href="https://www.instagram.com/superlearneracademy" target="_blank" rel="noopener noreferrer" aria-label="Super Learner Academy on Instagram" data-bind-href="contact.instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" stroke="none"/></svg></a>
@@ -981,6 +1002,6 @@
 
     <!-- Script -->
     <script src="site-nav.js?v=1.1.0" defer></script>
-    <script src="script.js?v=1.0.9" defer></script>
+    <script src="script.js?v=1.1.1" defer></script>
 </body>
 </html>

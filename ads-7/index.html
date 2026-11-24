@@ -88,7 +88,12 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"></noscript>
-    <link rel="stylesheet" href="../simple.css?v=1.0.0">
+    <link rel="stylesheet" href="../simple.css?v=1.1.0">
+    <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
+         workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
+         the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
+    <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free],html.sla-wait [data-bind$="buttonText"],html.sla-wait [data-bind$="stickyText"],html.sla-wait [data-bind$="trustLine"],html.sla-wait [data-bind^="promise."]{visibility:hidden}</style>
+    <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
 </head>
 <body data-design="simple">
 
@@ -116,12 +121,15 @@
             <p class="s-tag" data-bind="simple.heroEyebrow">3-Day LIVE Workshop · Every Saturday</p>
             <h1 data-bind-html="simple.heroTitle">Learn faster. <span class="hl">Remember what you study.</span></h1>
             <p class="s-lead" data-bind="simple.heroSub">Simple, research-backed methods for memory, focus and revision – for students, parents and working professionals.</p>
-            <p class="s-price"><strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>full course · one-time</span></p>
+            <p class="s-price" data-paid><strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>full course · one-time</span></p>
+            <p class="s-price" data-free><strong>FREE</strong> <span>no payment</span></p>
             <p class="s-promise"><span aria-hidden="true">✅</span> <span data-bind="promise.englishShort">The full course for one low price · No upsell at the end</span></p>
             <a href="https://superprofile.bio/e/onmob4mz" class="cta-button s-btn" data-bind-href="registration.link"><span data-bind="simple.buttonText">Register Now for ₹99</span></a>
             <ul class="s-trust">
-                <li>🔒 Secure UPI / Card</li>
-                <li>🛡️ 24-hour refund policy</li>
+                <li data-paid>🔒 Secure UPI / Card</li>
+                <li data-paid>🛡️ 24-hour refund policy</li>
+                <li data-free>🆓 No payment needed</li>
+                <li data-free>⏱️ Takes 1 minute</li>
                 <li>📜 Certificate included</li>
             </ul>
 
@@ -178,14 +186,16 @@
     <section class="s-sec" id="our-promise">
         <div class="s-wrap">
             <div class="s-card s-promise-box">
-                <h2>🛡️ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span> = the full course. No upsell.</h2>
+                <h2>🛡️ <span data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span> = the full course.</span><span data-free>Free = the full course.</span> No upsell.</h2>
                 <ul class="s-checks">
                     <li>All 3 LIVE days and every technique – nothing held back for a "paid course"</li>
                     <li>Worksheets, certificate and WhatsApp community included</li>
-                    <li>No sales pitch at the end. The price you pay is the whole price.</li>
+                    <li data-paid>No sales pitch at the end. The price you pay is the whole price.</li>
+                    <li data-free>No sales pitch at the end. Free means free: no hidden fees.</li>
                 </ul>
             </div>
-            <p class="s-note">Attend the full workshop – if you don't find value, get a full refund within 24 hours of the last session.</p>
+            <p class="s-note" data-paid>Attend the full workshop – if you don't find value, get a full refund within 24 hours of the last session.</p>
+            <p class="s-note" data-free>🙏 We're a new academy, so the first batches are free. If the workshop helps you, just share your honest feedback.</p>
         </div>
     </section>
 
@@ -196,9 +206,10 @@
             <div class="s-faq">
                 <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Will you sell another course at the end?</span></div><div class="faq-answer"><p>No. This is the full course: all three days, the worksheets, the certificate and the WhatsApp community are included. There is no sales pitch at the end.</p></div></div>
                 <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>What language is the workshop in?</span></div><div class="faq-answer"><p>Hinglish (Hindi + English), in simple words.</p></div></div>
-                <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>What happens after I pay?</span></div><div class="faq-answer"><p>You get a confirmation, and the joining link is shared in the WhatsApp community group before the first session.</p></div></div>
+                <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span><span data-paid>What happens after I pay?</span><span data-free>What happens after I register?</span></span></div><div class="faq-answer"><p>You get a confirmation, and the joining link is shared in the WhatsApp community group before the first session.</p></div></div>
                 <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>What if I miss a session?</span></div><div class="faq-answer"><p>Attending live is best, so you can ask questions. Recordings, when available, are shared in the WhatsApp community group.</p></div></div>
-                <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Is there a refund?</span></div><div class="faq-answer"><p>Yes. Attend the full workshop, and if you don't find value, contact us within 24 hours of the last session for a full refund.</p></div></div>
+                <div class="faq-item" data-free><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Why is it free? What's the catch?</span></div><div class="faq-answer"><p>No catch. We're a new academy, so the first batches are free – we want people to try the method properly. All 3 LIVE days, the worksheets, the WhatsApp community and the certificate are free. If the workshop helps you, we'll ask for your honest feedback at the end – that's all.</p></div></div>
+                <div class="faq-item" data-paid><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Is there a refund?</span></div><div class="faq-answer"><p>Yes. Attend the full workshop, and if you don't find value, contact us within 24 hours of the last session for a full refund.</p></div></div>
                 <div class="faq-item"><div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Do you promise marks, ranks or a job?</span></div><div class="faq-answer"><p>No. We teach a research-backed method for learning and remembering. Results come from using it regularly, so we never promise marks, ranks or jobs.</p></div></div>
             </div>
         </div>
@@ -208,7 +219,7 @@
     <section class="s-final">
         <div class="s-wrap">
             <h2>Seats for this Saturday are limited</h2>
-            <p>3 LIVE days. The full course. One honest price.</p>
+            <p>3 LIVE days. The full course. <span data-paid>One honest price.</span><span data-free>Free for this batch.</span></p>
             <a href="https://superprofile.bio/e/onmob4mz" class="cta-button s-btn" data-bind-href="registration.link"><span data-bind="simple.buttonText">Register Now for ₹99</span></a>
             <p class="s-contact">Questions? <a href="https://wa.me/919151726759" data-bind-href="simple.whatsappChat" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a> · <a href="mailto:support@superlearneracademy.in" data-bind-href="contact.emailHref"><span data-bind="contact.email">support@superlearneracademy.in</span></a></p>
         </div>
@@ -226,6 +237,6 @@
     </div>
 
     <script src="../bright.js?v=1.0.0" defer></script>
-    <script src="../script.js?v=1.0.9" defer></script>
+    <script src="../script.js?v=1.1.1" defer></script>
 </body>
 </html>

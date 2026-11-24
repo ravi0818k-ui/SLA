@@ -112,7 +112,7 @@ describe('/ads-3/ source: Hindi (Devanagari) page', () => {
         expect(left).toEqual([]);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
-        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"(?! data-free)/g) || []).length); // one version of each paid/free swapped question
     });
 });
 
@@ -135,7 +135,7 @@ describe('/ads-5/ source: board exam page', () => {
         expect(text).not.toMatch(/guarantee|pakka topper|\d+\s*%|100 ?percent|rank \d/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
-        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"(?! data-free)/g) || []).length); // one version of each paid/free swapped question
     });
 });
 
@@ -172,7 +172,7 @@ describe('/ads-4/ source: parents page (Class 3-5, tuition vs exam)', () => {
         expect(text).not.toMatch(/guarantee|pakka|\d+\s*%|100 ?percent|rank \d|topper/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
-        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"(?! data-free)/g) || []).length); // one version of each paid/free swapped question
     });
 });
 
@@ -207,7 +207,7 @@ describe('/ads-6/ source: professionals page (laid off, preparing for the next j
         expect(text + JSON.stringify(data.pro)).not.toMatch(/guarantee|placement assistance|get hired in|\d+\s*%|100 ?percent|salary hike/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
-        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"(?! data-free)/g) || []).length); // one version of each paid/free swapped question
     });
 });
 
@@ -232,7 +232,7 @@ describe('/ads-7/ source: simple one-column page', () => {
         expect(visibleText(html) + JSON.stringify(data.simple)).not.toMatch(/guarantee|\d+\s*%|100 ?percent|10x/i);
     });
     it('FAQ JSON-LD matches the visible FAQ count', () => {
-        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"/g) || []).length);
+        expect((html.match(/"@type": "Question"/g) || []).length).toBe((html.match(/class="faq-item"(?! data-free)/g) || []).length); // one version of each paid/free swapped question
     });
 });
 

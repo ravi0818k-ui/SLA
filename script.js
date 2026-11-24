@@ -116,6 +116,19 @@ function showProtectionAlert() {
      * Path prefix to the site root. Ad landing pages live one folder deep (/ads-1/, /ads-2/ ...)
      * and carry <html data-root="../">, so their JSON fetches still reach the root files.
      */
+    /**
+     * Cache-friendly version number for data.json / quotes.json: it changes every 5 minutes instead of on
+     * every visit. A brand-new number on every page view (Date.now()) made GitHub Pages skip its CDN cache
+     * for every visitor (x-cache: MISS, found in the 2026-11-24 k6 load test). With 5-minute steps, most
+     * visitors get the cached copy, the head script on index.html and script.js ask for the same URL (so the
+     * browser reuses the first download), and a data.json edit still shows within about 10 minutes
+     * (GitHub Pages caches files for up to 600 s anyway). The inline head script on index.html /
+     * index-classic.html uses the same formula: keep them in step.
+     */
+    function cacheBucket() {
+        return Math.floor(Date.now() / 300000);
+    }
+
     function siteRoot() {
         var r = document.documentElement.getAttribute('data-root');
         return r && /^(\.\.\/)+$/.test(r) ? r : '';
@@ -127,18 +140,76 @@ function showProtectionAlert() {
      */
     async function loadData() {
         try {
-            var response = await fetch(siteRoot() + 'data.json?v=' + Date.now());
+            var response = await fetch(siteRoot() + 'data.json?v=' + cacheBucket());
             if (!response.ok) {
                 throw new Error('HTTP ' + response.status);
             }
             var data = await response.json();
+            applyFreeSignup(data);
             injectContent(data);
             return data;
         } catch (error) {
             console.error('[SLA] Failed to load data.json:', error.message);
+            document.documentElement.classList.remove('sla-wait');
             hideDynamicElements();
             return undefined;
         }
+    }
+
+    // ========================
+    // FREE SIGNUP MODE (data.json -> freeSignup.enabled)
+    // ========================
+
+    /** True when data.json switches the site to free registration (no payment). */
+    function isFreeSignup(data) {
+        return !!(data && data.freeSignup && data.freeSignup.enabled === true);
+    }
+
+    /** Sets obj[a][b][c] for the path "a.b.c", creating missing objects on the way. */
+    function setNestedValue(obj, path, value) {
+        var keys = path.split('.');
+        var last = keys.pop();
+        var target = keys.reduce(function (current, key) {
+            if (!current[key] || typeof current[key] !== 'object') current[key] = {};
+            return current[key];
+        }, obj);
+        target[last] = value;
+    }
+
+    /**
+     * Free signup mode. When data.json freeSignup.enabled is true:
+     * - every registration button points at freeSignup.link instead of registration.link,
+     * - each data.json path listed in freeSignup.copy is replaced by its free wording (buttons, promise lines, FAQ),
+     * - <html> gets class "sla-free": the inline style in each page's <head> hides [data-paid] blocks
+     *   (price, payment, refund) and shows the [data-free] blocks instead.
+     * Either way it removes "sla-wait", which kept price text hidden until the mode was known,
+     * so visitors never see the paid price flash before the free version.
+     */
+    function applyFreeSignup(data) {
+        var root = document.documentElement;
+        var free = isFreeSignup(data);
+        if (free) {
+            var fs = data.freeSignup;
+            var copy = fs.copy || {};
+            Object.keys(copy).forEach(function (path) {
+                if (path.charAt(0) !== '_') setNestedValue(data, path, copy[path]);
+            });
+            if (fs.link) setNestedValue(data, 'registration.link', fs.link);
+            root.classList.add('sla-free');
+        } else {
+            root.classList.remove('sla-free');
+        }
+        root.classList.remove('sla-wait');
+        return free;
+    }
+
+    /** In free mode, count clicks on registration buttons as a GA4 "sign_up" event (mark it as a key event / import it to Google Ads). */
+    function initFreeSignupTracking(data) {
+        if (!isFreeSignup(data)) return;
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a.cta-button, a[data-bind-href="registration.link"]');
+            if (a && typeof window.gtag === 'function') window.gtag('event', 'sign_up', { method: 'free_signup' });
+        });
     }
 
     // ========================
@@ -748,7 +819,7 @@ function showProtectionAlert() {
      * so the price only ever needs changing in data.json.
      */
     function syncOfferPrice(data) {
-        var price = data && data.registration && data.registration.price;
+        var price = isFreeSignup(data) ? '0' : data && data.registration && data.registration.price;
         if (!price) return;
         document.querySelectorAll('script[type="application/ld+json"]').forEach(function (s) {
             try {
@@ -862,7 +933,7 @@ function showProtectionAlert() {
      */
     async function initQuotesSlider() {
         try {
-            var response = await fetch(siteRoot() + 'quotes.json?v=' + Date.now());
+            var response = await fetch(siteRoot() + 'quotes.json?v=' + cacheBucket());
             if (!response.ok) return;
             quotesData = await response.json();
             if (quotesData.length === 0) return;
@@ -1064,6 +1135,7 @@ function showProtectionAlert() {
                 initStickyCTA();
                 initScrollAnimations();
                 initAnalytics(data);
+                initFreeSignupTracking(data);
                 initCoachImageFallback();
                 initQuotesSlider();
                 initHeroQuotes();
@@ -1087,9 +1159,13 @@ function showProtectionAlert() {
 
     window.SLA = {
         siteRoot: siteRoot,
+        cacheBucket: cacheBucket,
         loadData: loadData,
         injectContent: injectContent,
         hideDynamicElements: hideDynamicElements,
+        isFreeSignup: isFreeSignup,
+        setNestedValue: setNestedValue,
+        applyFreeSignup: applyFreeSignup,
         getNestedValue: getNestedValue,
         fillTemplate: fillTemplate,
         isValidURL: isValidURL,

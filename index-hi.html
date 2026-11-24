@@ -242,12 +242,17 @@
     <link rel="stylesheet" href="site-nav.css?v=1.0.1">
     <link rel="stylesheet" href="bright.css?v=1.0.5">
     <link rel="stylesheet" href="bright-hi.css?v=1.0.0">
+    <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
+         workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
+         the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
+    <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free],html.sla-wait [data-bind$="buttonText"],html.sla-wait [data-bind$="stickyText"],html.sla-wait [data-bind$="trustLine"],html.sla-wait [data-bind^="promise."]{visibility:hidden}</style>
+    <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
 </head>
 <body data-design="bright">
 
     <!-- ========== TOP BAR ========== -->
     <div class="b-topbar" aria-label="Workshop summary">
-        <p>🔥 <span data-bind="hindi.topBar">3 दिन की LIVE वर्कशॉप</span> · <span data-bind="hindi.dateRange">हर शनिवार</span> · सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span><span class="b-topbar-extra"> · सीटें सीमित</span></p>
+        <p>🔥 <span data-bind="hindi.topBar">3 दिन की LIVE वर्कशॉप</span> · <span data-bind="hindi.dateRange">हर शनिवार</span><span data-paid> · सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span><span data-free> · बिल्कुल मुफ़्त</span><span class="b-topbar-extra"> · सीटें सीमित</span></p>
     </div>
 
     <!-- ========== HEADER ========== -->
@@ -305,7 +310,8 @@
                     <li><span aria-hidden="true">🎥</span> Zoom पर LIVE</li>
                     <li><span aria-hidden="true">🗣️</span> आसान हिंदी में</li>
                 </ul>
-                <p class="b-price"><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>एक बार का भुगतान</span></p>
+                <p class="b-price" data-paid><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>एक बार का भुगतान</span></p>
+                <p class="b-price" data-free><strong>मुफ़्त</strong> <span>कोई भुगतान नहीं</span></p>
                 <p class="b-promise"><span aria-hidden="true">✅</span> <span data-bind="promise.hindiShort">एक ही क़ीमत में पूरा कोर्स · आख़िर में कोई और कोर्स नहीं बेचते</span></p>
                 <div class="b-ctas">
                     <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-primary b-btn-lg" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
@@ -502,7 +508,7 @@
                 <p class="b-eyebrow">कैसे होता है</p>
                 <h2>घर बैठे, LIVE क्लास</h2>
                 <ol class="b-steps">
-                    <li><strong>सीट बुक करें</strong><span><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>, UPI या कार्ड से। बस 2 मिनट।</span></li>
+                    <li><strong>सीट बुक करें</strong><span data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>, UPI या कार्ड से। बस 2 मिनट।</span><span data-free>बिल्कुल मुफ़्त – कोई भुगतान नहीं। बस 1 मिनट।</span></li>
                     <li><strong>कन्फ़र्मेशन + WhatsApp ग्रुप</strong><span>रजिस्ट्रेशन के बाद कन्फ़र्मेशन मिलता है। Zoom जॉइनिंग लिंक WhatsApp कम्युनिटी ग्रुप में शेयर होता है।</span></li>
                     <li><strong><span data-bind="hindi.dateRange">हर शनिवार</span> LIVE क्लास</strong><span><span data-bind="hindi.sessionTime">शाम 7:00 – 9:00 बजे (IST)</span>, कोच अभिषेक के साथ। सवाल LIVE पूछिए, डाउट वहीं क्लियर।</span></li>
                     <li><strong>अभ्यास + सर्टिफ़िकेट</strong><span>एडिट होने वाली वर्कशीट से अभ्यास; तीनों दिन पूरे करने पर सर्टिफ़िकेट।</span></li>
@@ -584,7 +590,7 @@
     <section class="b-section b-soft" id="vaada">
         <div class="b-wrap">
             <p class="b-eyebrow">हमारा वादा</p>
-            <h2><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span> में पूरा कोर्स। <span class="hl">आख़िर में कोई “असली कोर्स” नहीं बेचते।</span></h2>
+            <h2><span data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span> में पूरा कोर्स।</span><span data-free>पूरा कोर्स बिल्कुल मुफ़्त।</span> <span class="hl">आख़िर में कोई “असली कोर्स” नहीं बेचते।</span></h2>
             <p class="b-sub">आजकल कई सस्ते वेबिनार सिर्फ़ ट्रेलर होते हैं – आधा सिखाते हैं और आख़िर में बड़ा कोर्स बेचते हैं। हम ऐसा नहीं करते।</p>
             <div class="b-vs b-vs-promise rv" role="table" aria-label="हमारा वादा">
                 <div class="b-vs-row b-vs-head" role="row"><span class="b-vs-them" role="columnheader">अक्सर सस्ते वेबिनार</span><span class="b-vs-us" role="columnheader">सुपर लर्नर एकेडमी</span></div>
@@ -593,7 +599,8 @@
                 <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">आख़िर में महंगा कोर्स बेचने की पिच</span><span class="b-vs-us" role="cell">कोई अपसेल नहीं, कोई सेल्स पिच नहीं</span></div>
                 <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">वर्कशीट या सर्टिफ़िकेट के अलग पैसे</span><span class="b-vs-us" role="cell">वर्कशीट, सर्टिफ़िकेट और WhatsApp कम्युनिटी शामिल</span></div>
             </div>
-            <p class="b-note b-promise-note"><strong>जो क़ीमत आप देते हैं, वही पूरी क़ीमत है।</strong></p>
+            <p class="b-note b-promise-note" data-paid><strong>जो क़ीमत आप देते हैं, वही पूरी क़ीमत है।</strong></p>
+            <p class="b-note b-promise-note" data-free><strong>मुफ़्त है, पर पूरा है – कोई छिपा शुल्क नहीं, आख़िर में कोई पिच नहीं।</strong></p>
         </div>
     </section>
 
@@ -623,20 +630,25 @@
                         <li>LIVE सवाल-जवाब और डाउट क्लियर करने का सेशन</li>
                         <li>अभ्यास के लिए एडिट होने वाली PDF वर्कशीट</li>
                         <li>WhatsApp कम्युनिटी में जगह</li>
-                        <li><strong>पूरा कोर्स इसी क़ीमत में – आख़िर में कोई अपसेल नहीं</strong></li>
+                        <li data-paid><strong>पूरा कोर्स इसी क़ीमत में – आख़िर में कोई अपसेल नहीं</strong></li>
+                        <li data-free><strong>पूरा कोर्स मुफ़्त – आख़िर में कोई अपसेल नहीं</strong></li>
                         <li>वर्कशॉप पूरी करने का सर्टिफ़िकेट</li>
                         <li>आसान हिंदी में, शुरुआत करने वालों के लिए भी</li>
                     </ul>
                 </div>
                 <div class="b-price-right">
-                    <p class="b-was">सामान्य कीमत <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
-                    <p class="b-now"><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
-                    <p class="b-once">एक बार का भुगतान · कोई छिपा शुल्क नहीं</p>
+                    <p class="b-was" data-paid>सामान्य कीमत <s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s></p>
+                    <p class="b-now" data-paid><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></p>
+                    <p class="b-once" data-paid>एक बार का भुगतान · कोई छिपा शुल्क नहीं</p>
+                    <p class="b-now" data-free>मुफ़्त</p>
+                    <p class="b-once" data-free>कोई भुगतान नहीं · कोई छिपा शुल्क नहीं</p>
                     <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg b-btn-block" data-bind-href="registration.link"><span data-bind="hindi.buttonText">अभी सीट बुक करें – ₹99</span></a>
-                    <p class="b-refund">🛡️ पूरी वर्कशॉप अटेंड करें – फ़ायदा न लगे तो सेशन ख़त्म होने के 24 घंटे के अंदर पूरा रिफ़ंड।</p>
+                    <p class="b-refund" data-paid>🛡️ पूरी वर्कशॉप अटेंड करें – फ़ायदा न लगे तो सेशन ख़त्म होने के 24 घंटे के अंदर पूरा रिफ़ंड।</p>
+                    <p class="b-refund" data-free>🙏 हम नई अकादमी हैं, इसलिए पहले बैच मुफ़्त हैं। वर्कशॉप पसंद आए तो बस अपना सच्चा फ़ीडबैक दीजिए।</p>
                     <p class="b-limited">⚡ इस बैच में सीटें सीमित हैं</p>
                 </div>
-                <span class="b-sticker b-price-sticker" aria-hidden="true">सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>!</span>
+                <span class="b-sticker b-price-sticker" aria-hidden="true" data-paid>सिर्फ़ <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span>!</span>
+                <span class="b-sticker b-price-sticker" aria-hidden="true" data-free>बिल्कुल मुफ़्त!</span>
             </div>
         </div>
     </section>
@@ -671,9 +683,13 @@
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>क्या यह असली विज्ञान पर आधारित है?</span><span class="b-chev" aria-hidden="true"></span></div>
                     <div class="faq-answer"><div><p>हाँ। लर्निंग रिसर्च में एक्टिव रिकॉल और स्पेस्ड प्रैक्टिस को पढ़ाई की सबसे असरदार तकनीकों में माना जाता है। हर तकनीक के साथ आप यह भी समझेंगे कि वह दिमाग पर काम क्यों करती है – सिर्फ़ “कैसे” नहीं, “क्यों” भी।</p></div></div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item" data-paid>
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>रिफ़ंड पॉलिसी क्या है?</span><span class="b-chev" aria-hidden="true"></span></div>
                     <div class="faq-answer"><div><p>पूरी वर्कशॉप अटेंड करने के बाद अगर आपको फ़ायदा न लगे, तो सेशन ख़त्म होने के 24 घंटे के अंदर हमसे संपर्क करें – पूरा रिफ़ंड मिलेगा।</p></div></div>
+                </div>
+                <div class="faq-item" data-free>
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>यह मुफ़्त क्यों है? कोई शर्त है?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>कोई शर्त नहीं। हम नई अकादमी हैं, इसलिए पहले बैच मुफ़्त रखे हैं – ताकि छात्र इस तरीके को ठीक से आज़मा सकें। तीनों LIVE दिन, वर्कशीट, WhatsApp कम्युनिटी और सर्टिफ़िकेट सब मुफ़्त है। वर्कशॉप से फ़ायदा हो तो आख़िर में हम आपका सच्चा फ़ीडबैक माँगेंगे – बस इतना।</p></div></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>जॉइन करने के लिए क्या चाहिए?</span><span class="b-chev" aria-hidden="true"></span></div>
@@ -745,6 +761,6 @@
 
     <script src="site-nav.js?v=1.1.0" defer></script>
     <script src="bright.js?v=1.0.0" defer></script>
-    <script src="script.js?v=1.0.9" defer></script>
+    <script src="script.js?v=1.1.1" defer></script>
 </body>
 </html>
