@@ -31,6 +31,7 @@ function visibleText(doc, free) {
     const body = doc.body.cloneNode(true);
     body.querySelectorAll(free ? '[data-paid]' : '[data-free]').forEach((el) => el.remove());
     body.querySelectorAll('script, noscript, style').forEach((el) => el.remove());
+    body.querySelectorAll('[style*="display: none"], [style*="display:none"]').forEach((el) => el.remove()); // hidden by script.js
     return body.textContent;
 }
 
@@ -92,5 +93,43 @@ describe.each(PAGES)('%s in paid mode', (file) => {
         const text = visibleText(doc, false);
         expect(text).toContain(data.registration.currency + data.registration.price);
         expect(text).not.toMatch(/first batches are free|pehle batches free|पहले बैच मुफ़्त/i);
+    });
+});
+
+describe('thank-you page (where the free Register buttons land)', () => {
+    function thankYou(enabled) {
+        const data = JSON.parse(read('data.json'));
+        data.freeSignup.enabled = enabled;
+        const dom = new JSDOM(read('thank-you.html'), { runScripts: 'outside-only' });
+        const calls = [];
+        dom.window.gtag = (...args) => calls.push(args);
+        dom.window.eval(script);
+        dom.window.SLA.applyFreeSignup(data);
+        dom.window.SLA.injectContent(data);
+        dom.window.SLA.initThankYouPage(data);
+        return { doc: dom.window.document, data, calls };
+    }
+    it('free signup link points at the thank-you page', () => {
+        const data = JSON.parse(read('data.json'));
+        expect(data.freeSignup.link).toBe('https://www.superlearneracademy.in/thank-you.html');
+        expect(read('thank-you.html')).toMatch(/html\.sla-free \[data-paid\]\{display:none!important\}/);
+    });
+    it('free mode: says the seat is booked, sends people to the WhatsApp group, conversion value 0', () => {
+        const { doc, data, calls } = thankYou(true);
+        const text = visibleText(doc, true);
+        expect(text).toMatch(/Free Seat Is Booked/);
+        expect(text).toMatch(/Zoom link sirf WhatsApp group mein milega/);
+        expect(text).not.toMatch(/redirect|incomplete|payment/i);
+        expect(doc.getElementById('whatsapp-btn').href).toBe(data.whatsapp.link);
+        const conv = calls.find((c) => c[0] === 'event' && c[1] === 'conversion');
+        expect(conv[2].value).toBe(0);
+    });
+    it('paid mode: keeps the paid wording and the purchase value', () => {
+        const { doc, calls } = thankYou(false);
+        const text = visibleText(doc, false);
+        expect(text).toMatch(/Thank You For Registering!/);
+        expect(text).not.toMatch(/Free Seat Is Booked/);
+        const conv = calls.find((c) => c[0] === 'event' && c[1] === 'conversion');
+        expect(conv[2].value).toBeGreaterThan(0);
     });
 });

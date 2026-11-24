@@ -778,7 +778,7 @@ function showProtectionAlert() {
         if (paidView) paidView.style.display = '';
         if (unpaidView) unpaidView.style.display = 'none';
 
-        trackPurchaseConversion();
+        trackPurchaseConversion(data);
 
         // Format and inject workshop date
         if (data.workshop && data.workshop.startDate) {
@@ -842,7 +842,7 @@ function showProtectionAlert() {
      * Guarded by sessionStorage so a refresh/reload of the thank-you page
      * doesn't double-fire the same conversion.
      */
-    function trackPurchaseConversion() {
+    function trackPurchaseConversion(data) {
         if (typeof window.gtag !== 'function') return;
 
         var alreadyFired = false;
@@ -853,7 +853,7 @@ function showProtectionAlert() {
 
         window.gtag('event', 'conversion', {
             'send_to': 'AW-18417193820/GmoECPGNmOocENymgM5E',
-            'value': 21,
+            'value': isFreeSignup(data) ? 0 : 21, // free signup mode: a sign-up, not a sale
             'currency': 'INR',
             'transaction_id': String(Date.now())
         });
