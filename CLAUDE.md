@@ -24,6 +24,10 @@ Rules:
 - `index.html#upsc` (or `#cbse`, `#state`, `#jee`, `#law`, `#parents`, `#school`) opens that audience tab. Use it for audience-specific ads.
 - `tests/unit/structure.test.js` now checks `index-classic.html`. `tests/unit/design-switch.test.js` covers the flag, the guards, the picker, the CTAs and the images.
 
+## Hamburger menu = site map (2026-11-25)
+
+The menu markup is still static in every page (no-JS fallback: Home, About, the 4 tools, Contact). With JS on, `site-nav.js` replaces those lists with the `SITE_MAP` array at its top: Main / Workshop pages (all 7 ad landing pages, each with its path and a copy-link button that copies the public URL) / Free tools, plus a search box and a "You're here" marker (it also recognises the `/ads-N/` copies and the `index-*.html` sources via `also`). **That array is the one place to add a new page**; `tests/unit/site-nav.test.js` fails if an `ad-pages.json` path is missing, a link points at a missing file, or the menu versions differ. `thank-you.html` is deliberately NOT in the map: opening it fires the Google Ads conversion. Links are built from the script's own `src` (`''` or `../`), so they work from sub-folders and on `file://`. Every page loads `site-nav.js?v=1.2.0` and `site-nav.css?v=1.1.0`; bump both everywhere when you change them.
+
 ## Ad landing pages (/english-ads-1-students/, /hinglish-ads-2-students/ ...)
 
 Paid campaigns point at fixed paths, one per audience/language, listed in **`ad-pages.json`**:
