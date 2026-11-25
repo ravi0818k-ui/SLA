@@ -1110,6 +1110,139 @@ function showProtectionAlert() {
     */
 
     // ========================
+    // VISITORS OUTSIDE INDIA (2026-11-25)
+    // ========================
+    // GitHub Pages has no server-side geo lookup, and an auto-redirect would also send Googlebot
+    // (which crawls from the US) away from the Hinglish pages. So: no redirect. If the browser's
+    // timezone is outside India, a slim, dismissible bar shows the LIVE class time in the visitor's
+    // own time and, on Hinglish/Hindi pages, a link to the English page. Copy: data.json -> abroad.
+    // Preview anywhere with ?abroad=1 (force on) or ?abroad=0 (force off).
+
+    var ABROAD_DISMISS_KEY = 'sla_abroad_dismissed';
+
+    /** True when a valid IANA timezone is given and it is not India's. Unknown timezone -> false. */
+    function isOutsideIndia(tz) {
+        if (!tz || typeof tz !== 'string') return false;
+        return !/^Asia\/(Kolkata|Calcutta)$/.test(tz);
+    }
+
+    /**
+     * The weekly IST session in the visitor's own time, e.g. "Sat 9:30 AM – 11:30 AM EST".
+     * @param {string} startIso - next session start, ISO with +05:30 (from getNextWeeklyOccurrence)
+     * @param {number} minutes - session length
+     * @param {string} tz - the visitor's IANA timezone
+     */
+    function formatLocalSession(startIso, minutes, tz) {
+        var start = new Date(startIso);
+        var end = new Date(start.getTime() + (minutes || 120) * 60000);
+        if (isNaN(start.getTime())) return '';
+        try {
+            var a = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'short', hour: 'numeric', minute: '2-digit' }).format(start);
+            var b = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(end);
+            return a + ' – ' + b.replace(/GMT\+0$/, 'GMT');
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function abroadStyles() {
+        if (document.getElementById('sla-abroad-style')) return;
+        var s = document.createElement('style');
+        s.id = 'sla-abroad-style';
+        s.textContent =
+            '.sla-abroad{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;justify-content:center;' +
+            'padding:10px 16px;background:#FFF7DD;border-bottom:1.5px solid #F2D27A;color:#141A3A;' +
+            'font:500 14px/1.45 Poppins,Inter,-apple-system,"Segoe UI",sans-serif;text-align:center}' +
+            '.sla-abroad strong{font-weight:700}' +
+            '.sla-abroad-en{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:#141A3A;color:#fff;' +
+            'font-weight:600;text-decoration:none;white-space:nowrap}' +
+            '.sla-abroad-en:hover,.sla-abroad-en:focus-visible{background:#3A5BFF;color:#fff}' +
+            '.sla-abroad-x{flex:0 0 auto;width:32px;height:32px;border:0;border-radius:8px;' +
+            'background:transparent;color:#141A3A;font-size:20px;line-height:1;cursor:pointer}' +
+            '.sla-abroad-x:hover,.sla-abroad-x:focus-visible{background:rgba(20,26,58,.08)}';
+        document.head.appendChild(s);
+    }
+
+    /**
+     * Shows the "Outside India?" bar when it applies. Returns the bar element or null.
+     * @param {object} data - data.json
+     * @param {object} [opts] - { tz, now, search } for tests; defaults to the real browser values
+     */
+    function initAbroadBar(data, opts) {
+        opts = opts || {};
+        var cfg = data && data.abroad;
+        if (!cfg || cfg.enabled === false || document.querySelector('.sla-abroad')) return null;
+
+        var search = opts.search !== undefined ? opts.search : location.search;
+        var force = /[?&]abroad=1\b/.test(search), off = /[?&]abroad=0\b/.test(search);
+        var tz = opts.tz;
+        if (tz === undefined) {
+            try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { tz = ''; }
+        }
+        if (off || (!force && !isOutsideIndia(tz))) return null;
+        if (!force) {
+            try { if (localStorage.getItem(ABROAD_DISMISS_KEY) === '1') return null; } catch (e) { /* storage blocked: just show it */ }
+        }
+
+        var weekly = data.countdown && data.countdown.weekly;
+        var local = '';
+        if (weekly && typeof weekly.day === 'number') {
+            var startIso = getNextWeeklyOccurrence(weekly.day, weekly.time, opts.now);
+            local = formatLocalSession(startIso, cfg.durationMinutes, tz || 'UTC');
+        }
+        var ist = (data.workshop && data.workshop.sessionTime) || '7:00 PM – 9:00 PM IST';
+
+        abroadStyles();
+        var bar = document.createElement('div');
+        bar.className = 'sla-abroad';
+        bar.setAttribute('role', 'region');
+        bar.setAttribute('aria-label', 'For visitors outside India');
+
+        var p = document.createElement('span');
+        var lead = document.createElement('strong');
+        lead.textContent = '🌍 ' + (cfg.label || 'Outside India?') + ' ';
+        p.appendChild(lead);
+        p.appendChild(document.createTextNode(local
+            ? (cfg.timePrefix || 'LIVE class:') + ' ' + local + ' ' + (cfg.yourTime || 'your time') + ' (' + ist + ')'
+            : (cfg.timePrefix || 'LIVE class:') + ' ' + ist));
+        bar.appendChild(p);
+
+        var lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+        if (cfg.englishPath && lang.indexOf('en') !== 0) {
+            var a = document.createElement('a');
+            a.className = 'sla-abroad-en';
+            a.href = siteRoot() + cfg.englishPath + (search || '');
+            a.textContent = (cfg.englishText || 'Read this page in English') + ' →';
+            a.addEventListener('click', function () {
+                if (typeof window.gtag === 'function') window.gtag('event', 'abroad_english_click', { tz: tz || '' });
+            });
+            bar.appendChild(a);
+        }
+
+        var x = document.createElement('button');
+        x.type = 'button';
+        x.className = 'sla-abroad-x';
+        x.setAttribute('aria-label', 'Close');
+        x.innerHTML = '&times;';
+        x.addEventListener('click', function () {
+            try { localStorage.setItem(ABROAD_DISMISS_KEY, '1'); } catch (e) { /* ignore */ }
+            if (bar.parentNode) bar.parentNode.removeChild(bar);
+        });
+        bar.appendChild(x);
+
+        // Top of the page content: inside <main> on the Bright/simple pages (under the sticky header),
+        // before the first section on the classic page (which has a fixed top bar and no <main>).
+        var main = document.querySelector('main');
+        if (main) main.insertBefore(bar, main.firstChild);
+        else {
+            var first = document.querySelector('body > section, section');
+            if (first && first.parentNode) first.parentNode.insertBefore(bar, first);
+            else document.body.insertBefore(bar, document.body.firstChild);
+        }
+        return bar;
+    }
+
+    // ========================
     // INITIALIZATION
     // ========================
 
@@ -1139,6 +1272,7 @@ function showProtectionAlert() {
                 initCoachImageFallback();
                 initQuotesSlider();
                 initHeroQuotes();
+                initAbroadBar(data);
             }
         }
     });
@@ -1158,6 +1292,9 @@ function showProtectionAlert() {
     }
 
     window.SLA = {
+        isOutsideIndia: isOutsideIndia,
+        formatLocalSession: formatLocalSession,
+        initAbroadBar: initAbroadBar,
         siteRoot: siteRoot,
         cacheBucket: cacheBucket,
         loadData: loadData,

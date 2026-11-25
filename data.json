@@ -78,6 +78,16 @@
         "buttonText": "Register Now for {{registration.currency}}{{registration.price}}",
         "whatsappChat": "https://wa.me/919151726759?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20the%203-day%20Super%20Learner%20Academy%20workshop."
     },
+    "abroad": {
+        "_help": "Bar for visitors whose browser timezone is outside India (no redirect). Shows the LIVE class in their local time and, on Hinglish/Hindi pages, a link to englishPath. Preview: add ?abroad=1 to any page URL.",
+        "enabled": true,
+        "label": "Outside India?",
+        "timePrefix": "LIVE class:",
+        "yourTime": "your time",
+        "durationMinutes": 120,
+        "englishPath": "english-ads-1-students/",
+        "englishText": "Read this page in English"
+    },
     "countdown": {
         "weekly": {
             "day": 6,
