@@ -424,3 +424,15 @@ body[data-design="bright"] .site-nav-toggle:hover { background: var(--pink); }
 .b-vs-promise .b-vs-head > .b-vs-us { background: var(--blue); color: var(--white); }
 .b-promise-note { font-size: 1.1rem; color: var(--ink); }
 .b-section h2 .hl { color: var(--blue); }
+
+/* Photo version of the board page (2026-11-25): Freepik photos on brand cards instead of illustrations */
+.b-photo { border-radius: 24px; }
+.b-ba-card { background: var(--white); border-radius: var(--r); padding: 22px 24px 26px; }
+.b-ba-after { border: 2.5px solid var(--ink); box-shadow: var(--shadow); }
+.b-ba-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 12px; }
+.b-ba-list li { position: relative; padding-left: 36px; font-weight: 500; }
+.b-ba-list li::before {
+    content: "✗"; position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center; font-size: .8rem; font-weight: 700; background: #FFE3EC; color: #D6336C;
+}
+.b-ba-after .b-ba-list li::before { content: "✓"; background: var(--mint-l); color: #0E6B50; }
