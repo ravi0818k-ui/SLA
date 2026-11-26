@@ -124,3 +124,6 @@ h2 { font-size: 1.65rem; text-align: center; }
 .s-foot .sla-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 10px 0 0; }
 .s-foot .sla-legal a { color: rgba(255, 255, 255, .85); text-decoration: underline; text-underline-offset: 3px; }
 .s-foot .sla-foot-note { max-width: 640px; margin: 8px auto 0; font-size: .76rem; line-height: 1.5; opacity: .75; }
+.s-foot .sla-follow { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 16px; margin: 10px 0 0; font-size: .84rem; }
+.s-foot .sla-follow a { color: rgba(255, 255, 255, .85); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.s-foot .sla-follow span { font-weight: 600; }

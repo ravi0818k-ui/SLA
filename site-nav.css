@@ -627,3 +627,30 @@ footer .sla-foot-note {
 .b-copy .sla-foot-note {
     opacity: 1;
 }
+
+/* Labelled social line under the policy bar: "Follow us: Instagram: … YouTube: … LinkedIn: …" */
+footer .sla-follow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px 18px;
+    margin: 0 0 12px;
+    font-size: 0.84rem;
+    text-align: center;
+}
+
+footer .sla-follow a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+}
+
+footer .sla-follow span {
+    font-weight: 600;
+}
+
+.b-copy > p.sla-follow {
+    margin: 0 0 12px;
+}
