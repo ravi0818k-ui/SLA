@@ -106,12 +106,27 @@
         map.appendChild(search);
 
         var total = 0;
-        SITE_MAP.forEach(function (g) {
-            var section = el('div', 'site-nav-group');
-            var h = el('p', 'site-nav-heading', g.group);
+        SITE_MAP.forEach(function (g, gi) {
+            // Every group starts COLLAPSED (2026-11-26): a visitor sees only the group names, so the
+            // other pages' links/URLs stay hidden until someone opens a group. Search opens matches.
+            var section = el('div', 'site-nav-group is-collapsed');
+            var listId = 'site-nav-group-' + gi;
+            var h = el('button', 'site-nav-heading site-nav-group-toggle');
+            h.type = 'button';
+            h.setAttribute('aria-expanded', 'false');
+            h.setAttribute('aria-controls', listId);
+            h.appendChild(el('span', 'site-nav-group-name', g.group));
             if (g.note) h.appendChild(el('span', 'site-nav-heading-note', ' · ' + g.note));
+            h.appendChild(el('span', 'site-nav-group-count', String(g.items.length)));
+            h.addEventListener('click', function () {
+                var open = section.classList.toggle('is-collapsed') === false;
+                h.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if (!input.value.trim()) ul.hidden = !open;
+            });
             section.appendChild(h);
             var ul = el('ul', 'site-nav-list site-nav-map-list');
+            ul.id = listId;
+            ul.hidden = true;
             g.items.forEach(function (it) {
                 total++;
                 var li = el('li');
@@ -174,6 +189,9 @@
                     if (ok) n++;
                 });
                 sec.hidden = n === 0;
+                // While searching, show the matches even in a collapsed group; when the box is
+                // cleared, each group goes back to the open/closed state the visitor chose.
+                sec.querySelector('.site-nav-map-list').hidden = q ? false : sec.classList.contains('is-collapsed');
                 shown += n;
             });
             empty.hidden = shown > 0;

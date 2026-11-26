@@ -93,8 +93,103 @@ describe('site map in the hamburger menu', () => {
         for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html',
             'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html']) {
             const html = read(f);
-            expect(html, f).toMatch(/site-nav\.js\?v=1\.2\.0/);
-            expect(html, f).toMatch(/site-nav\.css\?v=1\.1\.0/);
+            expect(html, f).toMatch(/site-nav\.js\?v=1\.3\.0/);
+            expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.0/);
+        }
+    });
+
+    it('every group starts collapsed, so no page link or URL shows until a group is opened', () => {
+        const panel = openPage('board-ads-5-topper/index.html', '/board-ads-5-topper/');
+        const groups = panel.querySelectorAll('.site-nav-group');
+        expect(groups.length).toBe(3);
+        for (const g of groups) {
+            expect(g.querySelector('.site-nav-group-toggle').getAttribute('aria-expanded')).toBe('false');
+            expect(g.querySelector('.site-nav-map-list').hidden).toBe(true);
+        }
+        const toggle = groups[1].querySelector('.site-nav-group-toggle');
+        toggle.click();
+        expect(toggle.getAttribute('aria-expanded')).toBe('true');
+        expect(groups[1].querySelector('.site-nav-map-list').hidden).toBe(false);
+        expect(groups[0].querySelector('.site-nav-map-list').hidden).toBe(true);
+        toggle.click();
+        expect(groups[1].querySelector('.site-nav-map-list').hidden).toBe(true);
+    });
+
+    it('search opens the groups with matches, and clearing it collapses them again', () => {
+        const panel = openPage('about.html', '/about.html');
+        const input = panel.querySelector('.site-nav-search input');
+        input.value = 'quiz';
+        input.dispatchEvent(new Event('input'));
+        const lists = panel.querySelectorAll('.site-nav-map-list');
+        expect(lists[2].hidden).toBe(false);
+        input.value = '';
+        input.dispatchEvent(new Event('input'));
+        for (const l of lists) expect(l.hidden).toBe(true);
+    });
+});
+
+describe('LinkedIn + Instagram links (2026-11-26)', () => {
+    const LI = 'https://www.linkedin.com/company/super-learner-academy';
+    const IG = 'https://www.instagram.com/superlearneracademy/';
+    const data = JSON.parse(read('data.json'));
+
+    it('data.json holds both profile URLs', () => {
+        expect(data.contact.linkedin).toBe(LI);
+        expect(data.contact.instagram).toBe(IG);
+    });
+
+    it('every footer has both links, and the About page lists both in Contact us', () => {
+        for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html', 'index-simple.html',
+            'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'generatenotes/index.html']) {
+            document.documentElement.innerHTML = read(f);
+            const all = document.querySelectorAll('footer'), foot = all[all.length - 1];   // the page footer (some cards use <footer> too)
+            expect(foot, f).not.toBeNull();
+            expect(foot.querySelector(`a[href="${LI}"]`), f + ' LinkedIn').not.toBeNull();
+            expect(foot.querySelector(`a[href="${IG}"]`), f + ' Instagram').not.toBeNull();
+        }
+        document.documentElement.innerHTML = read('about.html');
+        const contact = document.getElementById('contact');
+        expect(contact.querySelector(`a[href="${LI}"]`)).not.toBeNull();
+        expect(contact.querySelector(`a[href="${IG}"]`)).not.toBeNull();
+    });
+
+    it('the menu contact block has LinkedIn on every page with the menu', () => {
+        const panel = openPage('index.html', '/');
+        expect(panel.querySelector(`.site-nav-contact a[href="${LI}"]`)).not.toBeNull();
+    });
+});
+
+describe('standard footer: policy links on every page (2026-11-26)', () => {
+    const POLICIES = ['privacy-policy.html', 'terms.html', 'refund-policy.html'];
+    const SOURCES = ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html', 'index-simple.html'];
+    const OTHER = ['about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'generatenotes/index.html', ...POLICIES];
+    const lastFooter = () => { const all = document.querySelectorAll('footer'); return all[all.length - 1]; };
+
+    it('the three policy pages exist, are indexable and are in the sitemap', () => {
+        const sitemap = read('sitemap.xml');
+        for (const f of POLICIES) {
+            const html = read(f);
+            expect(html).toMatch(new RegExp(`<link rel="canonical" href="https://www.superlearneracademy.in/${f}">`));
+            expect(html).not.toMatch(/noindex/);
+            expect(sitemap).toContain(`https://www.superlearneracademy.in/${f}`);
+        }
+    });
+
+    it('every page footer links Privacy, Terms, Refund and Contact, plus the copyright and no-promises note', () => {
+        for (const f of [...SOURCES, ...OTHER, ...adPages.map((p) => `${p.path}/index.html`)]) {
+            document.documentElement.innerHTML = read(f);
+            const foot = lastFooter();
+            const hrefs = Array.from(foot.querySelectorAll('.sla-legal a')).map((a) => a.getAttribute('href').replace(/^\.\.\//, ''));
+            expect(hrefs, f).toEqual([...POLICIES, 'about.html#contact']);
+            expect(foot.textContent, f).toMatch(/© 2026 Super Learner Academy/);
+            expect(foot.querySelector('.sla-foot-note'), f).not.toBeNull();
+        }
+    });
+
+    it('on landing pages the Refund Policy link is paid-mode only (free mode shows no refund wording)', () => {
+        for (const f of SOURCES) {
+            document.documentElement.innerHTML = read(f);
+            expect(lastFooter().querySelector('.sla-legal a[href$="refund-policy.html"]').hasAttribute('data-paid'), f).toBe(true);
         }
     });
 });

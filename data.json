@@ -164,8 +164,11 @@
     "contact": {
         "email": "support@superlearneracademy.in",
         "emailHref": "mailto:support@superlearneracademy.in",
-        "instagram": "https://www.instagram.com/superlearneracademy",
-        "instagramHandle": "@superlearneracademy"
+        "instagram": "https://www.instagram.com/superlearneracademy/",
+        "instagramHandle": "@superlearneracademy",
+        "instagramLabel": "Instagram",
+        "linkedin": "https://www.linkedin.com/company/super-learner-academy",
+        "linkedinLabel": "LinkedIn"
     },
     "faq": {
         "attend": {

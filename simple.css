@@ -120,3 +120,7 @@ h2 { font-size: 1.65rem; text-align: center; }
     .s-when div + div { border-left: 0; border-top: 1.5px solid var(--line); }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .s-btn, .sticky-cta, .faq-answer { transition: none; } }
+/* Footer policy links (2026-11-26), same as site-nav.css */
+.s-foot .sla-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 10px 0 0; }
+.s-foot .sla-legal a { color: rgba(255, 255, 255, .85); text-decoration: underline; text-underline-offset: 3px; }
+.s-foot .sla-foot-note { max-width: 640px; margin: 8px auto 0; font-size: .76rem; line-height: 1.5; opacity: .75; }

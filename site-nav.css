@@ -411,6 +411,66 @@
     gap: 6px;
 }
 
+/* Collapsible groups (2026-11-26): every group starts closed; the heading is a button. */
+.site-nav-map .site-nav-group-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 12px 0 0;
+    padding: 11px 6px;
+    border: 0;
+    border-bottom: 1px solid var(--sn-line);
+    background: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.site-nav-group-toggle:hover,
+.site-nav-group-toggle:focus-visible {
+    color: var(--sn-ink);
+    outline: none;
+}
+
+.site-nav-group-toggle:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25);
+    border-radius: 8px;
+}
+
+.site-nav-group-count {
+    margin-left: auto;
+    min-width: 22px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: #eef1fa;
+    font-size: 0.66rem;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.site-nav-group-toggle::after {
+    content: "";
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px 3px 4px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+}
+
+.site-nav-group:not(.is-collapsed) .site-nav-group-toggle::after {
+    transform: rotate(-135deg);
+    margin-bottom: -3px;
+}
+
+.site-nav-map .site-nav-map-list {
+    margin-top: 4px;
+}
+
+.site-nav-map-list[hidden],
 .site-nav-map-list li[hidden],
 .site-nav-group[hidden],
 .site-nav-empty[hidden] {
@@ -516,4 +576,54 @@
 
 .site-nav-panel.has-site-map > .site-nav-heading {
     margin-top: 26px;
+}
+
+/* ==========================================================
+   Footer policy links (2026-11-26): every page's footer ends with
+   Privacy Policy · Terms & Conditions · Refund Policy · Contact Us,
+   the copyright line and a no-promises note. Shared by all designs
+   (simple.css has a copy for the one page that doesn't load this file).
+   ========================================================== */
+footer .sla-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 20px;
+    margin: 0 0 12px;
+    font-size: 0.88rem;
+}
+
+footer .sla-legal a {
+    display: inline-block;
+    padding: 2px 0;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+footer .sla-legal a:hover,
+footer .sla-legal a:focus-visible {
+    opacity: 1;
+    text-decoration-thickness: 2px;
+}
+
+footer .sla-foot-note {
+    max-width: 720px;
+    margin: 8px auto 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    opacity: 0.75;
+    text-align: center;
+}
+
+.b-copy {
+    padding: 0 20px;
+}
+
+.b-copy > p:not(.sla-foot-note) {
+    margin: 0;
+}
+
+.b-copy .sla-foot-note {
+    opacity: 1;
 }
