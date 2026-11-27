@@ -57,6 +57,14 @@
                 "ads-7"
             ],
             "label": "Simple one-column page for all audiences (competitor-style webinar sign-up), English, trust palette (simple.css), added 2026-11-23"
+        },
+        {
+            "path": "selfstudy-ads-8-board-2027",
+            "source": "index-board27.html",
+            "aliases": [
+                "ads-8"
+            ],
+            "label": "Board exam 2027, Class 10 & 12: 'tuition, coaching, self-study... phir bhi atak jaate ho?' + learner-type survey, Hinglish, Bright Mind with stock photos (added 2026-11-27)"
         }
     ]
 }

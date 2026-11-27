@@ -44,6 +44,20 @@
         "whatsappText": "WhatsApp par sawal poochein",
         "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mujhe%20board%20exam%20ke%20liye%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye."
     },
+    "board27": {
+        "_help": "Copy for the Board Exam 2027 self-study page index-board27.html -> /selfstudy-ads-8-board-2027/ (alias /ads-8/): Class 10 & 12, 'tuition, coaching, self-study... phir bhi atak jaate ho?'. Same keys as \"bright\" plus surveyText (hero link to the learner-type quiz). Never promise marks, %, rank or 'no coaching needed'; never attack tuition/coaching.",
+        "topBar": "Board Exam 2027 · 3 din LIVE Workshop",
+        "dateRange": "Har Shanivaar",
+        "heroEyebrow": "Class 10 & 12 · Board Exam 2027 · LIVE on Zoom",
+        "heroTitle": "Tuition, coaching, self-study... <span class=\"hl\">phir bhi test mein atak jaate ho?</span>",
+        "heroSub": "Aapko aur classes ki zaroorat nahi. Zaroorat hai yeh samajhne ki ki aapka dimaag kaise seekhta hai. 3 din ke LIVE workshop mein seekhiye: tez yaad karna, maths ke sawal khud solve karna, aur apni study habit khud banana.",
+        "buttonText": "Abhi Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "stickyText": "Seat Book Karein – {{registration.currency}}{{registration.price}}",
+        "trustLine": "UPI / Card se payment · 24 ghante refund policy · Certificate milega",
+        "surveyText": "Pehle 3 minute ka survey: Aap kis type ke learner ho?",
+        "whatsappText": "WhatsApp par sawal poochein",
+        "whatsappChat": "https://wa.me/919151726759?text=Namaste%2C%20mera%20board%20exam%202027%20mein%20hai%20(Class%20___).%20Mujhe%20Super%20Learner%20Academy%20ke%203-day%20workshop%20ke%20baare%20mein%20jaankari%20chahiye."
+    },
     "parents": {
         "_help": "Copy for the parents page index-parents.html -> /parents-ads-4-tuition-vs-exam/ (parents of Class 3-5 children: scores at home tuition, not in the exam). Same keys as \"bright\". Never promise marks or numbers.",
         "topBar": "Parents Special · 3 din LIVE",
@@ -120,6 +134,9 @@
             "board.buttonText": "Free Seat Book Karein",
             "board.stickyText": "Free Seat Book Karein",
             "board.trustLine": "Bilkul free · Register karte hi WhatsApp group mein Zoom link milega",
+            "board27.buttonText": "Free Seat Book Karein",
+            "board27.stickyText": "Free Seat Book Karein",
+            "board27.trustLine": "Bilkul free · Register karte hi WhatsApp group mein Zoom link milega",
             "parents.buttonText": "Free Seat Book Karein",
             "parents.stickyText": "Free Seat Book Karein",
             "parents.trustLine": "Bilkul free · Register karte hi WhatsApp group mein Zoom link milega",

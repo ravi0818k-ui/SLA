@@ -34,10 +34,11 @@
             { path: 'parents-ads-4-tuition-vs-exam/', icon: '👪', title: 'Parents · Class 3–5', sub: 'Tuition mein aata hai, exam mein kyun nahi?', also: ['ads-4/', 'index-parents.html'] },
             { path: 'board-ads-5-topper/', icon: '📝', title: 'Board exams · Class 9–12', sub: 'CBSE & State Board', also: ['ads-5/', 'index-board.html'] },
             { path: 'career-ads-6-professionals/', icon: '💼', title: 'Professionals', sub: 'Between jobs · learn any skill faster', also: ['ads-6/', 'index-pro.html'] },
-            { path: 'simple-ads-7-everyone/', icon: '⚡', title: 'Quick sign-up · everyone', sub: 'Short one-page version', also: ['ads-7/', 'index-simple.html'] }
+            { path: 'simple-ads-7-everyone/', icon: '⚡', title: 'Quick sign-up · everyone', sub: 'Short one-page version', also: ['ads-7/', 'index-simple.html'] },
+            { path: 'selfstudy-ads-8-board-2027/', icon: '🧩', title: 'Board exam 2027 · Class 10 & 12', sub: 'Tuition ke baad bhi atak jaate ho? + learner-type survey', also: ['ads-8/', 'index-board27.html'] }
         ] },
         { group: 'Free tools', items: [
-            { path: 'quiz.html', icon: '🧠', title: 'Quiz', sub: '19 free assessments & brain-training tools' },
+            { path: 'quiz.html', icon: '🧠', title: 'Quiz', sub: '20 free assessments & brain-training tools' },
             { path: 'mindmap/index.html', icon: '🧭', title: 'Mind Maps', sub: 'Build and export study mind maps', also: ['mindmap/'] },
             { path: 'generatenotes/index.html', icon: '📄', title: 'Notes Generator', sub: 'Markdown notes → printable PDF', also: ['generatenotes/'] },
             { path: 'resources.html', icon: '📚', title: 'Resources', sub: 'Free printable trackers & guides' }

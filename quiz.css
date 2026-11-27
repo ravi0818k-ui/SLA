@@ -1192,6 +1192,8 @@ input, textarea, [contenteditable="true"] {
 .result-tip h4 { font-family: var(--font-heading); font-size: 15px; color: var(--deep-learning-blue); margin-bottom: 6px; }
 .result-tip p { color: #444; font-size: 14px; line-height: 1.7; margin: 0; }
 .result-tip ul { margin: 6px 0 0 18px; color: #444; font-size: 14px; line-height: 1.8; }
+.result-tip ol { margin: 6px 0 0 20px; padding: 0; color: #444; font-size: 14px; line-height: 1.7; text-align: left; }
+.result-tip ol li { margin-bottom: 6px; }
 
 .result-urgency {
   background: #FFF3E0;
@@ -1846,3 +1848,5 @@ input, textarea, [contenteditable="true"] {
 :root[data-view="quiz"] .site-nav {
     display: none;
 }
+/* learner-type: the "a habit, not how your brain is wired" line right under the first-fix plan reads as part of the result */
+.result-tip + .result-disclaimer { font-size: 14px; color: #555; }

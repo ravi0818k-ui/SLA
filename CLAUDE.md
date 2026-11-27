@@ -26,7 +26,7 @@ Rules:
 
 ## Hamburger menu = site map (2026-11-25)
 
-The menu markup is still static in every page (no-JS fallback: Home, About, the 4 tools, Contact). With JS on, `site-nav.js` replaces those lists with the `SITE_MAP` array at its top: Main / Workshop pages (all 7 ad landing pages, each with its path and a copy-link button that copies the public URL) / Free tools, plus a search box and a "You're here" marker. **Every group starts collapsed** (2026-11-26, user request: other pages' links/URLs stay hidden until a group heading is clicked; search temporarily opens groups with matches) (it also recognises the `/ads-N/` copies and the `index-*.html` sources via `also`). **That array is the one place to add a new page**; `tests/unit/site-nav.test.js` fails if an `ad-pages.json` path is missing, a link points at a missing file, or the menu versions differ. `thank-you.html` is deliberately NOT in the map: opening it fires the Google Ads conversion. Links are built from the script's own `src` (`''` or `../`), so they work from sub-folders and on `file://`. Every page loads `site-nav.js?v=1.3.0` and `site-nav.css?v=1.2.0`; bump both everywhere when you change them.
+The menu markup is still static in every page (no-JS fallback: Home, About, the 4 tools, Contact). With JS on, `site-nav.js` replaces those lists with the `SITE_MAP` array at its top: Main / Workshop pages (all 8 ad landing pages, each with its path and a copy-link button that copies the public URL) / Free tools, plus a search box and a "You're here" marker. **Every group starts collapsed** (2026-11-26, user request: other pages' links/URLs stay hidden until a group heading is clicked; search temporarily opens groups with matches) (it also recognises the `/ads-N/` copies and the `index-*.html` sources via `also`). **That array is the one place to add a new page**; `tests/unit/site-nav.test.js` fails if an `ad-pages.json` path is missing, a link points at a missing file, or the menu versions differ. `thank-you.html` is deliberately NOT in the map: opening it fires the Google Ads conversion. Links are built from the script's own `src` (`''` or `../`), so they work from sub-folders and on `file://`. Every page loads `site-nav.js?v=1.3.1` (bumped 2026-11-27 for the /selfstudy-ads-8-board-2027/ entry) and `site-nav.css?v=1.2.1`; bump both everywhere when you change them (all HTML pages incl. the three policy pages, then `npm run build:ads`; `tests/unit/site-nav.test.js` checks the version).
 
 ## Social links (2026-11-26)
 
@@ -59,6 +59,7 @@ Paid campaigns point at fixed paths, one per audience/language, listed in **`ad-
 - **Free signup mode: `data.json` → `freeSignup.enabled`** (true since 2026-11-24: first batches free, to collect honest feedback). When true, `script.js` `applyFreeSignup()` (runs before `injectContent`) points every `registration.link` button at `freeSignup.link` (the thank-you page: it shows "Your Free Seat Is Booked" + the Join WhatsApp Group button (`whatsapp.link`, where the Zoom link is shared) and fires the Google Ads conversion with value 0 in free mode), copies each `freeSignup.copy` path over the paid wording (buttons, trust lines, promise lines, FAQ), sets the JSON-LD offer price to 0, adds `<html class="sla-free">` and fires a GA4 `sign_up` event on CTA clicks. Static paid-only HTML (price, payment, refund) carries `data-paid`; its free replacement sits next to it with `data-free`. The inline `<style>`/`<script>` at the end of each source page's `<head>` hides the wrong set and keeps price text invisible (`sla-wait`, max 3 s) until data.json has loaded, so ₹99 never flashes in free mode. Any new price/payment/refund copy needs a `data-paid` element plus a `data-free` twin; `tests/unit/free-signup.test.js` renders every page in both modes and fails on a visible ₹/refund/UPI in free mode or a visible free block in paid mode.
 - **Price lives only in `data.json` → `registration.price`.** Every visible price is a `data-bind` span or a `{{registration.price}}` template, page titles carry no price, and `script.js` `syncOfferPrice()` updates the JSON-LD offer at runtime. Tests (`ad-pages.test.js`, `price-switch.test.js`) fail if a literal ₹ price appears outside a bound element. The fallback text inside bound elements is the current price (₹99 since 2026-11-22); `price-switch.test.js` switches data.json to 149 and checks no fallback is left. The checkout URL is `registration.link`.
 - `/simple-ads-7-everyone/` = `index-simple.html` (2026-11-23): a SHORT one-column webinar sign-up page for all audiences, modelled on a competitor's layout. Own stylesheet `simple.css` (trust palette: navy, calm blue, white, green pay buttons, sunshine only for price/urgency; Poppins 400/600/700 only), no bright.css. Countdown in the top bar (same `countdown-*` ids), no crossed-out regular price on purpose. Copy in `data.json` → `simple`. Keep it under 8 sections (tested).
+- `/selfstudy-ads-8-board-2027/` (alias `/ads-8/`) = `index-board27.html` (2026-11-27, Board Exam 2027 campaign, Class 10 & 12; Hinglish, Bright Mind with the same Freepik photos as the board page). Story from `Documents\Super_Learner_Academy\Board_2027_Campaign\Board2027_Copy_Deck.md` §1: hero "Tuition, coaching, self-study... phir bhi test mein atak jaate ho?", `#kya-ye-aap-ho` 5 pain cards (our lines in the student's voice, NOT testimonials: no names, no quote marks), `#ruk-kar-socho` "Zyada classes vs sahi method" table (`.b-vs.b-vs-promise`), `#workshop` 3 days (same 3 pillars, Day 2 holds the 4-step "atakne par" maths routine), the goal line, `#learner-type` survey card, `#kiske-liye`, coach, `#vaada`, price, FAQ (copy-deck FAQs incl. "Do I have to stop tuition? Nahi" and "guarantee? Nahi"), final CTA. No `#topper` section and no `#reviews` block. Copy bound to `data.json` → `board27` (+ `surveyText`), free wording in `freeSignup.copy["board27.*"]`. The page loads `bright.css?v=1.0.7` (new rules at the end of bright.css: `.b-grid5`, `.b-day-goal`, `.b-mini-steps`, `.b-survey-card`, `.b-type-chips`). The hero link, survey button and final CTA link go to `quiz.html#/username/learner-type`; never link the VARK / Brain Dominance quizzes from it. Rules (tested in `tests/unit/board27.test.js`): no marks/%/rank/"no coaching needed" promise, no attack on tuition/coaching, FAQ JSON-LD equal to the visible FAQ, stock photos never captioned as students. `index.html`'s CBSE and State Board tab panels carry one small link to this page ("Board exam 2027? Class 10 & 12 ke liye special page →").
 - **Speed rules on every ad source (2026-11-22, mobile PageSpeed):** load `gtag.js` ONCE with both `gtag('config', 'G-YM45CDB7GK')` and `gtag('config', 'AW-18417193820')`; load the Google Fonts stylesheet non-blocking (`preload` + `media="print" onload="this.media='all'"` + `<noscript>`); `script.js` is `defer` (bright.js handles either order via `SLA_DATA` / the `sla:data` event). A test in `ad-pages.test.js` enforces this.
 - `index-hi.html` and `index-board.html` are hand-maintained sources (noindex). Change shared sections in `index.html` **and** in them. Each page's FAQPage JSON-LD must match its visible FAQ.
 - More will be added (e.g. an English Bright Mind page, an AI-training audience). Add an entry to `ad-pages.json` (new source page, if needed, in the repo root), run the build, commit.
@@ -163,7 +164,7 @@ The Google Fonts `<link>` in `<head>` is the only loader for the page fonts (Tom
 
 ## Quiz app (`quiz.html`)
 
-A second, self-contained app in the same repo: 19 free self-assessments and 11 brain-training
+A second, self-contained app in the same repo: 20 free self-assessments and 11 brain-training
 tools, aimed at the same student audience as the landing page and used as a free lead magnet.
 It was ported from a separate React/Vite project (`quiz-assessment-app`, since removed) into the
 same no-build, vanilla-JS shape as the rest of the site. **There is no React, no bundler and no
@@ -194,7 +195,7 @@ wraps it - that is what the render tests await instead of guessing at timers.
 
 ### The quiz engine is data-driven - don't add per-quiz code
 
-The 19 quizzes are **not** 19 code paths. Each `QuizQuestions/<id>.json` declares a `scorer` and a
+The 20 quizzes are **not** 20 code paths. Each `QuizQuestions/<id>.json` declares a `scorer` and a
 `widget`, and `quiz.js` dispatches on those. To add or change a quiz, edit its JSON; only add code
 if a genuinely new scoring shape is needed.
 
@@ -225,6 +226,15 @@ if a genuinely new scoring shape is needed.
 - Spirit Animal and Mood Check options carry a **`key`** (`"Bear"`, `"Calm"`) separately from their
   display text; that key is what indexes the quiz's `profiles` table. Tallying the visible text
   instead silently produces no profile.
+- **`learner-type` ("What Type of Learner Are You?", 2026-11-27)** is first in "Start Here" and is the board 2027
+  page's survey (deep link `quiz.html#/username/learner-type`). It is `tally-option` + `profile` like Mood Check:
+  10 questions about real study behaviour, each with one option per habit type (`Re-Reader`, `Last-Minute Crammer`,
+  `Solution Watcher`, `Deep-Thinking Drifter`, `Self-Tester`; option order varies per question). These are study-HABIT
+  types, not learning styles (no visual/auditory claims). `renderProfile()` gained three optional, generic fields for
+  it: `profile.steps` (numbered "first fix" list under `quiz.stepsTitle`), `quiz.disclaimer` (the "This is your study
+  habit today, not how your brain is wired. Habits can change..." line) and `quiz.cta` (`title`/`text`/`button`/`href`,
+  a link box after the chart; here to `selfstudy-ads-8-board-2027/`). Hindi sidecar: `QuizQuestions/hi/learner-type.json`.
+  `quiz.js`/`quiz.css` are loaded as `?v=1.2.1`.
 
 ### Deliberate choices worth not "fixing"
 
@@ -325,7 +335,7 @@ translated. The choice lives in `sessionStorage` (`sla_quiz_state.lang`) **and**
   question actually tests. Social Type's question text is just `1/20`..`20/20`, so it has no
   translation at all; only its adjectives do.
 - **Tests**: `tests/unit/quiz-i18n.test.js` asserts that the same answers produce identical numbers
-  in both languages for all 19 quizzes, that `textEn` survives the merge, that a missing sidecar
+  in both languages for all 20 quizzes, that `textEn` survives the merge, that a missing sidecar
   falls back to English, and that no sidecar restates a scoring key.
 - **The 11 tools in `quiz-tools.js` are still English only.** That was out of scope here; if they
   are ever translated they need their own approach, since their copy is inline in the JS.

@@ -1787,6 +1787,17 @@
                 h('p', { text: profile.forFacilitator })
             ]));
         }
+        // Habit-type quizzes (learner-type): a numbered "do this first" plan per profile,
+        // headed by the quiz's own stepsTitle, then the quiz-wide note (e.g. "a habit, not how your brain is wired").
+        if (profile.steps && profile.steps.length) {
+            card.appendChild(h('div', { class: 'result-tip' }, [
+                h('h4', { text: quiz.stepsTitle || tr('tryThis') }),
+                h('ol', {}, profile.steps.map(function (step) { return h('li', { text: step }); }))
+            ]));
+        }
+        if (quiz.disclaimer) {
+            card.appendChild(h('p', { class: 'result-disclaimer', text: quiz.disclaimer }));
+        }
 
         // Secondary result, when the answers weren't unanimous
         if (r.secondary) {
@@ -1802,6 +1813,15 @@
 
         card.appendChild(h('h3', { class: 'result-subhead', text: quiz.breakdownTitle || tr('yourBreakdown') }));
         card.appendChild(donutChart(r.chart));
+
+        // Optional next step from the quiz JSON (learner-type -> the board 2027 workshop page). Site-relative href.
+        if (quiz.cta && quiz.cta.href) {
+            card.appendChild(h('div', { class: 'result-guide' }, [
+                h('h4', { text: quiz.cta.title || '' }),
+                quiz.cta.text ? h('p', { text: quiz.cta.text }) : null,
+                h('a', { class: 'result-guide-link', href: quiz.cta.href, text: quiz.cta.button || quiz.cta.href })
+            ]));
+        }
     }
 
     function renderPlan(card, quiz, r, userName) {

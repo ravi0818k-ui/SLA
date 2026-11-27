@@ -90,10 +90,11 @@ describe('site map in the hamburger menu', () => {
     });
 
     it('every page with the menu loads the same new menu version', () => {
-        for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html',
-            'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html']) {
+        for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-pro.html',
+            'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html',
+            'privacy-policy.html', 'terms.html', 'refund-policy.html']) {
             const html = read(f);
-            expect(html, f).toMatch(/site-nav\.js\?v=1\.3\.0/);
+            expect(html, f).toMatch(/site-nav\.js\?v=1\.3\.1/);
             expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.1/);
         }
     });
@@ -141,7 +142,7 @@ describe('LinkedIn + Instagram + YouTube links (2026-11-26)', () => {
     });
 
     it('every footer has both links, and the About page lists both in Contact us', () => {
-        for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html', 'index-simple.html',
+        for (const f of ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-pro.html', 'index-simple.html',
             'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'generatenotes/index.html']) {
             document.documentElement.innerHTML = read(f);
             const all = document.querySelectorAll('footer'), foot = all[all.length - 1];   // the page footer (some cards use <footer> too)
@@ -170,7 +171,7 @@ describe('LinkedIn + Instagram + YouTube links (2026-11-26)', () => {
 
 describe('standard footer: policy links on every page (2026-11-26)', () => {
     const POLICIES = ['privacy-policy.html', 'terms.html', 'refund-policy.html'];
-    const SOURCES = ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-pro.html', 'index-simple.html'];
+    const SOURCES = ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-pro.html', 'index-simple.html'];
     const OTHER = ['about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'generatenotes/index.html', ...POLICIES];
     const lastFooter = () => { const all = document.querySelectorAll('footer'); return all[all.length - 1]; };
 

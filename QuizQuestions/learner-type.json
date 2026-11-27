@@ -1,0 +1,353 @@
+{
+  "id": "learner-type",
+  "title": "What Type of Learner Are You?",
+  "subtitle": "A 3-minute study-habit check for Class 10 & 12.",
+  "resultsTitle": "Your Learner Type",
+  "optionType": "per-question-keyed",
+  "scorer": "tally-option",
+  "widget": "profile",
+  "_note": "Study-HABIT types (what you do today), not fixed learning styles: the visual/auditory idea is not supported by research (site rule: no pseudo-science). Each option key is one of the 5 profiles; the option order varies per question on purpose. Copy deck: Board2027_Copy_Deck.md section 2.",
+  "stepsTitle": "✅ First fix: do this first",
+  "disclaimer": "This is your study habit today, not how your brain is wired. Habits can change, and the workshop shows you how.",
+  "breakdownTitle": "Your study-habit mix",
+  "cta": {
+    "title": "🎓 Board exam 2027? Change the habit in 3 LIVE days",
+    "text": "The free 3-day LIVE workshop for Class 10 & 12 shows you, step by step, how to remember faster, solve maths questions on your own and build your own study routine.",
+    "button": "See the 3-day workshop",
+    "href": "selfstudy-ads-8-board-2027/"
+  },
+  "questions": [
+    {
+      "text": "You sit down to study a new chapter. What do you usually do first?",
+      "options": [
+        {
+          "text": "Read it two or three times and highlight the important lines",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "Read one section, close the book and write down what I remember",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "Go straight to the solved examples and the teacher's notes",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "Skim it for now; I'll study it properly closer to the test",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "Start reading, then drift into a 'but why does this happen?' tangent",
+          "key": "Deep-Thinking Drifter"
+        }
+      ]
+    },
+    {
+      "text": "You're stuck on a maths question. What happens next?",
+      "options": [
+        {
+          "text": "I look at the solution, it makes sense, and I move on",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "I think about it for a while, then end up on my phone",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "I re-read the theory and the examples in the chapter",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "I try for a few minutes, write what I know, then check a hint",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "I skip it for now; I'll deal with it before the exam",
+          "key": "Last-Minute Crammer"
+        }
+      ]
+    },
+    {
+      "text": "When do you usually revise a chapter?",
+      "options": [
+        {
+          "text": "Mostly the night before the test",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "A day later, then a few days later, then again after a week",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "Whenever I get time, by reading my notes again",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "When I feel like it; there's no fixed time",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "When the teacher revises it in class or tuition",
+          "key": "Solution Watcher"
+        }
+      ]
+    },
+    {
+      "text": "What breaks your focus most often while you study?",
+      "options": [
+        {
+          "text": "My phone, or my own thoughts wandering to other questions",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "Reading the same page again gets boring and I lose interest",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "I get stuck and wait for someone to explain it",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "Not much: I study in short, timed blocks with the phone away",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "Nothing much until the night before the exam, then panic",
+          "key": "Last-Minute Crammer"
+        }
+      ]
+    },
+    {
+      "text": "In a tuition or coaching test, what usually happens?",
+      "options": [
+        {
+          "text": "The page looked familiar while reading, but my mind goes blank",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "I remember what I crammed last night, but not the older chapters",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "Most of it comes back, because I have practised recalling it",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "I understood it in class, but I can't start the question on my own",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "I know the ideas, but I lose time and don't finish",
+          "key": "Deep-Thinking Drifter"
+        }
+      ]
+    },
+    {
+      "text": "How do you decide that you have 'learnt' a topic?",
+      "options": [
+        {
+          "text": "It made sense when the teacher explained it",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "It looks familiar when I read it",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "I get the big idea, even if I can't write the details",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "I could say it out loud right before the test",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "I can answer questions on it with the book closed",
+          "key": "Self-Tester"
+        }
+      ]
+    },
+    {
+      "text": "Your notes are mostly...",
+      "options": [
+        {
+          "text": "Short question lists I can quiz myself with",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "Full of highlighting and underlining",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "Unfinished; I plan to complete them before the exam",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "Solutions copied from the board or the solution book",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "Full of side questions and doodles, but hard to revise from",
+          "key": "Deep-Thinking Drifter"
+        }
+      ]
+    },
+    {
+      "text": "A week after a test, how much of that chapter do you still remember?",
+      "options": [
+        {
+          "text": "Very little; most of it is gone",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "The interesting parts, not the boring details",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "I recognise the method when I see it, but can't start alone",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "Most of it, because I keep revising it at gaps",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "It feels familiar, but I couldn't write it out",
+          "key": "Re-Reader"
+        }
+      ]
+    },
+    {
+      "text": "You have two hours to study tonight. What does it usually look like?",
+      "options": [
+        {
+          "text": "Reading and highlighting the chapter again",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "Watching a video or reading solved examples",
+          "key": "Solution Watcher"
+        },
+        {
+          "text": "Short focus blocks: test myself, check, fix the gaps",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "I start well, but the phone and other thoughts take over",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "Not much tonight; I'll do one long session before the test",
+          "key": "Last-Minute Crammer"
+        }
+      ]
+    },
+    {
+      "text": "A friend asks you to explain a topic you studied last week. What happens?",
+      "options": [
+        {
+          "text": "I explain the 'why' with excitement, then go off topic",
+          "key": "Deep-Thinking Drifter"
+        },
+        {
+          "text": "I can explain most of it and I notice where I'm unsure",
+          "key": "Self-Tester"
+        },
+        {
+          "text": "I would have to cram it again first",
+          "key": "Last-Minute Crammer"
+        },
+        {
+          "text": "I need to open my notes first",
+          "key": "Re-Reader"
+        },
+        {
+          "text": "I can follow it with the solution in front of me, not from scratch",
+          "key": "Solution Watcher"
+        }
+      ]
+    }
+  ],
+  "profiles": {
+    "Re-Reader": {
+      "emoji": "📖",
+      "color": "#3A5BFF",
+      "name": "The Re-Reader",
+      "description": "You read and highlight again and again. The page starts to feel familiar, so it feels like learning, but in the test your mind goes blank. Familiar is not the same as remembered: recalling it on your own is what makes it stick.",
+      "traits": [
+        "Hard-working",
+        "Patient",
+        "Careful notes"
+      ],
+      "steps": [
+        "After each page, close the book and write down what you remember.",
+        "Open the book and check: tick what you got right and fill in what you missed.",
+        "Next time, start with the gaps. This is called active recall."
+      ]
+    },
+    "Last-Minute Crammer": {
+      "emoji": "🌙",
+      "color": "#E8487F",
+      "name": "The Last-Minute Crammer",
+      "description": "You can study hard the night before, and it often gets you through the next day. But most of it is gone a week later, so older chapters keep slipping away before the board exam.",
+      "traits": [
+        "Works well under pressure",
+        "Can focus for long hours",
+        "Gets things done"
+      ],
+      "steps": [
+        "Revise each topic again 1 day after you first study it.",
+        "Then revise it after 3 days, and again after 7 days. Short revisions are enough.",
+        "Write these dates in a small calendar so revision is not left for the last night. This is spaced repetition."
+      ]
+    },
+    "Solution Watcher": {
+      "emoji": "👀",
+      "color": "#D97706",
+      "name": "The Solution Watcher",
+      "description": "When the teacher solves a question, everything makes sense. On your own, you can't start the same question. Watching someone solve it gives understanding; solving it yourself is what works in the exam.",
+      "traits": [
+        "Good listener",
+        "Understands explanations",
+        "Follows the steps"
+      ],
+      "steps": [
+        "Try every question on your own for 5 minutes before you look at the solution.",
+        "If you are stuck, write the question in your own words and write down what you already know.",
+        "After reading the solution, close it and solve the question again yourself."
+      ]
+    },
+    "Deep-Thinking Drifter": {
+      "emoji": "💭",
+      "color": "#7C3AED",
+      "name": "The Deep-Thinking Drifter",
+      "description": "You ask big 'why' questions, and that curiosity is a real strength. But your focus breaks, the phone wins, and the work in front of you doesn't get finished.",
+      "traits": [
+        "Curious",
+        "Asks why",
+        "Sees the big picture"
+      ],
+      "steps": [
+        "Keep a 'question parking' notebook: write the big question down and come back to it later.",
+        "Study in 25-minute focus blocks with a short break after each one.",
+        "Keep your phone in another room while you study."
+      ]
+    },
+    "Self-Tester": {
+      "emoji": "🎯",
+      "color": "#0E9F73",
+      "name": "The Self-Tester",
+      "description": "You already test yourself and space out your revision. That is how memory gets stronger. Your next step is to make your practice closer to the real exam.",
+      "traits": [
+        "Tests themself",
+        "Revises at gaps",
+        "Knows their gaps"
+      ],
+      "steps": [
+        "Mix questions from different chapters in one practice session.",
+        "Time yourself, the way the exam will.",
+        "Explain each topic to someone in simple words (the Feynman Technique) and notice where you get stuck."
+      ]
+    }
+  }
+}

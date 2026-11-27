@@ -4,6 +4,14 @@
       "title": "Start Here",
       "quizzes": [
         {
+          "id": "learner-type",
+          "emoji": "🧩",
+          "label": "Learner Type",
+          "subtitle": "What type of learner are you?",
+          "title": "What Type of Learner Are You?",
+          "questions": 10
+        },
+        {
           "id": "mood-check",
           "emoji": "🎭",
           "label": "Mood Check",

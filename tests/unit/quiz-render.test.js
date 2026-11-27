@@ -177,7 +177,7 @@ describe('quiz runner', () => {
         expect(buttons[0].disabled).toBe(true);
     });
 
-    it('renders a first question for all 19 quizzes', async () => {
+    it('renders a first question for all 20 quizzes', async () => {
         for (const id of allIds) {
             await boot(`#/quiz/${id}`);
             const app = document.getElementById('app');
@@ -199,7 +199,7 @@ describe('results view', () => {
         return document.getElementById('app');
     }
 
-    it('renders a result card with actions for all 19 quizzes', async () => {
+    it('renders a result card with actions for all 20 quizzes', async () => {
         for (const id of allIds) {
             const app = await showResults(id);
             expect(app.querySelector('.quiz-error'), `${id} errored`).toBeNull();
@@ -285,6 +285,20 @@ describe('results view', () => {
         await boot('#/results/vark');
         expect(document.querySelector('.quiz-error')).toBeTruthy();
     });
+
+    it('learner-type: shows the habit type, its first-fix steps, the habit line and the workshop link', async () => {
+        const quiz = loadQuizJSON('learner-type');
+        const answers = quiz.questions.map((q) => q.options.findIndex((o) => o.key === 'Solution Watcher'));
+        sessionStorage.setItem('sla_quiz_state', JSON.stringify({ userName: 'Asha', quizId: 'learner-type', answers }));
+        await boot('#/results/learner-type');
+        const card = document.querySelector('.result-card');
+        expect(card.querySelector('.result-label').textContent).toContain('The Solution Watcher');
+        const tip = [...card.querySelectorAll('.result-tip')].find((t) => /First fix/.test(t.textContent));
+        expect(tip.querySelectorAll('ol li').length).toBe(quiz.profiles['Solution Watcher'].steps.length);
+        expect(card.querySelector('.result-disclaimer').textContent).toMatch(/not how your brain is wired\. Habits can change/);
+        expect(card.querySelector('.result-secondary')).toBeNull();
+        expect(card.querySelector('.result-guide-link').getAttribute('href')).toBe('selfstudy-ads-8-board-2027/');
+    });
 });
 
 describe('routing', () => {
@@ -305,5 +319,12 @@ describe('routing', () => {
         expect(document.title).toContain('Know Yourself Better');
         await boot('#/username/eq');
         expect(document.title).toContain('EQ');
+    });
+
+    it('the board 2027 page deep link #/username/learner-type opens the name gate for that quiz', async () => {
+        await boot('#/username/learner-type');
+        expect(document.querySelector('.quiz-error')).toBeNull();
+        expect(document.querySelector('.username-card')).toBeTruthy();
+        expect(document.title).toContain('What Type of Learner Are You?');
     });
 });

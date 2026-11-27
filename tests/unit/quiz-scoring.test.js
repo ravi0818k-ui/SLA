@@ -56,8 +56,8 @@ describe('quiz catalogue', () => {
         expect(allIds.slice().sort()).toEqual(files.slice().sort());
     });
 
-    it('declares 19 quizzes', () => {
-        expect(allIds).toHaveLength(19);
+    it('declares 20 quizzes', () => {
+        expect(allIds).toHaveLength(20);
     });
 
     it('every quiz file has questions, a scorer and a widget', () => {
@@ -92,7 +92,7 @@ describe('quiz catalogue', () => {
 describe('scoreQuiz - every quiz scores without throwing', () => {
     // Index 0 is the "lowest" answer, 4 the highest, so these bracket the range.
     for (const index of [0, 2, 4]) {
-        it(`handles an all-option-${index} run for all 19 quizzes`, () => {
+        it(`handles an all-option-${index} run for all 20 quizzes`, () => {
             for (const id of allIds) {
                 const quiz = loadQuizJSON(id);
                 const result = window.SLAQuiz.scoreQuiz(quiz, answerAll(quiz, index));
