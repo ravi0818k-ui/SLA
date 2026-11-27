@@ -9,7 +9,7 @@ import { JSDOM } from 'jsdom';
 
 const root = resolve(__dirname, '..', '..');
 const read = (f) => readFileSync(resolve(root, f), 'utf-8');
-const FILES = ['script.js', 'index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-pro.html', 'index-simple.html'];
+const FILES = ['script.js', 'index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-board27-en.html', 'index-pro.html', 'index-simple.html'];
 
 describe('JSON fetches are CDN-cache friendly', () => {
     it.each(FILES)('%s has no per-visit ?v=Date.now() cache-buster', (f) => {

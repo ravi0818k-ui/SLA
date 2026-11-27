@@ -75,7 +75,7 @@ describe('abroad bar on the pages', () => {
     });
 
     it('English pages show the local time but no "read in English" link', () => {
-        for (const f of ['index-pro.html', 'index-simple.html', 'index-classic.html']) {
+        for (const f of ['index-pro.html', 'index-simple.html', 'index-classic.html', 'index-board27-en.html']) {
             const SLA = openPage(f);
             const bar = SLA.initAbroadBar(data, { tz: 'Europe/London', now: NOW, search: '' });
             expect(bar, f).not.toBeNull();

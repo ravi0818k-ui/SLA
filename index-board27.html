@@ -269,14 +269,14 @@
 
     <link rel="preload" as="image" href="Images/photos/board-hero.webp" type="image/webp">
     <link rel="stylesheet" href="site-nav.css?v=1.2.1">
-    <link rel="stylesheet" href="bright.css?v=1.0.7">
+    <link rel="stylesheet" href="bright.css?v=1.0.8">
     <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
          workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
          the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
     <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free],html.sla-wait [data-bind$="buttonText"],html.sla-wait [data-bind$="stickyText"],html.sla-wait [data-bind$="trustLine"],html.sla-wait [data-bind^="promise."]{visibility:hidden}</style>
     <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
 </head>
-<body data-design="bright">
+<body data-design="bright" data-english-path="selfstudy-ads-9-board-2027-english/">
 
     <!-- ========== TOP BAR ========== -->
     <div class="b-topbar" aria-label="Workshop summary">
@@ -340,6 +340,7 @@
                     <li><span aria-hidden="true">🎥</span> Zoom par LIVE</li>
                     <li><span aria-hidden="true">🗣️</span> Hinglish mein</li>
                 </ul>
+                <p class="b-next" data-next-batch-wrap hidden><span aria-hidden="true">🗓️</span> <strong>Agla batch shuru:</strong> <span data-next-batch="hi"></span></p>
                 <p class="b-price" data-paid><s><span data-bind="registration.currency">₹</span><span data-bind="registration.originalPrice">4999</span></s> <strong><span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></strong> <span>ek baar ka payment</span></p>
                 <p class="b-price" data-free><strong>FREE</strong> <span>koi payment nahi</span></p>
                 <p class="b-promise"><span aria-hidden="true">✅</span> <span data-bind="promise.hinglishShort">Ek hi price mein poora course · End mein koi extra course nahi bechte</span></p>
@@ -349,6 +350,7 @@
                 </div>
                 <p class="b-survey-line"><a class="b-survey-link" href="quiz.html#/username/learner-type"><span data-bind="board27.surveyText">Pehle 3 minute ka survey: Aap kis type ke learner ho?</span> <span aria-hidden="true">→</span></a></p>
                 <p class="b-trust" data-bind="board27.trustLine">UPI / Card se payment · 24 ghante refund policy · Certificate milega</p>
+                <p class="b-lang"><a href="selfstudy-ads-9-board-2027-english/" lang="en" hreflang="en">Read this page in English <span aria-hidden="true">→</span></a></p>
             </div>
             <div class="b-hero-art">
                 <div class="b-hero-blob" aria-hidden="true"></div>
@@ -357,6 +359,21 @@
                 <span class="b-sticker b-sticker-2" aria-hidden="true">Maths</span>
                 <span class="b-sticker b-sticker-3" aria-hidden="true">Focus</span>
             </div>
+        </div>
+    </section>
+
+    <!-- ========== AT A GLANCE: what the workshop includes (2026-11-27). Facts only, no student counts or promises. ========== -->
+    <section class="b-glance" id="kya-milega" aria-labelledby="glance-h">
+        <div class="b-wrap">
+            <h2 id="glance-h">Workshop mein kya-kya hai</h2>
+            <ul class="b-glance-grid">
+                <li><div class="b-glance-card"><span class="b-gi" aria-hidden="true">🎥</span><span class="b-gt"><strong>3 din LIVE class</strong><small>Zoom par, 2-2 ghante, live sawal-jawab</small></span></div></li>
+                <li><div class="b-glance-card"><span class="b-gi" aria-hidden="true">✍️</span><span class="b-gt"><strong>Practical assignments</strong><small>Har technique apne board syllabus par try karo (PDF worksheets)</small></span></div></li>
+                <li><div class="b-glance-card"><span class="b-gi" aria-hidden="true">🧘</span><span class="b-gt"><strong>Breathing aur meditation</strong><small>Chhoti guided practice: padhai aur exam se pehle dimaag shaant</small></span></div></li>
+                <li><a class="b-glance-card b-glance-link" href="quiz.html#/username/learner-type"><span class="b-gi" aria-hidden="true">📋</span><span class="b-gt"><strong>Learner-type survey <span aria-hidden="true">→</span></strong><small>3 minute, free: apni padhai ki aadat jaano</small></span></a></li>
+                <li><div class="b-glance-card"><span class="b-gi" aria-hidden="true">➗</span><span class="b-gt"><strong>Maths ka 4-step routine</strong><small>Atakne par kya karein, live practice ke saath</small></span></div></li>
+                <li><div class="b-glance-card"><span class="b-gi" aria-hidden="true">🎓</span><span class="b-gt"><strong>Certificate + WhatsApp group</strong><small>Teeno din poore karne par certificate</small></span></div></li>
+            </ul>
         </div>
     </section>
 
@@ -540,6 +557,7 @@
     <section class="b-countdown" id="countdown" data-dynamic-only>
         <div class="b-wrap">
             <h2>Is hafte ki registration band hone mein</h2>
+            <p class="b-next-sm" data-next-batch-wrap hidden>Agla batch: <strong data-next-batch="hi"></strong></p>
             <div class="b-timer" id="countdown-timer">
                 <div><span id="countdown-days">00</span><small>Din</small></div>
                 <div><span id="countdown-hours">00</span><small>Ghante</small></div>
@@ -560,7 +578,9 @@
                     <ul class="b-checks">
                         <li>3 LIVE sessions, 2-2 ghante, Zoom par</li>
                         <li>Real-time Q&amp;A aur doubt-clearing session</li>
-                        <li>Editable PDF worksheets practice ke liye</li>
+                        <li>Practical assignments: editable PDF worksheets, apne syllabus par</li>
+                        <li>Guided breathing aur meditation practice</li>
+                        <li>Free learner-type survey (3 minute)</li>
                         <li>WhatsApp community access</li>
                         <li data-paid><strong>Poora course isi price mein – end mein koi upsell nahi</strong></li>
                         <li data-free><strong>Poora course free – end mein koi upsell nahi</strong></li>
@@ -716,8 +736,8 @@
 
     <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
-    <script src="site-nav.js?v=1.3.1" defer></script>
+    <script src="site-nav.js?v=1.3.2" defer></script>
     <script src="bright.js?v=1.0.0" defer></script>
-    <script src="script.js?v=1.1.2" defer></script>
+    <script src="script.js?v=1.1.3" defer></script>
 </body>
 </html>

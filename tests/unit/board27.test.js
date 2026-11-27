@@ -255,3 +255,158 @@ describe('learner-type quiz (QuizQuestions/learner-type.json)', () => {
         expect(r.secondary.name).toBe('Last-Minute Crammer');
     });
 });
+
+describe('next batch date (2026-11-27): "Agla batch shuru: Shanivaar, 28 Nov · 7:00 PM IST"', () => {
+    const IST = (s) => Date.parse(s + '+05:30');
+    let SLA;
+    beforeEach(() => {
+        delete window.SLA;
+        document.documentElement.innerHTML = html;
+        new Function(read('script.js'))();
+        SLA = window.SLA;
+    });
+
+    it('is hidden in the static HTML, so no stale date shows without JavaScript', () => {
+        const wraps = doc().querySelectorAll('[data-next-batch-wrap]');
+        expect(wraps.length).toBe(2);   // hero + countdown section
+        for (const w of wraps) {
+            expect(w.hasAttribute('hidden')).toBe(true);
+            expect(w.querySelector('[data-next-batch]').textContent).toBe('');
+        }
+    });
+
+    it('shows the coming Saturday from data.json countdown.weekly and un-hides both lines', () => {
+        const iso = SLA.initNextBatch(data, IST('2026-11-27T10:00:00'));   // a Friday
+        expect(iso).toBe('2026-11-28T19:00:00+05:30');
+        const wraps = document.querySelectorAll('[data-next-batch-wrap]');
+        for (const w of wraps) {
+            expect(w.hidden).toBe(false);
+            expect(w.querySelector('[data-next-batch]').textContent).toBe('Shanivaar, 28 Nov · 7:00 PM IST');
+        }
+        expect(norm(document.querySelector('.b-next').textContent)).toBe('🗓️ Agla batch shuru: Shanivaar, 28 Nov · 7:00 PM IST');
+    });
+
+    it('after Saturday 7 PM it moves to the next week, same as the countdown', () => {
+        expect(SLA.initNextBatch(data, IST('2026-11-28T19:00:00'))).toBe('2026-12-05T19:00:00+05:30');
+        expect(document.querySelector('[data-next-batch]').textContent).toBe('Shanivaar, 5 Dec · 7:00 PM IST');
+        expect(SLA.initNextBatch(data, IST('2026-12-31T23:30:00'))).toBe('2027-01-02T19:00:00+05:30');
+    });
+
+    it('formats English and morning times too', () => {
+        expect(SLA.formatNextBatch('2026-11-28T19:00:00+05:30', 'en')).toBe('Saturday, 28 Nov · 7:00 PM IST');
+        expect(SLA.formatNextBatch('2027-01-03T09:30:00+05:30', 'hi')).toBe('Ravivaar, 3 Jan · 9:30 AM IST');
+        expect(SLA.formatNextBatch('2027-01-03T12:00:00+05:30', 'en')).toBe('Sunday, 3 Jan · 12:00 PM IST');
+        expect(SLA.formatNextBatch('', 'hi')).toBe('');
+    });
+
+    it('does nothing without a weekly schedule', () => {
+        expect(SLA.initNextBatch({ countdown: { endDate: '2026-12-01T19:00:00+05:30' } })).toBeNull();
+        expect(document.querySelector('[data-next-batch-wrap]').hidden).toBe(true);
+    });
+});
+
+describe('"Workshop mein kya-kya hai" at-a-glance tiles (2026-11-27)', () => {
+    it('sits right after the hero and lists the 6 true inclusions', () => {
+        const d = doc();
+        const sec = d.getElementById('kya-milega');
+        expect(sec).not.toBeNull();
+        expect(sec.previousElementSibling.id).toBe('top');
+        const titles = Array.from(sec.querySelectorAll('.b-glance-grid > li strong')).map((s) => norm(s.textContent.replace('→', '')));
+        expect(titles).toEqual(['3 din LIVE class', 'Practical assignments', 'Breathing aur meditation', 'Learner-type survey',
+            'Maths ka 4-step routine', 'Certificate + WhatsApp group']);
+    });
+
+    it('the survey tile opens the learner-type quiz, also from the built ad page', () => {
+        expect(doc().querySelector('#kya-milega .b-glance-link').getAttribute('href')).toBe(QUIZ_LINK);
+        const built = new JSDOM(read(`${PATH}/index.html`)).window.document;
+        expect(built.querySelector('#kya-milega .b-glance-link').getAttribute('href')).toBe('../' + QUIZ_LINK);
+    });
+
+    it('makes no invented claims: no student counts, %, marks or price', () => {
+        const t = norm(doc().getElementById('kya-milega').textContent);
+        expect(t).not.toMatch(/\d{3,}|\d\s*\+|%|marks|topper|guarantee|₹|students? (trained|benefit)/i);
+    });
+
+    it('the price card lists assignments, breathing/meditation and the survey too', () => {
+        const items = Array.from(doc().querySelectorAll('#price .b-checks li')).map((li) => norm(li.textContent));
+        expect(items).toContain('Practical assignments: editable PDF worksheets, apne syllabus par');
+        expect(items).toContain('Guided breathing aur meditation practice');
+        expect(items).toContain('Free learner-type survey (3 minute)');
+    });
+});
+
+describe('English twin: index-board27-en.html -> /selfstudy-ads-9-board-2027-english/ (alias /ads-9/, 2026-11-27)', () => {
+    const EN = 'index-board27-en.html';
+    const EN_PATH = 'selfstudy-ads-9-board-2027-english';
+    const enHtml = read(EN);
+    const en = () => new JSDOM(enHtml).window.document;
+    const count = (d, sel) => d.querySelectorAll(sel).length;
+
+    it('is registered as an ad page with the /ads-9/ alias, and both built copies exist', () => {
+        const page = cfg.pages.find((p) => p.source === EN);
+        expect(page.path).toBe(EN_PATH);
+        expect(page.aliases).toEqual(['ads-9']);
+        expect(existsSync(resolve(root, `${EN_PATH}/index.html`))).toBe(true);
+        expect(read('ads-9/index.html')).toBe(read(`${EN_PATH}/index.html`));
+    });
+
+    it('is English and binds only to data.json "board27en" (plus shared keys), every key existing', () => {
+        expect(enHtml).toMatch(/<html lang="en">/);
+        expect(enHtml).not.toMatch(/data-bind(?:-html|-href)?="board27\./);
+        const keys = [...enHtml.matchAll(/data-bind(?:-html|-href)?="board27en\.([^"]+)"/g)].map((m) => m[1]);
+        expect(keys.length).toBeGreaterThan(10);
+        for (const k of new Set(keys)) expect(typeof data.board27en[k], k).toBe('string');
+        expect(enHtml).toContain('data-bind="promise.englishShort"');
+        for (const k of ['buttonText', 'stickyText', 'trustLine']) expect(data.freeSignup.copy[`board27en.${k}`]).toMatch(/free/i);
+    });
+
+    it('has the same sections and the same number of cards, rows, steps and FAQs as the Hinglish page', () => {
+        const a = doc(), b = en();
+        for (const sel of ['main > section', '.b-glance-grid > li', '.b-pain', '.b-vs-row', '.b-day', '.b-mini-steps li', '.b-type-chips li',
+            '.b-steps > li', '#price .b-checks li', '.faq-item', '[data-next-batch]', 'a[href="quiz.html#/username/learner-type"]', '[data-paid]', '[data-free]']) {
+            expect(count(b, sel), sel).toBe(count(a, sel));
+        }
+        expect((enHtml.match(/"@type": "Question"/g) || []).length).toBe(count(b, '.faq-item:not([data-free])'));
+    });
+
+    it('has no Hinglish in its visible text (apart from the link back to the Hinglish page)', () => {
+        const body = en().body;
+        body.querySelectorAll('script, style, .b-lang').forEach((el) => el.remove());
+        const text = norm(body.textContent);
+        expect(text).not.toMatch(/\b(hai|hain|karein|kaise|aap|aapka|mein|nahi|kya|kyun|padhai|seekh\w*|sawal|yaad|bhi|toh|din|ghante|Shanivaar|karo|wahi)\b/i);
+        expect(text).toMatch(/Taught in Hinglish/);   // honest: the class itself is in Hinglish
+        expect(text).toMatch(/live classes are taught in Hinglish/);
+    });
+
+    it('the two pages link to each other, also from the built ad pages', () => {
+        expect(en().querySelector('.b-lang a').getAttribute('href')).toBe('selfstudy-ads-8-board-2027/');
+        expect(doc().querySelector('.b-lang a').getAttribute('href')).toBe(EN_PATH + '/');
+        const builtEn = new JSDOM(read(`${EN_PATH}/index.html`)).window.document;
+        const builtHi = new JSDOM(read(`${PATH}/index.html`)).window.document;
+        expect(builtEn.querySelector('.b-lang a').getAttribute('href')).toBe('../selfstudy-ads-8-board-2027/');
+        expect(builtHi.querySelector('.b-lang a').getAttribute('href')).toBe(`../${EN_PATH}/`);
+        expect(builtEn.querySelector('#whats-inside .b-glance-link').getAttribute('href')).toBe('../' + QUIZ_LINK);
+    });
+
+    it('shows the next batch in English', () => {
+        delete window.SLA;
+        document.documentElement.innerHTML = enHtml;
+        new Function(read('script.js'))();
+        window.SLA.initNextBatch(data, Date.parse('2026-11-27T10:00:00+05:30'));
+        expect(norm(document.querySelector('.b-next').textContent)).toBe('🗓️ Next batch starts: Saturday, 28 Nov · 7:00 PM IST');
+        expect(document.querySelector('.b-next-sm').textContent).toBe('Next batch: Saturday, 28 Nov · 7:00 PM IST');
+    });
+
+    it('the "Outside India?" bar on the Hinglish page links to this English twin, not the generic English page', () => {
+        delete window.SLA;
+        document.documentElement.innerHTML = html;
+        new Function(read('script.js'))();
+        const bar = window.SLA.initAbroadBar(data, { tz: 'Europe/London', now: Date.parse('2026-11-27T10:00:00Z'), search: '' });
+        expect(bar.querySelector('a.sla-abroad-en').getAttribute('href')).toBe(EN_PATH + '/');
+    });
+
+    it('makes the same no-promise claims check as the Hinglish tiles', () => {
+        const t = norm(en().getElementById('whats-inside').textContent);
+        expect(t).not.toMatch(/\d{3,}|\d\s*\+|%|marks|topper|guarantee|₹|students? (trained|benefit)/i);
+    });
+});

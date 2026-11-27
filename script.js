@@ -432,6 +432,43 @@ function showProtectionAlert() {
             'T' + pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes()) + ':00+05:30';
     }
 
+    /**
+     * "Shanivaar, 28 Nov · 7:00 PM IST" (lang 'hi', Hinglish) or "Saturday, 28 Nov · 7:00 PM IST" (lang 'en')
+     * from an ISO string with a +05:30 offset (as returned by getNextWeeklyOccurrence).
+     * Reads the IST wall-clock parts straight from the string, so the visitor's timezone never shifts the date.
+     */
+    function formatNextBatch(startIso, lang) {
+        var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(startIso || ''));
+        if (!m) return '';
+        var y = +m[1], mo = +m[2], d = +m[3], h = +m[4], mi = m[5];
+        var DAYS = lang === 'en'
+            ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            : ['Ravivaar', 'Somvaar', 'Mangalvaar', 'Budhvaar', 'Guruvaar', 'Shukravaar', 'Shanivaar'];
+        var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var wd = new Date(Date.UTC(y, mo - 1, d)).getUTCDay();
+        var h12 = h % 12 === 0 ? 12 : h % 12;
+        return DAYS[wd] + ', ' + d + ' ' + MONTHS[mo - 1] + ' · ' + h12 + ':' + mi + ' ' + (h < 12 ? 'AM' : 'PM') + ' IST';
+    }
+
+    /**
+     * Fills every [data-next-batch] element (value 'hi' or 'en') with the next weekly batch start
+     * from data.countdown.weekly, and un-hides its [data-next-batch-wrap] container.
+     * Static HTML keeps the wrapper hidden, so no wrong date shows without JS.
+     * @returns {string|null} the ISO start used, or null when there is no weekly schedule
+     */
+    function initNextBatch(data, now) {
+        var weekly = data && data.countdown && data.countdown.weekly;
+        if (!weekly || typeof weekly.day !== 'number') return null;
+        var iso = getNextWeeklyOccurrence(weekly.day, weekly.time, now);
+        var els = document.querySelectorAll('[data-next-batch]');
+        for (var i = 0; i < els.length; i++) {
+            els[i].textContent = formatNextBatch(iso, els[i].getAttribute('data-next-batch'));
+            var wrap = els[i].closest('[data-next-batch-wrap]');
+            if (wrap) wrap.hidden = false;
+        }
+        return iso;
+    }
+
     function initCountdown(data) {
         countdownData = data;
 
@@ -648,7 +685,21 @@ function showProtectionAlert() {
         }
         if (data.analytics && data.analytics.fbPixel) {
             injectFBPixel(data.analytics.fbPixel);
+            if (document.body && document.body.getAttribute('data-page') === 'thank-you') trackFBLead(data);
         }
+    }
+
+    /**
+     * Meta (Facebook/Instagram) sign-up event on the thank-you page, so Meta ads can optimise for real sign-ups
+     * (2026-11-27). Runs only when data.analytics.fbPixel is set. Once per browser tab, like the Google Ads conversion.
+     * @returns {boolean} true when the event was sent
+     */
+    function trackFBLead(data) {
+        if (typeof window.fbq !== 'function') return false;
+        try { if (sessionStorage.getItem('sla_fb_lead_fired') === 'true') return false; } catch (e) { /* storage blocked: send */ }
+        window.fbq('track', 'Lead', { content_name: 'Super Learner Academy 3-day workshop', value: isFreeSignup(data) ? 0 : Number((data.registration && data.registration.price) || 0), currency: 'INR' });
+        try { sessionStorage.setItem('sla_fb_lead_fired', 'true'); } catch (e) { /* ignore */ }
+        return true;
     }
 
     /**
@@ -1208,10 +1259,12 @@ function showProtectionAlert() {
         bar.appendChild(p);
 
         var lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
-        if (cfg.englishPath && lang.indexOf('en') !== 0) {
+        // A page can name its own English twin (<body data-english-path="...">), else the default English page.
+        var enPath = (document.body && document.body.getAttribute('data-english-path')) || cfg.englishPath;
+        if (enPath && lang.indexOf('en') !== 0) {
             var a = document.createElement('a');
             a.className = 'sla-abroad-en';
-            a.href = siteRoot() + cfg.englishPath + (search || '');
+            a.href = siteRoot() + enPath + (search || '');
             a.textContent = (cfg.englishText || 'Read this page in English') + ' →';
             a.addEventListener('click', function () {
                 if (typeof window.gtag === 'function') window.gtag('event', 'abroad_english_click', { tz: tz || '' });
@@ -1264,6 +1317,7 @@ function showProtectionAlert() {
                 // await loadGoogleSheetContent(data);
 
                 initCountdown(data);
+                initNextBatch(data);
                 initFAQ();
                 initStickyCTA();
                 initScrollAnimations();
@@ -1325,8 +1379,11 @@ function showProtectionAlert() {
         playConfetti: playConfetti,
         formatWorkshopDate: formatWorkshopDate,
         getNextWeeklyOccurrence: getNextWeeklyOccurrence,
+        formatNextBatch: formatNextBatch,
+        initNextBatch: initNextBatch,
         initThankYouPage: initThankYouPage,
-        trackPurchaseConversion: trackPurchaseConversion
+        trackPurchaseConversion: trackPurchaseConversion,
+        trackFBLead: trackFBLead
     };
 
 })();

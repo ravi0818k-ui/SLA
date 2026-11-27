@@ -65,6 +65,14 @@
                 "ads-8"
             ],
             "label": "Board exam 2027, Class 10 & 12: 'tuition, coaching, self-study... phir bhi atak jaate ho?' + learner-type survey, Hinglish, Bright Mind with stock photos (added 2026-11-27)"
+        },
+        {
+            "path": "selfstudy-ads-9-board-2027-english",
+            "source": "index-board27-en.html",
+            "aliases": [
+                "ads-9"
+            ],
+            "label": "Board exam 2027, Class 10 & 12, ENGLISH twin of /selfstudy-ads-8-board-2027/ (same sections and facts; the class itself is taught in Hinglish), Bright Mind (added 2026-11-27)"
         }
     ]
 }

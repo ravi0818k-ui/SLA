@@ -13,7 +13,7 @@ const root = resolve(__dirname, '..', '..');
 const read = (f) => readFileSync(resolve(root, f), 'utf-8');
 const cfg = JSON.parse(read('ad-pages.json'));
 const script = read('script.js');
-const SOURCES = ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-pro.html', 'index-simple.html'];
+const SOURCES = ['index.html', 'index-classic.html', 'index-hi.html', 'index-parents.html', 'index-board.html', 'index-board27.html', 'index-board27-en.html', 'index-pro.html', 'index-simple.html'];
 const PAGES = SOURCES.concat(cfg.pages.map((p) => `${p.path}/index.html`));
 
 function render(file, enabled) {
