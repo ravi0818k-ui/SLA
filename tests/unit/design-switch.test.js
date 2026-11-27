@@ -1,5 +1,6 @@
 /**
- * Design switch: data.json site.design chooses between the new Bright Mind page (index.html)
+ * Design switch: data.json site.design chooses between the Bright Mind Hinglish page (index-home-hinglish.html, the home
+ * until 2026-11-28; the root index.html is now generated from index-board27-en.html)
  * and the frozen backup of the old page (index-classic.html).
  */
 import { describe, it, expect } from 'vitest';
@@ -28,7 +29,7 @@ describe('data.json design flag', () => {
 });
 
 describe('both designs are wired to the flag', () => {
-    it.each([['index.html', 'bright', 'index-classic.html'], ['index-classic.html', 'classic', 'index.html']])(
+    it.each([['index-home-hinglish.html', 'bright', 'index-classic.html'], ['index-classic.html', 'classic', 'index.html']])(
         '%s declares itself as %s and can redirect to %s',
         (file, me, other) => {
             const html = read(file);
@@ -44,15 +45,15 @@ describe('both designs are wired to the flag', () => {
     });
 });
 
-describe('bright page (index.html)', () => {
+describe('bright Hinglish page (index-home-hinglish.html)', () => {
     it('has register CTAs bound to registration.link', () => {
-        loadPage('index.html');
+        loadPage('index-home-hinglish.html');
         const ctas = document.querySelectorAll('a.cta-button[data-bind-href="registration.link"]');
         expect(ctas.length).toBeGreaterThanOrEqual(6);
         ctas.forEach((a) => expect(a.getAttribute('href')).toMatch(/^https:\/\//));
     });
     it('audience picker: every tab controls an existing panel', () => {
-        loadPage('index.html');
+        loadPage('index-home-hinglish.html');
         const tabs = document.querySelectorAll('[role="tab"]');
         expect(tabs.length).toBe(7);
         tabs.forEach((t) => {
@@ -62,7 +63,7 @@ describe('bright page (index.html)', () => {
         });
     });
     it('all local images exist and every illustration has alt text', () => {
-        loadPage('index.html');
+        loadPage('index-home-hinglish.html');
         document.querySelectorAll('img').forEach((img) => {
             const src = decodeURI(img.getAttribute('src'));
             expect(existsSync(resolve(root, src))).toBe(true);
@@ -70,7 +71,7 @@ describe('bright page (index.html)', () => {
         });
     });
     it('reviews stay hidden (no fabricated testimonials) and FAQ markup matches script.js', () => {
-        loadPage('index.html');
+        loadPage('index-home-hinglish.html');
         expect(document.getElementById('reviews').hasAttribute('hidden')).toBe(true);
         expect(document.querySelectorAll('.faq-item .faq-question[role="button"]').length).toBeGreaterThanOrEqual(8);
         for (const id of ['countdown-days', 'countdown-hours', 'countdown-minutes', 'countdown-seconds', 'countdown-timer', 'countdown-expired', 'scroll-to-top']) {
@@ -78,7 +79,7 @@ describe('bright page (index.html)', () => {
         }
     });
     it('bright.js reveals reviews only when the flag is true', () => {
-        loadPage('index.html');
+        loadPage('index-home-hinglish.html');
         new Function(read('bright.js'))();
         const reviews = document.getElementById('reviews');
         window.SLABright.applyFlags({ bright: { showTestimonials: false } });

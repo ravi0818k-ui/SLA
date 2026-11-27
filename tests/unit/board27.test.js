@@ -58,8 +58,8 @@ describe('registered as an ad page and in the site map', () => {
         expect(built).toContain('<meta name="robots" content="noindex, follow">');
     });
 
-    it('the homepage points board-2027 visitors at the page (CBSE + State Board tabs)', () => {
-        const home = new JSDOM(read('index.html')).window.document;
+    it('the Hinglish home page points board-2027 visitors at the page (CBSE + State Board tabs)', () => {
+        const home = new JSDOM(read('index-home-hinglish.html')).window.document;
         for (const id of ['panel-cbse', 'panel-state']) {
             const a = home.querySelector(`#${id} a[href="${PATH}/"]`);
             expect(a, id).not.toBeNull();

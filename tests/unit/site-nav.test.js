@@ -94,7 +94,7 @@ describe('site map in the hamburger menu', () => {
             'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html',
             'privacy-policy.html', 'terms.html', 'refund-policy.html']) {
             const html = read(f);
-            expect(html, f).toMatch(/site-nav\.js\?v=1\.3\.2/);
+            expect(html, f).toMatch(/site-nav\.js\?v=1.3.3/);
             expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.1/);
         }
     });

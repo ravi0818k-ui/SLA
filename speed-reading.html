@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!-- SPEED READING free guide (2026-11-28). Bright Mind design, English. A content page in "Free tools", not an ad page.
+     Interactive parts: speed-reading.js (calculator, reading-speed test, pacer, 2-minute preview timer); page styles: speed-reading.css.
+     Honesty rules for this page: no "1,000 words a minute" or "photo-reading" claims; numbers come from the cited studies
+     (Brysbaert 2019: ~238 wpm average adult silent reading, non-fiction; Rayner et al. 2016: speed-accuracy trade-off).
+     The workshop does NOT teach speed reading: the CTA sells the "remember what you read" half only. The workshop is taught in Hinglish.
+     Photos: Freepik free licence (credit in the footer), stock models, never captioned as students or results.
+     Sources: Documents\Super_Learner_Academy\freepik\speed_reading\SOURCES.md, built by _build\web_photos_speed.py. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Reading: Read a 100-Page Book in About 2 Hours, and Remember It | Super Learner Academy</title>
+    <meta name="description" content="What speed reading really is (and what's a myth), the maths of a 100-page book, a free reading-speed test, a pacer exercise, a 2-minute preview drill and 6 ways to remember what you read.">
+    <meta name="keywords" content="speed reading, how to read faster, reading speed test, words per minute test, how to read a book fast, how to remember what you read, speed reading exercises, pacer reading, skimming and scanning">
+    <link rel="canonical" href="https://www.superlearneracademy.in/speed-reading.html">
+    <meta name="theme-color" content="#3A5BFF">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Read a 100-page book in about 2 hours. And remember it.">
+    <meta property="og:description" content="Speed reading without the myths: a free reading-speed test, a pacer exercise and 6 ways to remember what you read.">
+    <meta property="og:url" content="https://www.superlearneracademy.in/speed-reading.html">
+    <meta property="og:image" content="https://www.superlearneracademy.in/Images/photos/og-speed.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="A smiling young woman reads an orange book">
+    <meta property="og:site_name" content="Super Learner Academy">
+    <meta property="og:locale" content="en_IN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Read a 100-page book in about 2 hours. And remember it.">
+    <meta name="twitter:description" content="Speed reading without the myths: a free reading-speed test, a pacer exercise and 6 ways to remember what you read.">
+    <meta name="twitter:image" content="https://www.superlearneracademy.in/Images/photos/og-speed.jpg">
+
+    <script>document.documentElement.className += ' js';</script>
+
+    <!-- Google tag (gtag.js): GA4 + Google Ads, one library download. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM45CDB7GK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YM45CDB7GK'); // GA4: Main Website
+      gtag('config', 'AW-18417193820'); // Google Ads (conversions, remarketing)
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Favicon SLA/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon SLA/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon SLA/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon SLA/apple-icon-180x180.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Speed reading: read a 100-page book in about 2 hours, and remember it",
+      "description": "What speed reading really is, the maths of a 100-page book, three exercises and six ways to remember what you read.",
+      "image": "https://www.superlearneracademy.in/Images/photos/og-speed.jpg",
+      "datePublished": "2026-11-28",
+      "inLanguage": "en-IN",
+      "author": { "@type": "Person", "name": "Abhishek Ranjan", "jobTitle": "Learning Science Coach" },
+      "publisher": { "@type": "Organization", "name": "Super Learner Academy", "url": "https://www.superlearneracademy.in/", "logo": { "@type": "ImageObject", "url": "https://www.superlearneracademy.in/Images/Logo.png" } },
+      "mainEntityOfPage": "https://www.superlearneracademy.in/speed-reading.html"
+    }
+    </script>
+    <!-- FAQ structured data: keep it word-for-word equal to the visible FAQ (tests/unit/speed-reading.test.js checks). -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can anyone really read 1,000 words a minute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not with full understanding. Research on eye movements shows a trade-off: past a point, more speed means less understanding. At those speeds people are skimming, which is useful, but it is not the same as reading."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I stop saying the words in my head?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The inner voice is part of how we understand language, and trying to switch it off completely tends to hurt understanding. It naturally gets quieter and quicker with practice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is speed reading good for textbooks and board exam study?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a fast gear for previewing a chapter and a slow gear for the actual learning. For exams, what you can recall matters far more than how fast you read, so spend the time you save on testing yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for Hindi books?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Previewing, reading with a question, using a pacer and recalling after reading work in any language. Your words-per-minute number will be different in each language, so compare yourself only with yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long until I read faster?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most of the early gain comes from fewer re-reads and less mind-wandering, which you can feel within a week of daily practice. Long-term speed grows with how much you read and how many words you know."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does your workshop teach speed reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The 3-day workshop teaches the other half: how to remember what you study (memory techniques, active recall and spaced revision), a 4-step routine for maths and a study habit. It is taught LIVE on Zoom, in Hinglish."
+      }
+    }
+  ]
+}
+    </script>
+
+    <!-- Fonts: Bright Mind type pair -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
+
+    <link rel="preload" as="image" href="Images/photos/speed-hero.webp" type="image/webp">
+    <link rel="stylesheet" href="site-nav.css?v=1.2.1">
+    <link rel="stylesheet" href="bright.css?v=1.1.0">
+    <link rel="stylesheet" href="speed-reading.css?v=1.0.0">
+    <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): see index-board27-en.html. -->
+    <style>html:not(.sla-free) [data-free],html.sla-free [data-paid]{display:none!important}html.sla-wait [data-paid],html.sla-wait [data-free]{visibility:hidden}</style>
+    <script>(function (h) { h.classList.add('sla-wait'); setTimeout(function () { h.classList.remove('sla-wait'); }, 3000); })(document.documentElement);</script>
+</head>
+<body data-design="bright" data-page="speed-reading">
+
+    <!-- ========== HEADER ========== -->
+    <header class="b-header">
+        <div class="b-wrap b-header-row">
+            <a href="index.html" class="b-logo" aria-label="Super Learner Academy – home">
+                <img src="Images/bright/sla-c-logo.svg" alt="Super Learner Academy" width="413" height="99">
+            </a>
+            <a href="#sr-test" class="b-btn b-btn-primary b-btn-sm b-header-cta">Test your speed</a>
+        </div>
+    </header>
+
+    <!-- ========== SITE MENU (hamburger, top-right; same markup as the other pages) ========== -->
+    <nav class="site-nav" aria-label="Site menu">
+        <button type="button" class="site-nav-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="site-nav-panel" aria-label="Open menu">
+            <span class="site-nav-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="site-nav-backdrop" id="site-nav-backdrop" hidden></div>
+        <div class="site-nav-panel" id="site-nav-panel" hidden>
+            <a class="site-nav-brand" href="index.html">Super Learner<br>Academy</a>
+
+            <p class="site-nav-heading">Pages</p>
+            <ul class="site-nav-list">
+                <li><a href="index.html"><span class="site-nav-icon" aria-hidden="true">&#127968;</span><span>Home</span></a></li>
+                <li><a href="about.html"><span class="site-nav-icon" aria-hidden="true">&#8505;&#65039;</span><span>About Us<span class="site-nav-sub">Who runs this site &amp; how to reach us</span></span></a></li>
+            </ul>
+
+            <p class="site-nav-heading">Free Tools</p>
+            <ul class="site-nav-list">
+                <li><a href="quiz.html"><span class="site-nav-icon" aria-hidden="true">&#129504;</span><span>Quiz<span class="site-nav-sub">20 free assessments &amp; brain-training tools</span></span></a></li>
+                <li><a href="speed-reading.html"><span class="site-nav-icon" aria-hidden="true">&#128214;</span><span>Speed Reading<span class="site-nav-sub">Free guide + reading-speed test</span></span></a></li>
+                <li><a href="mindmap/index.html"><span class="site-nav-icon" aria-hidden="true">&#129517;</span><span>Mind Maps<span class="site-nav-sub">Build and export study mind maps</span></span></a></li>
+                <li><a href="generatenotes/index.html"><span class="site-nav-icon" aria-hidden="true">&#128196;</span><span>Notes Generator<span class="site-nav-sub">Markdown notes &rarr; printable PDF</span></span></a></li>
+                <li><a href="resources.html"><span class="site-nav-icon" aria-hidden="true">&#128218;</span><span>Resources<span class="site-nav-sub">Free printable trackers &amp; guides</span></span></a></li>
+            </ul>
+
+            <p class="site-nav-heading">Contact</p>
+            <p class="site-nav-contact">
+                <a href="mailto:support@superlearneracademy.in"><svg class="site-nav-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.2 6.3 12 12.9l8.8-6.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>support@superlearneracademy.in</span></a><br>
+                <a href="https://www.instagram.com/superlearneracademy/" target="_blank" rel="noopener noreferrer"><svg class="site-nav-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" stroke="none"/></svg><span>&#64;superlearneracademy</span></a><br>
+                <a href="https://www.youtube.com/@superlearneracademy" target="_blank" rel="noopener noreferrer"><svg class="site-nav-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"/></svg><span>YouTube</span></a><br>
+                <a href="https://www.linkedin.com/company/super-learner-academy" target="_blank" rel="noopener noreferrer"><svg class="site-nav-contact-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="19" height="19" rx="3.5"/><path d="M7.6 10.6v5.9M7.6 7.5v.1M11.3 16.5v-5.9M11.3 13.4c0-1.7 1-2.8 2.4-2.8s2.3.9 2.3 2.8v3.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>LinkedIn</span></a>
+            </p>
+        </div>
+    </nav>
+
+    <main>
+    <!-- ========== HERO ========== -->
+    <section class="b-hero" id="top">
+        <div class="b-wrap b-hero-grid">
+            <div class="b-hero-text">
+                <p class="b-chip"><span class="b-dot" aria-hidden="true"></span>Free guide · Speed reading · 3 exercises</p>
+                <h1>Read a 100-page book in about 2 hours. <span class="hl">And remember it.</span></h1>
+                <p class="b-lead">Speed reading isn't a trick for swallowing a page at a glance. It's reading with a plan: preview first, read with a question, keep a steady pace, and test yourself when you finish. Try the three exercises below, free, right here on this page.</p>
+                <ul class="sr-facts">
+                    <li><strong>≈ 25,000</strong><span>words in a 100-page book</span></li>
+                    <li><strong>238</strong><span>words a minute: an average adult reader</span></li>
+                    <li><strong>≈ 1 h 45 min</strong><span>to read it at that pace</span></li>
+                </ul>
+                <div class="b-ctas">
+                    <a href="#sr-test" class="b-btn b-btn-primary b-btn-lg">Test my reading speed</a>
+                    <a href="#remember" class="b-btn b-btn-ghost b-btn-lg">How to remember it</a>
+                </div>
+            </div>
+            <div class="b-hero-art">
+                <div class="b-hero-blob" aria-hidden="true"></div>
+                <img src="Images/photos/speed-hero.webp" alt="A smiling young woman reads an orange book" width="800" height="800" fetchpriority="high" decoding="async">
+                <span class="b-sticker b-sticker-1" aria-hidden="true">Preview</span>
+                <span class="b-sticker b-sticker-2" aria-hidden="true">Pacer</span>
+                <span class="b-sticker b-sticker-3" aria-hidden="true">Recall</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ON THIS PAGE ========== -->
+    <nav class="sr-toc" aria-label="On this page">
+        <div class="b-wrap">
+            <ul>
+                <li><a href="#the-maths"><span aria-hidden="true">🧮</span>The 100-page maths</a></li>
+                <li><a href="#what-is-it"><span aria-hidden="true">👀</span>What speed reading is</a></li>
+                <li><a href="#method"><span aria-hidden="true">🪜</span>The 4-step method</a></li>
+                <li><a href="#exercises"><span aria-hidden="true">⏱️</span>3 exercises</a></li>
+                <li><a href="#remember"><span aria-hidden="true">🧠</span>Remember what you read</a></li>
+                <li><a href="#seven-days"><span aria-hidden="true">📅</span>7-day plan</a></li>
+                <li><a href="#faq"><span aria-hidden="true">❓</span>FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== THE MATHS + CALCULATOR ========== -->
+    <section class="b-section b-soft" id="the-maths">
+        <div class="b-wrap b-split">
+            <img class="b-photo" src="Images/photos/speed-books.webp" alt="A young man with glasses reads at a desk full of books" width="800" height="600" loading="lazy" decoding="async">
+            <div>
+                <p class="b-eyebrow">THE 100-PAGE MATHS</p>
+                <h2>A 100-page book is not a mountain</h2>
+                <p>A typical page holds about 250 words, so 100 pages is about 25,000 words. An average adult reads non-fiction silently at about <strong>238 words a minute</strong>. That's <strong>about 1 hour 45 minutes</strong> for the whole book, at a normal pace.</p>
+                <p>So most people don't need superhuman speed. They need to stop losing time: re-reading lines, drifting off, checking the phone, and forgetting it all a week later.</p>
+                <form class="sr-calc" id="sr-calc" aria-label="Reading time calculator">
+                    <p class="sr-calc-title">How long will <em>your</em> book take?</p>
+                    <div class="sr-calc-row">
+                        <label>Pages<input type="number" name="pages" value="100" min="1" max="5000" inputmode="numeric"></label>
+                        <label>Words per page<input type="number" name="wpp" value="250" min="50" max="1000" inputmode="numeric"></label>
+                        <label>Your speed (wpm)<input type="number" name="wpm" value="238" min="50" max="1000" inputmode="numeric"></label>
+                    </div>
+                    <p class="sr-calc-out">Reading time: <strong id="sr-calc-out" aria-live="polite">about 1 h 45 min</strong> <span>· at 20 minutes a day: <strong id="sr-calc-daily">6 days</strong></span></p>
+                    <p class="sr-small">Don't know your speed? Take the 2-minute test in <a href="#sr-test">Exercise 1</a>; your result fills in here.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHAT IT IS ========== -->
+    <section class="b-section" id="what-is-it">
+        <div class="b-wrap">
+            <div class="b-split sr-split-rev">
+                <div>
+                    <p class="b-eyebrow">WHAT SPEED READING IS</p>
+                    <h2>Your eyes jump. They don't glide.</h2>
+                    <p>When you read, your eyes make quick jumps along the line and stop for about a quarter of a second on a word. Reading happens during those stops. At each stop you see only a few letters sharply, so no training lets you take in a whole page at a glance.</p>
+                    <p><strong>Real speed reading means wasting fewer stops:</strong> fewer jumps back over lines you already read, fewer moments of drifting off, and knowing which parts deserve a slow read and which can be skimmed.</p>
+                </div>
+                <img class="b-photo" src="Images/photos/speed-reader.webp" alt="A young man with glasses reads a notebook outdoors" width="800" height="600" loading="lazy" decoding="async">
+            </div>
+            <div class="b-vs b-vs-promise sr-vs rv" role="table" aria-label="Speed reading myths and what works">
+                <div class="b-vs-row b-vs-head" role="row"><span class="b-vs-them" role="columnheader">Myth</span><span class="b-vs-us" role="columnheader">What works</span></div>
+                <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">"Read 1,000+ words a minute with full understanding"</span><span class="b-vs-us" role="cell">More speed past a point means less understanding. Choose the right speed for the text</span></div>
+                <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">"Photo-read a whole page at once"</span><span class="b-vs-us" role="cell">Preview the page first: headings, bold words, first lines</span></div>
+                <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">"Switch off the voice in your head"</span><span class="b-vs-us" role="cell">Keep it. It gets quicker on its own as you read more</span></div>
+                <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">"Eye exercises to widen your vision"</span><span class="b-vs-us" role="cell">A pacer under the line, so your eyes don't slip back</span></div>
+                <div class="b-vs-row" role="row"><span class="b-vs-them" role="cell">One fast speed for everything</span><span class="b-vs-us" role="cell">Gears: fast for what you know, slow for what's new or hard</span></div>
+            </div>
+            <p class="b-note">Based on the review "So much to read, so little time" (Rayner and colleagues, 2016): the biggest long-term boosts to reading speed are reading a lot and knowing more words.</p>
+        </div>
+    </section>
+
+    <!-- ========== METHOD ========== -->
+    <section class="b-section b-soft" id="method">
+        <div class="b-wrap">
+            <p class="b-eyebrow">THE 4-STEP METHOD</p>
+            <h2>Preview, Ask, Pace, Recall</h2>
+            <p class="b-sub">Use it on a chapter, an article or a whole book. The first two steps take five minutes and save you much more.</p>
+            <ol class="sr-steps">
+                <li class="rv"><span class="sr-step-n sr-c1">1</span><h3>Preview <small>5 min</small></h3><p>Read the title, headings, bold words, pictures, the summary and the questions at the end. Now you know the map before the journey.</p></li>
+                <li class="rv"><span class="sr-step-n sr-c2">2</span><h3>Ask <small>1 min</small></h3><p>Write 2 or 3 questions you want answered. Reading to find answers keeps your mind from drifting.</p></li>
+                <li class="rv"><span class="sr-step-n sr-c3">3</span><h3>Pace <small>the read</small></h3><p>Move a pen or finger steadily under the line, a little faster than comfortable. Don't go back unless the meaning is lost. Slow down for hard parts.</p></li>
+                <li class="rv"><span class="sr-step-n sr-c4">4</span><h3>Recall <small>3 min</small></h3><p>Close the book. Write or say everything you remember and answer your questions. Then check what you missed.</p></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ========== EXERCISES ========== -->
+    <section class="b-section" id="exercises">
+        <div class="b-wrap">
+            <p class="b-eyebrow">TRY IT NOW</p>
+            <h2>3 speed-reading exercises</h2>
+            <p class="b-sub">Do them in order. Read the way you normally do: the goal is an honest starting point, not a high score.</p>
+
+            <!-- Exercise 1: reading-speed test -->
+            <article class="sr-tool" id="sr-test">
+                <header class="sr-tool-head"><span class="sr-tag sr-c1">Exercise 1</span><h3>Reading-speed test</h3><p>Press start, read the passage once at your normal pace, then press "I'm done". Three short questions check your understanding.</p></header>
+                <div class="sr-tool-bar"><button type="button" class="b-btn b-btn-primary" data-sr="start">Start reading</button><button type="button" class="b-btn b-btn-primary" data-sr="done" hidden>I'm done</button><span class="sr-clock" aria-label="Time">0:00</span></div>
+                <div class="sr-passage sr-blur" aria-hidden="true">
+                    <h4>Why we forget, and how to stop it</h4>
+                    <p>In the 1880s, a German psychologist named Hermann Ebbinghaus ran an unusual experiment on himself. He memorised long lists of nonsense syllables, short made-up words like DAX or BOK, so that nothing he already knew could help him. Then he tested himself after different gaps, from twenty minutes to a month. The results surprised him. A large part of each list was gone within the first day. After that, forgetting slowed down, but it never quite stopped. We now call this pattern the forgetting curve.</p>
+                    <p>The curve explains a feeling every student knows. You read a chapter on Monday, understand all of it, and by Thursday it feels as if you never opened the book. Nothing is wrong with your brain. Forgetting is how memory clears space for what matters.</p>
+                    <p>The good news is that the curve can be bent. Each time you pull an idea back out of memory, without looking at the page, the memory becomes stronger and fades more slowly. Researchers call this retrieval practice. It works best when the gaps grow: a quick review the same day, another a day or two later, then one after a week. This is called spaced repetition.</p>
+                    <p>Notice what does not help much: reading the same page again and again. Re-reading feels productive, because the words look familiar, but familiarity is not the same as memory. The real test is whether you can explain the idea with the book closed.</p>
+                    <p>So the next time you finish a chapter, close the book. Write down everything you remember in two minutes. Then check what you missed. That small, slightly uncomfortable effort is the difference between reading a chapter and keeping it.</p>
+                </div>
+                <form class="sr-quiz" hidden>
+                    <p class="sr-quiz-lead">Your speed: <strong class="sr-wpm">0</strong> words a minute. Now, without scrolling up:</p>
+                    <fieldset data-answer="b"><legend>1. Why did Ebbinghaus use nonsense syllables?</legend>
+                        <label><input type="radio" name="q1" value="a"> They were easy to say out loud</label>
+                        <label><input type="radio" name="q1" value="b"> So that what he already knew couldn't help him</label>
+                        <label><input type="radio" name="q1" value="c"> Because he was studying a new language</label>
+                    </fieldset>
+                    <fieldset data-answer="c"><legend>2. According to the passage, what makes a memory fade more slowly?</legend>
+                        <label><input type="radio" name="q2" value="a"> Reading the page again</label>
+                        <label><input type="radio" name="q2" value="b"> Highlighting the key words</label>
+                        <label><input type="radio" name="q2" value="c"> Pulling the idea out of memory without looking</label>
+                    </fieldset>
+                    <fieldset data-answer="a"><legend>3. When should the first review happen?</legend>
+                        <label><input type="radio" name="q3" value="a"> The same day</label>
+                        <label><input type="radio" name="q3" value="b"> After a week</label>
+                        <label><input type="radio" name="q3" value="c"> Just before the exam</label>
+                    </fieldset>
+                    <button type="submit" class="b-btn b-btn-primary">Check my answers</button>
+                </form>
+                <div class="sr-result" hidden aria-live="polite">
+                    <div class="sr-result-grid">
+                        <p><strong class="sr-r-wpm">0</strong><span>words a minute</span></p>
+                        <p><strong class="sr-r-score">0/3</strong><span>understanding</span></p>
+                        <p><strong class="sr-r-eff">0</strong><span>effective speed (speed × understanding)</span></p>
+                    </div>
+                    <p class="sr-r-tip"></p>
+                    <p class="sr-small">For comparison: an average adult reads non-fiction at about 238 words a minute (Brysbaert, 2019). Your number in Hindi or on a textbook will be different; compare yourself only with yourself.</p>
+                </div>
+            </article>
+
+            <!-- Exercise 2: pacer -->
+            <article class="sr-tool" id="sr-pacer">
+                <header class="sr-tool-head"><span class="sr-tag sr-c2">Exercise 2</span><h3>Pacer drill</h3><p>The highlight moves three words at a time. Let your eyes follow it without going back. Start at your test speed, then try 25 words a minute faster. If you lose the meaning, slow down.</p></header>
+                <div class="sr-tool-bar">
+                    <button type="button" class="b-btn b-btn-primary" data-sr="pacer-play" aria-pressed="false">Start</button>
+                    <button type="button" class="b-btn b-btn-ghost" data-sr="pacer-reset">Reset</button>
+                    <label class="sr-range">Speed <input type="range" name="pacer-wpm" min="150" max="500" step="25" value="250"> <strong class="sr-pacer-val">250</strong> wpm</label>
+                </div>
+                <div class="sr-pacer-text">
+                    <p>Your eyes do not glide smoothly across a line. They jump. Each jump is called a saccade, and between jumps the eyes stop for about a quarter of a second. These stops are called fixations, and they are when the actual reading happens. During a fixation you can make out only about seven or eight letters to the right of where you are looking, and fewer to the left. Everything further away is a blur.</p>
+                    <p>Roughly one jump in ten goes backwards. These are regressions. Some are useful, because you go back when a sentence did not make sense. Many are just habit, or a sign that your mind wandered and you lost your place.</p>
+                    <p>A pacer helps here. When you move a pen or finger steadily under the line, your eyes have something to follow, and they are less likely to slip back without a reason. Set the pacer a little faster than feels comfortable, but never so fast that you lose the meaning. Understanding is the point. Speed is only useful if the meaning comes with it.</p>
+                </div>
+                <p class="sr-small">On paper: use a pen cap or your finger the same way. A card held <em>above</em> the line, covering what you've read, also stops you slipping back.</p>
+            </article>
+
+            <!-- Exercise 3: preview drill -->
+            <article class="sr-tool" id="sr-preview">
+                <header class="sr-tool-head"><span class="sr-tag sr-c3">Exercise 3</span><h3>2-minute preview drill</h3><p>Pick any chapter from your textbook or a book you're reading. Start the timer and look at <strong>only</strong> these, in this order:</p></header>
+                <div class="sr-preview-grid">
+                    <ol class="sr-preview-list">
+                        <li>Chapter title and every heading</li>
+                        <li>Pictures, diagrams, tables and their captions</li>
+                        <li>Bold and highlighted words</li>
+                        <li>The first sentence of each paragraph</li>
+                        <li>The summary and the questions at the end</li>
+                    </ol>
+                    <div class="sr-preview-timer">
+                        <p class="sr-preview-clock" aria-live="polite">2:00</p>
+                        <button type="button" class="b-btn b-btn-primary" data-sr="preview-go">Start 2 minutes</button>
+                    </div>
+                </div>
+                <p class="sr-small">When the time is up, close the book and write 3 things the chapter is about. Then read it properly: you'll notice you go faster, because your brain already has the map.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========== REMEMBER ========== -->
+    <section class="b-section b-soft" id="remember">
+        <div class="b-wrap">
+            <div class="b-split">
+                <img class="b-photo" src="Images/photos/speed-notes.webp" alt="A young woman sits cross-legged on a bench and writes notes" width="800" height="600" loading="lazy" decoding="async">
+                <div>
+                    <p class="b-eyebrow">THE HALF EVERYONE SKIPS</p>
+                    <h2>How to remember what you read</h2>
+                    <p>Reading fast is pointless if it's gone by next week. Without review, a large part of what you read fades within a day. That's normal: it's how memory works. These six habits bend that curve.</p>
+                </div>
+            </div>
+            <div class="sr-tips">
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">📝</span><h3>Recall before you close the tab</h3><p>Right after reading, write or say everything you remember with the book shut. Pulling it out of memory is what makes it stay.</p></div>
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">❓</span><h3>Read with questions</h3><p>The questions you wrote in step 2 become hooks. Answers to questions you care about stick better than facts you skimmed past.</p></div>
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">🗣️</span><h3>Explain it simply</h3><p>Explain the idea as if to a younger student, in your own words. Where you get stuck is exactly what you haven't understood yet.</p></div>
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">📆</span><h3>Review on a schedule</h3><p>Same day, after 1–2 days, after a week. Each short review takes less time than the last, and the memory lasts longer.</p></div>
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">🧭</span><h3>Draw a one-page map</h3><p>Put the main idea in the middle and branch out. Linking new ideas to what you already know makes them easier to find later. <a href="mindmap/index.html">Try our free Mind Maps tool →</a></p></div>
+                <div class="b-card rv"><span class="sr-ic" aria-hidden="true">📵</span><h3>One thing at a time</h3><p>Phone in another room, 25-minute reading blocks. A memory needs your full attention while it's being made.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 7-DAY PLAN ========== -->
+    <section class="b-section" id="seven-days">
+        <div class="b-wrap">
+            <p class="b-eyebrow">7-DAY PRACTICE PLAN</p>
+            <h2>15–20 minutes a day for one week</h2>
+            <p class="b-sub">Use a real book you want to read. Take Exercise 1 again on day 7 and compare with your own day-1 number.</p>
+            <ol class="sr-week">
+                <li><strong>Day 1</strong><span>Take the reading-speed test. Note your speed and your score.</span></li>
+                <li><strong>Day 2</strong><span>Preview drill on one chapter, then read it. Recall for 3 minutes.</span></li>
+                <li><strong>Day 3</strong><span>Pacer drill at your test speed, then read 10 pages with a pen as pacer.</span></li>
+                <li><strong>Day 4</strong><span>Pacer at +25 wpm. Review day 2's chapter from memory first.</span></li>
+                <li><strong>Day 5</strong><span>Full method on a new chapter: Preview, Ask, Pace, Recall.</span></li>
+                <li><strong>Day 6</strong><span>Explain one chapter aloud in 2 minutes. Draw a one-page map.</span></li>
+                <li><strong>Day 7</strong><span>Take the test again. Did your speed <em>and</em> your score hold up?</span></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ========== WORKSHOP CTA (the workshop teaches remembering, NOT speed reading) ========== -->
+    <section class="b-final" id="workshop">
+        <div class="b-wrap b-split">
+            <div>
+                <h2>Read it once. Now learn to keep it.</h2>
+                <p>Our free 3-day LIVE workshop teaches the remembering half: memory techniques, active recall and spaced revision, plus a 4-step routine for maths. On Zoom, taught in Hinglish, with Coach Abhishek.</p>
+                <p class="b-next sr-next" data-next-batch-wrap hidden><span aria-hidden="true">🗓️</span> <strong>Next batch starts:</strong> <span data-next-batch="en"></span></p>
+                <div class="b-ctas">
+                    <a href="https://superprofile.bio/e/onmob4mz" class="cta-button b-btn b-btn-white b-btn-lg" data-bind-href="registration.link"><span data-paid>Book Your Seat – <span data-bind="registration.currency">₹</span><span data-bind="registration.price">99</span></span><span data-free>Book Your Free Seat</span></a>
+                    <a href="selfstudy-ads-9-board-2027-english/" class="b-btn b-btn-outline-white b-btn-lg">See the workshop</a>
+                </div>
+            </div>
+            <div class="b-tagged">
+                <img src="Images/photos/board-final.webp" alt="A smiling girl pointing upwards with both hands" width="1200" height="900" loading="lazy" decoding="async">
+                <span class="b-sticker b-tag-l" aria-hidden="true">Recall</span>
+                <span class="b-sticker b-tag-r" aria-hidden="true">Review</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ (keep equal to the FAQPage JSON-LD in <head>) ========== -->
+    <section class="b-section" id="faq">
+        <div class="b-wrap b-narrow">
+            <p class="b-eyebrow">FAQ</p>
+            <h2>Speed reading questions</h2>
+            <div class="b-faq">
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Can anyone really read 1,000 words a minute?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Not with full understanding. Research on eye movements shows a trade-off: past a point, more speed means less understanding. At those speeds people are skimming, which is useful, but it is not the same as reading.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Should I stop saying the words in my head?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>No. The inner voice is part of how we understand language, and trying to switch it off completely tends to hurt understanding. It naturally gets quieter and quicker with practice.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Is speed reading good for textbooks and board exam study?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Use a fast gear for previewing a chapter and a slow gear for the actual learning. For exams, what you can recall matters far more than how fast you read, so spend the time you save on testing yourself.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Does this work for Hindi books?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Yes. Previewing, reading with a question, using a pacer and recalling after reading work in any language. Your words-per-minute number will be different in each language, so compare yourself only with yourself.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>How long until I read faster?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>Most of the early gain comes from fewer re-reads and less mind-wandering, which you can feel within a week of daily practice. Long-term speed grows with how much you read and how many words you know.</p></div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0"><span>Does your workshop teach speed reading?</span><span class="b-chev" aria-hidden="true"></span></div>
+                    <div class="faq-answer"><div><p>No. The 3-day workshop teaches the other half: how to remember what you study (memory techniques, active recall and spaced revision), a 4-step routine for maths and a study habit. It is taught LIVE on Zoom, in Hinglish.</p></div></div>
+                </div>
+            </div>
+            <div class="sr-sources">
+                <p class="b-foot-head">Sources</p>
+                <ul>
+                    <li>Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. <em>Journal of Memory and Language</em>, 109.</li>
+                    <li>Rayner, K., Schotter, E. R., Masson, M. E. J., Potter, M. C., &amp; Treiman, R. (2016). So much to read, so little time: How do we read, and can speed reading help? <em>Psychological Science in the Public Interest</em>, 17(1).</li>
+                    <li>Ebbinghaus, H. (1885). <em>Memory: A Contribution to Experimental Psychology</em>.</li>
+                    <li>Roediger, H. L., &amp; Karpicke, J. D. (2006). Test-enhanced learning. <em>Psychological Science</em>, 17(3).</li>
+                    <li>Cepeda, N. J., et al. (2006). Distributed practice in verbal recall tasks: A review and quantitative synthesis. <em>Psychological Bulletin</em>, 132(3).</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="b-footer">
+        <div class="b-wrap b-footer-grid">
+            <div>
+                <img src="Images/bright/sla-c-logo-reverse.svg" alt="Super Learner Academy" width="413" height="99" loading="lazy" class="b-footer-logo">
+                <p>Learn how to learn. A 3-day LIVE workshop for students: memory, focus and mindset.</p>
+            </div>
+            <div>
+                <p class="b-foot-head">This guide</p>
+                <a href="#the-maths">The 100-page maths</a><a href="#what-is-it">What speed reading is</a><a href="#method">The 4-step method</a><a href="#exercises">3 exercises</a><a href="#remember">Remember what you read</a><a href="#faq">FAQ</a>
+            </div>
+            <div>
+                <p class="b-foot-head">Free tools</p>
+                <a href="quiz.html">Quiz</a><a href="mindmap/index.html">Mind Maps</a><a href="generatenotes/index.html">Notes Generator</a><a href="resources.html">Resources</a><a href="about.html">About Us</a>
+            </div>
+            <div>
+                <p class="b-foot-head">Contact</p>
+                <a href="mailto:support@superlearneracademy.in" data-bind-href="contact.emailHref"><span data-bind="contact.email">support@superlearneracademy.in</span></a>
+                <a href="https://www.instagram.com/superlearneracademy/" data-bind-href="contact.instagram" target="_blank" rel="noopener noreferrer"><span data-bind="contact.instagramLabel">Instagram</span></a>
+                <a href="https://www.youtube.com/@superlearneracademy" data-bind-href="contact.youtube" target="_blank" rel="noopener noreferrer"><span data-bind="contact.youtubeLabel">YouTube</span></a>
+                <a href="https://www.linkedin.com/company/super-learner-academy" data-bind-href="contact.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+        <div class="b-copy">
+            <nav class="sla-legal" aria-label="Policies">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="refund-policy.html" data-paid>Refund Policy</a>
+                <a href="about.html#contact">Contact Us</a>
+            </nav>
+            <p>© 2026 Super Learner Academy. All rights reserved. Online classes, based in India.</p>
+            <p class="sla-foot-note">Photos: Freepik. We teach learning skills. Results depend on each student&rsquo;s own practice, so we don&rsquo;t promise any marks, rank or job.</p>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+    <script src="site-nav.js?v=1.3.3" defer></script>
+    <script src="bright.js?v=1.0.0" defer></script>
+    <script src="script.js?v=1.1.3" defer></script>
+    <script src="speed-reading.js?v=1.0.0" defer></script>
+</body>
+</html>

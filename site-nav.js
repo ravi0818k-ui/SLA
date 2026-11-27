@@ -24,7 +24,7 @@
      */
     var SITE_MAP = [
         { group: 'Main', items: [
-            { path: '', icon: '🏠', title: 'Home', sub: '3-day LIVE workshop (Hinglish)', also: ['index.html'] },
+            { path: '', icon: '🏠', title: 'Home', sub: 'Board exam 2027 · 3-day LIVE workshop', also: ['index.html'] },
             { path: 'about.html', icon: 'ℹ️', title: 'About Us', sub: 'Who runs this site & how to reach us' }
         ] },
         { group: 'Workshop pages', note: 'one per audience', share: true, items: [
@@ -40,6 +40,7 @@
         ] },
         { group: 'Free tools', items: [
             { path: 'quiz.html', icon: '🧠', title: 'Quiz', sub: '20 free assessments & brain-training tools' },
+            { path: 'speed-reading.html', icon: '📖', title: 'Speed Reading', sub: 'Free guide + reading-speed test' },
             { path: 'mindmap/index.html', icon: '🧭', title: 'Mind Maps', sub: 'Build and export study mind maps', also: ['mindmap/'] },
             { path: 'generatenotes/index.html', icon: '📄', title: 'Notes Generator', sub: 'Markdown notes → printable PDF', also: ['generatenotes/'] },
             { path: 'resources.html', icon: '📚', title: 'Resources', sub: 'Free printable trackers & guides' }
