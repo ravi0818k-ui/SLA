@@ -70,7 +70,8 @@ describe('registered as an ad page and in the site map', () => {
 
 describe('copy: the board 2027 story, bound to data.json "board27"', () => {
     it('leads with the copy-deck hero and binds every key to data.json board27', () => {
-        expect(data.board27.heroTitle).toMatch(/Tuition, coaching, self-study/);
+        expect(data.board27.heroTitle).toMatch(/Padha hua .*bhoolna band karo/);
+        expect(data.board27en.heroTitle).toMatch(/Stop forgetting .*what you study/);
         expect(data.board27.heroEyebrow).toMatch(/Class 10 & 12/);
         expect(data.board27.heroEyebrow).toMatch(/2027/);
         expect(html).not.toMatch(/data-bind(?:-html|-href)?="(?:bright|board|parents|hindi|pro)\./);
@@ -150,7 +151,7 @@ describe('copy: the board 2027 story, bound to data.json "board27"', () => {
         expect(d.title).not.toMatch(/₹|\d{2,} ?(?:rs|inr)/i);
         expect(d.querySelector('meta[name="description"]').content).toMatch(/Class 10 & 12/);
         expect(d.querySelector('meta[property="og:url"]').content).toBe(`${cfg.baseUrl}/${PATH}/`);
-        expect(d.querySelector('meta[property="og:title"]').content).toMatch(/atak jaate ho/);
+        expect(d.querySelector('meta[property="og:title"]').content).toMatch(/bhoolna band karo/);
     });
 });
 
