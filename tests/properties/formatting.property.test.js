@@ -35,7 +35,7 @@ describe('Property 8: Date formatting correctness', () => {
     it('formatted output contains correct day, month, year, and time with AM/PM and IST', () => {
         fc.assert(
             fc.property(
-                fc.date({ min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) }),
+                fc.date({ min: new Date(2020, 0, 1), max: new Date(2030, 11, 31), noInvalidDate: true }),
                 (date) => {
                     const isoString = date.toISOString();
                     const result = window.SLA.formatWorkshopDate(isoString);
@@ -73,7 +73,7 @@ describe('Property 8: Date formatting correctness', () => {
     it('output always ends with IST suffix', () => {
         fc.assert(
             fc.property(
-                fc.date({ min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) }),
+                fc.date({ min: new Date(2020, 0, 1), max: new Date(2030, 11, 31), noInvalidDate: true }),
                 (date) => {
                     // Guard against invalid dates
                     fc.pre(!isNaN(date.getTime()));

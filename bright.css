@@ -497,3 +497,12 @@ body[data-design="bright"] .site-nav-toggle:hover { background: var(--pink); }
 .b-lang { margin: 10px 0 0; font-size: .92rem; }
 .b-lang a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .b-lang a:hover, .b-lang a:focus-visible { color: var(--ink); }
+/* Floating word stickers on section photos (board27 pages, 2026-11-27): same look as the hero stickers.
+   Words only, never claims ("100% retention" etc. are not allowed). */
+.b-tagged { position: relative; }
+.b-tagged > img { display: block; width: 100%; height: auto; }
+.b-tag-l { background: var(--yel); left: 6%; top: 12%; transform: rotate(-6deg); }
+.b-tag-r { background: var(--mint); right: 6%; top: 20%; transform: rotate(5deg); animation-delay: -1.6s; }
+.b-final .b-tag-r { background: var(--pink); }
+@media (max-width: 900px) { .b-final .b-tagged { width: 100%; max-width: 480px; margin: 8px auto 0; } .b-final .b-tagged > img { margin: 0; } }
+@media (max-width: 640px) { .b-tag-l { left: 3%; top: 8%; } .b-tag-r { right: 3%; top: 16%; } }

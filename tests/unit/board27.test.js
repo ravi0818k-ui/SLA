@@ -410,3 +410,15 @@ describe('English twin: index-board27-en.html -> /selfstudy-ads-9-board-2027-eng
         expect(t).not.toMatch(/\d{3,}|\d\s*\+|%|marks|topper|guarantee|₹|students? (trained|benefit)/i);
     });
 });
+
+describe('word stickers on the section photos (2026-11-27)', () => {
+    it('both Board 2027 pages tag the "who it\'s for" and final photos with words, never claims', () => {
+        for (const f of ['index-board27.html', 'index-board27-en.html']) {
+            const d = new JSDOM(read(f)).window.document;
+            const words = Array.from(d.querySelectorAll('.b-tagged .b-sticker')).map((s) => s.textContent);
+            expect(words, f).toEqual(['Active recall', 'Board 2027', 'Memory', 'Focus']);
+            for (const w of words) expect(w, f).not.toMatch(/%|100|guarantee|topper|10x|marks/i);
+            for (const s of d.querySelectorAll('.b-tagged .b-sticker')) expect(s.getAttribute('aria-hidden')).toBe('true');
+        }
+    });
+});
