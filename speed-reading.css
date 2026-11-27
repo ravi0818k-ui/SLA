@@ -145,3 +145,16 @@
 
 /* .b-btn sets display, which beats the [hidden] attribute */
 .sr-tool [hidden] { display: none !important; }
+
+/* No dark top bar on this page, so the sticky header sits at the very top (bright.css leaves 36px for the bar)
+   and the hamburger lines up with it: (70 - 46) / 2 = 12px; phones (62 - 42) / 2 = 10px. */
+[data-page="speed-reading"] .b-header { top: 0; }
+body[data-design="bright"][data-page="speed-reading"] .site-nav-toggle { top: 12px; }
+@media (max-width: 640px) {
+    body[data-design="bright"][data-page="speed-reading"] .site-nav-toggle { top: 10px; }
+}
+
+/* "Next batch starts" on the blue workshop band: .b-final p makes text pale blue, unreadable on pale yellow.
+   Solid yellow with dark text instead. */
+.b-final .b-next { background: var(--yel); color: var(--ink); }
+.b-final .b-next, .b-final .b-next strong, .b-final .b-next span { color: var(--ink); }

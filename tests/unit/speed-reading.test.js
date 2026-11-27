@@ -142,6 +142,6 @@ describe('page wiring', () => {
         expect(html).toContain('<a href="speed-reading.html">');
         expect(read('sitemap.xml')).toContain('https://www.superlearneracademy.in/speed-reading.html');
         expect(doc().querySelector('link[rel="canonical"]').getAttribute('href')).toBe('https://www.superlearneracademy.in/speed-reading.html');
-        expect(html).toMatch(/site-nav\.js\?v=1\.3\.3/);
+        expect(html).toMatch(/site-nav\.js\?v=1\.3\.4/);
     });
 });

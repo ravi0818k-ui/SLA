@@ -39,7 +39,8 @@ describe('site map in the hamburger menu', () => {
             expect(links).toContain(l);
         }
         for (const l of links) {
-            const file = l === './' ? 'index.html' : l.endsWith('/') ? `${l}index.html` : l;
+            const f = l.split('#')[0];
+            const file = f === './' ? 'index.html' : f.endsWith('/') ? `${f}index.html` : f;
             expect(existsSync(resolve(root, file)), file).toBe(true);
         }
     });
@@ -94,7 +95,7 @@ describe('site map in the hamburger menu', () => {
             'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html',
             'privacy-policy.html', 'terms.html', 'refund-policy.html']) {
             const html = read(f);
-            expect(html, f).toMatch(/site-nav\.js\?v=1.3.3/);
+            expect(html, f).toMatch(/site-nav\.js\?v=1.3.4/);
             expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.1/);
         }
     });

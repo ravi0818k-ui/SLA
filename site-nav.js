@@ -41,6 +41,7 @@
         { group: 'Free tools', items: [
             { path: 'quiz.html', icon: '🧠', title: 'Quiz', sub: '20 free assessments & brain-training tools' },
             { path: 'speed-reading.html', icon: '📖', title: 'Speed Reading', sub: 'Free guide + reading-speed test' },
+            { path: 'speed-reading.html#sr-test', icon: '⏱️', title: 'Reading Speed Test', sub: 'Find your words per minute in 2 minutes' },
             { path: 'mindmap/index.html', icon: '🧭', title: 'Mind Maps', sub: 'Build and export study mind maps', also: ['mindmap/'] },
             { path: 'generatenotes/index.html', icon: '📄', title: 'Notes Generator', sub: 'Markdown notes → printable PDF', also: ['generatenotes/'] },
             { path: 'resources.html', icon: '📚', title: 'Resources', sub: 'Free printable trackers & guides' }
@@ -141,7 +142,8 @@
                 a.appendChild(icon);
                 var text = el('span', 'site-nav-text', it.title);
                 var urls = [it.path].concat(it.also || []);
-                var isHere = urls.some(function (p) { return normUrl(absUrl((prefix + p) || './')) === here; });
+                // a deep link into a page (path with #) is never "You're here": the page's own entry is
+                var isHere = it.path.indexOf('#') < 0 && urls.some(function (p) { return normUrl(absUrl((prefix + p) || './')) === here; });
                 if (isHere) {
                     li.className = 'is-current';
                     a.setAttribute('aria-current', 'page');
