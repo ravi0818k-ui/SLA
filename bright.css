@@ -506,3 +506,19 @@ body[data-design="bright"] .site-nav-toggle:hover { background: var(--pink); }
 .b-final .b-tag-r { background: var(--pink); }
 @media (max-width: 900px) { .b-final .b-tagged { width: 100%; max-width: 480px; margin: 8px auto 0; } .b-final .b-tagged > img { margin: 0; } }
 @media (max-width: 640px) { .b-tag-l { left: 3%; top: 8%; } .b-tag-r { right: 3%; top: 16%; } }
+
+/* how-it-works photo: a mini "Zoom chat" card in the empty wall area */
+.b-chat {
+    position: absolute; z-index: 2; left: 6%; top: 9%; width: min(46%, 260px);
+    background: var(--white); color: var(--ink); border: 2.5px solid var(--ink); border-radius: 18px;
+    box-shadow: 3px 4px 0 var(--ink); padding: 10px 12px; transform: rotate(-3deg);
+    animation: b-float 4s ease-in-out infinite; font-size: .88rem; line-height: 1.35;
+}
+.b-chat p { margin: 0; }
+.b-chat-live { font-family: var(--fh); font-weight: 800; font-size: .74rem; letter-spacing: .04em; color: #E0245E; display: flex; align-items: center; gap: 6px; }
+.b-chat-live i { width: 8px; height: 8px; border-radius: 50%; background: #E0245E; animation: b-blink 1.4s ease-in-out infinite; }
+.b-chat-q { margin-top: 6px !important; background: var(--blue-xxl); border-radius: 12px 12px 12px 4px; padding: 7px 10px; font-weight: 600; }
+.b-chat-a { margin-top: 6px !important; margin-left: auto !important; width: fit-content; background: var(--mint-l); color: #0E6B50; border-radius: 12px 12px 4px 12px; padding: 5px 10px; font-weight: 700; font-size: .8rem; }
+@keyframes b-blink { 50% { opacity: .25; } }
+@media (max-width: 640px) { .b-chat { left: 3%; top: 5%; width: 47%; padding: 6px 8px; border-radius: 14px; font-size: .68rem; } .b-chat-live { font-size: .62rem; } .b-chat-q { padding: 5px 7px; } .b-chat-a { font-size: .62rem; padding: 4px 7px; } }
+@media (prefers-reduced-motion: reduce) { .b-chat, .b-chat-live i { animation: none; } }
