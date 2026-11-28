@@ -22,6 +22,36 @@
         return /^[6-9]\d{9}$/.test(d) ? d : '';
     }
 
+    /**
+     * Cleans the WhatsApp box while typing / on autofill: digits only, and a saved number's
+     * "+91", "91", "0091" or "0" in front is cut off at once, so a child sees just the 10 digits.
+     * An 11-digit number starting with 91 is left alone: someone may still be typing "+91…".
+     */
+    function cleanPhoneInput(v) {
+        var d = String(v || '').replace(/\D/g, '');
+        if (d.length > 12 && d.indexOf('0091') === 0) d = d.slice(4);
+        if (d.length >= 12 && d.indexOf('91') === 0) d = d.slice(2);
+        else if (d.length >= 11 && d.charAt(0) === '0') d = d.slice(1);
+        if (d.length > 10 && !(d.length === 11 && d.indexOf('91') === 0)) d = d.slice(0, 10);
+        return d;
+    }
+
+    /**
+     * Typed class -> what the sheet stores. mode "number": 1-12 only ("10", "10th", "class 10" -> "Class 10").
+     * mode "text": a class number becomes "Class N", anything else ("College", "B.Com") is kept as typed.
+     * Returns "" when it isn't usable.
+     */
+    function normalizeClass(v, mode) {
+        var s = String(v || '').replace(/\s+/g, ' ').trim();
+        var m = s.match(/^(?:class|kaksha|कक्षा)?\s*(\d{1,2})\s*(?:st|nd|rd|th|वीं|वी)?$/i);
+        if (m) {
+            var n = parseInt(m[1], 10);
+            return n >= 1 && n <= 12 ? 'Class ' + n : '';
+        }
+        if (mode === 'number') return '';
+        return s.length >= 2 ? s.slice(0, 30) : '';
+    }
+
     function isEmail(v) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || '').trim());
     }
@@ -29,11 +59,13 @@
     /** Returns { field: errorKey } for every problem; empty object = valid. */
     function validate(values, set) {
         var err = {};
+        var mode = (set && set.classInput) || 'text';
         if (set.who && !values.who) err.who = 'errWho';
         if (!String(values.name || '').trim()) err.name = 'errName';
         if (!normalizePhone(values.phone)) err.phone = 'errPhone';
         if (String(values.email || '').trim() && !isEmail(values.email)) err.email = 'errEmail';
-        if (!values.klass) err.klass = 'errClass';
+        if (mode === 'chips') { if (!values.klass) err.klass = 'errClass'; }
+        else if (!normalizeClass(values.klass, mode)) err.klass = mode === 'number' ? 'errClassNum' : 'errClass';
         return err;
     }
 
@@ -47,7 +79,7 @@
 
     function pickSet(cfg, name) {
         var sets = (cfg && cfg.sets) || {};
-        return sets[name] || sets.all || { who: true, whoDefault: '', classes: ['Other'] };
+        return sets[name] || sets.all || { who: true, whoDefault: '', classInput: 'text' };
     }
 
     /** First-touch ad parameters: kept for the visit so they survive moving between pages. */
@@ -119,15 +151,21 @@
             var fsWho = el('fieldset', 'slaf-field slaf-who');
             fsWho.setAttribute('data-field', 'who');
             fsWho.appendChild(el('legend', 'slaf-label', t('whoLabel')));
+            // Two big full-width cards with a whole sentence each ("I'm a student / I will attend the class"):
+            // a one-word "Student | Parent" toggle was hard for a 4th grader to read as a choice.
             var seg = el('div', 'slaf-seg');
-            [['Student', t('student'), '🎒'], ['Parent', t('parent'), '👪']].forEach(function (o) {
+            [['Student', t('studentTitle'), t('studentSub'), '🎒'], ['Parent', t('parentTitle'), t('parentSub'), '👪']].forEach(function (o) {
                 var lab = el('label', 'slaf-seg-opt');
                 var inp = el('input');
                 inp.type = 'radio'; inp.name = 'who'; inp.value = o[0];
                 if (set.whoDefault === o[0]) inp.checked = true;
                 var face = el('span', 'slaf-seg-face');
-                face.appendChild(el('span', 'slaf-emoji', o[2]));
-                face.appendChild(document.createTextNode(o[1]));
+                face.appendChild(el('span', 'slaf-radio'));
+                face.appendChild(el('span', 'slaf-emoji', o[3]));
+                var words = el('span', 'slaf-seg-words');
+                words.appendChild(el('strong', '', o[1]));
+                words.appendChild(el('small', '', o[2]));
+                face.appendChild(words);
                 lab.appendChild(inp); lab.appendChild(face);
                 seg.appendChild(lab);
             });
@@ -137,28 +175,53 @@
         }
 
         form.appendChild(textField('name', t('nameLabel'), '', { type: 'text', autocomplete: 'name', placeholder: t('namePh'), maxLength: 80, required: true }));
-        var phone = textField('phone', t('phoneLabel'), '', { type: 'tel', autocomplete: 'tel-national', inputMode: 'numeric', placeholder: t('phonePh'), maxLength: 16, required: true }, '+91');
+        var phone = textField('phone', t('phoneLabel'), '', { type: 'tel', autocomplete: 'tel-national', inputMode: 'numeric', placeholder: t('phonePh'), maxLength: 20, required: true }, '+91');
+        var phoneBox = phone.querySelector('.slaf-box');
+        phoneBox.appendChild(el('span', 'slaf-ok', '✓'));
         phone.appendChild(el('p', 'slaf-help', t('phoneHelp')));
         form.appendChild(phone);
+        var phoneInput = phone.querySelector('input');
+        // Saved numbers ("09876543210", "+91 98765 43210") are trimmed to 10 digits the moment they land in the box.
+        var tidyPhone = function () {
+            var c = cleanPhoneInput(phoneInput.value);
+            if (c !== phoneInput.value) phoneInput.value = c;
+            phone.classList.toggle('is-ok', !!normalizePhone(c));
+        };
+        ['input', 'change', 'blur', 'paste'].forEach(function (ev) { phoneInput.addEventListener(ev, function () { setTimeout(tidyPhone, 0); }); });
         form.appendChild(textField('email', t('emailLabel'), t('optional'), { type: 'email', autocomplete: 'email', placeholder: t('emailPh'), maxLength: 120 }));
 
-        // Class chips
-        var fsClass = el('fieldset', 'slaf-field');
-        fsClass.setAttribute('data-field', 'klass');
-        var classLegend = el('legend', 'slaf-label');
-        classLegend.setAttribute('data-slaf-class-label', '');
-        fsClass.appendChild(classLegend);
-        var chips = el('div', 'slaf-chips');
-        (set.classes || []).forEach(function (c) {
-            var lab = el('label', 'slaf-chip-opt');
-            var inp = el('input');
-            inp.type = 'radio'; inp.name = 'klass'; inp.value = c;
-            lab.appendChild(inp);
-            lab.appendChild(el('span', '', names[c] || c));
-            chips.appendChild(lab);
-        });
-        fsClass.appendChild(chips);
-        fsClass.appendChild(errNode('klass'));
+        // Class: one box to type in (a number keypad on school pages). Only the professionals page keeps choice chips.
+        var mode = set.classInput || 'text';
+        var fsClass, classLegend;
+        if (mode === 'chips') {
+            fsClass = el('fieldset', 'slaf-field');
+            fsClass.setAttribute('data-field', 'klass');
+            classLegend = el('legend', 'slaf-label');
+            fsClass.appendChild(classLegend);
+            var chips = el('div', 'slaf-chips');
+            (set.classes || []).forEach(function (c) {
+                var lab = el('label', 'slaf-chip-opt');
+                var inp = el('input');
+                inp.type = 'radio'; inp.name = 'klass'; inp.value = c;
+                lab.appendChild(inp);
+                lab.appendChild(el('span', '', names[c] || c));
+                chips.appendChild(lab);
+            });
+            fsClass.appendChild(chips);
+            fsClass.appendChild(errNode('klass'));
+        } else if (mode === 'number') {
+            fsClass = textField('klass', '', '', { type: 'text', inputMode: 'numeric', autocomplete: 'off', placeholder: String(t('classPh')).replace('{n}', set.classExample || 10), maxLength: 2, required: true }, t('classPrefix'));
+            fsClass.classList.add('slaf-class-num');
+            classLegend = fsClass.querySelector('label');
+            var classInput = fsClass.querySelector('input');
+            classInput.addEventListener('input', function () {
+                var d = classInput.value.replace(/\D/g, '').slice(0, 2);
+                if (d !== classInput.value) classInput.value = d;
+            });
+        } else {
+            fsClass = textField('klass', '', '', { type: 'text', autocomplete: 'off', placeholder: t('classPhText'), maxLength: 30, required: true });
+            classLegend = fsClass.querySelector('label');
+        }
         form.appendChild(fsClass);
 
         var minor = el('p', 'slaf-minor', t('minorNote'));
@@ -193,7 +256,8 @@
 
         function syncWho() {
             var who = whoValue(form, set);
-            classLegend.textContent = !set.who ? t('classLabelPro') : (who === 'Parent' ? t('classLabelParent') : t('classLabel'));
+            var text = !set.who ? t('classLabelPro') : (who === 'Parent' ? t('classLabelParent') : t('classLabel'));
+            classLegend.textContent = text;
             if (who === 'Student') minor.removeAttribute('hidden'); else minor.setAttribute('hidden', '');
         }
         syncWho();
@@ -308,8 +372,9 @@
     function submit(cfg, set, form, t) {
         if (state.busy) return;
         var get = function (n) { var i = form.querySelector('[name="' + n + '"]'); return i ? i.value : ''; };
-        var klass = form.querySelector('input[name="klass"]:checked');
-        var values = { who: whoValue(form, set), name: get('name').trim(), phone: get('phone'), email: get('email').trim(), klass: klass ? klass.value : '' };
+        var mode = set.classInput || 'text';
+        var klass = mode === 'chips' ? (form.querySelector('input[name="klass"]:checked') || {}).value || '' : get('klass');
+        var values = { who: whoValue(form, set), name: get('name').trim(), phone: get('phone'), email: get('email').trim(), klass: klass };
         var errors = validate(values, set);
         if (Object.keys(errors).length) { showErrors(form, errors, t); return; }
 
@@ -321,7 +386,8 @@
         btn.textContent = t('saving');
 
         var payload = {
-            who: values.who, name: values.name, phone: normalizePhone(values.phone), email: values.email, klass: values.klass,
+            who: values.who, name: values.name, phone: normalizePhone(values.phone), email: values.email,
+            klass: mode === 'chips' ? values.klass : normalizeClass(values.klass, mode),
             website: get('website'),
             page: location.pathname, lang: document.documentElement.getAttribute('lang') || '',
             referrer: (document.referrer || '').slice(0, 200),
@@ -341,7 +407,7 @@
 
         var timeout = new Promise(function (res) { setTimeout(res, Number(cfg.timeoutMs) || 8000); });
         Promise.race([send(cfg.endpoint, payload), timeout]).then(function () {
-            gtagEvent('sign_up', { method: 'lead_form', who: values.who || '', class_name: values.klass });
+            gtagEvent('sign_up', { method: 'lead_form', who: values.who || '', class_name: payload.klass });
             try { sessionStorage.setItem('sla_lead_name', values.name.split(' ')[0]); } catch (e) { /* storage off */ }
             btn.textContent = t('done');
             status.textContent = t('done');
@@ -374,6 +440,8 @@
         open: open,
         close: close,
         normalizePhone: normalizePhone,
+        cleanPhoneInput: cleanPhoneInput,
+        normalizeClass: normalizeClass,
         isEmail: isEmail,
         validate: validate,
         pickLang: pickLang,

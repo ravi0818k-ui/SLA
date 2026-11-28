@@ -37,17 +37,26 @@ html.slaf-open, html.slaf-open body { overflow: hidden; }
 .slaf-label { display: block; padding: 0; margin: 0 0 6px; font-weight: 600; font-size: .95rem; color: var(--slaf-ink); }
 .slaf-opt { font-weight: 400; color: var(--slaf-muted); }
 
-/* Student / Parent */
-.slaf-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.slaf-seg-opt, .slaf-chip-opt { position: relative; cursor: pointer; }
+/* Who are you? Two full-width cards, each a whole sentence, with a clear radio circle (easier for young children) */
+.slaf-seg { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.slaf-seg-opt, .slaf-chip-opt { position: relative; cursor: pointer; display: block; }
 .slaf-seg-opt input, .slaf-chip-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .slaf-seg-face {
-    display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 8px 12px;
-    border: 2px solid var(--slaf-line); border-radius: 16px; background: var(--slaf-cloud); font-weight: 700; font-size: 1rem;
+    display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 14px;
+    border: 2px solid var(--slaf-line); border-radius: 16px; background: #FFFFFF;
     transition: border-color .15s, background .15s, box-shadow .15s;
 }
-.slaf-emoji { font-size: 1.25rem; line-height: 1; }
+.slaf-seg-opt:hover .slaf-seg-face { border-color: var(--slaf-blue); }
+.slaf-radio {
+    flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; border: 2.5px solid #9BA1BD; background: #FFFFFF;
+    display: grid; place-items: center; transition: border-color .15s, background .15s;
+}
+.slaf-emoji { flex: 0 0 auto; font-size: 1.7rem; line-height: 1; }
+.slaf-seg-words { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.slaf-seg-words strong { font-size: 1.05rem; font-weight: 700; color: var(--slaf-ink); }
+.slaf-seg-words small { font-size: .85rem; color: var(--slaf-muted); }
 .slaf-seg-opt input:checked + .slaf-seg-face { border-color: var(--slaf-ink); background: var(--slaf-blue-l); box-shadow: 3px 4px 0 var(--slaf-ink); }
+.slaf-seg-opt input:checked + .slaf-seg-face .slaf-radio { border-color: var(--slaf-blue); background: var(--slaf-blue); box-shadow: inset 0 0 0 4px #FFFFFF; }
 .slaf-seg-opt input:focus-visible + .slaf-seg-face, .slaf-chip-opt input:focus-visible + span { outline: 3px solid var(--slaf-blue); outline-offset: 2px; }
 
 /* Text inputs */
@@ -60,6 +69,13 @@ html.slaf-open, html.slaf-open body { overflow: hidden; }
 }
 .slaf-input::placeholder { color: #9BA1BD; }
 .slaf-help { margin: 5px 0 0; font-size: .82rem; color: var(--slaf-muted); }
+/* green tick once the WhatsApp number is a valid 10-digit number */
+.slaf-ok { display: none; align-items: center; padding: 0 14px; color: #0E8A5F; font-weight: 800; font-size: 1.2rem; }
+.slaf-field.is-ok .slaf-ok { display: flex; }
+.slaf-field.is-ok .slaf-box { border-color: #2ED3A0; }
+/* class number box: short, with a fixed "Class" in front */
+.slaf-class-num .slaf-box { max-width: 220px; }
+.slaf-class-num .slaf-input { font-weight: 700; font-size: 1.15rem; }
 
 /* Class chips */
 .slaf-chips { display: flex; flex-wrap: wrap; gap: 8px; }

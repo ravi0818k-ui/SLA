@@ -132,7 +132,7 @@
         "englishShort": "The full course for {{registration.currency}}{{registration.price}} · No upsell at the end"
     },
     "leadForm": {
-        "_help": "FREE-MODE REGISTRATION POPUP (2026-11-28). Only when freeSignup.enabled is true AND enabled is true AND endpoint is set: every Book/Register button opens a short form (Student/Parent, name, WhatsApp, optional email, class). It saves the registration to the 'SLA Leads' Google Sheet (google-apps-script-leads.js, deployed as a web app; paste its /exec URL into endpoint), then opens the button's link (the thank-you page, which counts the Google Ads conversion). If saving is slow or fails, the visitor still goes to the thank-you page after timeoutMs. Empty endpoint = old behaviour (buttons go straight to the thank-you page). Preview without saving: add ?leadform=1 to any landing page URL. Paid mode (freeSignup.enabled false) never shows the popup: buttons go to registration.link (webinar.gg later). 'sets' = class choices per page, picked by <html data-lead-form=\"...\"> (no attribute = 'all'). 'copy' = wording per page language: en, hinglish (lang hi-Latn), hi (Devanagari).",
+        "_help": "FREE-MODE REGISTRATION POPUP (2026-11-28). Only when freeSignup.enabled is true AND enabled is true AND endpoint is set: every Book/Register button opens a short form (Student/Parent, name, WhatsApp, optional email, class). It saves the registration to the 'SLA Leads' Google Sheet (google-apps-script-leads.js, deployed as a web app; paste its /exec URL into endpoint), then opens the button's link (the thank-you page, which counts the Google Ads conversion). If saving is slow or fails, the visitor still goes to the thank-you page after timeoutMs. Empty endpoint = old behaviour (buttons go straight to the thank-you page). Preview without saving: add ?leadform=1 to any landing page URL. Paid mode (freeSignup.enabled false) never shows the popup: buttons go to registration.link (webinar.gg later). 'sets' = the class question per page: classInput 'number' (one box, number keypad, 1-12, stored as 'Class N'), 'text' (one box: a number or e.g. 'College') or 'chips' (pro page only: the 'classes' choices), picked by <html data-lead-form=\"...\"> (no attribute = 'all'). 'copy' = wording per page language: en, hinglish (lang hi-Latn), hi (Devanagari).",
         "enabled": true,
         "endpoint": "https://script.google.com/macros/s/AKfycbzWH2AKHpLvg9mKJGXHNyJZpbasBJt933iB7Hc3-hVnxIaweYHTp7b45K_ZuG4SIFcl/exec",
         "timeoutMs": 8000,
@@ -140,39 +140,24 @@
             "all": {
                 "who": true,
                 "whoDefault": "",
-                "classes": [
-                    "Class 3–5",
-                    "Class 6–8",
-                    "Class 9",
-                    "Class 10",
-                    "Class 11",
-                    "Class 12",
-                    "College",
-                    "Other"
-                ]
+                "classInput": "text"
             },
             "board": {
                 "who": true,
                 "whoDefault": "",
-                "classes": [
-                    "Class 10",
-                    "Class 12",
-                    "Other"
-                ]
+                "classInput": "number",
+                "classExample": 10
             },
             "parents": {
                 "who": true,
                 "whoDefault": "Parent",
-                "classes": [
-                    "Class 3–5",
-                    "Class 6–8",
-                    "Class 9–10",
-                    "Class 11–12"
-                ]
+                "classInput": "number",
+                "classExample": 4
             },
             "pro": {
                 "who": false,
                 "whoDefault": "Professional",
+                "classInput": "chips",
                 "classes": [
                     "Working",
                     "Looking for a job",
@@ -186,9 +171,11 @@
                 "chip": "Free · 3-day LIVE workshop",
                 "title": "Book your free seat",
                 "sub": "Takes 30 seconds. We send the Zoom link on WhatsApp.",
-                "whoLabel": "Who is filling this form?",
-                "student": "Student",
-                "parent": "Parent",
+                "whoLabel": "Who are you?",
+                "studentTitle": "I'm a student",
+                "studentSub": "I will attend the class",
+                "parentTitle": "I'm a parent",
+                "parentSub": "Registering for my child",
                 "nameLabel": "Your name",
                 "namePh": "Full name",
                 "phoneLabel": "WhatsApp number",
@@ -200,6 +187,9 @@
                 "classLabel": "Your class",
                 "classLabelParent": "Your child's class",
                 "classLabelPro": "You are",
+                "classPrefix": "Class",
+                "classPh": "e.g. {n}",
+                "classPhText": "e.g. 4, 10 or College",
                 "minorNote": "Under 18? Please fill this in with your parent's OK.",
                 "submit": "Book my free seat",
                 "saving": "Booking your seat…",
@@ -212,16 +202,19 @@
                 "errName": "Please enter your name.",
                 "errPhone": "Please enter a 10-digit mobile number.",
                 "errEmail": "Please check the email address.",
-                "errClass": "Please choose a class.",
+                "errClass": "Please type your class.",
+                "errClassNum": "Please type a class from 1 to 12.",
                 "classNames": {}
             },
             "hinglish": {
                 "chip": "Free · 3 din ka LIVE workshop",
                 "title": "Apni free seat book karein",
                 "sub": "Sirf 30 second. Zoom link WhatsApp par bhejenge.",
-                "whoLabel": "Yeh form kaun bhar raha hai?",
-                "student": "Student",
-                "parent": "Parent",
+                "whoLabel": "Aap kaun hain?",
+                "studentTitle": "Main student hoon",
+                "studentSub": "Class mujhe attend karni hai",
+                "parentTitle": "Main parent hoon",
+                "parentSub": "Bachche ke liye registration",
                 "nameLabel": "Aapka naam",
                 "namePh": "Poora naam",
                 "phoneLabel": "WhatsApp number",
@@ -233,6 +226,9 @@
                 "classLabel": "Aapki class",
                 "classLabelParent": "Bachche ki class",
                 "classLabelPro": "Aap",
+                "classPrefix": "Class",
+                "classPh": "jaise {n}",
+                "classPhText": "jaise 4, 10 ya College",
                 "minorNote": "18 se kam umar hai? Mummy-papa se poochh kar bharein.",
                 "submit": "Meri free seat book karein",
                 "saving": "Seat book ho rahi hai…",
@@ -245,7 +241,8 @@
                 "errName": "Apna naam likhein.",
                 "errPhone": "10 digit ka mobile number likhein.",
                 "errEmail": "Email check kar lein.",
-                "errClass": "Class chunein.",
+                "errClass": "Apni class likhein.",
+                "errClassNum": "1 se 12 tak class likhein.",
                 "classNames": {
                     "Other": "Koi aur",
                     "Looking for a job": "Job dhoondh rahe hain"
@@ -255,9 +252,11 @@
                 "chip": "मुफ़्त · 3 दिन की LIVE वर्कशॉप",
                 "title": "अपनी मुफ़्त सीट बुक करें",
                 "sub": "सिर्फ़ 30 सेकंड। Zoom लिंक WhatsApp पर भेजेंगे।",
-                "whoLabel": "यह फ़ॉर्म कौन भर रहा है?",
-                "student": "विद्यार्थी",
-                "parent": "माता-पिता",
+                "whoLabel": "आप कौन हैं?",
+                "studentTitle": "मैं विद्यार्थी हूँ",
+                "studentSub": "क्लास मुझे अटेंड करनी है",
+                "parentTitle": "मैं माता/पिता हूँ",
+                "parentSub": "बच्चे के लिए रजिस्ट्रेशन",
                 "nameLabel": "आपका नाम",
                 "namePh": "पूरा नाम",
                 "phoneLabel": "WhatsApp नंबर",
@@ -269,6 +268,9 @@
                 "classLabel": "आपकी कक्षा",
                 "classLabelParent": "बच्चे की कक्षा",
                 "classLabelPro": "आप",
+                "classPrefix": "कक्षा",
+                "classPh": "जैसे {n}",
+                "classPhText": "जैसे 4, 10 या कॉलेज",
                 "minorNote": "18 साल से कम हैं? माता-पिता से पूछकर भरें।",
                 "submit": "मेरी मुफ़्त सीट बुक करें",
                 "saving": "सीट बुक हो रही है…",
@@ -281,16 +283,13 @@
                 "errName": "अपना नाम लिखें।",
                 "errPhone": "10 अंकों का मोबाइल नंबर लिखें।",
                 "errEmail": "ईमेल जाँच लें।",
-                "errClass": "कक्षा चुनें।",
+                "errClass": "अपनी कक्षा लिखें।",
+                "errClassNum": "1 से 12 तक कक्षा लिखें।",
                 "classNames": {
-                    "Class 3–5": "कक्षा 3–5",
-                    "Class 6–8": "कक्षा 6–8",
-                    "Class 9": "कक्षा 9",
-                    "Class 10": "कक्षा 10",
-                    "Class 11": "कक्षा 11",
-                    "Class 12": "कक्षा 12",
                     "College": "कॉलेज",
-                    "Other": "अन्य"
+                    "Other": "अन्य",
+                    "Working": "नौकरी करते हैं",
+                    "Looking for a job": "नौकरी ढूँढ रहे हैं"
                 }
             }
         }

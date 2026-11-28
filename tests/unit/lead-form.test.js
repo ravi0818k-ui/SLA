@@ -22,16 +22,20 @@ function win() {
 
 describe('data.json leadForm', () => {
     const lf = data().leadForm;
-    it('has the switch, an endpoint slot, a timeout and the 4 class sets', () => {
+    it('has the switch, an endpoint slot, a timeout and the 4 class questions', () => {
         expect(typeof lf.enabled).toBe('boolean');
         expect(typeof lf.endpoint).toBe('string');
         if (lf.endpoint) expect(lf.endpoint).toMatch(/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/);
         expect(lf.timeoutMs).toBeGreaterThanOrEqual(3000);
         for (const s of ['all', 'board', 'parents', 'pro']) {
-            expect(Array.isArray(lf.sets[s].classes) && lf.sets[s].classes.length).toBeTruthy();
+            expect(['number', 'text', 'chips']).toContain(lf.sets[s].classInput);
             expect(typeof lf.sets[s].who).toBe('boolean');
         }
-        expect(lf.sets.board.classes).toEqual(['Class 10', 'Class 12', 'Other']);
+        // 4th-grader test (2026-11-28): school pages ask the class in ONE box, not choice buttons
+        expect(lf.sets.board.classInput).toBe('number');
+        expect(lf.sets.parents.classInput).toBe('number');
+        expect(lf.sets.all.classInput).toBe('text');
+        expect(lf.sets.pro.classes.length).toBeGreaterThan(1);
     });
     it('has the same wording keys in English, Hinglish and Hindi', () => {
         const keys = Object.keys(lf.copy.en).sort();
@@ -95,9 +99,29 @@ describe('lead-form.js helpers', () => {
     it('validates required fields; email is optional', () => {
         const set = { who: true };
         expect(Object.keys(L.validate({}, set)).sort()).toEqual(['klass', 'name', 'phone', 'who']);
-        expect(L.validate({ who: 'Parent', name: 'A', phone: '9876543210', klass: 'Class 10' }, set)).toEqual({});
-        expect(L.validate({ who: 'Parent', name: 'A', phone: '9876543210', klass: 'Class 10', email: 'bad' }, set)).toEqual({ email: 'errEmail' });
-        expect(L.validate({ name: 'A', phone: '9876543210', klass: 'Working' }, { who: false })).toEqual({});
+        expect(L.validate({ who: 'Parent', name: 'A', phone: '9876543210', klass: '10' }, set)).toEqual({});
+        expect(L.validate({ who: 'Parent', name: 'A', phone: '9876543210', klass: '10', email: 'bad' }, set)).toEqual({ email: 'errEmail' });
+        expect(L.validate({ name: 'A', phone: '9876543210', klass: 'Working' }, { who: false, classInput: 'chips' })).toEqual({});
+        expect(L.validate({ who: 'Student', name: 'A', phone: '9876543210', klass: '15' }, { who: true, classInput: 'number' })).toEqual({ klass: 'errClassNum' });
+    });
+    it('trims a saved number (0, 91, +91, 0091 in front) to 10 digits while typing', () => {
+        expect(L.cleanPhoneInput('09876543210')).toBe('9876543210');
+        expect(L.cleanPhoneInput('919876543210')).toBe('9876543210');
+        expect(L.cleanPhoneInput('+91 98765-43210')).toBe('9876543210');
+        expect(L.cleanPhoneInput('00919876543210')).toBe('9876543210');
+        expect(L.cleanPhoneInput('+91 98765')).toBe('9198765'); // still typing: nothing cut yet
+        expect(L.cleanPhoneInput('91987654321')).toBe('91987654321'); // "+91" + 9 digits so far: wait for the last digit
+        expect(L.cleanPhoneInput('9123456789')).toBe('9123456789'); // a real number that starts with 91 stays
+        expect(L.cleanPhoneInput('98765432109')).toBe('9876543210'); // one digit too many
+    });
+    it('turns a typed class into what the sheet stores', () => {
+        expect(L.normalizeClass('4', 'number')).toBe('Class 4');
+        expect(L.normalizeClass('10th', 'number')).toBe('Class 10');
+        expect(L.normalizeClass('class 12', 'text')).toBe('Class 12');
+        expect(L.normalizeClass('13', 'number')).toBe('');
+        expect(L.normalizeClass('College', 'number')).toBe('');
+        expect(L.normalizeClass('College', 'text')).toBe('College');
+        expect(L.normalizeClass('', 'text')).toBe('');
     });
     it('picks the wording by page language', () => {
         expect(L.pickLang('hi')).toBe('hi');
@@ -116,8 +140,15 @@ describe('lead-form.js helpers', () => {
         w.SLALeadForm.open('https://www.superlearneracademy.in/thank-you.html');
         const dlg = w.document.querySelector('.slaf [role="dialog"]');
         expect(dlg.getAttribute('aria-modal')).toBe('true');
-        expect(Array.from(w.document.querySelectorAll('.slaf input[name="klass"]')).map((i) => i.value)).toEqual(['Class 10', 'Class 12', 'Other']);
+        const klass = w.document.querySelectorAll('.slaf input[name="klass"]');
+        expect(klass.length).toBe(1); // one box to type in
+        expect(klass[0].getAttribute('inputmode')).toBe('numeric');
+        expect(klass[0].getAttribute('placeholder')).toBe('e.g. 10');
         expect(w.document.querySelectorAll('.slaf input[name="who"]').length).toBe(2);
+        expect(w.document.querySelector('.slaf .slaf-seg-words strong').textContent).toBe("I'm a student");
+        const phone = w.document.querySelector('#slaf-phone');
+        phone.value = '+91 98765 43210';
+        phone.dispatchEvent(new w.Event('input', { bubbles: true }));
         expect(w.document.querySelector('.slaf input[name="website"]').tabIndex).toBe(-1); // bot trap
         w.document.querySelector('.slaf').dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         expect(w.document.querySelector('.slaf').hasAttribute('hidden')).toBe(true);
