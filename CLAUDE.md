@@ -500,3 +500,4 @@ must be able to tell who runs the site and how to contact them from any page.
 
 
 - 2026-11-28 (speed-reading fixes): menu has a "Reading Speed Test" deep link (`speed-reading.html#sr-test`) in SITE_MAP + the page's static list; a SITE_MAP path containing `#` is never marked "You're here". site-nav.js is now `?v=1.3.4` on every page. speed-reading.css `?v=1.0.1`: the header sticks at top 0 on this page (no dark top bar), the hamburger is re-centred on it, and "Next batch starts" on the blue workshop band is solid yellow with dark text.
+- 2026-11-28 (Facebook): https://www.facebook.com/superlearneracademy added wherever LinkedIn is: menu contact block, footer (text link or icon row), "Follow us" line (Instagram, YouTube, LinkedIn, Facebook), About page Contact us, JSON-LD `sameAs`, data.json `contact.facebook` / `facebookLabel`. tests/unit/site-nav.test.js checks every .html has as many Facebook links as LinkedIn links.

@@ -3,7 +3,7 @@
  * lists are replaced by one grouped map of every public page (search, "You're here", copy-link).
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 
 const root = resolve(__dirname, '..', '..');
@@ -130,16 +130,18 @@ describe('site map in the hamburger menu', () => {
     });
 });
 
-describe('LinkedIn + Instagram + YouTube links (2026-11-26)', () => {
+describe('LinkedIn + Instagram + YouTube + Facebook links (2026-11-26; Facebook 2026-11-28)', () => {
     const LI = 'https://www.linkedin.com/company/super-learner-academy';
     const IG = 'https://www.instagram.com/superlearneracademy/';
     const YT = 'https://www.youtube.com/@superlearneracademy';
+    const FB = 'https://www.facebook.com/superlearneracademy';
     const data = JSON.parse(read('data.json'));
 
     it('data.json holds both profile URLs', () => {
         expect(data.contact.linkedin).toBe(LI);
         expect(data.contact.instagram).toBe(IG);
         expect(data.contact.youtube).toBe(YT);
+        expect(data.contact.facebook).toBe(FB);
     });
 
     it('every footer has both links, and the About page lists both in Contact us', () => {
@@ -151,22 +153,36 @@ describe('LinkedIn + Instagram + YouTube links (2026-11-26)', () => {
             expect(foot.querySelector(`a[href="${LI}"]`), f + ' LinkedIn').not.toBeNull();
             expect(foot.querySelector(`a[href="${IG}"]`), f + ' Instagram').not.toBeNull();
             expect(foot.querySelector(`a[href="${YT}"]`), f + ' YouTube').not.toBeNull();
-            // labelled line: "Follow us: Instagram: … YouTube: … LinkedIn: …", in that order
+            expect(foot.querySelector(`a[href="${FB}"]`), f + ' Facebook').not.toBeNull();
+            // labelled line: "Follow us: Instagram: … YouTube: … LinkedIn: … Facebook: …", in that order
             const follow = Array.from(foot.querySelectorAll('.sla-follow a'));
-            expect(follow.map((a) => a.getAttribute('href')), f + ' follow line').toEqual([IG, YT, LI]);
-            expect(follow.map((a) => a.textContent.split(':')[0]), f).toEqual(['Instagram', 'YouTube', 'LinkedIn']);
+            expect(follow.map((a) => a.getAttribute('href')), f + ' follow line').toEqual([IG, YT, LI, FB]);
+            expect(follow.map((a) => a.textContent.split(':')[0]), f).toEqual(['Instagram', 'YouTube', 'LinkedIn', 'Facebook']);
         }
         document.documentElement.innerHTML = read('about.html');
         const contact = document.getElementById('contact');
         expect(contact.querySelector(`a[href="${LI}"]`)).not.toBeNull();
         expect(contact.querySelector(`a[href="${IG}"]`)).not.toBeNull();
         expect(contact.querySelector(`a[href="${YT}"]`)).not.toBeNull();
+        expect(contact.querySelector(`a[href="${FB}"]`)).not.toBeNull();
     });
 
     it('the menu contact block has LinkedIn on every page with the menu', () => {
         const panel = openPage('index.html', '/');
         expect(panel.querySelector(`.site-nav-contact a[href="${LI}"]`)).not.toBeNull();
         expect(panel.querySelector(`.site-nav-contact a[href="${YT}"]`)).not.toBeNull();
+        expect(panel.querySelector(`.site-nav-contact a[href="${FB}"]`)).not.toBeNull();
+    });
+
+    it('every page with a LinkedIn link has Facebook too (menu, footer, schema sameAs)', () => {
+        const pages = readdirSync(root, { recursive: true }).map(String).filter((f) => f.endsWith('.html') && !/node_modules|(^|[\\/])\./.test(f));
+        expect(pages.length).toBeGreaterThan(30);
+        for (const f of pages) {
+            const html = read(f);
+            expect(html.split(FB).length, f).toBe(html.split(LI).length);
+            const same = html.match(/"sameAs": \[[^\]]*\]/);
+            if (same) expect(same[0], f).toContain(FB);
+        }
     });
 });
 

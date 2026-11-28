@@ -205,7 +205,9 @@
         "youtubeHandle": "@superlearneracademy",
         "youtubeLabel": "YouTube",
         "linkedin": "https://www.linkedin.com/company/super-learner-academy",
-        "linkedinLabel": "LinkedIn"
+        "linkedinLabel": "LinkedIn",
+        "facebook": "https://www.facebook.com/superlearneracademy",
+        "facebookLabel": "Facebook"
     },
     "faq": {
         "attend": {
