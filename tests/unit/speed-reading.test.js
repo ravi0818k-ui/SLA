@@ -99,13 +99,15 @@ describe('exercises work in the page', () => {
 
 describe('honest copy', () => {
     const text = norm(doc().body.textContent);
-    it('no miracle claims outside the myth column, no marks promise, workshop not sold as speed reading', () => {
+    it('no miracle claims outside the myth column, no marks promise, no school subject', () => {
         const d = doc();
         d.querySelectorAll('.b-vs-them, .faq-question, script').forEach((e) => e.remove());
         const rest = norm(d.body.textContent);
         expect(rest).not.toMatch(/photo-?read|10x|\b1,?000\+? words a minute\b(?! with full)|guarantee/i);
         expect(text).toMatch(/Does your workshop teach speed reading\?/);
-        expect(norm(doc().querySelector('#workshop').textContent)).not.toMatch(/speed reading/i);
+        // the workshop teaches speed-reading basics (workshop deck), never a school subject (2026-11-28)
+        expect(norm(doc().querySelector('#workshop').textContent)).toMatch(/speed-reading basics/i);
+        expect(norm(doc().body.textContent)).not.toMatch(/maths?/i);
         expect(norm(doc().querySelector('#workshop').textContent)).toMatch(/Hinglish/);
     });
 

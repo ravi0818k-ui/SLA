@@ -314,7 +314,11 @@ describe('"Workshop mein kya-kya hai" at-a-glance tiles (2026-11-27)', () => {
         expect(sec.previousElementSibling.id).toBe('top');
         const titles = Array.from(sec.querySelectorAll('.b-glance-grid > li strong')).map((s) => norm(s.textContent.replace('→', '')));
         expect(titles).toEqual(['3 din LIVE class', 'Practical assignments', 'Breathing aur meditation', 'Learner-type survey',
-            'Maths ka 4-step routine', 'Certificate + WhatsApp group']);
+            'Speed reading ke basics', 'Certificate + WhatsApp group']);
+        // 2026-11-28 rule: workshop copy names techniques (memory, focus, revision, meditation, speed reading), never a school subject
+        for (const f of ['index-board27.html', 'index-board27-en.html', 'data.json']) {
+            expect(read(f).replace(/Math\.\w+/g, ''), f).not.toMatch(/\bmaths?\b/i);
+        }
     });
 
     it('the survey tile opens the learner-type quiz, also from the built ad page', () => {
