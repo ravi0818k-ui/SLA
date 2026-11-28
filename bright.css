@@ -522,3 +522,16 @@ body[data-design="bright"] .site-nav-toggle:hover { background: var(--pink); }
 @keyframes b-blink { 50% { opacity: .25; } }
 @media (max-width: 640px) { .b-chat { left: 3%; top: 5%; width: 47%; padding: 6px 8px; border-radius: 14px; font-size: .68rem; } .b-chat-live { font-size: .62rem; } .b-chat-q { padding: 5px 7px; } .b-chat-a { font-size: .62rem; padding: 4px 7px; } }
 @media (prefers-reduced-motion: reduce) { .b-chat, .b-chat-live i { animation: none; } }
+
+/* Hero photo swap on the English Board 2027 page (2026-11-28): the "pointing up" card photo is the hero,
+   the cut-out girl with books moves to the blue final CTA. On phones the hero photo sits right under the h1. */
+.b-hero-card .b-tagged > img, .b-hero-mob > img { background: var(--white); border-radius: 32px; border: 3px solid var(--ink); box-shadow: 6px 7px 0 var(--ink); }
+.b-hero-card .b-tag-r, .b-hero-mob .b-tag-r { background: var(--pink); }
+.b-hero-mob { display: none; }
+@media (max-width: 960px) {
+    .b-hero-card { display: none; }
+    .b-hero-mob { display: block; max-width: 480px; margin: 18px auto 22px; }
+}
+.b-final .b-final-art img { background: none; border: 0; border-radius: 0; }
+.b-final .b-final-art .b-hero-blob { background: rgba(255, 255, 255, .16); }
+@media (max-width: 960px) { .b-final .b-final-art { width: 100%; max-width: 440px; margin: 16px auto 0; } .b-final .b-final-art img { margin: 0; } }

@@ -270,9 +270,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
 
-    <link rel="preload" as="image" href="Images/photos/board-hero.webp" type="image/webp">
+    <link rel="preload" as="image" href="Images/photos/board-final.webp" type="image/webp">
     <link rel="stylesheet" href="site-nav.css?v=1.2.2">
-    <link rel="stylesheet" href="bright.css?v=1.1.0">
+    <link rel="stylesheet" href="bright.css?v=1.1.1">
     <!-- Free signup switch (data.json -> freeSignup.enabled, applied by script.js): [data-paid] blocks show only when the
          workshop is paid, [data-free] blocks only when it is free. Until data.json has loaded ("sla-wait", max 3 s) both and
          the price-bearing button texts stay invisible, so the paid price never flashes before the free version. -->
@@ -338,6 +338,12 @@
             <div class="b-hero-text">
                 <p class="b-chip"><span class="b-dot" aria-hidden="true"></span><span data-bind="board27en.heroEyebrow">Class 10 &amp; 12 · Board Exam 2027 · LIVE on Zoom</span></p>
                 <h1 data-bind-html="board27en.heroTitle">Stop forgetting <span class="hl">what you study.</span></h1>
+                <!-- Hero photo, phones only (2026-11-28): same file as the desktop one, so it downloads once -->
+                <div class="b-tagged b-hero-mob">
+                    <img src="Images/photos/board-final.webp" alt="A smiling girl pointing upwards with both hands" width="1200" height="900" fetchpriority="high" decoding="async">
+                    <span class="b-sticker b-tag-l" aria-hidden="true">Memory</span>
+                    <span class="b-sticker b-tag-r" aria-hidden="true">Focus</span>
+                </div>
                 <p class="b-lead" data-bind="board27en.heroSub">Everyone says “study more”. Nobody teaches you how to study. In a 3-day LIVE workshop, learn memory techniques, laser-like focus, smart revision and speed-reading basics, and build a study habit that sticks.</p>
                 <ul class="b-meta">
                     <li><span aria-hidden="true">📅</span> <span data-bind="board27en.dateRange">Every Saturday</span></li>
@@ -357,12 +363,12 @@
                 <p class="b-trust" data-bind="board27en.trustLine">Pay by UPI / card · 24-hour refund policy · Certificate included</p>
                 <p class="b-lang"><a href="selfstudy-ads-8-board-2027/" lang="hi-Latn" hreflang="hi-Latn">Hinglish mein padhein <span aria-hidden="true">→</span></a></p>
             </div>
-            <div class="b-hero-art">
-                <div class="b-hero-blob" aria-hidden="true"></div>
-                <img src="Images/photos/board-hero.webp" alt="A smiling girl holding books and a bag points towards you" width="1000" height="1000" fetchpriority="high" decoding="async">
-                <span class="b-sticker b-sticker-1" aria-hidden="true">Recall</span>
-                <span class="b-sticker b-sticker-2" aria-hidden="true">Memory</span>
-                <span class="b-sticker b-sticker-3" aria-hidden="true">Focus</span>
+            <div class="b-hero-art b-hero-card">
+                <div class="b-tagged">
+                    <img src="Images/photos/board-final.webp" alt="A smiling girl pointing upwards with both hands" width="1200" height="900" fetchpriority="high" decoding="async">
+                    <span class="b-sticker b-tag-l" aria-hidden="true">Memory</span>
+                    <span class="b-sticker b-tag-r" aria-hidden="true">Focus</span>
+                </div>
             </div>
         </div>
     </section>
@@ -703,10 +709,12 @@
                 </div>
                 <p class="b-final-survey"><a href="quiz.html#/username/learner-type">Or take the free survey first: What type of learner are you? →</a></p>
             </div>
-            <div class="b-tagged">
-                <img src="Images/photos/board-final.webp" alt="A smiling girl pointing upwards with both hands" width="1200" height="900" loading="lazy" decoding="async">
-                <span class="b-sticker b-tag-l" aria-hidden="true">Memory</span>
-                <span class="b-sticker b-tag-r" aria-hidden="true">Focus</span>
+            <div class="b-hero-art b-final-art">
+                <div class="b-hero-blob" aria-hidden="true"></div>
+                <img src="Images/photos/board-hero.webp" alt="A smiling girl holding books and a bag points towards you" width="1000" height="1000" loading="lazy" decoding="async">
+                <span class="b-sticker b-sticker-1" aria-hidden="true">Recall</span>
+                <span class="b-sticker b-sticker-2" aria-hidden="true">Memory</span>
+                <span class="b-sticker b-sticker-3" aria-hidden="true">Focus</span>
             </div>
         </div>
     </section>

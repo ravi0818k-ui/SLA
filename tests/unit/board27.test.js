@@ -418,12 +418,35 @@ describe('English twin: index-board27-en.html -> /selfstudy-ads-9-board-2027-eng
 
 describe('word stickers on the section photos (2026-11-27)', () => {
     it('both Board 2027 pages tag the "who it\'s for" and final photos with words, never claims', () => {
-        for (const f of ['index-board27.html', 'index-board27-en.html']) {
+        // English page since 2026-11-28: the "pointing up" photo is the hero (phone copy under the h1 + desktop copy)
+        const expected = {
+            'index-board27.html': ['Active recall', 'Board 2027', 'Memory', 'Focus'],
+            'index-board27-en.html': ['Memory', 'Focus', 'Memory', 'Focus', 'Active recall', 'Board 2027'],
+        };
+        for (const f of Object.keys(expected)) {
             const d = new JSDOM(read(f)).window.document;
             const words = Array.from(d.querySelectorAll('.b-tagged .b-sticker')).map((s) => s.textContent);
-            expect(words, f).toEqual(['Active recall', 'Board 2027', 'Memory', 'Focus']);
+            expect(words, f).toEqual(expected[f]);
             for (const w of words) expect(w, f).not.toMatch(/%|100|guarantee|topper|10x|marks/i);
             for (const s of d.querySelectorAll('.b-tagged .b-sticker')) expect(s.getAttribute('aria-hidden')).toBe('true');
         }
+    });
+});
+
+describe('English Board 2027 hero photo swap (2026-11-28)', () => {
+    const d = new JSDOM(read('index-board27-en.html')).window.document;
+    it('hero shows the pointing-up photo, on phones right under the headline', () => {
+        expect(d.querySelector('.b-hero-card img').getAttribute('src')).toBe('Images/photos/board-final.webp');
+        const mob = d.querySelector('.b-hero-text > h1 + .b-hero-mob img');
+        expect(mob.getAttribute('src')).toBe('Images/photos/board-final.webp');
+        expect(d.querySelector('link[rel="preload"][as="image"]').getAttribute('href')).toBe('Images/photos/board-final.webp');
+    });
+    it('the final CTA shows the cut-out photo that used to be the hero', () => {
+        expect(d.querySelector('.b-final .b-final-art img').getAttribute('src')).toBe('Images/photos/board-hero.webp');
+    });
+    it('the phone copy is hidden on desktop and the desktop copy on phones', () => {
+        const css = read('bright.css');
+        expect(css).toMatch(/\.b-hero-mob \{ display: none; \}/);
+        expect(css).toMatch(/max-width: 960px\) \{\s*\.b-hero-card \{ display: none; \}/);
     });
 });
