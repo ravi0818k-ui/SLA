@@ -356,7 +356,7 @@ describe('English twin: index-board27-en.html -> /selfstudy-ads-9-board-2027-eng
     });
 
     it('is English and binds only to data.json "board27en" (plus shared keys), every key existing', () => {
-        expect(enHtml).toMatch(/<html lang="en">/);
+        expect(enHtml).toMatch(/<html lang="en"[ >]/);
         expect(enHtml).not.toMatch(/data-bind(?:-html|-href)?="board27\./);
         const keys = [...enHtml.matchAll(/data-bind(?:-html|-href)?="board27en\.([^"]+)"/g)].map((m) => m[1]);
         expect(keys.length).toBeGreaterThan(10);

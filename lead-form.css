@@ -1,0 +1,116 @@
+/* Free-registration popup (lead-form.js, 2026-11-28). Bright Mind look; works on every page design
+   because it uses its own colour tokens and only borrows the page's heading font (--fh) when there is one. */
+.slaf {
+    --slaf-blue: #3A5BFF; --slaf-blue-d: #2F4BF0; --slaf-blue-l: #EEF1FF;
+    --slaf-ink: #141A3A; --slaf-muted: #555B7A; --slaf-line: #DCE1F5; --slaf-cloud: #F3F5FF;
+    --slaf-yel: #FFC93C; --slaf-yel-l: #FFE7A3; --slaf-mint-l: #C9F5E6; --slaf-bad: #C8102E; --slaf-bad-l: #FFF1F3;
+    position: fixed; inset: 0; z-index: 10000;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif; color: var(--slaf-ink); line-height: 1.45;
+}
+.slaf[hidden] { display: none; }
+html.slaf-open, html.slaf-open body { overflow: hidden; }
+.slaf *, .slaf *::before, .slaf *::after { box-sizing: border-box; }
+
+.slaf-back { position: absolute; inset: 0; background: rgba(20, 26, 58, .58); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); animation: slaf-fade .2s ease-out; }
+.slaf-panel {
+    position: relative; width: 100%; max-width: 480px; max-height: calc(100vh - 40px); overflow-y: auto; overscroll-behavior: contain;
+    background: #FFFFFF; border: 3px solid var(--slaf-ink); border-radius: 26px; box-shadow: 7px 8px 0 var(--slaf-ink);
+    padding: 26px 26px 20px; animation: slaf-pop .22s ease-out;
+}
+.slaf-x {
+    position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center; border: 2px solid var(--slaf-line); background: #FFFFFF; color: var(--slaf-ink); cursor: pointer;
+}
+.slaf-x:hover, .slaf-x:focus-visible { border-color: var(--slaf-ink); background: var(--slaf-cloud); }
+
+.slaf-head { padding-right: 40px; margin-bottom: 14px; }
+.slaf-chip {
+    display: inline-block; margin: 0 0 10px; padding: 5px 12px; border-radius: 999px;
+    background: var(--slaf-yel-l); border: 2px solid var(--slaf-ink); font-weight: 700; font-size: .8rem; letter-spacing: .01em;
+}
+.slaf-title { margin: 0 0 4px; font-family: var(--fh, 'Montserrat Alternates', 'Poppins', system-ui, sans-serif); font-weight: 800; font-size: 1.6rem; line-height: 1.15; color: var(--slaf-ink); }
+.slaf-sub { margin: 0; color: var(--slaf-muted); font-size: .95rem; }
+
+.slaf-form { display: grid; gap: 14px; }
+.slaf-field { margin: 0; padding: 0; border: 0; min-width: 0; }
+.slaf-label { display: block; padding: 0; margin: 0 0 6px; font-weight: 600; font-size: .95rem; color: var(--slaf-ink); }
+.slaf-opt { font-weight: 400; color: var(--slaf-muted); }
+
+/* Student / Parent */
+.slaf-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.slaf-seg-opt, .slaf-chip-opt { position: relative; cursor: pointer; }
+.slaf-seg-opt input, .slaf-chip-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.slaf-seg-face {
+    display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 8px 12px;
+    border: 2px solid var(--slaf-line); border-radius: 16px; background: var(--slaf-cloud); font-weight: 700; font-size: 1rem;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+}
+.slaf-emoji { font-size: 1.25rem; line-height: 1; }
+.slaf-seg-opt input:checked + .slaf-seg-face { border-color: var(--slaf-ink); background: var(--slaf-blue-l); box-shadow: 3px 4px 0 var(--slaf-ink); }
+.slaf-seg-opt input:focus-visible + .slaf-seg-face, .slaf-chip-opt input:focus-visible + span { outline: 3px solid var(--slaf-blue); outline-offset: 2px; }
+
+/* Text inputs */
+.slaf-box { display: flex; align-items: stretch; border: 2px solid var(--slaf-line); border-radius: 14px; background: #FFFFFF; transition: border-color .15s, box-shadow .15s; }
+.slaf-box:focus-within { border-color: var(--slaf-blue); box-shadow: 0 0 0 4px rgba(58, 91, 255, .18); }
+.slaf-prefix { display: flex; align-items: center; padding: 0 12px; border-right: 2px solid var(--slaf-line); color: var(--slaf-muted); font-weight: 600; background: var(--slaf-cloud); border-radius: 12px 0 0 12px; }
+.slaf-input {
+    flex: 1; min-width: 0; height: 50px; padding: 0 14px; border: 0; border-radius: 12px; background: transparent;
+    font: inherit; font-size: 1.05rem; color: var(--slaf-ink); outline: none;
+}
+.slaf-input::placeholder { color: #9BA1BD; }
+.slaf-help { margin: 5px 0 0; font-size: .82rem; color: var(--slaf-muted); }
+
+/* Class chips */
+.slaf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.slaf-chip-opt span {
+    display: inline-flex; align-items: center; min-height: 42px; padding: 6px 16px; border-radius: 999px;
+    border: 2px solid var(--slaf-line); background: #FFFFFF; font-weight: 600; font-size: .95rem; transition: border-color .15s, background .15s;
+}
+.slaf-chip-opt:hover span { border-color: var(--slaf-blue); }
+.slaf-chip-opt input:checked + span { background: var(--slaf-blue); border-color: var(--slaf-ink); color: #FFFFFF; }
+
+.slaf-minor { margin: -4px 0 0; padding: 8px 12px; border-radius: 12px; background: var(--slaf-mint-l); color: #0E6B50; font-size: .86rem; font-weight: 500; }
+.slaf-minor[hidden] { display: none; }
+
+/* Errors */
+.slaf-err { margin: 5px 0 0; font-size: .85rem; font-weight: 600; color: var(--slaf-bad); }
+.slaf-err:empty { display: none; }
+.slaf-field.is-bad .slaf-box { border-color: var(--slaf-bad); background: var(--slaf-bad-l); }
+.slaf-field.is-bad .slaf-seg-face, .slaf-field.is-bad .slaf-chip-opt span { border-color: var(--slaf-bad); }
+
+.slaf-trap { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+
+.slaf-submit {
+    width: 100%; min-height: 56px; margin-top: 4px; padding: 12px 20px; border-radius: 999px; cursor: pointer;
+    border: 3px solid var(--slaf-ink); background: var(--slaf-blue); color: #FFFFFF; box-shadow: 4px 5px 0 var(--slaf-ink);
+    font-family: inherit; font-weight: 700; font-size: 1.08rem; transition: transform .12s, box-shadow .12s, background .12s;
+}
+.slaf-submit:hover { background: var(--slaf-blue-d); }
+.slaf-submit:active { transform: translate(3px, 4px); box-shadow: 1px 1px 0 var(--slaf-ink); }
+.slaf-submit:focus-visible { outline: 3px solid var(--slaf-yel); outline-offset: 3px; }
+.slaf-submit[disabled] { opacity: .85; cursor: progress; }
+.slaf-status { margin: 0; font-size: .9rem; font-weight: 600; color: var(--slaf-blue-d); text-align: center; }
+.slaf-status:empty { display: none; }
+.slaf-privacy { margin: 0; text-align: center; font-size: .8rem; color: var(--slaf-muted); }
+.slaf-privacy a { color: var(--slaf-muted); text-decoration: underline; text-underline-offset: 2px; }
+
+@keyframes slaf-fade { from { opacity: 0; } }
+@keyframes slaf-pop { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+@keyframes slaf-up { from { transform: translateY(100%); } }
+
+/* Phones: a bottom sheet that slides up, thumb-friendly */
+@media (max-width: 560px) {
+    .slaf { padding: 0; align-items: flex-end; }
+    .slaf-panel {
+        max-width: none; max-height: 92vh; border-radius: 24px 24px 0 0; border-bottom: 0; box-shadow: 0 -6px 0 var(--slaf-ink);
+        padding: 22px 18px calc(18px + env(safe-area-inset-bottom)); animation: slaf-up .26s ease-out;
+    }
+    .slaf-title { font-size: 1.4rem; }
+    .slaf-head { margin-bottom: 10px; }
+    .slaf-form { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .slaf-back, .slaf-panel { animation: none; }
+    .slaf-submit { transition: none; }
+}

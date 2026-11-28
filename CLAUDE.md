@@ -505,3 +505,29 @@ must be able to tell who runs the site and how to contact them from any page.
 - 2026-11-28 (favicon): every page now links the Bright Mind cloud icons in `Images/favicon/` (favicon.svg, 16/32/48 PNG, favicon.ico, apple-touch-icon 180, icon-192/512) plus a root `/favicon.ico`. Tab icons = cloud face only (readable at 16 px); home-screen icons = full mark with sparkles on white. Built by `Documents\Super_Learner_Academy\_build\favicons.py` from `Images/bright/sla-c-mark.svg`. The old `Favicon SLA/` folder is no longer linked (kept only as a backup). tests/unit/favicon.test.js guards it.
 
 - Google review link (2026-11-28): https://g.page/r/CaHWZVTPGzDFEAI/review in data.json contact.googleReview, the menu (.site-nav-review on every page; site-nav.js adds a copy button for webinars), the footer (bright Contact column, or a .sla-review line under "Follow us") and About > Contact. tests/unit/google-review.test.js checks it.
+
+**Free-registration popup (2026-11-28):** in free mode, when `data.json` → `leadForm.enabled` is true and `leadForm.endpoint` holds the Apps Script web-app URL, `script.js` `initLeadForm()` makes every registration button (`a.cta-button`, `[data-bind-href="registration.link"]`) open a popup (`lead-form.js` + `lead-form.css`, loaded on demand, `LEAD_FORM_VERSION`). Fields: Student/Parent, name, WhatsApp (10-digit Indian mobile), optional email, class chips (set per page via `<html data-lead-form="board|parents|pro">`, default `all`; sets and EN/Hinglish/Hindi wording in `leadForm`). It POSTs JSON as text/plain with `mode: 'no-cors'` + keepalive (no CORS pre-flight) to the sheet script `google-apps-script-leads.js` (LockService, formula-injection guard, repeat-number flag, Status dropdown), then goes to the button's link (thank-you page = the Google Ads conversion). After `timeoutMs` it moves on regardless, so a sheet problem never blocks a sign-up. GA4: `lead_form_open`, then `sign_up` (method `lead_form`) on submit; the old click-time `sign_up` is skipped while the popup is active. Paid mode never shows it. Preview without saving: `?leadform=1`; force off: `?leadform=0`. Tests: `tests/unit/lead-form.test.js`.
+
+### Switching to webinar.gg (planned, not live yet; written 2026-11-28)
+
+Today (free mode): button -> popup (leads to the "SLA Leads" Google Sheet) -> `thank-you.html` (Google Ads conversion, value 0) -> WhatsApp group -> Zoom.
+After the switch (paid mode): button -> webinar.gg registration/payment page -> back to `thank-you.html` -> webinar.gg sends the joining link.
+
+**What changes automatically when `freeSignup.enabled` is set to `false`:**
+- The popup turns off (`isLeadFormActive()` requires free mode), and every registration button goes straight to `registration.link`.
+- The ₹ price, payment and refund blocks (`data-paid`) come back, and the FREE blocks (`data-free`) hide. The JSON-LD offer price becomes `registration.price`.
+- GA4 `sign_up` on button clicks comes back (`initFreeSignupTracking` is skipped in paid mode, so there's no double count with the popup).
+- The Google Sheet stops getting new rows. webinar.gg's registrant list becomes the lead list (export it, or use its integrations if it has them). The sheet keeps the free-batch history.
+
+**Steps for the switch (in this order):**
+1. In webinar.gg, create the event and set the **redirect after successful registration/payment** to `https://www.superlearneracademy.in/thank-you.html`. If webinar.gg has no redirect option, the thank-you page never loads, so the Google Ads conversion and the Meta Lead never fire. In that case, measure with webinar.gg's own Google tag/Pixel fields instead, and don't run both (double counting).
+2. In `data.json`, set `registration.link` to the webinar.gg event URL, check `registration.price` (₹99 plan), and set `freeSignup.enabled` to `false`. Leave `leadForm` as it is (it stays off in paid mode, and is ready for the next free batch).
+3. **Fix the conversion value first:** `trackPurchaseConversion()` in `script.js` still sends a hard-coded `21` in paid mode. Make it `Number(data.registration.price)` and add a test, so Google Ads sees the real ₹ value.
+4. Add the Meta Pixel ID to `data.json` → `analytics.fbPixel` (postponed until webinar.gg; see the Meta Lead event note above).
+5. `thank-you.html` has no payment check (anyone opening it counts as a conversion). If webinar.gg can add a query parameter or token to the redirect, gate the conversion on it.
+6. Change the copy that says "Zoom link in our WhatsApp group" (`freeSignup.copy`, trust lines, FAQ) wherever webinar.gg now sends the link. Also check `workshop.platform` (still says Zoom).
+7. Test with one real payment from a phone: webinar.gg page -> payment -> `thank-you.html` -> Google Ads conversion "Recording" -> GA4 -> Meta Test events.
+
+**Google Ads learning:** the conversion moves from "free form submitted" to "paid registration", which is rarer and has a ₹ value. Treat it as a new learning period. If the campaign is on Maximize conversions, go back to Maximize clicks (with a CPC cap) until about 15–30 paid registrations are recorded, then switch again. Keep exactly one Primary conversion action. Don't change the landing page in the same week.
+
+**Hybrid option (not built):** keep the popup before webinar.gg (save name + WhatsApp first, then open webinar.gg), so people who leave at the payment step can still be followed up. This needs a `leadForm.paidMode` flag in `isLeadFormActive()` and different popup wording ("Next: payment on webinar.gg"). Decide after seeing how many people drop off at payment.

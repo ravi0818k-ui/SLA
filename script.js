@@ -206,10 +206,69 @@ function showProtectionAlert() {
     /** In free mode, count clicks on registration buttons as a GA4 "sign_up" event (mark it as a key event / import it to Google Ads). */
     function initFreeSignupTracking(data) {
         if (!isFreeSignup(data)) return;
+        if (isLeadFormActive(data)) return; // the popup sends sign_up itself, after the form is filled
         document.addEventListener('click', function (e) {
             var a = e.target.closest && e.target.closest('a.cta-button, a[data-bind-href="registration.link"]');
             if (a && typeof window.gtag === 'function') window.gtag('event', 'sign_up', { method: 'free_signup' });
         });
+    }
+
+    // ========================
+    // FREE REGISTRATION POPUP (data.json -> leadForm, 2026-11-28)
+    // ========================
+
+    /**
+     * True when Book/Register buttons should open the registration popup (lead-form.js) instead of going straight
+     * to the thank-you page: free mode + leadForm.enabled + an endpoint (the Google Sheet web app).
+     * ?leadform=1 previews it without an endpoint (nothing is saved); ?leadform=0 turns it off for a test.
+     */
+    function isLeadFormActive(data, search) {
+        if (!isFreeSignup(data)) return false;
+        var lf = data.leadForm;
+        if (!lf || lf.enabled !== true) return false;
+        var q = String(search === undefined ? window.location.search : search);
+        if (/[?&]leadform=0(&|$)/.test(q)) return false;
+        return !!lf.endpoint || /[?&]leadform=1(&|$)/.test(q);
+    }
+
+    var LEAD_FORM_VERSION = '1.0.0';
+    var leadFormLoading = null;
+
+    /** Loads lead-form.css + lead-form.js once (only pages that need the popup download it). */
+    function loadLeadForm() {
+        if (window.SLALeadForm) return Promise.resolve(window.SLALeadForm);
+        if (leadFormLoading) return leadFormLoading;
+        leadFormLoading = new Promise(function (resolve, reject) {
+            var root = siteRoot();
+            var css = document.createElement('link');
+            css.rel = 'stylesheet';
+            css.href = root + 'lead-form.css?v=' + LEAD_FORM_VERSION;
+            document.head.appendChild(css);
+            var js = document.createElement('script');
+            js.src = root + 'lead-form.js?v=' + LEAD_FORM_VERSION;
+            js.async = true;
+            js.onload = function () { if (window.SLALeadForm) resolve(window.SLALeadForm); else reject(new Error('lead form missing')); };
+            js.onerror = function () { leadFormLoading = null; reject(new Error('lead form failed to load')); };
+            document.head.appendChild(js);
+        });
+        return leadFormLoading;
+    }
+
+    /** Book buttons open the popup. If the popup can't load, the button works as before (straight to its link). */
+    function initLeadForm(data) {
+        if (!isLeadFormActive(data)) return false;
+        document.addEventListener('click', function (e) {
+            if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            var a = e.target.closest && e.target.closest('a.cta-button, a[data-bind-href="registration.link"]');
+            if (!a || !a.href) return;
+            e.preventDefault();
+            var href = a.href;
+            loadLeadForm().then(function (lf) { lf.open(href); }).catch(function () { window.location.href = href; });
+        });
+        var warm = function () { loadLeadForm().catch(function () { /* the click handler falls back */ }); };
+        if ('requestIdleCallback' in window) window.requestIdleCallback(warm, { timeout: 3000 });
+        else setTimeout(warm, 1500);
+        return true;
     }
 
     // ========================
@@ -1323,6 +1382,7 @@ function showProtectionAlert() {
                 initScrollAnimations();
                 initAnalytics(data);
                 initFreeSignupTracking(data);
+                initLeadForm(data);
                 initCoachImageFallback();
                 initQuotesSlider();
                 initHeroQuotes();
@@ -1355,6 +1415,8 @@ function showProtectionAlert() {
         injectContent: injectContent,
         hideDynamicElements: hideDynamicElements,
         isFreeSignup: isFreeSignup,
+        isLeadFormActive: isLeadFormActive,
+        initLeadForm: initLeadForm,
         setNestedValue: setNestedValue,
         applyFreeSignup: applyFreeSignup,
         getNestedValue: getNestedValue,

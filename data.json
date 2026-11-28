@@ -131,6 +131,170 @@
         "hindiShort": "{{registration.currency}}{{registration.price}} में पूरा कोर्स · आख़िर में कोई और कोर्स नहीं बेचते",
         "englishShort": "The full course for {{registration.currency}}{{registration.price}} · No upsell at the end"
     },
+    "leadForm": {
+        "_help": "FREE-MODE REGISTRATION POPUP (2026-11-28). Only when freeSignup.enabled is true AND enabled is true AND endpoint is set: every Book/Register button opens a short form (Student/Parent, name, WhatsApp, optional email, class). It saves the registration to the 'SLA Leads' Google Sheet (google-apps-script-leads.js, deployed as a web app; paste its /exec URL into endpoint), then opens the button's link (the thank-you page, which counts the Google Ads conversion). If saving is slow or fails, the visitor still goes to the thank-you page after timeoutMs. Empty endpoint = old behaviour (buttons go straight to the thank-you page). Preview without saving: add ?leadform=1 to any landing page URL. Paid mode (freeSignup.enabled false) never shows the popup: buttons go to registration.link (webinar.gg later). 'sets' = class choices per page, picked by <html data-lead-form=\"...\"> (no attribute = 'all'). 'copy' = wording per page language: en, hinglish (lang hi-Latn), hi (Devanagari).",
+        "enabled": true,
+        "endpoint": "https://script.google.com/macros/s/AKfycbzWH2AKHpLvg9mKJGXHNyJZpbasBJt933iB7Hc3-hVnxIaweYHTp7b45K_ZuG4SIFcl/exec",
+        "timeoutMs": 8000,
+        "sets": {
+            "all": {
+                "who": true,
+                "whoDefault": "",
+                "classes": [
+                    "Class 3–5",
+                    "Class 6–8",
+                    "Class 9",
+                    "Class 10",
+                    "Class 11",
+                    "Class 12",
+                    "College",
+                    "Other"
+                ]
+            },
+            "board": {
+                "who": true,
+                "whoDefault": "",
+                "classes": [
+                    "Class 10",
+                    "Class 12",
+                    "Other"
+                ]
+            },
+            "parents": {
+                "who": true,
+                "whoDefault": "Parent",
+                "classes": [
+                    "Class 3–5",
+                    "Class 6–8",
+                    "Class 9–10",
+                    "Class 11–12"
+                ]
+            },
+            "pro": {
+                "who": false,
+                "whoDefault": "Professional",
+                "classes": [
+                    "Working",
+                    "Looking for a job",
+                    "College",
+                    "Other"
+                ]
+            }
+        },
+        "copy": {
+            "en": {
+                "chip": "Free · 3-day LIVE workshop",
+                "title": "Book your free seat",
+                "sub": "Takes 30 seconds. We send the Zoom link on WhatsApp.",
+                "whoLabel": "Who is filling this form?",
+                "student": "Student",
+                "parent": "Parent",
+                "nameLabel": "Your name",
+                "namePh": "Full name",
+                "phoneLabel": "WhatsApp number",
+                "phonePh": "10-digit mobile number",
+                "phoneHelp": "The class link and reminders come to this number.",
+                "emailLabel": "Email",
+                "optional": "optional",
+                "emailPh": "you@example.com",
+                "classLabel": "Your class",
+                "classLabelParent": "Your child's class",
+                "classLabelPro": "You are",
+                "minorNote": "Under 18? Please fill this in with your parent's OK.",
+                "submit": "Book my free seat",
+                "saving": "Booking your seat…",
+                "done": "Seat booked! Opening the next step…",
+                "previewDone": "Preview only: nothing was saved.",
+                "privacy": "Used only for this workshop. No spam, never sold.",
+                "privacyLink": "Privacy policy",
+                "close": "Close",
+                "errWho": "Please choose one.",
+                "errName": "Please enter your name.",
+                "errPhone": "Please enter a 10-digit mobile number.",
+                "errEmail": "Please check the email address.",
+                "errClass": "Please choose a class.",
+                "classNames": {}
+            },
+            "hinglish": {
+                "chip": "Free · 3 din ka LIVE workshop",
+                "title": "Apni free seat book karein",
+                "sub": "Sirf 30 second. Zoom link WhatsApp par bhejenge.",
+                "whoLabel": "Yeh form kaun bhar raha hai?",
+                "student": "Student",
+                "parent": "Parent",
+                "nameLabel": "Aapka naam",
+                "namePh": "Poora naam",
+                "phoneLabel": "WhatsApp number",
+                "phonePh": "10 digit mobile number",
+                "phoneHelp": "Class link aur reminders isi number par aayenge.",
+                "emailLabel": "Email",
+                "optional": "optional",
+                "emailPh": "aap@example.com",
+                "classLabel": "Aapki class",
+                "classLabelParent": "Bachche ki class",
+                "classLabelPro": "Aap",
+                "minorNote": "18 se kam umar hai? Mummy-papa se poochh kar bharein.",
+                "submit": "Meri free seat book karein",
+                "saving": "Seat book ho rahi hai…",
+                "done": "Seat book ho gayi! Agla step khul raha hai…",
+                "previewDone": "Sirf preview: kuch save nahi hua.",
+                "privacy": "Sirf is workshop ke liye. Koi spam nahi, data kabhi becha nahi jaata.",
+                "privacyLink": "Privacy policy",
+                "close": "Band karein",
+                "errWho": "Ek option chunein.",
+                "errName": "Apna naam likhein.",
+                "errPhone": "10 digit ka mobile number likhein.",
+                "errEmail": "Email check kar lein.",
+                "errClass": "Class chunein.",
+                "classNames": {
+                    "Other": "Koi aur",
+                    "Looking for a job": "Job dhoondh rahe hain"
+                }
+            },
+            "hi": {
+                "chip": "मुफ़्त · 3 दिन की LIVE वर्कशॉप",
+                "title": "अपनी मुफ़्त सीट बुक करें",
+                "sub": "सिर्फ़ 30 सेकंड। Zoom लिंक WhatsApp पर भेजेंगे।",
+                "whoLabel": "यह फ़ॉर्म कौन भर रहा है?",
+                "student": "विद्यार्थी",
+                "parent": "माता-पिता",
+                "nameLabel": "आपका नाम",
+                "namePh": "पूरा नाम",
+                "phoneLabel": "WhatsApp नंबर",
+                "phonePh": "10 अंकों का मोबाइल नंबर",
+                "phoneHelp": "क्लास लिंक और रिमाइंडर इसी नंबर पर आएँगे।",
+                "emailLabel": "ईमेल",
+                "optional": "ज़रूरी नहीं",
+                "emailPh": "aap@example.com",
+                "classLabel": "आपकी कक्षा",
+                "classLabelParent": "बच्चे की कक्षा",
+                "classLabelPro": "आप",
+                "minorNote": "18 साल से कम हैं? माता-पिता से पूछकर भरें।",
+                "submit": "मेरी मुफ़्त सीट बुक करें",
+                "saving": "सीट बुक हो रही है…",
+                "done": "सीट बुक हो गई! अगला कदम खुल रहा है…",
+                "previewDone": "सिर्फ़ प्रीव्यू: कुछ सेव नहीं हुआ।",
+                "privacy": "सिर्फ़ इस वर्कशॉप के लिए। कोई स्पैम नहीं, डेटा कभी बेचा नहीं जाता।",
+                "privacyLink": "प्राइवेसी पॉलिसी",
+                "close": "बंद करें",
+                "errWho": "एक विकल्प चुनें।",
+                "errName": "अपना नाम लिखें।",
+                "errPhone": "10 अंकों का मोबाइल नंबर लिखें।",
+                "errEmail": "ईमेल जाँच लें।",
+                "errClass": "कक्षा चुनें।",
+                "classNames": {
+                    "Class 3–5": "कक्षा 3–5",
+                    "Class 6–8": "कक्षा 6–8",
+                    "Class 9": "कक्षा 9",
+                    "Class 10": "कक्षा 10",
+                    "Class 11": "कक्षा 11",
+                    "Class 12": "कक्षा 12",
+                    "College": "कॉलेज",
+                    "Other": "अन्य"
+                }
+            }
+        }
+    },
     "freeSignup": {
         "enabled": true,
         "_help": "FREE SIGNUP SWITCH for every page. true = the workshop shows as FREE everywhere (no price, no payment, no refund text) and every Register button opens freeSignup.link: the thank-you page, which counts the Google Ads conversion (value 0 in free mode) and shows the 'Join WhatsApp Group' button (whatsapp.link, where the Zoom link is shared). false = back to the paid price (registration.price) and registration.link. 'copy' = the free wording for each data.json path; the paid wording stays where it is, so switching back needs no other change.",

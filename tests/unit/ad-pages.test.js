@@ -182,7 +182,7 @@ describe('/ads-6/ source: professionals page (laid off, preparing for the next j
         expect(data.pro.heroTitle).toMatch(/laid off/i);
         expect(data.pro.heroTitle).toMatch(/next job/i);
         expect(data.pro.heroTitle).toMatch(/master any subject faster/i);
-        expect(html).toMatch(/<html lang="en">/);
+        expect(html).toMatch(/<html lang="en"[ >]/);
         expect(html).toContain('id="watch-vs-interview"');
         expect((html.match(/class="b-vs-row"/g) || []).length).toBeGreaterThanOrEqual(8);
     });

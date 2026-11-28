@@ -25,7 +25,7 @@ PAGES = [
         <section class="about-card" id="what-we-collect">
             <h2>What we collect and why</h2>
             <h3 style="margin-top:0;">When you register for a class</h3>
-            <p>Your name, email address and phone number, entered on our registration form or sent to us on WhatsApp. We use them to send you the class details and joining link, to remind you about sessions and to answer your questions. For a paid workshop, the payment itself is handled by our payment partner; we never see or store your card or UPI details.</p>
+            <p>Your name, WhatsApp number and (if you give it) email address, plus whether you are a student or a parent and the class, entered on our registration form or sent to us on WhatsApp. We use them to send you the class details and joining link, to remind you about sessions and to answer your questions. Free registrations are saved in a Google Sheet in our own Google account, which only our team can open. If you are under 18, please register with your parent&rsquo;s permission. For a paid workshop, the payment itself is handled by our payment partner; we never see or store your card or UPI details.</p>
             <h3>In our WhatsApp group and live classes</h3>
             <p>Class updates are shared in a WhatsApp group, where other members can see your name and phone number, as in any WhatsApp group. Classes run on Zoom, where other participants can see the display name you choose. WhatsApp&rsquo;s and Zoom&rsquo;s own privacy policies apply to those apps.</p>
             <h3>When you email or message us</h3>
@@ -38,7 +38,7 @@ PAGES = [
 
         <section class="about-card" id="sharing">
             <h2>Who we share it with</h2>
-            <p>We <strong>never sell</strong> your personal data. We share it only with the services we need to run the classes: our registration and payment partner, WhatsApp, Zoom and Google (analytics and ads measurement). We may also share it if the law requires us to.</p>
+            <p>We <strong>never sell</strong> your personal data. We share it only with the services we need to run the classes: our registration and payment partner, WhatsApp, Zoom and Google (Google Sheets for the registration list, analytics and ads measurement). We may also share it if the law requires us to.</p>
         </section>
 
         <section class="about-card" id="keeping">
