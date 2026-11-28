@@ -154,25 +154,7 @@
                 a.appendChild(text);
                 li.appendChild(a);
 
-                if (g.share) {
-                    var btn = el('button', 'site-nav-copy');
-                    btn.type = 'button';
-                    btn.setAttribute('aria-label', 'Copy link: ' + it.title);
-                    btn.title = 'Copy link';
-                    btn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>' +
-                        '<svg class="site-nav-copy-ok" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-                    btn.addEventListener('click', function () {
-                        copyText(PUBLIC_ROOT + it.path, function () {
-                            btn.classList.add('is-copied');
-                            btn.setAttribute('aria-label', 'Link copied');
-                            setTimeout(function () {
-                                btn.classList.remove('is-copied');
-                                btn.setAttribute('aria-label', 'Copy link: ' + it.title);
-                            }, 1600);
-                        });
-                    });
-                    li.appendChild(btn);
-                }
+                if (g.share) li.appendChild(copyButton(PUBLIC_ROOT + it.path, it.title));
                 ul.appendChild(li);
             });
             section.appendChild(ul);
@@ -217,6 +199,35 @@
         return total;
     }
 
+    // A small "copy link" button (copy icon; turns into a green tick for 1.6 s once copied).
+    function copyButton(url, title) {
+        var btn = el('button', 'site-nav-copy');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Copy link: ' + title);
+        btn.title = 'Copy link';
+        btn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>' +
+            '<svg class="site-nav-copy-ok" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.addEventListener('click', function () {
+            copyText(url, function () {
+                btn.classList.add('is-copied');
+                btn.setAttribute('aria-label', 'Link copied');
+                setTimeout(function () {
+                    btn.classList.remove('is-copied');
+                    btn.setAttribute('aria-label', 'Copy link: ' + title);
+                }, 1600);
+            });
+        });
+        return btn;
+    }
+
+    // The Google review link in the menu (.site-nav-review, static HTML on every page) gets a copy
+    // button, so the coach can paste the link into the webinar chat (2026-11-28).
+    function addReviewCopy(panel) {
+        var a = panel.querySelector('.site-nav-review a[href]');
+        if (!a || a.parentNode.querySelector('.site-nav-copy')) return;
+        a.parentNode.appendChild(copyButton(a.href, 'Google review'));
+    }
+
     function initSiteNav() {
         var toggle = document.getElementById('site-nav-toggle');
         var panel = document.getElementById('site-nav-panel');
@@ -225,6 +236,7 @@
         if (!toggle || !panel) return;
 
         buildSiteMap(panel);
+        addReviewCopy(panel);
 
         var lastFocused = null;
 

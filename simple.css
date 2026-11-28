@@ -127,3 +127,5 @@ h2 { font-size: 1.65rem; text-align: center; }
 .s-foot .sla-follow { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 16px; margin: 10px 0 0; font-size: .84rem; }
 .s-foot .sla-follow a { color: rgba(255, 255, 255, .85); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .s-foot .sla-follow span { font-weight: 600; }
+.s-foot .sla-review { margin: 8px 0 0; font-size: .84rem; text-align: center; }
+.s-foot .sla-review a { color: rgba(255, 255, 255, .9); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

@@ -207,7 +207,9 @@
         "linkedin": "https://www.linkedin.com/company/super-learner-academy",
         "linkedinLabel": "LinkedIn",
         "facebook": "https://www.facebook.com/superlearneracademy",
-        "facebookLabel": "Facebook"
+        "facebookLabel": "Facebook",
+        "googleReview": "https://g.page/r/CaHWZVTPGzDFEAI/review",
+        "googleReviewLabel": "Review us on Google"
     },
     "faq": {
         "attend": {

@@ -85,7 +85,9 @@ describe('site map in the hamburger menu', () => {
 
     it('workshop pages have a copy-link button with the public URL', () => {
         const panel = openPage('about.html', '/about.html');
-        const btns = panel.querySelectorAll('.site-nav-copy');
+        const btns = panel.querySelectorAll('.site-nav-map .site-nav-copy');
+        // plus one more on the Google review link (2026-11-28)
+        expect(panel.querySelectorAll('.site-nav-review .site-nav-copy').length).toBe(1);
         expect(btns.length).toBe(adPages.length);
         expect(navJs).toContain("PUBLIC_ROOT = 'https://www.superlearneracademy.in/'");
     });
@@ -95,8 +97,8 @@ describe('site map in the hamburger menu', () => {
             'about.html', 'quiz.html', 'resources.html', 'thank-you.html', 'mindmap/index.html', 'generatenotes/index.html',
             'privacy-policy.html', 'terms.html', 'refund-policy.html']) {
             const html = read(f);
-            expect(html, f).toMatch(/site-nav\.js\?v=1.3.4/);
-            expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.1/);
+            expect(html, f).toMatch(/site-nav\.js\?v=1.3.5/);
+            expect(html, f).toMatch(/site-nav\.css\?v=1\.2\.2/);
         }
     });
 
