@@ -154,7 +154,13 @@
             // Two big full-width cards with a whole sentence each ("I'm a student / I will attend the class"):
             // a one-word "Student | Parent" toggle was hard for a 4th grader to read as a choice.
             var seg = el('div', 'slaf-seg');
-            [['Student', t('studentTitle'), t('studentSub'), '🎒'], ['Parent', t('parentTitle'), t('parentSub'), '👪']].forEach(function (o) {
+            // Which cards: data.json sets.<page>.whoOptions (the master/all-audience pages add "Professional").
+            var WHO = {
+                Student: ['Student', t('studentTitle'), t('studentSub'), '🎒'],
+                Parent: ['Parent', t('parentTitle'), t('parentSub'), '👪'],
+                Professional: ['Professional', t('proTitle'), t('proSub'), '💼']
+            };
+            (set.whoOptions || ['Student', 'Parent']).filter(function (k) { return WHO[k]; }).map(function (k) { return WHO[k]; }).forEach(function (o) {
                 var lab = el('label', 'slaf-seg-opt');
                 var inp = el('input');
                 inp.type = 'radio'; inp.name = 'who'; inp.value = o[0];
@@ -256,8 +262,11 @@
 
         function syncWho() {
             var who = whoValue(form, set);
-            var text = !set.who ? t('classLabelPro') : (who === 'Parent' ? t('classLabelParent') : t('classLabel'));
+            var text = !set.who ? t('classLabelPro') : (who === 'Parent' ? t('classLabelParent') : (who === 'Professional' ? t('classLabelWork') : t('classLabel')));
             classLegend.textContent = text;
+            // a professional types their work or course instead of a class
+            var ci = mode === 'text' ? fsClass.querySelector('input') : null;
+            if (ci) ci.setAttribute('placeholder', who === 'Professional' ? t('classPhWork') : t('classPhText'));
             if (who === 'Student') minor.removeAttribute('hidden'); else minor.setAttribute('hidden', '');
         }
         syncWho();

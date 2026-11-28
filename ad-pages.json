@@ -2,8 +2,8 @@
     "_help": "Ad landing pages, one folder per path. Each page is a GENERATED copy of a source page: edit the source, then run `npm run build:ads` and commit the result. Paths are meaningful names (angle-ads-N-audience, e.g. /parents-ads-4-tuition-vs-exam/); `aliases` are older URLs (the original /ads-N/) that get an identical copy whose canonical points at the main path, so ads already running never break. To add a page, add an entry here, run the build, and point the campaign at the new URL. Ad pages are noindex and have no design-switch redirect.",
     "baseUrl": "https://www.superlearneracademy.in",
     "home": {
-        "source": "index-board27-en.html",
-        "label": "The site root (https://www.superlearneracademy.in/ = index.html) is a GENERATED copy of the English Board 2027 page since 2026-11-28 (user: 'this page should appear in main url'). Indexable, canonical = root. The old Hinglish home lives on as index-home-hinglish.html (source of /hinglish-ads-2-students/ and /ads-2/)."
+        "source": "index-master.html",
+        "label": "The site root (https://www.superlearneracademy.in/ = index.html) is a GENERATED copy of index-master.html since 2026-11-28 (user: the main page is the master page for everyone, Class 4 to graduation, parents and working professionals, not tied to the board exam; tab title 'Super Learner Academy-workshop'). Indexable, canonical = root. Before that it was the English Board 2027 page, which stays as /selfstudy-ads-9-board-2027-english/. The old Hinglish home lives on as index-home-hinglish.html (source of /hinglish-ads-2-students/ and /ads-2/)."
     },
     "pages": [
         {

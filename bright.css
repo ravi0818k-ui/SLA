@@ -535,3 +535,19 @@ body[data-design="bright"] .site-nav-toggle:hover { background: var(--pink); }
 .b-final .b-final-art img { background: none; border: 0; border-radius: 0; }
 .b-final .b-final-art .b-hero-blob { background: rgba(255, 255, 255, .16); }
 @media (max-width: 960px) { .b-final .b-final-art { width: 100%; max-width: 440px; margin: 16px auto 0; } .b-final .b-final-art img { margin: 0; } }
+
+/* "Who can join the workshop?" cards on the master home page (index-master.html, 2026-11-28):
+   Students / Parents / Working professionals, each with a Freepik photo (models, never "our students") and a word sticker. */
+.b-who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 30px; }
+.b-who-card { display: flex; flex-direction: column; background: var(--white); border: 3px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+.b-who-photo { position: relative; border-bottom: 3px solid var(--ink); background: var(--cloud); }
+.b-who-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.b-who-tag { left: 14px; bottom: 14px; font-size: .92rem; padding: 7px 15px; transform: rotate(-3deg); }
+.b-who-tag-1 { background: var(--yel); }
+.b-who-tag-2 { background: var(--pink); animation-delay: -1.3s; }
+.b-who-tag-3 { background: var(--mint); animation-delay: -2.6s; }
+.b-who-card h3 { margin: 20px 22px 10px; font-size: 1.3rem; }
+.b-who-card .b-checks { margin: 0 22px 24px; }
+.b-who-cta { text-align: center; margin: 34px 0 0; }
+@media (max-width: 960px) { .b-who-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .b-who-grid { grid-template-columns: 1fr; gap: 20px; } .b-who-card h3 { margin: 16px 18px 8px; } .b-who-card .b-checks { margin: 0 18px 20px; } }

@@ -231,7 +231,7 @@ function showProtectionAlert() {
         return !!lf.endpoint || /[?&]leadform=1(&|$)/.test(q);
     }
 
-    var LEAD_FORM_VERSION = '1.1.0';
+    var LEAD_FORM_VERSION = '1.2.0';
     var leadFormLoading = null;
 
     /** Loads lead-form.css + lead-form.js once (only pages that need the popup download it). */

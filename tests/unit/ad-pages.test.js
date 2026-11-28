@@ -289,11 +289,11 @@ describe('script.js siteRoot()', () => {
     });
 });
 
-describe('site root (2026-11-28): index.html is generated from the English Board 2027 page', () => {
+describe('site root (2026-11-28): index.html is generated from the master page index-master.html', () => {
     const { buildHome } = require('../../scripts/build-ad-pages.js');
     const cfg = JSON.parse(read('ad-pages.json'));
     it('is the up-to-date generated copy, indexable, canonical = root', () => {
-        expect(cfg.home.source).toBe('index-board27-en.html');
+        expect(cfg.home.source).toBe('index-master.html');
         const home = read('index.html');
         expect(home).toBe(buildHome(read(cfg.home.source), cfg.home, cfg));
         expect(home).toContain('<meta name="robots" content="index, follow, max-image-preview:large">');
